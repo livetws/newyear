@@ -43,7 +43,7 @@
                 </div>
                 <div>
                     <h1 class="font-bold text-lg bg-gradient-to-r from-slate-900 via-indigo-900 to-indigo-600 bg-clip-text text-transparent">2027 全台跨年晚會及元旦升旗</h1>
-                    <p class="text-xs text-slate-500 hidden sm:block">即時行程雲端總覽系統</p>
+                    <p class="text-xs text-slate-500 hidden sm:block">即時行程管理系統</p>
                 </div>
             </div>
 
@@ -55,7 +55,7 @@
                     <i data-lucide="bookmark" class="w-4 h-4"></i><span>我的收藏 <span id="bookmark-badge" class="ml-1 px-1.5 py-0.5 text-xs bg-indigo-600 text-white rounded-full">0</span></span>
                 </button>
                 <button onclick="switchTab('admin')" id="nav-admin" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition text-slate-600 hover:bg-slate-100 flex items-center space-x-2">
-                    <i data-lucide="shield-check" class="w-4 h-4"></i><span>雲端同步設定</span>
+                    <i data-lucide="shield-check" class="w-4 h-4"></i><span>管理系統</span>
                 </button>
             </nav>
         </div>
@@ -82,13 +82,11 @@
                         <input type="text" id="search-input" oninput="filterEvents()" placeholder="搜尋縣市、晚會名稱、地點..." class="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-500 shadow-sm">
                     </div>
 
-                    <!-- Dynamic Category Tabs -->
                     <div id="category-tabs-container" class="flex items-center space-x-1.5 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
                         <button onclick="setCategory('all')" class="cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-indigo-600 text-white shadow-md" data-cat="all">全部活動</button>
                     </div>
                 </div>
 
-                <!-- Region Filter -->
                 <div class="flex items-center space-x-1.5 overflow-x-auto pb-1 hide-scrollbar pt-1">
                     <button onclick="setRegion('all')" class="region-tab px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-900 text-white whitespace-nowrap" data-region="all">全臺</button>
                     <button onclick="setRegion('北部')" class="region-tab px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-600 border whitespace-nowrap" data-region="北部">北部</button>
@@ -99,7 +97,6 @@
 
                 <div class="flex items-center justify-between text-xs text-slate-500 px-1">
                     <span id="result-count">載入中...</span>
-                    <span>資料來源：Google 試算表即時同步</span>
                 </div>
             </div>
 
@@ -109,8 +106,8 @@
             <!-- Empty State -->
             <div id="empty-state" class="hidden flex-col items-center justify-center py-16 text-center">
                 <div class="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 mb-4"><i data-lucide="frown" class="w-8 h-8"></i></div>
-                <h3 class="text-lg font-semibold text-slate-800 mb-1">目前沒有符合的活動資料</h3>
-                <p class="text-xs text-slate-500">請確認 Google 試算表內是否有填寫資料，或檢查同步網址是否正確。</p>
+                <h3 class="text-lg font-semibold text-slate-800 mb-1">找不到符合的活動</h3>
+                <button onclick="resetSearch()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white text-sm font-medium">清除搜尋條件</button>
             </div>
         </div>
 
@@ -127,18 +124,65 @@
 
         <!-- ==================== ADMIN TAB ==================== -->
         <div id="view-admin" class="space-y-6 hidden animate-fadeIn">
-            <div class="clean-panel p-8 rounded-2xl border border-indigo-100 shadow-xl max-w-xl mx-auto space-y-6 my-8">
-                <div class="text-center space-y-2">
-                    <div class="w-14 h-14 bg-indigo-600 text-white rounded-2xl flex items-center justify-center mx-auto shadow-lg"><i data-lucide="cloud-sync" class="w-7 h-7"></i></div>
-                    <h3 class="text-xl font-bold text-slate-900">Google 試算表連線設定</h3>
-                    <p class="text-xs text-slate-500">所有活動內容、排序與狀態（開放、鎖定、關閉）請直接在 Google 試算表中維護。</p>
+            <!-- Login Box -->
+            <div id="admin-login-box" class="clean-panel p-8 rounded-2xl border border-indigo-100 shadow-xl max-w-md mx-auto text-center space-y-4 my-12">
+                <div class="w-14 h-14 bg-indigo-600 text-white rounded-2xl flex items-center justify-center mx-auto text-2xl shadow-lg">
+                    <i data-lucide="lock" class="w-7 h-7"></i>
                 </div>
-                <div class="space-y-3">
-                    <label class="block text-xs font-semibold text-slate-700">Apps Script 部署網址 (Web App /exec)</label>
-                    <input type="url" id="gas-url-input" placeholder="https://script.google.com/macros/s/.../exec" class="w-full px-4 py-3 border rounded-xl text-sm focus:outline-none focus:border-indigo-500">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900">管理者系統安全登入</h3>
+                    <p class="text-xs text-slate-500 mt-1">請輸入管理員密碼 (預設: 1234)</p>
                 </div>
-                <div class="flex justify-end space-x-3 pt-2">
-                    <button onclick="saveGasSettings()" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-md transition">儲存並立即同步</button>
+                <div class="flex space-x-2 pt-2">
+                    <input type="password" id="admin-password-input" placeholder="請輸入密碼..." class="flex-1 px-4 py-2.5 border rounded-xl text-sm focus:outline-none">
+                    <button onclick="verifyAdminPassword()" class="px-5 py-2.5 bg-indigo-600 text-white text-sm font-semibold rounded-xl">登入</button>
+                </div>
+            </div>
+
+            <!-- Admin Unlocked Content -->
+            <div id="admin-content-box" class="clean-panel p-6 sm:p-8 rounded-2xl border border-indigo-100 shadow-xl hidden">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-200 gap-4">
+                    <div>
+                        <div class="flex items-center space-x-2 mb-1">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700">後台控制台</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-900">行程與活動管理系統</h2>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button onclick="openSyncModal()" class="px-4 py-2.5 bg-white text-indigo-600 rounded-xl text-sm font-medium border shadow-sm flex items-center space-x-1.5">
+                            <i data-lucide="cloud-sync" class="w-4 h-4"></i><span>試算表同步設定</span>
+                        </button>
+                        <button onclick="openAddModal()" class="px-4 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-medium flex items-center space-x-2 shadow-lg">
+                            <i data-lucide="plus" class="w-4 h-4"></i><span>新增活動</span>
+                        </button>
+                        <button onclick="resetDefaultData()" class="px-4 py-2.5 bg-white text-slate-700 rounded-xl text-sm font-medium border shadow-sm">
+                            載入範例資料
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
+                    <div class="bg-slate-50 p-4 rounded-xl border"><div class="text-slate-500 text-xs mb-1">總活動數量</div><div id="stat-total" class="text-2xl font-bold text-slate-900">0</div></div>
+                    <div class="bg-slate-50 p-4 rounded-xl border"><div class="text-slate-500 text-xs mb-1">已開放</div><div id="stat-open" class="text-2xl font-bold text-emerald-600">0</div></div>
+                    <div class="bg-slate-50 p-4 rounded-xl border"><div class="text-slate-500 text-xs mb-1">鎖定/關閉</div><div id="stat-locked" class="text-2xl font-bold text-rose-600">0</div></div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-slate-800 mb-4">活動清單管理</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm text-slate-700">
+                            <thead class="bg-slate-100 text-slate-600 text-xs uppercase border-b">
+                                <tr>
+                                    <th class="p-3.5">狀態</th>
+                                    <th class="p-3.5">活動名稱 / 縣市</th>
+                                    <th class="p-3.5">類型</th>
+                                    <th class="p-3.5">時間</th>
+                                    <th class="p-3.5 text-right">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-table-body" class="divide-y divide-slate-200"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -156,11 +200,85 @@
         </div>
     </div>
 
-    <!-- Lightbox Modal -->
-    <div id="lightbox-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="closeLightbox()">
-        <div class="relative max-w-5xl max-h-[95vh] w-full flex flex-col items-center justify-center" onclick="event.stopPropagation()">
-            <button onclick="closeLightbox()" class="absolute top-2 right-2 text-white p-2 bg-black/50 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
-            <img id="lightbox-img" src="" alt="放大預覽" class="max-h-[85vh] max-w-full object-contain rounded-xl bg-slate-900">
+    <!-- Form Modal (新增與編輯活動表單：含圖片上傳與時刻表手寫輸入) -->
+    <div id="form-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
+        <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border shadow-2xl max-h-[90vh] flex flex-col bg-white">
+            <div class="p-6 border-b flex items-center justify-between bg-slate-50">
+                <h3 id="form-modal-title" class="text-xl font-bold text-slate-900">新增活動</h3>
+                <button onclick="closeFormModal()"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+            <form id="event-form" onsubmit="handleFormSubmit(event)" class="overflow-y-auto p-6 space-y-4">
+                <input type="hidden" id="event-id">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">活動類型 *</label>
+                        <input type="text" id="input-category" required placeholder="例如: 跨年晚會" class="w-full px-3.5 py-2.5 border rounded-xl text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">所屬縣市 *</label>
+                        <select id="input-city" required class="w-full px-3.5 py-2.5 border rounded-xl text-sm">
+                            <option value="臺北市">臺北市</option><option value="新北市">新北市</option><option value="基隆市">基隆市</option><option value="桃園市">桃園市</option><option value="新竹市">新竹市</option><option value="新竹縣">新竹縣</option><option value="宜蘭縣">宜蘭縣</option><option value="苗栗縣">苗栗縣</option><option value="臺中市">臺中市</option><option value="彰化縣">彰化縣</option><option value="南投縣">南投縣</option><option value="雲林縣">雲林縣</option><option value="嘉義市">嘉義市</option><option value="嘉義縣">嘉義縣</option><option value="臺南市">臺南市</option><option value="高雄市">高雄市</option><option value="屏東縣">屏東縣</option><option value="花蓮縣">花蓮縣</option><option value="臺東縣">臺東縣</option><option value="澎湖縣">澎湖縣</option><option value="金門縣">金門縣</option><option value="連江縣">連江縣</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">開放狀態 *</label>
+                        <select id="input-status" required class="w-full px-3.5 py-2.5 border rounded-xl text-sm">
+                            <option value="open">開放 (正常瀏覽)</option>
+                            <option value="locked">尚未公布 (反灰鎖定)</option>
+                            <option value="closed">已結束 (隱藏關閉)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div><label class="block text-xs font-semibold text-slate-700 mb-1">活動名稱 *</label><input type="text" id="input-name" required class="w-full px-3.5 py-2.5 border rounded-xl text-sm"></div>
+                    <div><label class="block text-xs font-semibold text-slate-700 mb-1">活動時間 *</label><input type="text" id="input-time" required placeholder="2026/12/31 19:00" class="w-full px-3.5 py-2.5 border rounded-xl text-sm"></div>
+                </div>
+                <div><label class="block text-xs font-semibold text-slate-700 mb-1">活動地點 *</label><input type="text" id="input-location" required class="w-full px-3.5 py-2.5 border rounded-xl text-sm"></div>
+                
+                <!-- 圖片上傳與網址輸入 -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">上傳圖片檔案</label>
+                        <input type="file" id="input-image-file" accept="image/*" onchange="handleImageUpload(event)" class="w-full text-xs file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-indigo-600 file:text-white cursor-pointer">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">或直接輸入圖片網址</label>
+                        <input type="url" id="input-image" placeholder="https://..." class="w-full px-3.5 py-2.5 border rounded-xl text-sm">
+                    </div>
+                </div>
+                <div id="image-preview-container" class="hidden"><img id="image-preview" src="" alt="Preview" class="h-32 object-cover rounded-xl border"></div>
+
+                <div><label class="block text-xs font-semibold text-slate-700 mb-1">官方活動連結</label><input type="url" id="input-link" class="w-full px-3.5 py-2.5 border rounded-xl text-sm"></div>
+                
+                <!-- 活動時刻表手寫輸入框 -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">活動時刻表 / 演出順序 (每行一筆)</label>
+                    <textarea id="input-desc" rows="4" placeholder="19:00 - 20:00 | 暖身開場&#10;20:00 - 23:00 | 巨星開唱" class="w-full px-3.5 py-2.5 border rounded-xl text-sm font-mono"></textarea>
+                </div>
+
+                <div class="pt-4 flex justify-end space-x-3">
+                    <button type="button" onclick="closeFormModal()" class="px-5 py-2.5 rounded-xl bg-white border text-sm">取消</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-indigo-600 text-white text-sm shadow-lg">儲存活動</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sync Modal -->
+    <div id="sync-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
+        <div class="clean-panel w-full max-w-xl rounded-2xl overflow-hidden border shadow-2xl flex flex-col bg-white">
+            <div class="p-6 border-b flex items-center justify-between bg-slate-50">
+                <h3 class="text-lg font-bold text-slate-900">Google 試算表同步設定</h3>
+                <button onclick="closeSyncModal()"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+            <div class="p-6 space-y-4">
+                <p class="text-sm text-slate-600">若有填寫 GAS 部署網址，將優先讀取雲端試算表；若留空則使用本機管理資料。</p>
+                <input type="url" id="gas-url-input" placeholder="https://script.google.com/macros/s/.../exec" class="w-full px-4 py-3 border rounded-xl text-sm">
+            </div>
+            <div class="p-4 bg-slate-50 border-t flex justify-end space-x-3">
+                <button onclick="closeSyncModal()" class="px-5 py-2.5 rounded-xl bg-white border text-sm">關閉</button>
+                <button onclick="saveGasSettings()" class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm">儲存設定</button>
+            </div>
         </div>
     </div>
 
@@ -172,20 +290,17 @@
             '花蓮縣': '東部與離島', '臺東縣': '東部與離島', '澎湖縣': '東部與離島', '金門縣': '東部與離島', '連江縣': '東部與離島'
         };
 
-        const HERO_SLIDES = [
-            { title: '2027 跨年與元旦即時行程', subtitle: '透過 Google 試算表雲端同步連線', image: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1200&q=80' }
-        ];
-        let currentSlideIdx = 0;
+        const HERO_SLIDES = [{ title: '2027 跨年與元旦即時行程', subtitle: '全臺跨年煙火與元旦升旗總覽', image: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1200&q=80' }];
 
         function initCarousel() {
             const container = document.getElementById('hero-carousel-container');
             if (!container) return;
-            container.innerHTML = HERO_SLIDES.map((slide, idx) => `
-                <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100">
+            container.innerHTML = HERO_SLIDES.map(slide => `
+                <div class="absolute inset-0 transition-opacity duration-1000 opacity-100">
                     <img src="${slide.image}" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent"></div>
                     <div class="absolute bottom-6 left-6 right-6 text-white z-10">
-                        <span class="px-2.5 py-1 rounded-md bg-indigo-600 text-xs font-bold mb-2 inline-block">雲端連線中</span>
+                        <span class="px-2.5 py-1 rounded-md bg-indigo-600 text-xs font-bold mb-2 inline-block">活動總覽</span>
                         <h3 class="text-2xl sm:text-3xl font-extrabold">${slide.title}</h3>
                         <p class="text-xs sm:text-sm text-slate-200 mt-1">${slide.subtitle}</p>
                     </div>
@@ -193,12 +308,17 @@
             `).join('');
         }
 
+        const SAMPLE_EVENTS = [
+            { id: 't-1', category: '燈會', name: '2027 台灣燈會在嘉義', city: '嘉義縣', region: '南部', time: '2027/02/05', location: '嘉義縣展區', status: 'locked', image: '', link: '', desc: '活動籌備中，敬請期待。' },
+            { id: 'f-1', category: '元旦升旗', name: '中華民國116年元旦總統府升旗典禮', city: '臺北市', region: '北部', time: '2027/01/01 05:30', location: '總統府前廣場', status: 'open', image: '', link: 'https://www.president.gov.tw', desc: '05:30 - 06:00 | 民眾進場\n06:00 - 06:30 | 國歌領唱\n06:30 - 08:30 | 升旗典禮' }
+        ];
+
         let events = [];
         let bookmarks = [];
         let currentCategory = 'all';
         let currentRegion = 'all';
         let currentSearchQuery = '';
-        let currentActiveTab = 'home';
+        let isAdminUnlocked = false;
         let currentModalEventId = null;
 
         window.onload = async function() {
@@ -207,40 +327,44 @@
             renderCategoryTabs();
             renderEvents();
             renderBookmarks();
+            renderAdminTable();
             initCarousel();
             lucide.createIcons();
         };
 
-        // 清空預設資料，完全由 Google 試算表帶入
         async function loadData() {
             const GAS_URL = localStorage.getItem('tw_nye_gas_url_light') || "";
             if (GAS_URL) {
                 try {
                     const res = await fetch(GAS_URL);
                     const data = await res.json();
-                    if (Array.isArray(data)) {
-                        // 順序完全對應試算表中的排列順序
-                        events = data.map(e => ({
-                            ...e,
-                            region: e.region || REGION_MAP[e.city] || '北部',
-                            status: e.status || 'open' // 可支援 open(開放), locked(鎖定), closed(關閉隱藏)
-                        }));
+                    if (Array.isArray(data) && data.length > 0) {
+                        events = data.map(e => ({ ...e, region: e.region || REGION_MAP[e.city] || '北部', status: e.status || 'open' }));
                         return;
                     }
-                } catch (err) {
-                    console.error("雲端讀取失敗", err);
-                }
+                } catch (err) { console.error("雲端讀取失敗", err); }
             }
-            events = []; // 無網址時保持空白
+            const saved = localStorage.getItem('tw_nye_events_local_v8');
+            if (saved) {
+                try { events = JSON.parse(saved); } catch (e) { events = SAMPLE_EVENTS; }
+            } else {
+                events = SAMPLE_EVENTS;
+                saveData();
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('tw_nye_events_local_v8', JSON.stringify(events));
+            updateStats();
         }
 
         function loadBookmarks() {
-            const saved = localStorage.getItem('tw_nye_bookmarks_2027_light_v7');
+            const saved = localStorage.getItem('tw_nye_bookmarks_v8');
             if (saved) { try { bookmarks = JSON.parse(saved); } catch (e) { bookmarks = []; } }
             updateBookmarkBadge();
         }
         function saveBookmarks() {
-            localStorage.setItem('tw_nye_bookmarks_2027_light_v7', JSON.stringify(bookmarks));
+            localStorage.setItem('tw_nye_bookmarks_v8', JSON.stringify(bookmarks));
             updateBookmarkBadge();
         }
         function updateBookmarkBadge() {
@@ -258,33 +382,49 @@
                 const btn = document.querySelectorAll('.nav-btn')[i];
                 if (btn) btn.className = t === tabId ? "nav-btn px-4 py-2 rounded-xl text-sm font-medium transition text-indigo-600 bg-indigo-50 flex items-center space-x-2" : "nav-btn px-4 py-2 rounded-xl text-sm font-medium transition text-slate-600 hover:bg-slate-100 flex items-center space-x-2";
             });
-            if (tabId === 'admin') {
-                document.getElementById('gas-url-input').value = localStorage.getItem('tw_nye_gas_url_light') || '';
-            }
+            if (tabId === 'admin') updateAdminAuthView();
             window.scrollTo({ top: 0, behavior: 'smooth' });
             lucide.createIcons();
         }
 
-        // 動態抓取試算表中的 category 產生分類按鈕
+        async function verifyAdminPassword() {
+            const pwd = document.getElementById('admin-password-input').value;
+            if (pwd === '1234') {
+                isAdminUnlocked = true;
+                updateAdminAuthView();
+            } else {
+                alert('密碼錯誤！(預設: 1234)');
+            }
+        }
+
+        function updateAdminAuthView() {
+            const loginBox = document.getElementById('admin-login-box');
+            const contentBox = document.getElementById('admin-content-box');
+            if (isAdminUnlocked) {
+                loginBox.classList.add('hidden');
+                contentBox.classList.remove('hidden');
+                renderAdminTable();
+                updateStats();
+            } else {
+                loginBox.classList.remove('hidden');
+                contentBox.classList.add('hidden');
+            }
+        }
+
         function renderCategoryTabs() {
             const container = document.getElementById('category-tabs-container');
             const categories = ['all', ...new Set(events.map(e => e.category).filter(Boolean))];
-            
             container.innerHTML = categories.map(cat => {
                 const label = cat === 'all' ? '全部活動' : cat;
                 const isActive = currentCategory === cat;
-                return `
-                    <button onclick="setCategory('${cat}')" class="cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap ${isActive ? 'bg-indigo-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}" data-cat="${cat}">
-                        ${label}
-                    </button>
-                `;
+                return `<button onclick="setCategory('${cat}')" class="cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap ${isActive ? 'bg-indigo-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-100 border'}" data-cat="${cat}">${label}</button>`;
             }).join('');
         }
 
         function setCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.cat-tab').forEach(btn => {
-                btn.className = btn.getAttribute('data-cat') === cat ? "cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-indigo-600 text-white shadow-md" : "cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200";
+                btn.className = btn.getAttribute('data-cat') === cat ? "cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-indigo-600 text-white shadow-md" : "cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border";
             });
             renderEvents();
         }
@@ -306,9 +446,8 @@
             const grid = document.getElementById('events-grid');
             const emptyState = document.getElementById('empty-state');
             
-            // 過濾掉狀態為 closed（已結束關閉）的活動
             let filtered = events.filter(e => {
-                if (e.status === 'closed' || e.status === 'Closed') return false;
+                if (e.status === 'closed') return false;
                 const matchCat = (currentCategory === 'all' || e.category === currentCategory);
                 const matchRegion = (currentRegion === 'all' || e.region === currentRegion);
                 const matchSearch = !currentSearchQuery || 
@@ -331,7 +470,7 @@
 
             grid.innerHTML = filtered.map(e => {
                 const isBookmarked = bookmarks.includes(String(e.id));
-                const isLocked = (e.status === 'locked' || e.status === 'Locked');
+                const isLocked = (e.status === 'locked');
                 
                 let imageHtml = e.image && e.image.trim() !== '' ? 
                     `<img src="${e.image}" alt="${e.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" ${isLocked ? '' : `onclick="openDetailModal('${e.id}')"`}>` :
@@ -362,7 +501,7 @@
                             </div>
                             <div class="pt-3 border-t border-slate-100">
                                 ${isLocked ? `
-                                    <div class="w-full py-2.5 rounded-xl bg-slate-100 text-slate-400 text-xs font-semibold flex items-center justify-center space-x-1.5"><i data-lucide="lock" class="w-4 h-4"><span>尚未開放瀏覽</span></i></div>
+                                    <div class="w-full py-2.5 rounded-xl bg-slate-100 text-slate-400 text-xs font-semibold flex items-center justify-center space-x-1.5"><i data-lucide="lock" class="w-4 h-4"></i><span>尚未開放瀏覽</span></div>
                                 ` : `
                                     <button onclick="openDetailModal('${e.id}')" class="w-full py-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-600 text-indigo-600 hover:text-white text-xs font-semibold transition border border-indigo-200 flex items-center justify-center space-x-1.5"><i data-lucide="calendar-days" class="w-4 h-4"></i><span>更多活動資訊</span></button>
                                 `}
@@ -423,6 +562,7 @@
                     <div class="bg-slate-50 p-3 rounded-xl border"><div class="text-xs text-slate-500">地點</div><div class="text-sm font-semibold">${e.location}</div></div>
                 </div>
                 <div><h4 class="text-xs font-bold text-slate-500 uppercase mb-2">時刻表</h4>${parseScheduleToTimeline(e.desc)}</div>
+                ${e.link ? `<div><a href="${e.link}" target="_blank" class="text-sm text-indigo-600 font-medium underline">前往官方網站</a></div>` : ''}
             `;
             document.getElementById('detail-modal').classList.remove('hidden');
             lucide.createIcons();
@@ -430,13 +570,141 @@
 
         function closeDetailModal() { document.getElementById('detail-modal').classList.add('hidden'); }
         function toggleBookmarkFromModal() { if (currentModalEventId) { toggleBookmark(currentModalEventId); openDetailModal(currentModalEventId); } }
-        function openLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox-modal').classList.remove('hidden'); }
-        function closeLightbox() { document.getElementById('lightbox-modal').classList.add('hidden'); }
 
+        // Admin Management Functions
+        function renderAdminTable() {
+            const tbody = document.getElementById('admin-table-body');
+            tbody.innerHTML = events.map(e => `
+                <tr class="hover:bg-slate-50 transition">
+                    <td class="p-3.5"><span class="px-2 py-1 rounded text-xs font-bold ${e.status === 'open' ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}">${e.status}</span></td>
+                    <td class="p-3.5"><div class="font-bold text-slate-900">${e.name}</div><div class="text-xs text-indigo-600">${e.city} | ${e.region}</div></td>
+                    <td class="p-3.5 text-xs font-semibold">${e.category}</td>
+                    <td class="p-3.5 text-xs text-slate-600">${e.time}</td>
+                    <td class="p-3.5 text-right space-x-2">
+                        <button onclick="openEditModal('${e.id}')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-indigo-600 hover:text-white text-xs border">編輯</button>
+                        <button onclick="deleteEvent('${e.id}')" class="px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-600 hover:text-white text-xs text-rose-600 border">刪除</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updateStats() {
+            document.getElementById('stat-total').innerText = events.length;
+            document.getElementById('stat-open').innerText = events.filter(e => e.status === 'open').length;
+            document.getElementById('stat-locked').innerText = events.filter(e => e.status !== 'open').length;
+        }
+
+        function openAddModal() {
+            document.getElementById('form-modal-title').innerText = '新增活動';
+            document.getElementById('event-form').reset();
+            document.getElementById('event-id').value = '';
+            document.getElementById('image-preview-container').classList.add('hidden');
+            document.getElementById('form-modal').classList.remove('hidden');
+        }
+
+        function openEditModal(id) {
+            const e = events.find(item => String(item.id) === String(id));
+            if (!e) return;
+            document.getElementById('form-modal-title').innerText = '編輯活動';
+            document.getElementById('event-id').value = e.id;
+            document.getElementById('input-category').value = e.category || '跨年晚會';
+            document.getElementById('input-city').value = e.city;
+            document.getElementById('input-status').value = e.status || 'open';
+            document.getElementById('input-name').value = e.name;
+            document.getElementById('input-time').value = e.time;
+            document.getElementById('input-location').value = e.location;
+            document.getElementById('input-image').value = e.image || '';
+            document.getElementById('input-link').value = e.link || '';
+            document.getElementById('input-desc').value = e.desc || '';
+            if (e.image) {
+                document.getElementById('image-preview').src = e.image;
+                document.getElementById('image-preview-container').classList.remove('hidden');
+            } else {
+                document.getElementById('image-preview-container').classList.add('hidden');
+            }
+            document.getElementById('form-modal').classList.remove('hidden');
+        }
+
+        function closeFormModal() { document.getElementById('form-modal').classList.add('hidden'); }
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64 = e.target.result;
+                document.getElementById('input-image').value = base64;
+                document.getElementById('image-preview').src = base64;
+                document.getElementById('image-preview-container').classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const id = document.getElementById('event-id').value;
+            const city = document.getElementById('input-city').value;
+            const region = REGION_MAP[city] || '北部';
+            const eventData = {
+                id: id || 'evt-' + Date.now(),
+                category: document.getElementById('input-category').value,
+                name: document.getElementById('input-name').value,
+                city: city,
+                region: region,
+                time: document.getElementById('input-time').value,
+                location: document.getElementById('input-location').value,
+                status: document.getElementById('input-status').value,
+                image: document.getElementById('input-image').value || '',
+                link: document.getElementById('input-link').value,
+                desc: document.getElementById('input-desc').value
+            };
+            if (id) {
+                const idx = events.findIndex(item => String(item.id) === String(id));
+                if (idx > -1) events[idx] = eventData;
+            } else {
+                events.unshift(eventData);
+            }
+            saveData();
+            renderCategoryTabs();
+            renderEvents();
+            renderBookmarks();
+            renderAdminTable();
+            closeFormModal();
+        }
+
+        function deleteEvent(id) {
+            if (confirm('確定要刪除這項活動嗎？')) {
+                events = events.filter(e => String(e.id) !== String(id));
+                bookmarks = bookmarks.filter(bId => String(bId) !== String(id));
+                saveData();
+                renderCategoryTabs();
+                renderEvents();
+                renderBookmarks();
+                renderAdminTable();
+            }
+        }
+
+        function resetDefaultData() {
+            if (confirm('確定要載入範例資料嗎？')) {
+                events = SAMPLE_EVENTS;
+                saveData();
+                renderCategoryTabs();
+                renderEvents();
+                renderBookmarks();
+                renderAdminTable();
+                alert('已恢復範例資料！');
+            }
+        }
+
+        function openSyncModal() {
+            document.getElementById('gas-url-input').value = localStorage.getItem('tw_nye_gas_url_light') || '';
+            document.getElementById('sync-modal').classList.remove('hidden');
+        }
+        function closeSyncModal() { document.getElementById('sync-modal').classList.add('hidden'); }
         function saveGasSettings() {
             const url = document.getElementById('gas-url-input').value.trim();
             localStorage.setItem('tw_nye_gas_url_light', url);
-            alert('已成功儲存同步網址！網頁即時重新整理。');
+            alert('已成功儲存同步網址！網頁即將重新整理。');
             location.reload();
         }
     </script>
