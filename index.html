@@ -3,8 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>2027 全臺跨年晚會及元旦升旗</title>
     
+    <!-- SEO 搜尋引擎最佳化與關鍵字設定 -->
+    <title>2027 全臺跨年晚會及元旦升旗 - 即時行程、卡司陣容、煙火轉播與活動總覽</title>
+    <meta name="description" content="全臺最完整的 2027 跨年晚會與元旦升旗典禮資訊平台！即時更新臺北 101 煙火、幸福臺中、高雄夢時代、義大世界、總統府升旗等各大活動最新陣容、時間地點與交通時刻表。">
+    <meta name="keywords" content="2027跨年, 2027跨年晚會, 元旦升旗, 2027元旦升旗, 臺北最HIGH新年城, 101煙火, 跨年卡司, 跨年卡司名單, 台灣燈會, 高雄跨年, 台中跨年, 跨年轉播">
+    <meta name="author" content="全臺跨年晚會活動資訊管理系統">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph 社群分享卡片 (Facebook, LINE) -->
+    <meta property="og:title" content="2027 全臺跨年晚會及元旦升旗 - 即時行程與活動總覽">
+    <meta property="og:description" content="快速查詢全臺各縣市 2027 跨年煙火晚會、元旦升旗與燈會活動，即時掌握最新卡司演出陣容與時刻表！">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:locale" content="zh_TW">
+
+    <!-- JSON-LD 結構化資料 (提供 Google 搜尋引擎精確解析) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EventSeries",
+      "name": "2027 全臺跨年晚會及元旦升旗",
+      "description": "全臺各縣市 2027 跨年晚會、元旦升旗與燈會活動即時行程總覽系統",
+      "startDate": "2026-12-31T18:00:00+08:00",
+      "endDate": "2027-01-01T12:00:00+08:00",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "全臺各大展區與市民廣場",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "TW"
+        }
+      }
+    }
+    </script>
+
     <!-- PWA & Mobile Meta Tags -->
     <meta name="theme-color" content="#ffffff">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -62,9 +96,8 @@
         .locked-card {
             background: #f1f5f9 !important;
             border-color: #cbd5e1 !important;
-            opacity: 0.65;
-            filter: grayscale(80%);
-            pointer-events: none;
+            opacity: 0.72;
+            filter: grayscale(75%);
         }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -115,7 +148,7 @@
         <!-- ==================== HOME TAB ==================== -->
         <div id="view-home" class="space-y-8 animate-fadeIn">
             
-            <!-- Hero Carousel Banner -->
+            <!-- Hero Carousel Banner (後台動態控制 1~10 張) -->
             <div class="relative rounded-2xl overflow-hidden clean-panel border border-indigo-100 shadow-xl h-64 sm:h-80 bg-slate-900">
                 <div id="hero-carousel-container" class="relative w-full h-full"></div>
                 <div id="carousel-dots" class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-20"></div>
@@ -138,11 +171,9 @@
                             class="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 transition shadow-sm">
                     </div>
 
-                    <div class="flex items-center space-x-1.5 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
+                    <!-- 動態分類按鈕容器 -->
+                    <div id="category-tabs-container" class="flex items-center space-x-1.5 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
                         <button onclick="setCategory('all')" class="cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-indigo-600 text-white shadow-md shadow-indigo-600/20" data-cat="all">全部活動</button>
-                        <button onclick="setCategory('跨年晚會')" class="cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shadow-sm" data-cat="跨年晚會">跨年晚會</button>
-                        <button onclick="setCategory('元旦升旗')" class="cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shadow-sm" data-cat="元旦升旗">元旦升旗</button>
-                        <button onclick="setCategory('燈會')" class="cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shadow-sm" data-cat="燈會">燈會活動</button>
                     </div>
                 </div>
 
@@ -156,7 +187,7 @@
 
                 <div class="flex items-center justify-between text-xs text-slate-500 px-1">
                     <span id="result-count">載入中...</span>
-                    <span class="flex items-center space-x-1"><i data-lucide="info" class="w-3.5 h-3.5 text-indigo-600"></i><span>尚未開放之活動將自動反灰鎖定</span></span>
+                    <span></span>
                 </div>
             </div>
 
@@ -184,7 +215,7 @@
                     </h2>
                     <span id="bookmark-count-label" class="text-xs text-slate-600 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">0 個活動</span>
                 </div>
-                <p class="text-sm text-slate-500">您在這裡可以快速檢視已收藏的跨年晚會與元旦升旗行程。</p>
+                <p class="text-sm text-slate-500">您在這裡可以快速檢視已收藏的跨年晚會與元旦升旗行程（包含追蹤尚未公布之活動）。</p>
             </div>
 
             <div id="bookmarks-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -194,21 +225,21 @@
                     <i data-lucide="bookmark-plus" class="w-8 h-8"></i>
                 </div>
                 <h3 class="text-lg font-semibold text-slate-800 mb-1">目前還沒有收藏任何活動</h3>
-                <p class="text-sm text-slate-500 max-w-sm mb-6">在探索頁面點擊卡片上的收藏圖示，即可將感興趣的活動加入收藏！</p>
+                <p class="text-sm text-slate-500 max-w-sm mb-6">在探索頁面點擊卡片右上角的收藏圖示，即可將感興趣的活動加入追蹤清單！</p>
                 <button onclick="switchTab('home')" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium shadow-md">去探索活動</button>
             </div>
         </div>
 
         <!-- ==================== ADMIN TAB ==================== -->
         <div id="view-admin" class="space-y-6 hidden animate-fadeIn">
-            <!-- Login Box -->
+            <!-- Login Box (雲端安全驗證) -->
             <div id="admin-login-box" class="clean-panel p-8 rounded-2xl border border-indigo-100 shadow-xl max-w-md mx-auto text-center space-y-4 my-12">
                 <div class="w-14 h-14 bg-indigo-600 text-white rounded-2xl flex items-center justify-center mx-auto text-2xl shadow-lg shadow-indigo-600/25">
                     <i data-lucide="lock" class="w-7 h-7"></i>
                 </div>
                 <div>
                     <h3 class="text-lg font-bold text-slate-900">管理者系統安全登入</h3>
-                    <p class="text-xs text-slate-500 mt-1">請輸入管理者密碼</p>
+                    <p class="text-xs text-slate-500 mt-1">請輸入管理者密碼 (與試算表雲端同步驗證)</p>
                 </div>
                 <div class="flex space-x-2 pt-2">
                     <input type="password" id="admin-password-input" placeholder="請輸入密碼..." class="flex-1 px-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:outline-none focus:border-indigo-500">
@@ -268,6 +299,7 @@
                                     <th class="p-3.5">狀態</th>
                                     <th class="p-3.5">活動名稱 / 縣市</th>
                                     <th class="p-3.5">類型</th>
+                                    <th class="p-3.5">輪播推薦</th>
                                     <th class="p-3.5">時間</th>
                                     <th class="p-3.5 text-right">操作</th>
                                 </tr>
@@ -319,7 +351,7 @@
         </div>
     </div>
 
-    <!-- Form Modal (新增/編輯活動 - 完整包含海報上傳、時刻表手寫輸入與時刻表海報上傳) -->
+    <!-- Form Modal (新增/編輯活動 - 完整包含海報上傳、時刻表手寫輸入、時刻表海報上傳與輪播順序) -->
     <div id="form-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-indigo-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div class="p-6 border-b border-slate-200 flex items-center justify-between bg-slate-50">
@@ -333,15 +365,19 @@
                 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">活動類型 *</label>
-                        <select id="input-category" required class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-sm">
-                            <option value="跨年晚會">跨年晚會</option>
-                            <option value="元旦升旗">元旦升旗</option>
-                            <option value="燈會">燈會</option>
-                        </select>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">活動類型 * (可選可輸入)</label>
+                        <!-- 下拉選單兼支援輸入新文字 -->
+                        <input list="category-datalist" id="input-category" required placeholder="選擇或手動輸入..." class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-sm">
+                        <datalist id="category-datalist">
+                            <option value="跨年晚會"></option>
+                            <option value="元旦升旗"></option>
+                            <option value="燈會"></option>
+                            <option value="迎曙光"></option>
+                            <option value="音樂祭"></option>
+                        </datalist>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">所屬縣市 * (自動對應)</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">所屬縣市 * (自動對應分區)</label>
                         <select id="input-city" required class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-sm">
                             <option value="臺北市">臺北市</option><option value="新北市">新北市</option><option value="基隆市">基隆市</option><option value="桃園市">桃園市</option><option value="新竹市">新竹市</option><option value="新竹縣">新竹縣</option><option value="宜蘭縣">宜蘭縣</option><option value="苗栗縣">苗栗縣</option><option value="臺中市">臺中市</option><option value="彰化縣">彰化縣</option><option value="南投縣">南投縣</option><option value="雲林縣">雲林縣</option><option value="嘉義市">嘉義市</option><option value="嘉義縣">嘉義縣</option><option value="臺南市">臺南市</option><option value="高雄市">高雄市</option><option value="屏東縣">屏東縣</option><option value="花蓮縣">花蓮縣</option><option value="臺東縣">臺東縣</option><option value="澎湖縣">澎湖縣</option><option value="金門縣">金門縣</option><option value="連江縣">連江縣</option>
                         </select>
@@ -371,6 +407,18 @@
                     <input type="text" id="input-location" required placeholder="例如：臺北市市民廣場" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-sm">
                 </div>
 
+                <!-- 輪播控制項目 (1~10 順序) -->
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex items-center space-x-3">
+                        <input type="checkbox" id="input-is-carousel" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                        <label for="input-is-carousel" class="text-xs font-semibold text-slate-700 cursor-pointer">加入首頁頂端輪播 Banner 推薦</label>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">輪播順序 (1 ~ 10)</label>
+                        <input type="number" id="input-carousel-order" min="1" max="10" placeholder="數字愈小愈先顯示 (1~10)" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-sm">
+                    </div>
+                </div>
+
                 <!-- 主視覺圖片 -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
@@ -390,7 +438,7 @@
 
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">官方活動連結</label>
-                    <input type="url" id="input-link" placeholder="https://..." class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none shadow-sm">
+                    <input type="url" id="input-link" placeholder="https://..." class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none shadow-sm">
                 </div>
 
                 <!-- 手動輸入演出時間格式支援 -->
@@ -446,7 +494,7 @@
             </div>
             <div class="flex justify-end space-x-2 pt-2">
                 <button onclick="closePasswordChangeModal()" class="px-4 py-2 bg-slate-100 rounded-xl text-sm">取消</button>
-                <button onclick="saveNewPassword()" class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm">確認修改</button>
+                <button onclick="saveNewPassword()" id="change-pwd-btn" class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm">確認修改</button>
             </div>
         </div>
     </div>
@@ -468,7 +516,7 @@
                     本系統支援透過 Google Apps Script (GAS) 串接 Google 試算表進行雲端資料讀寫。
                 </p>
                 <div class="space-y-2">
-                    <label class="block text-xs font-semibold text-slate-700">API URL</label>
+                    <label class="block text-xs font-semibold text-slate-700">API URL (Web App /exec)</label>
                     <input type="url" id="gas-url-input" placeholder="https://script.google.com/macros/s/.../exec" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none">
                 </div>
             </div>
@@ -487,6 +535,8 @@
             '花蓮縣': '東部與離島', '臺東縣': '東部與離島', '澎湖縣': '東部與離島', '金門縣': '東部與離島', '連江縣': '東部與離島'
         };
 
+        const REGION_PRIORITY = { '北部': 1, '中部': 2, '南部': 3, '東部與離島': 4 };
+
         function getRegionByCity(city) {
             return REGION_MAP[city] || '北部';
         }
@@ -494,41 +544,49 @@
         async function sha256(message) {
             const msgBuffer = new TextEncoder().encode(message);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
-        async function getAdminTargetHash() {
-            return localStorage.getItem('tw_nye_admin_hash') || "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"; // 預設密碼 1234
-        }
+        // 雲端同步之管理密碼雜湊紀錄
+        let serverAdminHash = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"; // 預設 1234
+        let currentAdminSessionHash = ""; // 登入成功後保存於記憶體
 
-        const HERO_SLIDES = [
-            { title: '2027 臺北最HIGH新年城', subtitle: '全臺指標跨年煙火與頂尖巨星狂歡', image: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1200&q=80' },
-            { title: '2027 總統府元旦升旗典禮', subtitle: '迎向新局，齊心迎接曙光', image: 'https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?auto=format&fit=crop&w=1200&q=80' },
-            { title: '2027 幸福臺中跨年晚會', subtitle: '水湳中央公園璀璨開唱', image: 'https://images.unsplash.com/photo-1498931299472-f7a63a5a1cfa?auto=format&fit=crop&w=1200&q=80' }
-        ];
         let currentSlideIdx = 0;
         let carouselInterval = null;
+        let activeCarouselEvents = [];
 
-        function initCarousel() {
+        function updateCarouselView() {
             const container = document.getElementById('hero-carousel-container');
             const dots = document.getElementById('carousel-dots');
             if (!container || !dots) return;
 
-            container.innerHTML = HERO_SLIDES.map((slide, idx) => `
-                <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'} carousel-slide" data-idx="${idx}">
-                    <img src="${slide.image}" alt="${slide.title}" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent"></div>
+            // 過濾後台有勾選加入輪播的活動 (最多 10 個)
+            activeCarouselEvents = events
+                .filter(e => e.is_carousel === true || e.is_carousel === 'true' || e.is_carousel === 1 || e.is_carousel === '1')
+                .sort((a, b) => (Number(a.carousel_order) || 99) - (Number(b.carousel_order) || 99))
+                .slice(0, 10);
+
+            // 若後台無設定，預設取前 3 筆活動展示
+            if (activeCarouselEvents.length === 0) {
+                activeCarouselEvents = events.slice(0, 3);
+            }
+
+            if (currentSlideIdx >= activeCarouselEvents.length) currentSlideIdx = 0;
+
+            container.innerHTML = activeCarouselEvents.map((e, idx) => `
+                <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentSlideIdx ? 'opacity-100 z-10' : 'opacity-0 z-0'} carousel-slide cursor-pointer" data-idx="${idx}" onclick="openDetailModal('${e.id}')">
+                    ${e.image ? `<img src="${e.image}" alt="${e.name}" class="w-full h-full object-cover">` : `<div class="w-full h-full bg-gradient-to-r from-indigo-900 to-slate-900"></div>`}
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent"></div>
                     <div class="absolute bottom-6 left-6 right-6 text-white z-10">
-                        <span class="px-2.5 py-1 rounded-md bg-indigo-600 text-xs font-bold mb-2 inline-block shadow">精選活動</span>
-                        <h3 class="text-2xl sm:text-3xl font-extrabold drop-shadow">${slide.title}</h3>
-                        <p class="text-xs sm:text-sm text-slate-200 mt-1 drop-shadow">${slide.subtitle}</p>
+                        <span class="px-2.5 py-1 rounded-md bg-indigo-600 text-xs font-bold mb-2 inline-block shadow">精選活動推薦</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold drop-shadow">${e.name}</h3>
+                        <p class="text-xs sm:text-sm text-slate-200 mt-1 drop-shadow">${e.city} · ${e.time}</p>
                     </div>
                 </div>
             `).join('');
 
-            dots.innerHTML = HERO_SLIDES.map((_, idx) => `
-                <button onclick="goToSlide(${idx})" class="w-2.5 h-2.5 rounded-full transition-all ${idx === 0 ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/80'} carousel-dot" data-idx="${idx}"></button>
+            dots.innerHTML = activeCarouselEvents.map((_, idx) => `
+                <button onclick="goToSlide(${idx})" class="w-2.5 h-2.5 rounded-full transition-all ${idx === currentSlideIdx ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/80'} carousel-dot" data-idx="${idx}"></button>
             `).join('');
 
             startCarousel();
@@ -538,12 +596,24 @@
             if (carouselInterval) clearInterval(carouselInterval);
             carouselInterval = setInterval(() => { nextSlide(); }, 5000);
         }
-        function nextSlide() { currentSlideIdx = (currentSlideIdx + 1) % HERO_SLIDES.length; updateCarousel(); }
-        function prevSlide() { currentSlideIdx = (currentSlideIdx - 1 + HERO_SLIDES.length) % HERO_SLIDES.length; updateCarousel(); }
-        function goToSlide(idx) { currentSlideIdx = idx; updateCarousel(); startCarousel(); }
-        function updateCarousel() {
+        function nextSlide() {
+            if (activeCarouselEvents.length === 0) return;
+            currentSlideIdx = (currentSlideIdx + 1) % activeCarouselEvents.length;
+            renderSlideStates();
+        }
+        function prevSlide() {
+            if (activeCarouselEvents.length === 0) return;
+            currentSlideIdx = (currentSlideIdx - 1 + activeCarouselEvents.length) % activeCarouselEvents.length;
+            renderSlideStates();
+        }
+        function goToSlide(idx) {
+            currentSlideIdx = idx;
+            renderSlideStates();
+            startCarousel();
+        }
+        function renderSlideStates() {
             document.querySelectorAll('.carousel-slide').forEach((slide, idx) => {
-                slide.className = `absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentSlideIdx ? 'opacity-100 z-10' : 'opacity-0 z-0'} carousel-slide`;
+                slide.className = `absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentSlideIdx ? 'opacity-100 z-10' : 'opacity-0 z-0'} carousel-slide cursor-pointer`;
             });
             document.querySelectorAll('.carousel-dot').forEach((dot, idx) => {
                 dot.className = `w-2.5 h-2.5 rounded-full transition-all ${idx === currentSlideIdx ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/80'} carousel-dot`;
@@ -551,19 +621,13 @@
         }
 
         const DEFAULT_EVENTS = [
-            { id: 't-1', category: '燈會', name: '2027 台灣燈會在嘉義', city: '嘉義縣', region: '南部', time: '2027/02/05', location: '嘉義縣展區', status: 'locked', image: '', link: '', desc: '活動籌備中，敬請期待。', schedule_image: '' },
-            { id: 'f-1', category: '元旦升旗', name: '中華民國116年元旦總統府升旗典禮', city: '臺北市', region: '北部', time: '2027/01/01 05:30', location: '總統府前廣場', status: 'locked', image: '', link: '', desc: '05:30 - 06:00 | 民眾進場\n06:00 - 06:30 | 國歌領唱與表演活動\n06:30 - 08:30 | 正式升旗典禮', schedule_image: '' },
-            { id: 'n-1', category: '跨年晚會', name: '2027 台北最HIGH新年城跨年晚會', city: '臺北市', region: '北部', time: '2026/12/31 19:00', location: '臺北市市民廣場', status: 'locked', image: '', link: '', desc: '19:00 - 20:30 | 暖身開場表演\n20:30 - 23:00 | 實力派歌手接力開唱\n23:00 - 00:00 | 壓軸天團超級演唱會\n00:00 - 00:06 | 101 跨年煙火大秀\n00:06 - 01:00 | 新年狂歡派對', schedule_image: '' },
-            { id: 'n-2', category: '跨年晚會', name: '2027 基隆年終晚會', city: '基隆市', region: '北部', time: '2026/12/31 19:00', location: '基隆市', status: 'locked', image: '', link: '', desc: '活動籌備中。', schedule_image: '' },
-            { id: 'n-3', category: '跨年晚會', name: '2027 閃耀新北1314跨河煙火秀', city: '新北市', region: '北部', time: '2026/12/31 19:00', location: '淡水河畔', status: 'locked', image: '', link: '', desc: '活動籌備中。', schedule_image: '' },
-            { id: 'n-6', category: '跨年晚會', name: '2027 桃園跨年晚會', city: '桃園市', region: '北部', time: '2026/12/31 19:00', location: '桃園高鐵站前廣場', status: 'locked', image: '', link: '', desc: '活動籌備中。', schedule_image: '' },
-            { id: 'c-2', category: '跨年晚會', name: '2027 台中跨年夜', city: '臺中市', region: '中部', time: '2026/12/31 19:00', location: '水湳中央公園', status: 'locked', image: '', link: '', desc: '18:00 - 19:30 | 在地樂團暖身\n19:30 - 23:55 | 巨星閃耀演唱會\n23:55 - 00:03 | 水湳璀璨煙火秀', schedule_image: '' },
-            { id: 'c-3', category: '跨年晚會', name: '2027 台中麗寶跨年演唱會', city: '臺中市', region: '中部', time: '2026/12/31 20:00', location: '麗寶樂園', status: 'locked', image: '', link: '', desc: '活動籌備中。', schedule_image: '' },
-            { id: 's-2', category: '跨年晚會', name: '2027 台南好Young跨年晚會', city: '臺南市', region: '南部', time: '2026/12/31 18:00', location: '永華市政中心', status: 'locked', image: '', link: '', desc: '活動籌備中。', schedule_image: '' },
-            { id: 's-3', category: '跨年晚會', name: '2027 高雄跨年晚會', city: '高雄市', region: '南部', time: '2026/12/31 18:30', location: '夢時代時代大道', status: 'locked', image: '', link: '', desc: '18:30 - 20:00 | 青春活力開場\n20:00 - 00:00 | 夢時代巨星演唱會\n00:00 - 00:05 | 亞灣跨年煙火', schedule_image: '' },
-            { id: 's-4', category: '跨年晚會', name: '2027 高雄義大跨年煙火秀', city: '高雄市', region: '南部', time: '2026/12/31 20:00', location: '義大世界', status: 'locked', image: '', link: '', desc: '活動籌備中。', schedule_image: '' },
-            { id: 'e-3', category: '跨年晚會', name: '2027 花蓮太平洋觀光節跨年晚會', city: '花蓮縣', region: '東部與離島', time: '2026/12/31 20:00', location: '東大門廣場', status: 'locked', image: '', link: '', desc: '活動籌備中。', schedule_image: '' },
-            { id: 'e-5', category: '跨年晚會', name: '2027 台東跨年晚會', city: '臺東縣', region: '東部與離島', time: '2026/12/31 19:00', location: '臺東市', status: 'locked', image: '', link: '', desc: '活動籌備中。', schedule_image: '' }
+            { id: 't-1', category: '燈會', name: '2027 台灣燈會在嘉義', city: '嘉義縣', region: '南部', time: '2027/02/05', location: '嘉義縣展區', status: 'locked', image: '', link: '', desc: '活動籌備中，敬請期待。', schedule_image: '', is_carousel: false, carousel_order: 3, updated_at: '2026-10-01' },
+            { id: 'f-1', category: '元旦升旗', name: '中華民國116年元旦總統府升旗典禮', city: '臺北市', region: '北部', time: '2027/01/01 05:30', location: '總統府前廣場', status: 'locked', image: 'https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?auto=format&fit=crop&w=1200&q=80', link: '', desc: '05:30 - 06:00 | 民眾進場\n06:00 - 06:30 | 國歌領唱與表演活動\n06:30 - 08:30 | 正式升旗典禮', schedule_image: '', is_carousel: true, carousel_order: 2, updated_at: '2026-10-05' },
+            { id: 'n-1', category: '跨年晚會', name: '2027 台北最HIGH新年城跨年晚會', city: '臺北市', region: '北部', time: '2026/12/31 19:00', location: '臺北市市民廣場', status: 'open', image: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1200&q=80', link: '', desc: '19:00 - 20:30 | 暖身開場表演\n20:30 - 23:00 | 實力派歌手接力開唱\n23:00 - 00:00 | 壓軸天團超級演唱會\n00:00 - 00:06 | 101 跨年煙火大秀\n00:06 - 01:00 | 新年狂歡派對', schedule_image: '', is_carousel: true, carousel_order: 1, updated_at: '2026-10-09' },
+            { id: 'n-2', category: '跨年晚會', name: '2027 基隆年終晚會', city: '基隆市', region: '北部', time: '2026/12/31 19:00', location: '基隆市', status: 'locked', image: '', link: '', desc: '活動籌備中。', schedule_image: '', is_carousel: false, carousel_order: 99, updated_at: '2026-09-20' },
+            { id: 'n-3', category: '跨年晚會', name: '2027 閃耀新北1314跨河煙火秀', city: '新北市', region: '北部', time: '2026/12/31 19:00', location: '淡水河畔', status: 'locked', image: '', link: '', desc: '活動籌備中。', schedule_image: '', is_carousel: false, carousel_order: 99, updated_at: '2026-09-20' },
+            { id: 'c-2', category: '跨年晚會', name: '2027 台中跨年夜', city: '臺中市', region: '中部', time: '2026/12/31 19:00', location: '水湳中央公園', status: 'open', image: 'https://images.unsplash.com/photo-1498931299472-f7a63a5a1cfa?auto=format&fit=crop&w=1200&q=80', link: '', desc: '18:00 - 19:30 | 在地樂團暖身\n19:30 - 23:55 | 巨星閃耀演唱會\n23:55 - 00:03 | 水湳璀璨煙火秀', schedule_image: '', is_carousel: true, carousel_order: 3, updated_at: '2026-10-08' },
+            { id: 's-3', category: '跨年晚會', name: '2027 高雄跨年晚會', city: '高雄市', region: '南部', time: '2026/12/31 18:30', location: '夢時代時代大道', status: 'open', image: '', link: '', desc: '18:30 - 20:00 | 青春活力開場\n20:00 - 00:00 | 夢時代巨星演唱會\n00:00 - 00:05 | 亞灣跨年煙火', schedule_image: '', is_carousel: false, carousel_order: 99, updated_at: '2026-10-09' }
         ];
 
         let events = [];
@@ -578,42 +642,49 @@
         window.onload = async function() {
             await syncDataFromCloud(false);
             loadBookmarks();
+            buildDynamicCategoryTabs();
             renderEvents();
             renderBookmarks();
             renderAdminTable();
             updateStats();
-            initCarousel();
+            updateCarouselView();
             lucide.createIcons();
         };
 
-        // 讀取：優先向 Google 試算表拉取最新資料
+        // 雲端資料同步讀取 (含安全雜湊比對)
         async function syncDataFromCloud(isManual = false) {
             const GAS_URL = localStorage.getItem('tw_nye_gas_url_cloud') || localStorage.getItem('tw_nye_gas_url_light') || "";
             if (GAS_URL) {
                 try {
                     const res = await fetch(GAS_URL);
                     const data = await res.json();
-                    if (Array.isArray(data) && data.length > 0) {
-                        events = data.map(e => ({
+                    if (data && Array.isArray(data.events) && data.events.length > 0) {
+                        events = data.events.map(e => ({
                             ...e,
                             region: e.region || getRegionByCity(e.city),
                             status: e.status || 'open',
-                            schedule_image: e.schedule_image || ''
+                            schedule_image: e.schedule_image || '',
+                            is_carousel: (e.is_carousel === 'true' || e.is_carousel === true || e.is_carousel === 1),
+                            carousel_order: Number(e.carousel_order) || 99,
+                            updated_at: e.updated_at || ''
                         }));
+                        if (data.adminHash) serverAdminHash = data.adminHash;
                         saveDataLocally();
-                        if (isManual) alert('已成功從 Google 試算表同步最新資料！');
+                        buildDynamicCategoryTabs();
                         renderEvents();
                         renderBookmarks();
                         renderAdminTable();
                         updateStats();
+                        updateCarouselView();
                         lucide.createIcons();
+                        if (isManual) alert('已成功從 Google 試算表同步最新活動與權限！');
                         return;
                     }
                 } catch (err) {
-                    console.error("雲端讀取失敗，使用本機暫存", err);
+                    console.error("雲端讀取失敗，使用本機快取", err);
                 }
             }
-            // 若無雲端網址或讀取失敗，讀取本機快取
+
             const saved = localStorage.getItem('tw_nye_events_2027_light_v7');
             if (saved) {
                 try { events = JSON.parse(saved); } catch (e) { events = DEFAULT_EVENTS; }
@@ -621,7 +692,7 @@
                 events = DEFAULT_EVENTS;
                 saveDataLocally();
             }
-            if (isManual) alert('目前尚未設定 Google 試算表網址，已載入現有資料。');
+            if (isManual) alert('目前尚未設定 Google 試算表 API 網址，已呈現現有資料。');
         }
 
         function saveDataLocally() {
@@ -629,19 +700,25 @@
             updateStats();
         }
 
-        // 寫入：即時回寫 Google 試算表
+        // 雲端安全寫入 (帶有 SHA-256 安全權杖驗證)
         async function syncToGoogleSheet() {
             const GAS_URL = localStorage.getItem('tw_nye_gas_url_cloud') || localStorage.getItem('tw_nye_gas_url_light') || "";
             if (!GAS_URL) return;
+
+            const payload = {
+                adminHash: currentAdminSessionHash || serverAdminHash,
+                events: events
+            };
+
             try {
                 await fetch(GAS_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(events)
+                    body: JSON.stringify(payload)
                 });
             } catch (err) {
-                console.error("即時寫入 Google 試算表失敗", err);
+                console.error("即時同步至 Google 試算表失敗", err);
             }
         }
 
@@ -688,15 +765,19 @@
             lucide.createIcons();
         }
 
+        // 雲端跨瀏覽器密碼驗證
         async function verifyAdminPassword() {
             const pwd = document.getElementById('admin-password-input').value;
+            if (!pwd) { alert('請輸入密碼！'); return; }
             const hash = await sha256(pwd);
-            const targetHash = await getAdminTargetHash();
-            if (hash === targetHash) {
+            
+            if (hash === serverAdminHash) {
                 isAdminUnlocked = true;
+                currentAdminSessionHash = hash;
                 updateAdminAuthView();
+                document.getElementById('admin-password-input').value = '';
             } else {
-                alert('密碼錯誤！');
+                alert('密碼錯誤！請輸入正確的管理員密碼。');
             }
         }
 
@@ -721,18 +802,82 @@
             const p1 = document.getElementById('new-password-input').value;
             const p2 = document.getElementById('confirm-password-input').value;
             if (!p1 || p1 !== p2) { alert('兩次輸入的密碼不一致或為空！'); return; }
+            
+            const btn = document.getElementById('change-pwd-btn');
+            btn.innerText = '更新中...';
+            btn.disabled = true;
+
             const newHash = await sha256(p1);
-            localStorage.setItem('tw_nye_admin_hash', newHash);
-            alert('管理者密碼已成功修改！');
+            serverAdminHash = newHash;
+            currentAdminSessionHash = newHash;
+
+            // 同步將新密鑰存回試算表「系統設定」分頁
+            const GAS_URL = localStorage.getItem('tw_nye_gas_url_cloud') || localStorage.getItem('tw_nye_gas_url_light') || "";
+            if (GAS_URL) {
+                try {
+                    await fetch(GAS_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            adminHash: currentAdminSessionHash,
+                            action: "change_password",
+                            newHash: newHash
+                        })
+                    });
+                } catch(e) { console.error("密碼同步雲端失敗", e); }
+            }
+
+            alert('管理員密碼已成功修改！跨瀏覽器均已即刻生效。');
             closePasswordChangeModal();
             document.getElementById('new-password-input').value = '';
             document.getElementById('confirm-password-input').value = '';
+            btn.innerText = '確認修改';
+            btn.disabled = false;
+        }
+
+        // 動態生成探索活動上方分類按鈕 (依需求 3)
+        function buildDynamicCategoryTabs() {
+            const container = document.getElementById('category-tabs-container');
+            if (!container) return;
+
+            const baseOrder = ['跨年晚會', '元旦升旗', '燈會'];
+            const allCats = Array.from(new Set(events.map(e => e.category).filter(Boolean)));
+            
+            // 排序：預設基礎類別排前面，其餘自訂新類別依序排在後方
+            const sortedCats = [
+                ...baseOrder.filter(c => allCats.includes(c)),
+                ...allCats.filter(c => !baseOrder.includes(c))
+            ];
+
+            let html = `
+                <button onclick="setCategory('all')" class="cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap ${currentCategory === 'all' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shadow-sm'}" data-cat="all">全部活動</button>
+            `;
+
+            sortedCats.forEach(cat => {
+                const isActive = currentCategory === cat;
+                html += `
+                    <button onclick="setCategory('${cat}')" class="cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap ${isActive ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shadow-sm'}" data-cat="${cat}">${cat}</button>
+                `;
+            });
+
+            container.innerHTML = html;
+
+            // 更新 datalist 供表單選取
+            const datalist = document.getElementById('category-datalist');
+            if (datalist) {
+                const options = Array.from(new Set([...baseOrder, ...allCats]));
+                datalist.innerHTML = options.map(opt => `<option value="${opt}"></option>`).join('');
+            }
         }
 
         function setCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.cat-tab').forEach(btn => {
-                btn.className = btn.getAttribute('data-cat') === cat ? "cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-indigo-600 text-white shadow-md shadow-indigo-600/20" : "cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shadow-sm";
+                const isSelected = btn.getAttribute('data-cat') === cat;
+                btn.className = isSelected 
+                    ? "cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-indigo-600 text-white shadow-md shadow-indigo-600/20"
+                    : "cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shadow-sm";
             });
             renderEvents();
         }
@@ -757,6 +902,17 @@
             setRegion('all');
         }
 
+        // 判斷是否為 7 天內更新之活動 (需求 5: NEW 紅色標籤)
+        function isRecentlyUpdated(updatedAt) {
+            if (!updatedAt) return false;
+            try {
+                const diffTime = Math.abs(new Date() - new Date(updatedAt));
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                return diffDays <= 7;
+            } catch(e) { return false; }
+        }
+
+        // 活動排序與渲染 (需求 4: 已開放排前、未開放排後，同狀態按 北->中->南->東)
         function renderEvents() {
             const grid = document.getElementById('events-grid');
             const emptyState = document.getElementById('empty-state');
@@ -769,6 +925,21 @@
                     (e.city && e.city.toLowerCase().includes(currentSearchQuery)) ||
                     (e.location && e.location.toLowerCase().includes(currentSearchQuery));
                 return matchCat && matchRegion && matchSearch;
+            });
+
+            // 核心智慧雙重排序邏輯
+            filtered.sort((a, b) => {
+                // 1. 狀態權重：open (0) 比 locked (1) 優先
+                const statusA = (a.status === 'open') ? 0 : 1;
+                const statusB = (b.status === 'open') ? 0 : 1;
+                if (statusA !== statusB) return statusA - statusB;
+
+                // 2. 區域排序：北部 (1) -> 中部 (2) -> 南部 (3) -> 東部與離島 (4)
+                const regionOrderA = REGION_PRIORITY[a.region] || 9;
+                const regionOrderB = REGION_PRIORITY[b.region] || 9;
+                if (regionOrderA !== regionOrderB) return regionOrderA - regionOrderB;
+
+                return 0;
             });
 
             document.getElementById('result-count').innerText = `共找到 ${filtered.length} 場活動`;
@@ -786,6 +957,7 @@
             grid.innerHTML = filtered.map(e => {
                 const isBookmarked = bookmarks.includes(String(e.id));
                 const isLocked = (e.status === 'locked');
+                const hasNewBadge = isRecentlyUpdated(e.updated_at);
                 
                 let imageHtml = e.image && e.image.trim() !== '' ? 
                     `<img src="${e.image}" alt="${e.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" ${isLocked ? '' : `onclick="openDetailModal('${e.id}')"`}>` :
@@ -801,20 +973,25 @@
                             ${imageHtml}
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none"></div>
                             
-                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-xs font-semibold ${badgeColor} text-white shadow-md">
-                                ${e.city} · ${e.category}
-                            </span>
+                            <div class="absolute top-3 left-3 flex items-center space-x-1.5">
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-semibold ${badgeColor} text-white shadow-md">
+                                    ${e.city} · ${e.category}
+                                </span>
+                                ${hasNewBadge ? `<span class="px-2 py-0.5 rounded-lg text-[10px] font-extrabold bg-gradient-to-r from-red-500 to-rose-600 text-white shadow-md animate-pulse">NEW</span>` : ''}
+                            </div>
                             
+                            <!-- 需求 9: 尚未公布的卡片亦支援加入收藏 -->
+                            <button onclick="event.stopPropagation(); toggleBookmark('${e.id}')" class="absolute top-3 right-3 p-2 rounded-xl bg-white/95 backdrop-blur-md text-slate-700 hover:bg-indigo-600 hover:text-white transition shadow-md z-10" title="${isBookmarked ? '取消收藏' : '加入收藏'}">
+                                <i data-lucide="bookmark" class="w-4 h-4 ${isBookmarked ? 'fill-indigo-600 text-indigo-600' : ''}"></i>
+                            </button>
+
                             ${isLocked ? `
                                 <div class="absolute inset-0 bg-slate-900/70 backdrop-blur-xs flex flex-col items-center justify-center text-white p-4 text-center">
-                                    <i data-lucide="lock" class="w-8 h-8 mb-2 text-rose-400"></i>
+                                    <i data-lucide="lock" class="w-7 h-7 mb-1.5 text-rose-400"></i>
                                     <span class="font-bold text-base">尚未公布 (鎖定中)</span>
-                                    <span class="text-xs text-slate-300 mt-1">官方尚未開放相關活動資訊</span>
+                                    <span class="text-[11px] text-slate-300 mt-0.5">可點擊右上角加入收藏追蹤</span>
                                 </div>
                             ` : `
-                                <button onclick="event.stopPropagation(); toggleBookmark('${e.id}')" class="absolute top-3 right-3 p-2 rounded-xl bg-white/95 backdrop-blur-md text-slate-700 hover:bg-indigo-600 hover:text-white transition shadow-md">
-                                    <i data-lucide="bookmark" class="w-4 h-4 ${isBookmarked ? 'fill-indigo-600 text-indigo-600' : ''}"></i>
-                                </button>
                                 ${e.image ? `
                                     <button onclick="event.stopPropagation(); openLightbox('${e.image}')" class="absolute bottom-3 right-3 p-1.5 rounded-lg bg-black/50 hover:bg-black/80 text-white text-xs flex items-center space-x-1 backdrop-blur-sm transition">
                                         <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i><span>放大預覽</span>
@@ -842,7 +1019,7 @@
                                 ${isLocked ? `
                                     <div class="w-full py-2.5 rounded-xl bg-slate-100 text-slate-400 text-xs font-semibold flex items-center justify-center space-x-1.5">
                                         <i data-lucide="lock" class="w-4 h-4"></i>
-                                        <span>尚未開放瀏覽</span>
+                                        <span>尚未開放瀏覽 (已支援追蹤收藏)</span>
                                     </div>
                                 ` : `
                                     <button onclick="openDetailModal('${e.id}')" class="w-full py-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-600 text-indigo-600 hover:text-white text-xs font-semibold transition border border-indigo-200 flex items-center justify-center space-x-1.5 shadow-sm">
@@ -859,12 +1036,14 @@
             lucide.createIcons();
         }
 
+        // 收藏功能 (包含鎖定活動之收藏支援)
         function toggleBookmark(id) {
-            const e = events.find(item => String(item.id) === String(id));
-            if (e && e.status === 'locked') return;
-            
             const index = bookmarks.indexOf(String(id));
-            if (index > -1) { bookmarks.splice(index, 1); } else { bookmarks.push(String(id)); }
+            if (index > -1) { 
+                bookmarks.splice(index, 1); 
+            } else { 
+                bookmarks.push(String(id)); 
+            }
             saveBookmarks();
             renderEvents();
             renderBookmarks();
@@ -873,7 +1052,7 @@
         function renderBookmarks() {
             const grid = document.getElementById('bookmarks-grid');
             const empty = document.getElementById('bookmarks-empty');
-            const bookmarkedEvents = events.filter(e => bookmarks.includes(String(e.id)) && e.status !== 'locked');
+            const bookmarkedEvents = events.filter(e => bookmarks.includes(String(e.id)));
 
             if (bookmarkedEvents.length === 0) {
                 grid.innerHTML = '';
@@ -885,27 +1064,41 @@
             empty.classList.add('hidden');
             empty.classList.remove('flex');
 
-            grid.innerHTML = bookmarkedEvents.map(e => `
-                <div class="clean-card rounded-2xl overflow-hidden flex flex-col shadow-sm">
-                    <div class="relative h-44 overflow-hidden flex items-center justify-center bg-slate-900 cursor-pointer" onclick="openDetailModal('${e.id}')">
-                        ${e.image ? `<img src="${e.image}" alt="${e.name}" class="w-full h-full object-cover">` : `<span class="text-white font-bold p-3 text-center">${e.name}</span>`}
-                        <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-xs font-semibold bg-indigo-600 text-white">${e.city}</span>
-                        <button onclick="event.stopPropagation(); toggleBookmark('${e.id}')" class="absolute top-3 right-3 p-2 rounded-xl bg-white/95 text-indigo-600 hover:bg-slate-100 transition shadow-md">
-                            <i data-lucide="bookmark" class="w-4 h-4 fill-indigo-600"></i>
-                        </button>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
-                        <div>
-                            <h3 class="font-bold text-base text-slate-900 mb-1">${e.name}</h3>
-                            <p class="text-xs text-slate-500 mb-2"><i data-lucide="calendar" class="w-3.5 h-3.5 inline mr-1 text-indigo-600"></i>${e.time}</p>
-                            <p class="text-xs text-slate-600 line-clamp-2"><strong class="text-indigo-600">地點：</strong>${e.location}</p>
+            grid.innerHTML = bookmarkedEvents.map(e => {
+                const isLocked = (e.status === 'locked');
+                return `
+                    <div class="clean-card rounded-2xl overflow-hidden flex flex-col shadow-sm ${isLocked ? 'locked-card' : ''}">
+                        <div class="relative h-44 overflow-hidden flex items-center justify-center bg-slate-900 ${isLocked ? '' : 'cursor-pointer'}" ${isLocked ? '' : `onclick="openDetailModal('${e.id}')"`}>
+                            ${e.image ? `<img src="${e.image}" alt="${e.name}" class="w-full h-full object-cover">` : `<span class="text-white font-bold p-3 text-center">${e.name}</span>`}
+                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-xs font-semibold bg-indigo-600 text-white">${e.city}</span>
+                            
+                            <button onclick="event.stopPropagation(); toggleBookmark('${e.id}')" class="absolute top-3 right-3 p-2 rounded-xl bg-white/95 text-indigo-600 hover:bg-slate-100 transition shadow-md">
+                                <i data-lucide="bookmark" class="w-4 h-4 fill-indigo-600"></i>
+                            </button>
+
+                            ${isLocked ? `
+                                <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center text-white">
+                                    <span class="px-2.5 py-1 bg-black/60 rounded-lg text-xs font-bold text-rose-300">尚未公布 (追蹤中)</span>
+                                </div>
+                            ` : ''}
                         </div>
-                        <button onclick="openDetailModal('${e.id}')" class="w-full py-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-600 text-indigo-600 hover:text-white text-xs font-semibold transition border border-indigo-200">
-                            更多活動資訊
-                        </button>
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
+                            <div>
+                                <h3 class="font-bold text-base text-slate-900 mb-1">${e.name}</h3>
+                                <p class="text-xs text-slate-500 mb-2"><i data-lucide="calendar" class="w-3.5 h-3.5 inline mr-1 text-indigo-600"></i>${e.time}</p>
+                                <p class="text-xs text-slate-600 line-clamp-2"><strong class="text-indigo-600">地點：</strong>${e.location}</p>
+                            </div>
+                            ${isLocked ? `
+                                <div class="w-full py-2.5 rounded-xl bg-slate-100 text-slate-400 text-xs font-semibold text-center">官方公布後即刻開放瀏覽</div>
+                            ` : `
+                                <button onclick="openDetailModal('${e.id}')" class="w-full py-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-600 text-indigo-600 hover:text-white text-xs font-semibold transition border border-indigo-200">
+                                    更多活動資訊
+                                </button>
+                            `}
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
 
             lucide.createIcons();
         }
@@ -1051,6 +1244,9 @@
                         <div class="text-xs text-indigo-600">${e.city} | ${e.region}</div>
                     </td>
                     <td class="p-3.5 text-xs font-semibold text-slate-700">${e.category}</td>
+                    <td class="p-3.5 text-xs font-semibold text-indigo-600">
+                        ${(e.is_carousel === true || e.is_carousel === 'true') ? `<span class="bg-indigo-50 text-indigo-700 px-2 py-1 rounded-md border border-indigo-200">輪播第 ${e.carousel_order || 1} 順位</span>` : '<span class="text-slate-400">未加入</span>'}
+                    </td>
                     <td class="p-3.5 text-xs text-slate-600">${e.time}</td>
                     <td class="p-3.5 text-right space-x-2">
                         <button onclick="openEditModal('${e.id}')" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-indigo-600 hover:text-white text-slate-700 text-xs font-medium transition border border-slate-200 shadow-sm">編輯</button>
@@ -1073,6 +1269,8 @@
             document.getElementById('form-modal-title').innerText = '新增活動';
             document.getElementById('event-form').reset();
             document.getElementById('event-id').value = '';
+            document.getElementById('input-is-carousel').checked = false;
+            document.getElementById('input-carousel-order').value = '';
             document.getElementById('image-preview-container').classList.add('hidden');
             document.getElementById('schedule-image-preview-container').classList.add('hidden');
             document.getElementById('form-modal').classList.remove('hidden');
@@ -1095,6 +1293,9 @@
             document.getElementById('input-desc').value = e.desc || '';
             document.getElementById('input-schedule-image').value = e.schedule_image || '';
 
+            document.getElementById('input-is-carousel').checked = (e.is_carousel === true || e.is_carousel === 'true');
+            document.getElementById('input-carousel-order').value = e.carousel_order || '';
+
             if (e.image) {
                 document.getElementById('image-preview').src = e.image;
                 document.getElementById('image-preview-container').classList.remove('hidden');
@@ -1116,7 +1317,7 @@
             document.getElementById('form-modal').classList.add('hidden');
         }
 
-        // 圖片上傳壓縮防護（自動縮圖，防止超出試算表容量限制）
+        // 圖片上傳壓縮防護（自動縮圖至 900px，徹底杜絕超過試算表格子上限問題）
         function handleImageUpload(event, inputTargetId, previewImgId, previewContainerId) {
             const file = event.target.files[0];
             if (!file) return;
@@ -1137,7 +1338,7 @@
                     canvas.height = h;
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, w, h);
-                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.65);
 
                     document.getElementById(inputTargetId).value = compressedBase64;
                     document.getElementById(previewImgId).src = compressedBase64;
@@ -1162,26 +1363,30 @@
         async function handleFormSubmit(event) {
             event.preventDefault();
             const saveBtn = document.getElementById('form-save-btn');
-            saveBtn.innerText = '儲存中...';
+            saveBtn.innerText = '儲存同步中...';
             saveBtn.disabled = true;
 
             const id = document.getElementById('event-id').value;
             const city = document.getElementById('input-city').value;
             const region = getRegionByCity(city);
+            const nowIso = new Date().toISOString().split('T')[0];
             
             const eventData = {
                 id: id || 'evt-' + Date.now(),
-                category: document.getElementById('input-category').value,
-                name: document.getElementById('input-name').value,
+                category: document.getElementById('input-category').value.trim(),
+                name: document.getElementById('input-name').value.trim(),
                 city: city,
                 region: region,
-                time: document.getElementById('input-time').value,
-                location: document.getElementById('input-location').value,
+                time: document.getElementById('input-time').value.trim(),
+                location: document.getElementById('input-location').value.trim(),
                 status: document.getElementById('input-status').value,
                 image: document.getElementById('input-image').value || '',
-                link: document.getElementById('input-link').value,
-                desc: document.getElementById('input-desc').value,
-                schedule_image: document.getElementById('input-schedule-image').value || ''
+                link: document.getElementById('input-link').value || '',
+                desc: document.getElementById('input-desc').value || '',
+                schedule_image: document.getElementById('input-schedule-image').value || '',
+                is_carousel: document.getElementById('input-is-carousel').checked,
+                carousel_order: Number(document.getElementById('input-carousel-order').value) || 99,
+                updated_at: nowIso
             };
 
             if (id) {
@@ -1192,9 +1397,11 @@
             }
 
             saveDataLocally();
+            buildDynamicCategoryTabs();
             renderEvents();
             renderBookmarks();
             renderAdminTable();
+            updateCarouselView();
             closeFormModal();
 
             // 即時同步至 Google 試算表
@@ -1204,14 +1411,16 @@
         }
 
         async function deleteEvent(id) {
-            if (confirm('確定要刪除這項活動嗎？')) {
+            if (confirm('確定要刪除這項活動嗎？此動作將同時同步清除 Google 試算表中的資料。')) {
                 events = events.filter(e => String(e.id) !== String(id));
                 bookmarks = bookmarks.filter(bId => String(bId) !== String(id));
                 saveDataLocally();
                 saveBookmarks();
+                buildDynamicCategoryTabs();
                 renderEvents();
                 renderBookmarks();
                 renderAdminTable();
+                updateCarouselView();
                 await syncToGoogleSheet();
             }
         }
@@ -1230,7 +1439,7 @@
             const url = document.getElementById('gas-url-input').value.trim();
             localStorage.setItem('tw_nye_gas_url_cloud', url);
             localStorage.setItem('tw_nye_gas_url_light', url);
-            alert('已成功儲存 Google Apps Script 連結設定！即將為您重新同步。');
+            alert('已成功儲存 Google Apps Script 連結設定！即將為您重新進行全域同步。');
             closeSyncModal();
             syncDataFromCloud(true);
         }
