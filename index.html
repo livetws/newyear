@@ -120,7 +120,6 @@
     <!-- Header Navigation (支援後台自訂 Logo、防破圖自動回退、自訂標題、正版社群 SVG、管理圖示化、收藏金色連動) -->
     <header class="sticky top-0 z-40 clean-panel border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
-            <!-- 標題與官方專屬 Logo (禁止折行) -->
             <div class="flex items-center space-x-2.5 sm:space-x-3 cursor-pointer shrink-0" onclick="switchTab('home')">
                 <div id="header-logo-wrapper" class="w-10 h-10 rounded-xl overflow-hidden shadow-sm shrink-0 flex items-center justify-center">
                     <!-- 動態渲染 Logo 或 經典星號 fallback -->
@@ -133,7 +132,6 @@
 
             <!-- 右側導覽與社群 -->
             <div class="flex items-center space-x-1.5 sm:space-x-3 shrink-0">
-                <!-- 官方社群平台原生高解析 SVG 圖標 -->
                 <div class="flex items-center space-x-1 border-r border-slate-200 pr-2 sm:pr-3">
                     <a href="https://www.instagram.com/livetws/" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded-lg text-slate-500 hover:text-pink-600 hover:bg-pink-50 transition" title="Instagram">
                         <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -188,7 +186,7 @@
                 </button>
             </div>
 
-            <!-- 搜尋與篩選控制面板 (含 本週活動 篩選) -->
+            <!-- 搜尋與篩選控制面板 -->
             <div id="event-section" class="clean-panel p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
                 <div class="relative w-full">
                     <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -318,7 +316,7 @@
             </div>
         </div>
 
-        <!-- ==================== ADMIN TAB (管理系統 - 懸浮吸頂工具列、分流視圖、即時權重、品牌設定) ==================== -->
+        <!-- ==================== ADMIN TAB (管理系統 - 懸浮吸頂工具列、分流視圖、即時權重、置頂切換) ==================== -->
         <div id="view-admin" class="space-y-6 hidden animate-fadeIn">
             <!-- 安全登入視窗 -->
             <div id="admin-login-box" class="clean-panel p-8 rounded-2xl border border-indigo-100 shadow-xl max-w-md mx-auto text-center space-y-4 my-12">
@@ -350,7 +348,6 @@
                     </div>
 
                     <div class="flex flex-wrap items-center gap-2">
-                        <!-- 網站品牌與標題設定按鈕 -->
                         <button onclick="openBrandingModal()" class="px-3.5 py-2 bg-white hover:bg-slate-50 text-slate-700 rounded-xl text-xs sm:text-sm font-medium border border-slate-200 shadow-2xs flex items-center space-x-1.5 transition">
                             <i data-lucide="palette" class="w-4 h-4 text-pink-600"></i><span>網站品牌與Logo設定</span>
                         </button>
@@ -435,6 +432,7 @@
                             <thead class="bg-slate-100 text-slate-600 text-xs uppercase border-b border-slate-200">
                                 <tr>
                                     <th class="p-3.5 whitespace-nowrap">即時狀態</th>
+                                    <th class="p-3.5 whitespace-nowrap">置頂</th>
                                     <th class="p-3.5 whitespace-nowrap">權重</th>
                                     <th class="p-3.5">活動名稱 (點擊預覽) / 縣市</th>
                                     <th class="p-3.5 whitespace-nowrap">類型</th>
@@ -452,14 +450,13 @@
 
     </main>
 
-    <!-- 頁尾 (簡化官方社群、累積瀏覽人次) -->
+    <!-- 頁尾 -->
     <footer class="w-full py-8 mt-10 border-t border-slate-200 bg-white/70 backdrop-blur-md text-center text-xs text-slate-500 z-10 relative">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="font-medium text-slate-700">
                 <span>© livetws 跨年晚會資訊</span>
             </div>
 
-            <!-- 官方社群平台原生高解析 SVG 按鈕 -->
             <div class="flex items-center space-x-2">
                 <a href="https://www.instagram.com/livetws/" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-3 py-1.5 bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 text-pink-700 rounded-xl border border-pink-200 transition shadow-2xs font-semibold">
                     <svg class="w-3.5 h-3.5 fill-current text-pink-600" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -472,7 +469,6 @@
                     </a>
                 </div>
 
-                <!-- 累積瀏覽人次 -->
                 <div class="flex items-center space-x-2 bg-indigo-50 border border-indigo-100 text-indigo-700 px-3.5 py-1.5 rounded-full font-medium shadow-2xs">
                     <i data-lucide="flame" class="w-4 h-4 text-orange-500 animate-pulse"></i>
                     <span>累積瀏覽人次：</span>
@@ -503,7 +499,7 @@
         </button>
     </nav>
 
-    <!-- Detail Modal (演出卡司 與 宣傳海報 獨立拆開呈現) -->
+    <!-- Detail Modal -->
     <div id="detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-slate-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div id="modal-content" class="overflow-y-auto p-6 space-y-6"></div>
@@ -526,7 +522,7 @@
         </div>
     </div>
 
-    <!-- Branding Modal (後台自訂網站品牌、Logo、標題與副標題) -->
+    <!-- Branding Modal -->
     <div id="branding-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-lg rounded-2xl overflow-hidden border border-slate-200 shadow-2xl flex flex-col bg-white p-6 space-y-4 max-h-[85vh]">
             <div class="flex items-center justify-between border-b pb-3">
@@ -550,7 +546,6 @@
                     <input type="text" id="brand-input-subtitle" placeholder="跨年煙火、元旦升旗與活動即時行程總覽" class="w-full px-3.5 py-2.5 border rounded-xl text-sm focus:outline-none focus:border-indigo-500">
                 </div>
 
-                <!-- Logo 上傳與預覽 -->
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
                     <div class="flex items-center justify-between">
                         <span class="block text-xs font-bold text-slate-800">網站品牌 Logo 圖示</span>
@@ -583,7 +578,7 @@
         </div>
     </div>
 
-    <!-- Form Modal (新增/編輯活動 - 頂部固定動作列、支援多海報上傳、單圖移除、已上傳圖庫選擇、自訂權重) -->
+    <!-- Form Modal (支援 置頂 is_pinned、自訂權重 weight) -->
     <div id="form-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-indigo-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div class="p-4 sm:p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50 sticky top-0 z-10">
@@ -633,8 +628,8 @@
                         <input type="text" id="input-name" placeholder="例如：2027 臺北最HIGH新年城" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-sm transition">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">活動時間 * (格式: 2026/12/31 19:00)</label>
-                        <input type="text" id="input-time" placeholder="2026/12/31 19:00 或 2027/01/01 06:30" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-sm transition">
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">活動時間 * (支援區間: 2026/11/06 - 116/01/03)</label>
+                        <input type="text" id="input-time" placeholder="2026/12/31 19:00 或 2026/11/06 - 116/01/03" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-sm transition">
                     </div>
                 </div>
 
@@ -643,19 +638,29 @@
                     <input type="text" id="input-location" placeholder="例如：臺北市市民廣場" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-sm transition">
                 </div>
 
-                <!-- 輪播動態連動控制 -->
-                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div class="flex items-center space-x-3">
-                        <input type="checkbox" id="input-is-carousel" onchange="toggleCarouselOrderField()" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
-                        <label for="input-is-carousel" class="text-xs font-semibold text-slate-700 cursor-pointer">加入首頁頂端輪播 Banner 推薦</label>
+                <!-- 推薦置頂 與 輪播動態連動控制 -->
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" id="input-is-pinned" class="w-4 h-4 text-amber-500 rounded border-slate-300 focus:ring-amber-400">
+                            <label for="input-is-pinned" class="text-xs font-bold text-amber-700 cursor-pointer flex items-center space-x-1">
+                                <span>📌 推薦置頂活動 (釘選於探索頁第一順位)</span>
+                            </label>
+                        </div>
                     </div>
-                    <div id="carousel-order-container" class="hidden flex-1 sm:max-w-xs">
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">輪播順序 (1 ~ 10) *</label>
-                        <input type="number" id="input-carousel-order" min="1" max="10" placeholder="請輸入順序數字 (1 ~ 10)" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-sm">
+                    <div class="pt-2 border-t border-slate-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" id="input-is-carousel" onchange="toggleCarouselOrderField()" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                            <label for="input-is-carousel" class="text-xs font-semibold text-slate-700 cursor-pointer">加入首頁頂端輪播 Banner 推薦</label>
+                        </div>
+                        <div id="carousel-order-container" class="hidden flex-1 sm:max-w-xs">
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">輪播順序 (1 ~ 10) *</label>
+                            <input type="number" id="input-carousel-order" min="1" max="10" placeholder="請輸入順序數字 (1 ~ 10)" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-sm">
+                        </div>
                     </div>
                 </div>
 
-                <!-- 1. 主視覺圖片 (維持橫幅) -->
+                <!-- 1. 主視覺封面 -->
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
                     <div class="flex items-center justify-between">
                         <span class="block text-xs font-bold text-slate-800">1. 主視覺封面橫幅圖片 (橫幅首圖)</span>
@@ -844,7 +849,7 @@
         // ==========================================
         const DEFAULT_GAS_URL = "https://script.google.com/macros/s/AKfycbwQftVg70yJwJJ6kuvy3dRFetPStKr05ntksXZzqkoB-KMNTQ8fCuT-mY95b0RYPX61/exec";
 
-        // 宜蘭縣劃入「東部與離島」
+        // 宜蘭縣正確歸入「東部與離島」
         const REGION_MAP = {
             '基隆市': '北部', '臺北市': '北部', '新北市': '北部', '桃園市': '北部', '新竹市': '北部', '新竹縣': '北部',
             '苗栗縣': '中部', '臺中市': '中部', '彰化縣': '中部', '南投縣': '中部', '雲林縣': '中部',
@@ -861,7 +866,6 @@
 
         const REGION_PRIORITY = { '北部': 1, '中部': 2, '南部': 3, '東部與離島': 4 };
 
-        // 預設品牌設定
         let siteBranding = {
             title: "LIVE 演唱會｜2027跨年晚會",
             subtitle: "跨年煙火、元旦升旗與活動即時行程總覽",
@@ -900,31 +904,84 @@
             return timeStr;
         }
 
-        function parseEventDate(timeStr) {
-            if (!timeStr) return new Date(8640000000000000);
-            const cleaned = sanitizeTimeDisplay(timeStr);
-            const match = cleaned.match(/(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})/);
+        // ==========================================
+        // 【核心演算法】智慧時間區間與民國年/西元年雙向自動辨識
+        // 例如：2026/11/06 - 116/01/03 自動判斷
+        // ==========================================
+        function parseDateSubString(partStr, isEndDate = false) {
+            if (!partStr) return null;
+            const cleaned = sanitizeTimeDisplay(partStr).trim();
+            const match = cleaned.match(/(\d{2,4})[\/\-](\d{1,2})[\/\-](\d{1,2})/);
             if (match) {
-                const year = parseInt(match[1], 10);
+                let year = parseInt(match[1], 10);
+                if (year < 1900) {
+                    year += 1911; // 民國年換算西元年 (如 116 -> 2027)
+                }
                 const month = parseInt(match[2], 10) - 1;
                 const day = parseInt(match[3], 10);
-                let hour = 23, min = 59;
+                
+                let hour = isEndDate ? 23 : 0;
+                let min = isEndDate ? 59 : 0;
+                let sec = isEndDate ? 59 : 0;
+
                 const timeMatch = cleaned.match(/(\d{1,2}):(\d{2})/);
                 if (timeMatch) {
                     hour = parseInt(timeMatch[1], 10);
                     min = parseInt(timeMatch[2], 10);
                 }
-                return new Date(year, month, day, hour, min);
+                return new Date(year, month, day, hour, min, sec);
             }
-            return new Date(8640000000000000);
+            return null;
+        }
+
+        function parseEventRange(timeStr) {
+            if (!timeStr) {
+                return {
+                    startDate: new Date(8640000000000000),
+                    endDate: new Date(8640000000000000)
+                };
+            }
+
+            const raw = sanitizeTimeDisplay(timeStr);
+            const delimiters = [' - ', '-', ' ~ ', '~', ' 至 ', '至'];
+            let matchedDelim = null;
+
+            for (let d of delimiters) {
+                if (raw.includes(d)) {
+                    matchedDelim = d;
+                    break;
+                }
+            }
+
+            if (matchedDelim) {
+                const parts = raw.split(matchedDelim);
+                const start = parseDateSubString(parts[0], false);
+                const end = parseDateSubString(parts[1], true);
+
+                return {
+                    startDate: start || new Date(8640000000000000),
+                    endDate: end || start || new Date(8640000000000000)
+                };
+            } else {
+                const single = parseDateSubString(raw, false);
+                return {
+                    startDate: single || new Date(8640000000000000),
+                    endDate: parseDateSubString(raw, true) || single || new Date(8640000000000000)
+                };
+            }
+        }
+
+        function parseEventDate(timeStr) {
+            return parseEventRange(timeStr).startDate;
         }
 
         function isEventExpiredTwoDays(timeStr) {
             if (!timeStr) return false;
-            const d = parseEventDate(timeStr);
-            if (d.getTime() >= 8640000000000000) return false;
-            const endOfEventDay = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59).getTime();
-            const twoDaysAfter = endOfEventDay + (2 * 24 * 60 * 60 * 1000);
+            const range = parseEventRange(timeStr);
+            if (range.endDate.getTime() >= 8640000000000000) return false;
+            
+            const endOfEvent = range.endDate.getTime();
+            const twoDaysAfter = endOfEvent + (2 * 24 * 60 * 60 * 1000);
             return Date.now() > twoDaysAfter;
         }
 
@@ -934,8 +991,8 @@
 
         function isEventInThisWeek(timeStr) {
             if (!timeStr) return false;
-            const eventDate = parseEventDate(timeStr);
-            if (eventDate.getTime() >= 8640000000000000) return false;
+            const range = parseEventRange(timeStr);
+            if (range.startDate.getTime() >= 8640000000000000) return false;
 
             const now = new Date();
             const currentDay = now.getDay();
@@ -944,8 +1001,12 @@
             const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() + distanceToMonday, 0, 0, 0, 0);
             const sunday = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + 6, 23, 59, 59, 999);
 
-            const t = eventDate.getTime();
-            return t >= monday.getTime() && t <= sunday.getTime();
+            const monTime = monday.getTime();
+            const sunTime = sunday.getTime();
+            const s = range.startDate.getTime();
+            const end = range.endDate.getTime();
+
+            return (s <= sunTime && end >= monTime);
         }
 
         function getRandomOrderValue(id) {
@@ -1195,6 +1256,7 @@
                             events = data.events.map(e => {
                                 const carouselRaw = String(e.is_carousel || '').trim().toLowerCase();
                                 const isCar = (carouselRaw === 'true' || carouselRaw === '1' || carouselRaw === 'yes');
+                                const isPinned = (String(e.is_pinned).trim().toLowerCase() === 'true' || e.is_pinned === 1 || e.is_pinned === '1');
                                 const orderNum = (e.carousel_order !== undefined && e.carousel_order !== null && e.carousel_order !== '') ? Number(e.carousel_order) : '';
                                 const weightVal = (e.weight !== undefined && e.weight !== null && e.weight !== '') ? Number(e.weight) : '';
 
@@ -1203,6 +1265,7 @@
                                     region: e.region || getRegionByCity(e.city),
                                     status: e.status || 'open',
                                     weight: weightVal,
+                                    is_pinned: isPinned,
                                     time: sanitizeTimeDisplay(e.time),
                                     lineup: e.lineup || '',
                                     lineup_image: e.lineup_image || '',
@@ -1247,6 +1310,7 @@
                         e.time = sanitizeTimeDisplay(e.time);
                         const carouselRaw = String(e.is_carousel || '').trim().toLowerCase();
                         e.is_carousel = (carouselRaw === 'true' || carouselRaw === '1' || carouselRaw === 'yes');
+                        e.is_pinned = (String(e.is_pinned).trim().toLowerCase() === 'true' || e.is_pinned === 1);
                     });
                 } catch (e) { events = []; }
             } else {
@@ -1950,7 +2014,9 @@
             }
         }
 
-        // 探索活動渲染 (含本週活動、自訂權重與留白隨機排序)
+        // ==========================================
+        // 【核心顯示排序】置頂優先 ➔ 活動開始時間 ➔ 地區順位 ➔ 類型 ➔ 權重
+        // ==========================================
         function renderEvents() {
             const grid = document.getElementById('events-grid');
             const emptyState = document.getElementById('empty-state');
@@ -1979,37 +2045,30 @@
             });
 
             filtered.sort((a, b) => {
-                if (currentCategory === '各縣市活動' || currentRegion === 'this_week') {
-                    const dateA = parseEventDate(a.time).getTime();
-                    const dateB = parseEventDate(b.time).getTime();
-                    if (dateA !== dateB) return dateA - dateB;
+                // 1. 最高優先權：📌 置頂活動永遠排在最前面
+                const pinA = a.is_pinned ? 0 : 1;
+                const pinB = b.is_pinned ? 0 : 1;
+                if (pinA !== pinB) return pinA - pinB;
 
-                    const regionOrderA = REGION_PRIORITY[a.region] || 9;
-                    const regionOrderB = REGION_PRIORITY[b.region] || 9;
-                    if (regionOrderA !== regionOrderB) return regionOrderA - regionOrderB;
+                // 2. 第二順位：活動開始時間 (由早至晚、越先登場越先看)
+                const startA = parseEventRange(a.time).startDate.getTime();
+                const startB = parseEventRange(b.time).startDate.getTime();
+                if (startA !== startB) return startA - startB;
 
-                    const wA = (a.weight !== undefined && a.weight !== null && a.weight !== '') ? Number(a.weight) : (1000 + getRandomOrderValue(a.id));
-                    const wB = (b.weight !== undefined && b.weight !== null && b.weight !== '') ? Number(b.weight) : (1000 + getRandomOrderValue(b.id));
-                    return wA - wB;
-                } else {
-                    const statusA = (a.status === 'open') ? 0 : 1;
-                    const statusB = (b.status === 'open') ? 0 : 1;
-                    if (statusA !== statusB) return statusA - statusB;
+                // 3. 第三順位：地區順位 (北 -> 中 -> 南 -> 東部離島)
+                const regionOrderA = REGION_PRIORITY[a.region] || 9;
+                const regionOrderB = REGION_PRIORITY[b.region] || 9;
+                if (regionOrderA !== regionOrderB) return regionOrderA - regionOrderB;
 
-                    const idxA = CITY_ORDER.indexOf(a.city);
-                    const idxB = CITY_ORDER.indexOf(b.city);
-                    const orderCityA = (idxA !== -1 ? idxA : 99);
-                    const orderCityB = (idxB !== -1 ? idxB : 99);
-                    if (orderCityA !== orderCityB) return orderCityA - orderCityB;
+                // 4. 第四順位：同類型排在一起
+                const catA = String(a.category || '');
+                const catB = String(b.category || '');
+                if (catA !== catB) return catA.localeCompare(catB, 'zh-TW');
 
-                    const wA = (a.weight !== undefined && a.weight !== null && a.weight !== '') ? Number(a.weight) : (1000 + getRandomOrderValue(a.id));
-                    const wB = (b.weight !== undefined && b.weight !== null && b.weight !== '') ? Number(b.weight) : (1000 + getRandomOrderValue(b.id));
-                    if (wA !== wB) return wA - wB;
-
-                    const dateA = parseEventDate(a.time).getTime();
-                    const dateB = parseEventDate(b.time).getTime();
-                    return dateA - dateB;
-                }
+                // 5. 第五順位：同條件下的權重排序 (留白則隨機散列自然排序)
+                const wA = (a.weight !== undefined && a.weight !== null && a.weight !== '') ? Number(a.weight) : (1000 + getRandomOrderValue(a.id));
+                const wB = (b.weight !== undefined && b.weight !== null && b.weight !== '') ? Number(b.weight) : (1000 + getRandomOrderValue(b.id));
+                return wA - wB;
             });
 
             if (filtered.length === 0) {
@@ -2025,6 +2084,7 @@
             grid.innerHTML = filtered.map(e => {
                 const isBookmarked = bookmarks.includes(String(e.id));
                 const isLocked = (e.status === 'locked');
+                const isPinned = e.is_pinned;
                 const hasNewBadge = isRecentlyUpdated(e.updated_at);
                 const badgeColor = getRegionBadgeColor(e.region);
                 const lineupSummary = formatLineupSummary(e.lineup);
@@ -2034,12 +2094,13 @@
                     `<div class="w-full h-full flex items-center justify-center p-4 text-center ${isLocked ? '' : 'cursor-pointer'} bg-gradient-to-br from-indigo-900 to-slate-900" ${isLocked ? '' : `onclick="openDetailModal('${e.id}')"`}><span class="text-white font-bold text-lg drop-shadow-md">${e.name}</span></div>`;
 
                 return `
-                    <div class="clean-card rounded-2xl overflow-hidden flex flex-col group shadow-sm ${isLocked ? 'locked-card' : ''}">
+                    <div class="clean-card rounded-2xl overflow-hidden flex flex-col group shadow-sm ${isLocked ? 'locked-card' : ''} ${isPinned ? 'ring-2 ring-amber-400/50' : ''}">
                         <div class="relative h-52 overflow-hidden flex items-center justify-center bg-slate-900">
                             ${imageHtml}
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none"></div>
                             
-                            <div class="absolute top-3 left-3 flex items-center space-x-1.5">
+                            <div class="absolute top-3 left-3 flex flex-wrap items-center gap-1.5">
+                                ${isPinned ? `<span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md flex items-center space-x-1"><span>📌 置頂</span></span>` : ''}
                                 <span class="px-2.5 py-1 rounded-lg text-xs font-semibold ${badgeColor} text-white shadow-md">
                                     ${e.city} · ${e.category}
                                 </span>
@@ -2060,7 +2121,7 @@
 
                             <div class="absolute bottom-3 left-3 flex items-center space-x-2 text-xs text-white pointer-events-none">
                                 <span class="bg-slate-900/70 px-2 py-1 rounded-md backdrop-blur-sm">
-                                    ${e.time ? e.time.split(' ')[0] : ''}
+                                    ${e.time}
                                 </span>
                             </div>
                         </div>
@@ -2310,7 +2371,6 @@
             return `<div class="space-y-2.5">${itemsHtml}</div>`;
         }
 
-        // 活動詳情彈窗：演出卡司 與 宣傳海報 徹底拆開為獨立區塊
         function openDetailModal(id) {
             const e = events.find(item => String(item.id) === String(id));
             if (!e) return;
@@ -2514,6 +2574,20 @@
             await syncToGoogleSheet();
         }
 
+        // 即時切換置頂
+        async function handleInlinePinToggle(eventId) {
+            const idx = events.findIndex(e => String(e.id) === String(eventId));
+            if (idx === -1) return;
+
+            events[idx].is_pinned = !events[idx].is_pinned;
+            events[idx].updated_at = new Date().toISOString().split('T')[0];
+
+            saveDataLocally();
+            renderEvents();
+            renderAdminTable();
+            await syncToGoogleSheet();
+        }
+
         async function handleInlineWeightChange(eventId, newWeight) {
             const idx = events.findIndex(e => String(e.id) === String(eventId));
             if (idx === -1) return;
@@ -2550,6 +2624,14 @@
             });
 
             filtered.sort((a, b) => {
+                const pinA = a.is_pinned ? 0 : 1;
+                const pinB = b.is_pinned ? 0 : 1;
+                if (pinA !== pinB) return pinA - pinB;
+
+                const startA = parseEventRange(a.time).startDate.getTime();
+                const startB = parseEventRange(b.time).startDate.getTime();
+                if (startA !== startB) return startA - startB;
+
                 const idxA = CITY_ORDER.indexOf(a.city);
                 const idxB = CITY_ORDER.indexOf(b.city);
                 const orderCityA = (idxA !== -1 ? idxA : 99);
@@ -2564,16 +2646,18 @@
             document.getElementById('admin-table-count').innerText = `目前分流顯示 ${filtered.length} 筆活動`;
 
             if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="p-8 text-center text-slate-400 text-xs">${adminViewTab === 'active' ? '目前尚無進行中活動資料，請點擊上方「新增活動」' : '目前歷屆歸檔區尚無活動資料'}</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="8" class="p-8 text-center text-slate-400 text-xs">${adminViewTab === 'active' ? '目前尚無進行中活動資料，請點擊上方「新增活動」' : '目前歷屆歸檔區尚無活動資料'}</td></tr>`;
                 return;
             }
 
             tbody.innerHTML = filtered.map(e => {
                 const isCar = (e.is_carousel === true || e.is_carousel === 'true' || e.is_carousel === 1);
                 const carOrder = e.carousel_order || 1;
+                const isPinned = e.is_pinned;
 
                 return `
                     <tr class="hover:bg-slate-50 transition">
+                        <!-- 即時狀態下拉選單 -->
                         <td class="p-3.5 whitespace-nowrap">
                             <select onchange="handleInlineStatusChange('${e.id}', this.value)" class="text-xs font-semibold py-1 px-2.5 rounded-lg border focus:outline-none transition ${
                                 e.status === 'open' ? 'bg-emerald-50 text-emerald-700 border-emerald-300' :
@@ -2587,6 +2671,16 @@
                                 <option value="closed" ${e.status === 'closed' ? 'selected' : ''}>已結束</option>
                             </select>
                         </td>
+                        <!-- 即時置頂按鈕 -->
+                        <td class="p-3.5 whitespace-nowrap">
+                            <button type="button" onclick="handleInlinePinToggle('${e.id}')" title="點擊切換置頂狀態" class="px-2 py-1 rounded-lg text-xs font-bold transition flex items-center space-x-1 ${
+                                isPinned ? 'bg-amber-500 text-white shadow-xs' : 'bg-slate-100 text-slate-400 hover:text-slate-700'
+                            }">
+                                <span>📌</span>
+                                <span>${isPinned ? '已置頂' : '一般'}</span>
+                            </button>
+                        </td>
+                        <!-- 即時權重輸入框 (留白則隨機) -->
                         <td class="p-3.5 whitespace-nowrap">
                             <input type="number" min="1" max="99" value="${e.weight !== undefined && e.weight !== null ? e.weight : ''}" placeholder="隨機" 
                                 onchange="handleInlineWeightChange('${e.id}', this.value)"
@@ -2600,6 +2694,7 @@
                             <div class="text-xs text-indigo-600 font-medium">${e.city} · ${e.region}</div>
                         </td>
                         <td class="p-3.5 text-xs font-semibold text-slate-700 whitespace-nowrap">${e.category}</td>
+                        <!-- 輪播 (精簡為純數字 1, 2, 3...) -->
                         <td class="p-3.5 text-xs font-semibold whitespace-nowrap">
                             ${isCar ? `<span class="bg-indigo-50 text-indigo-700 font-bold px-2.5 py-0.5 rounded-lg border border-indigo-200 shadow-2xs">${carOrder}</span>` : '<span class="text-slate-400 font-mono">-</span>'}
                         </td>
@@ -2645,6 +2740,7 @@
             document.getElementById('event-id').value = '';
             document.getElementById('input-status').value = 'hidden';
             document.getElementById('input-weight').value = '';
+            document.getElementById('input-is-pinned').checked = false;
             document.getElementById('input-is-carousel').checked = false;
             document.getElementById('input-carousel-order').value = '';
             toggleCarouselOrderField();
@@ -2673,6 +2769,7 @@
             document.getElementById('input-city').value = e.city;
             document.getElementById('input-status').value = e.status || 'open';
             document.getElementById('input-weight').value = (e.weight !== undefined && e.weight !== null) ? e.weight : '';
+            document.getElementById('input-is-pinned').checked = (e.is_pinned === true || e.is_pinned === 'true');
             document.getElementById('input-name').value = e.name;
             document.getElementById('input-time').value = sanitizeTimeDisplay(e.time);
             document.getElementById('input-location').value = e.location;
@@ -2724,6 +2821,7 @@
             const isCarousel = document.getElementById('input-is-carousel').checked;
             const carouselOrderVal = document.getElementById('input-carousel-order').value.trim();
             const weightVal = document.getElementById('input-weight').value.trim();
+            const isPinned = document.getElementById('input-is-pinned').checked;
 
             if (!category) {
                 highlightErrorField('input-category', '請選擇或輸入活動類型！');
@@ -2774,6 +2872,7 @@
                 location: location,
                 status: document.getElementById('input-status').value,
                 weight: weightVal === '' ? '' : Number(weightVal),
+                is_pinned: isPinned,
                 image: image,
                 lineup: document.getElementById('input-lineup').value.trim(),
                 lineup_image: lineupImage,
