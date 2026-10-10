@@ -11,7 +11,7 @@
     <meta name="author" content="全臺跨年晚會活動資訊管理系統">
     <meta name="robots" content="index, follow">
 
-    <!-- Open Graph 社群分享卡片 (Facebook, LINE) -->
+    <!-- Open Graph 社群分享卡片 -->
     <meta property="og:title" content="2027 全臺跨年晚會及元旦升旗 - 即時行程與活動總覽">
     <meta property="og:description" content="快速查詢全臺各縣市 2027 跨年煙火晚會、元旦升旗與燈會活動，即時掌握最新卡司演出陣容與時刻表！">
     <meta property="og:type" content="website">
@@ -155,7 +155,12 @@
             
             <!-- Hero Carousel Banner -->
             <div class="relative rounded-2xl overflow-hidden clean-panel border border-indigo-100 shadow-xl h-64 sm:h-80 bg-slate-900">
-                <div id="hero-carousel-container" class="relative w-full h-full"></div>
+                <div id="hero-carousel-container" class="relative w-full h-full flex items-center justify-center">
+                    <div class="text-slate-400 text-sm flex items-center space-x-2 animate-pulse">
+                        <i data-lucide="loader" class="w-5 h-5 animate-spin text-indigo-400"></i>
+                        <span>正在載入即時活動輪播...</span>
+                    </div>
+                </div>
                 <div id="carousel-dots" class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-20"></div>
                 <button onclick="prevSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center transition z-20">
                     <i data-lucide="chevron-left" class="w-6 h-6"></i>
@@ -176,7 +181,6 @@
                             class="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 transition shadow-sm">
                     </div>
 
-                    <!-- 動態分類按鈕容器 -->
                     <div id="category-tabs-container" class="flex items-center space-x-1.5 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
                         <button onclick="setCategory('all')" class="cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-indigo-600 text-white shadow-md shadow-indigo-600/20" data-cat="all">全部活動</button>
                     </div>
@@ -191,13 +195,29 @@
                 </div>
 
                 <div class="flex items-center justify-between text-xs text-slate-500 px-1">
-                    <span id="result-count">載入中...</span>
+                    <span id="result-count">載入雲端資料中...</span>
                     <span></span>
                 </div>
             </div>
 
-            <!-- Events Grid -->
-            <div id="events-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <!-- Events Grid (預設骨架加載，不再殘留假資料) -->
+            <div id="events-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="clean-card rounded-2xl p-5 space-y-4 animate-pulse">
+                    <div class="h-48 bg-slate-200 rounded-xl"></div>
+                    <div class="h-4 bg-slate-200 rounded w-3/4"></div>
+                    <div class="h-3 bg-slate-200 rounded w-1/2"></div>
+                </div>
+                <div class="clean-card rounded-2xl p-5 space-y-4 animate-pulse">
+                    <div class="h-48 bg-slate-200 rounded-xl"></div>
+                    <div class="h-4 bg-slate-200 rounded w-3/4"></div>
+                    <div class="h-3 bg-slate-200 rounded w-1/2"></div>
+                </div>
+                <div class="clean-card rounded-2xl p-5 space-y-4 animate-pulse">
+                    <div class="h-48 bg-slate-200 rounded-xl"></div>
+                    <div class="h-4 bg-slate-200 rounded w-3/4"></div>
+                    <div class="h-3 bg-slate-200 rounded w-1/2"></div>
+                </div>
+            </div>
 
             <!-- Empty State -->
             <div id="empty-state" class="hidden flex-col items-center justify-center py-16 text-center">
@@ -379,7 +399,7 @@
         </div>
     </footer>
 
-    <!-- Mobile Bottom Dock Navigation (保留原版完整四按鈕) -->
+    <!-- Mobile Bottom Dock Navigation -->
     <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 clean-panel border-t border-slate-200 px-4 py-2 flex justify-around items-center shadow-lg" style="padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));">
         <button onclick="switchTab('home')" id="mob-nav-home" class="mob-tab flex flex-col items-center justify-center py-1 px-3 text-indigo-600">
             <i data-lucide="compass" class="w-5 h-5 mb-1"></i>
@@ -399,7 +419,7 @@
         </button>
     </nav>
 
-    <!-- Detail Modal (含卡司文字標籤、卡司海報、時刻表文字、時刻表海報) -->
+    <!-- Detail Modal -->
     <div id="detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-slate-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div id="modal-content" class="overflow-y-auto p-6 space-y-6"></div>
@@ -422,7 +442,7 @@
         </div>
     </div>
 
-    <!-- Form Modal (新增/編輯活動 - 含獨立卡司文字、卡司海報、輪播連動與 Drive 智慧壓縮上傳) -->
+    <!-- Form Modal -->
     <div id="form-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-indigo-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div class="p-6 border-b border-slate-200 flex items-center justify-between bg-slate-50">
@@ -472,7 +492,7 @@
                     <input type="text" id="input-location" required placeholder="例如：臺北市市民廣場" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-sm">
                 </div>
 
-                <!-- 輪播動態連動控制 (未勾選自動隱藏順序) -->
+                <!-- 輪播動態連動控制 -->
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div class="flex items-center space-x-3">
                         <input type="checkbox" id="input-is-carousel" onchange="toggleCarouselOrderField()" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
@@ -638,6 +658,13 @@
     </div>
 
     <script>
+        // ==========================================
+        // 【核心設定】全域預設 Google Apps Script API 網址
+        // 請將下方引號內替換為您的 Apps Script 部署網址（含 /exec）
+        // 這樣任何人在全新無痕或手機瀏覽，都會 100% 同步您的試算表！
+        // ==========================================
+        const DEFAULT_GAS_URL = "https://script.google.com/macros/s/AKfycbwQftVg70yJwJJ6kuvy3dRFetPStKr05ntksXZzqkoB-KMNTQ8fCuT-mY95b0RYPX61/exec";
+
         const REGION_MAP = {
             '基隆市': '北部', '臺北市': '北部', '新北市': '北部', '桃園市': '北部', '新竹市': '北部', '新竹縣': '北部', '宜蘭縣': '北部',
             '苗栗縣': '中部', '臺中市': '中部', '彰化縣': '中部', '南投縣': '中部', '雲林縣': '中部',
@@ -692,12 +719,164 @@
             return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
-        let serverAdminHash = localStorage.getItem('tw_nye_admin_hash_backup') || "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"; // 預設 1234
+        function getActiveGasUrl() {
+            return localStorage.getItem('tw_nye_gas_url_cloud') || 
+                   localStorage.getItem('tw_nye_gas_url_light') || 
+                   DEFAULT_GAS_URL;
+        }
+
+        let serverAdminHash = localStorage.getItem('tw_nye_admin_hash_backup') || "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4";
         let currentAdminSessionHash = "";
 
         let currentSlideIdx = 0;
         let carouselInterval = null;
         let activeCarouselEvents = [];
+
+        // 徹底清空寫死資料，只由試算表雲端驅動
+        let events = [];
+        let bookmarks = [];
+        let currentCategory = 'all';
+        let currentRegion = 'all';
+        let currentSearchQuery = '';
+        let currentActiveTab = 'home';
+        let currentModalEventId = null;
+        let isAdminUnlocked = false;
+        let adminCurrentRegionFilter = 'all';
+
+        let categoryConfigs = [
+            { name: '跨年晚會', order: 1, enabled: true },
+            { name: '元旦升旗', order: 2, enabled: true },
+            { name: '燈會', order: 3, enabled: true }
+        ];
+
+        window.onload = async function() {
+            loadCategoryConfigs();
+            loadBookmarks();
+            buildDynamicCategoryTabs();
+            // 先渲染基本外殼與空狀態
+            renderBookmarks();
+            renderAdminTable();
+            updateStats();
+            lucide.createIcons();
+
+            // 從雲端同步真實最新資料 (防快取直連)
+            await syncDataFromCloud(false);
+        };
+
+        function loadCategoryConfigs() {
+            const saved = localStorage.getItem('tw_nye_cat_configs_v1');
+            if (saved) {
+                try { categoryConfigs = JSON.parse(saved); } catch(e){}
+            }
+        }
+        function saveCategoryConfigsLocally() {
+            localStorage.setItem('tw_nye_cat_configs_v1', JSON.stringify(categoryConfigs));
+        }
+
+        // 雲端資料同步 (含 Anti-Cache 防 CDN 快取機制)
+        async function syncDataFromCloud(isManual = false) {
+            const GAS_URL = getActiveGasUrl();
+            if (GAS_URL && !GAS_URL.includes("請替換")) {
+                try {
+                    // 加入時間戳記 ?_t= 繞過 GitHub Pages / 瀏覽器 CDN 快取
+                    const cacheBuster = GAS_URL.includes('?') ? `&_t=${Date.now()}` : `?_t=${Date.now()}`;
+                    const res = await fetch(GAS_URL + cacheBuster);
+                    const data = await res.json();
+                    
+                    if (data && Array.isArray(data.events)) {
+                        events = data.events.map(e => ({
+                            ...e,
+                            region: e.region || getRegionByCity(e.city),
+                            status: e.status || 'open',
+                            time: sanitizeTimeDisplay(e.time),
+                            lineup: e.lineup || '',
+                            lineup_image: e.lineup_image || '',
+                            schedule_image: e.schedule_image || '',
+                            is_carousel: (e.is_carousel === 'true' || e.is_carousel === true || e.is_carousel === 1),
+                            carousel_order: Number(e.carousel_order) || 99,
+                            updated_at: e.updated_at || ''
+                        }));
+
+                        if (data.adminHash) {
+                            serverAdminHash = data.adminHash;
+                            localStorage.setItem('tw_nye_admin_hash_backup', data.adminHash);
+                        }
+                        if (data.visitCount !== undefined) {
+                            document.getElementById('global-visit-count').innerText = Number(data.visitCount).toLocaleString();
+                        }
+
+                        saveDataLocally();
+                        syncCategoriesWithEvents();
+                        buildDynamicCategoryTabs();
+                        renderEvents();
+                        renderHistoryEvents();
+                        renderBookmarks();
+                        renderAdminTable();
+                        updateStats();
+                        updateCarouselView();
+                        lucide.createIcons();
+                        if (isManual) alert('已成功從 Google 試算表同步最新活動與權限！');
+                        return;
+                    }
+                } catch (err) {
+                    console.error("雲端讀取失敗，使用本機快取", err);
+                }
+            }
+
+            // 若無法連線雲端，讀取上次本機快取
+            const saved = localStorage.getItem('tw_nye_events_2027_production');
+            if (saved) {
+                try { 
+                    events = JSON.parse(saved);
+                    events.forEach(e => { e.time = sanitizeTimeDisplay(e.time); });
+                } catch (e) { events = []; }
+            } else {
+                events = [];
+            }
+            
+            syncCategoriesWithEvents();
+            renderEvents();
+            renderHistoryEvents();
+            renderBookmarks();
+            renderAdminTable();
+            updateStats();
+            updateCarouselView();
+            lucide.createIcons();
+
+            if (isManual) alert('請先設定有效的 Google 試算表 API 網址。');
+        }
+
+        function syncCategoriesWithEvents() {
+            const currentCatNames = Array.from(new Set(events.map(e => e.category).filter(Boolean)));
+            currentCatNames.forEach(cat => {
+                if (!categoryConfigs.some(c => c.name === cat)) {
+                    categoryConfigs.push({ name: cat, order: categoryConfigs.length + 1, enabled: true });
+                }
+            });
+            saveCategoryConfigsLocally();
+        }
+
+        function saveDataLocally() {
+            localStorage.setItem('tw_nye_events_2027_production', JSON.stringify(events));
+            updateStats();
+        }
+
+        async function syncToGoogleSheet() {
+            const GAS_URL = getActiveGasUrl();
+            if (!GAS_URL || GAS_URL.includes("請替換")) return;
+
+            const payload = { events: events };
+            try {
+                await fetch(GAS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (err) {
+                console.error("即時同步至 Google 試算表失敗", err);
+            }
+        }
 
         function updateCarouselView() {
             const container = document.getElementById('hero-carousel-container');
@@ -711,6 +890,12 @@
 
             if (activeCarouselEvents.length === 0) {
                 activeCarouselEvents = events.filter(e => e.status !== 'closed').slice(0, 3);
+            }
+
+            if (activeCarouselEvents.length === 0) {
+                container.innerHTML = `<div class="text-slate-400 text-sm flex items-center justify-center h-full">暫無推薦活動輪播</div>`;
+                dots.innerHTML = '';
+                return;
             }
 
             if (currentSlideIdx >= activeCarouselEvents.length) currentSlideIdx = 0;
@@ -762,160 +947,6 @@
             });
         }
 
-        // 預設資料 (含完整卡司 lineup 與海報)
-        const DEFAULT_EVENTS = [
-            { id: 't-1', category: '燈會', name: '2027 台灣燈會在嘉義', city: '嘉義縣', region: '南部', time: '2027/02/05', location: '嘉義縣展區', status: 'locked', image: '', lineup: '在地藝術團隊, 國際光影設計師', lineup_image: '', link: '', desc: '活動籌備中，敬請期待。', schedule_image: '', is_carousel: false, carousel_order: 3, updated_at: '2026-10-01' },
-            { id: 'f-1', category: '元旦升旗', name: '中華民國116年元旦總統府升旗典禮', city: '臺北市', region: '北部', time: '2027/01/01 05:30', location: '總統府前廣場', status: 'locked', image: 'https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?auto=format&fit=crop&w=1200&q=80', lineup: '三軍儀隊, 示範樂隊, 國歌領唱嘉賓', lineup_image: '', link: '', desc: '05:30 - 06:00 | 民眾進場\n06:00 - 06:30 | 國歌領唱與表演活動\n06:30 - 08:30 | 正式升旗典禮', schedule_image: '', is_carousel: true, carousel_order: 2, updated_at: '2026-10-05' },
-            { id: 'n-1', category: '跨年晚會', name: '2027 台北最HIGH新年城跨年晚會', city: '臺北市', region: '北部', time: '2026/12/31 19:00', location: '臺北市市民廣場', status: 'open', image: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1200&q=80', lineup: '五月天, 告五人, 麋先生, 宇宙人, 孫盛希', lineup_image: '', link: '', desc: '19:00 - 20:30 | 暖身開場表演\n20:30 - 23:00 | 實力派歌手接力開唱\n23:00 - 00:00 | 壓軸天團超級演唱會\n00:00 - 00:06 | 101 跨年煙火大秀\n00:06 - 01:00 | 新年狂歡派對', schedule_image: '', is_carousel: true, carousel_order: 1, updated_at: '2026-10-09' },
-            { id: 'n-2', category: '跨年晚會', name: '2027 基隆年終晚會', city: '基隆市', region: '北部', time: '2026/12/31 19:00', location: '基隆市', status: 'locked', image: '', lineup: '籌備中', lineup_image: '', link: '', desc: '活動籌備中。', schedule_image: '', is_carousel: false, carousel_order: 99, updated_at: '2026-09-20' },
-            { id: 'n-3', category: '跨年晚會', name: '2027 閃耀新北1314跨河煙火秀', city: '新北市', region: '北部', time: '2026/12/31 19:00', location: '淡水河畔', status: 'locked', image: '', lineup: '籌備中', lineup_image: '', link: '', desc: '活動籌備中。', schedule_image: '', is_carousel: false, carousel_order: 99, updated_at: '2026-09-20' },
-            { id: 'c-2', category: '跨年晚會', name: '2027 台中跨年夜', city: '臺中市', region: '中部', time: '2026/12/31 19:00', location: '水湳中央公園', status: 'open', image: 'https://images.unsplash.com/photo-1498931299472-f7a63a5a1cfa?auto=format&fit=crop&w=1200&q=80', lineup: '動力火車, 盧廣仲, 滅火器, 艾怡良', lineup_image: '', link: '', desc: '18:00 - 19:30 | 在地樂團暖身\n19:30 - 23:55 | 巨星閃耀演唱會\n23:55 - 00:03 | 水湳璀璨煙火秀', schedule_image: '', is_carousel: true, carousel_order: 3, updated_at: '2026-10-08' },
-            { id: 's-3', category: '跨年晚會', name: '2027 高雄跨年晚會', city: '高雄市', region: '南部', time: '2026/12/31 18:30', location: '夢時代時代大道', status: 'open', image: '', lineup: '八三夭, 韋禮安, 熊仔, 孫盛希', lineup_image: '', link: '', desc: '18:30 - 20:00 | 青春活力開場\n20:00 - 00:00 | 夢時代巨星演唱會\n00:00 - 00:05 | 亞灣跨年煙火', schedule_image: '', is_carousel: false, carousel_order: 99, updated_at: '2026-10-09' }
-        ];
-
-        let events = [];
-        let bookmarks = [];
-        let currentCategory = 'all';
-        let currentRegion = 'all';
-        let currentSearchQuery = '';
-        let currentActiveTab = 'home';
-        let currentModalEventId = null;
-        let isAdminUnlocked = false;
-
-        let adminCurrentRegionFilter = 'all';
-
-        let categoryConfigs = [
-            { name: '跨年晚會', order: 1, enabled: true },
-            { name: '元旦升旗', order: 2, enabled: true },
-            { name: '燈會', order: 3, enabled: true }
-        ];
-
-        window.onload = async function() {
-            loadCategoryConfigs();
-            await syncDataFromCloud(false);
-            loadBookmarks();
-            buildDynamicCategoryTabs();
-            renderEvents();
-            renderHistoryEvents();
-            renderBookmarks();
-            renderAdminTable();
-            updateStats();
-            updateCarouselView();
-            lucide.createIcons();
-        };
-
-        function loadCategoryConfigs() {
-            const saved = localStorage.getItem('tw_nye_cat_configs_v1');
-            if (saved) {
-                try { categoryConfigs = JSON.parse(saved); } catch(e){}
-            }
-        }
-        function saveCategoryConfigsLocally() {
-            localStorage.setItem('tw_nye_cat_configs_v1', JSON.stringify(categoryConfigs));
-        }
-
-        async function syncDataFromCloud(isManual = false) {
-            const GAS_URL = localStorage.getItem('tw_nye_gas_url_cloud') || localStorage.getItem('tw_nye_gas_url_light') || "";
-            if (GAS_URL) {
-                try {
-                    const res = await fetch(GAS_URL);
-                    const data = await res.json();
-                    if (data && Array.isArray(data.events)) {
-                        if (data.events.length > 0) {
-                            events = data.events.map(e => ({
-                                ...e,
-                                region: e.region || getRegionByCity(e.city),
-                                status: e.status || 'open',
-                                time: sanitizeTimeDisplay(e.time),
-                                lineup: e.lineup || '',
-                                lineup_image: e.lineup_image || '',
-                                schedule_image: e.schedule_image || '',
-                                is_carousel: (e.is_carousel === 'true' || e.is_carousel === true || e.is_carousel === 1),
-                                carousel_order: Number(e.carousel_order) || 99,
-                                updated_at: e.updated_at || ''
-                            }));
-                        }
-                        if (data.adminHash) {
-                            serverAdminHash = data.adminHash;
-                            localStorage.setItem('tw_nye_admin_hash_backup', data.adminHash);
-                        }
-                        if (data.visitCount !== undefined) {
-                            document.getElementById('global-visit-count').innerText = Number(data.visitCount).toLocaleString();
-                        }
-                        saveDataLocally();
-                        syncCategoriesWithEvents();
-                        buildDynamicCategoryTabs();
-                        renderEvents();
-                        renderHistoryEvents();
-                        renderBookmarks();
-                        renderAdminTable();
-                        updateStats();
-                        updateCarouselView();
-                        lucide.createIcons();
-                        if (isManual) alert('已成功從 Google 試算表同步最新活動與權限！');
-                        return;
-                    }
-                } catch (err) {
-                    console.error("雲端讀取失敗，使用本機快取", err);
-                }
-            }
-
-            const saved = localStorage.getItem('tw_nye_events_2027_light_v8');
-            if (saved) {
-                try { 
-                    events = JSON.parse(saved);
-                    events.forEach(e => { e.time = sanitizeTimeDisplay(e.time); });
-                } catch (e) { events = DEFAULT_EVENTS; }
-            } else {
-                events = DEFAULT_EVENTS;
-                saveDataLocally();
-            }
-            
-            // 本地計數器保險
-            let localVisits = parseInt(localStorage.getItem('tw_nye_local_visits') || '1024', 10) + 1;
-            localStorage.setItem('tw_nye_local_visits', localVisits);
-            document.getElementById('global-visit-count').innerText = localVisits.toLocaleString();
-
-            syncCategoriesWithEvents();
-            if (isManual) alert('目前尚未設定 Google 試算表 API 網址，已呈現現有資料。');
-        }
-
-        function syncCategoriesWithEvents() {
-            const currentCatNames = Array.from(new Set(events.map(e => e.category).filter(Boolean)));
-            currentCatNames.forEach(cat => {
-                if (!categoryConfigs.some(c => c.name === cat)) {
-                    categoryConfigs.push({ name: cat, order: categoryConfigs.length + 1, enabled: true });
-                }
-            });
-            saveCategoryConfigsLocally();
-        }
-
-        function saveDataLocally() {
-            localStorage.setItem('tw_nye_events_2027_light_v8', JSON.stringify(events));
-            updateStats();
-        }
-
-        async function syncToGoogleSheet() {
-            const GAS_URL = localStorage.getItem('tw_nye_gas_url_cloud') || localStorage.getItem('tw_nye_gas_url_light') || "";
-            if (!GAS_URL) return;
-
-            const payload = {
-                events: events
-            };
-
-            try {
-                await fetch(GAS_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-            } catch (err) {
-                console.error("即時同步至 Google 試算表失敗", err);
-            }
-        }
-
-        // 輪播順序動態連動
         function toggleCarouselOrderField() {
             const isChecked = document.getElementById('input-is-carousel').checked;
             const container = document.getElementById('carousel-order-container');
@@ -929,7 +960,6 @@
             }
         }
 
-        // 前端智慧壓縮並直接存入 Google Drive
         async function handleSmartDriveUpload(event, inputTargetId, previewImgId, previewContainerId, statusId) {
             const file = event.target.files[0];
             if (!file) return;
@@ -942,7 +972,7 @@
                 const img = new Image();
                 img.onload = async function() {
                     const canvas = document.createElement('canvas');
-                    const maxW = 1200; // 最適合網頁的高清長邊
+                    const maxW = 1200;
                     let w = img.width;
                     let h = img.height;
                     if (w > maxW) {
@@ -954,17 +984,14 @@
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, w, h);
 
-                    // 壓縮畫質至 75%，檔案暴降至 80~180KB
                     const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.75);
                     const rawBase64 = compressedDataUrl.split(',')[1];
 
-                    // 立即於本地預覽
                     document.getElementById(previewImgId).src = compressedDataUrl;
                     document.getElementById(previewContainerId).classList.remove('hidden');
 
-                    const GAS_URL = localStorage.getItem('tw_nye_gas_url_cloud') || localStorage.getItem('tw_nye_gas_url_light') || "";
-                    if (!GAS_URL) {
-                        // 若尚未設定 GAS，保險以 Base64 填入
+                    const GAS_URL = getActiveGasUrl();
+                    if (!GAS_URL || GAS_URL.includes("請替換")) {
                         document.getElementById(inputTargetId).value = compressedDataUrl;
                         if (statusEl) statusEl.innerText = '⚠️ 尚未設定 Google API，暫存於本機。';
                         return;
@@ -990,7 +1017,6 @@
                             throw new Error('Upload error');
                         }
                     } catch(err) {
-                        // 若遇 CORS 限制，仍將輕量化 Base64 帶入輸入框
                         document.getElementById(inputTargetId).value = compressedDataUrl;
                         if (statusEl) statusEl.innerText = '✅ 圖片已極限輕量化完成！';
                     }
@@ -1011,12 +1037,12 @@
         }
 
         function loadBookmarks() {
-            const saved = localStorage.getItem('tw_nye_bookmarks_2027_light_v8');
+            const saved = localStorage.getItem('tw_nye_bookmarks_2027_production');
             if (saved) { try { bookmarks = JSON.parse(saved); } catch (e) { bookmarks = []; } }
             updateBookmarkBadge();
         }
         function saveBookmarks() {
-            localStorage.setItem('tw_nye_bookmarks_2027_light_v8', JSON.stringify(bookmarks));
+            localStorage.setItem('tw_nye_bookmarks_2027_production', JSON.stringify(bookmarks));
             updateBookmarkBadge();
         }
         function updateBookmarkBadge() {
@@ -1099,8 +1125,8 @@
             currentAdminSessionHash = newHash;
             localStorage.setItem('tw_nye_admin_hash_backup', newHash);
 
-            const GAS_URL = localStorage.getItem('tw_nye_gas_url_cloud') || localStorage.getItem('tw_nye_gas_url_light') || "";
-            if (GAS_URL) {
+            const GAS_URL = getActiveGasUrl();
+            if (GAS_URL && !GAS_URL.includes("請替換")) {
                 try {
                     await fetch(GAS_URL, {
                         method: 'POST',
@@ -1475,7 +1501,6 @@
             lucide.createIcons();
         }
 
-        // 卡司字串轉獨立膠囊標籤
         function parseLineupBadges(lineupStr) {
             if (!lineupStr) return '';
             const items = lineupStr.split(/[,，、\s]+/).filter(s => s.trim().length > 0);
@@ -1516,7 +1541,6 @@
             return `<div class="space-y-2.5">${itemsHtml}</div>`;
         }
 
-        // 活動詳情 (完整呈現卡司文字膠囊標籤、卡司宣傳海報、時刻表與時刻海報)
         function openDetailModal(id) {
             const e = events.find(item => String(item.id) === String(id));
             if (!e || e.status === 'locked') return;
@@ -1552,7 +1576,6 @@
                     </div>
                 </div>
 
-                <!-- 演出卡司專區 (膠囊標籤 + 直式卡司海報) -->
                 ${(e.lineup || e.lineup_image) ? `
                     <div class="space-y-3 p-4 bg-indigo-50/40 rounded-2xl border border-indigo-100">
                         <h4 class="text-xs font-bold text-indigo-900 uppercase tracking-wider flex items-center space-x-1.5">
@@ -1573,7 +1596,6 @@
                     </div>
                 ` : ''}
 
-                <!-- 活動時刻表專區 -->
                 <div class="space-y-3">
                     <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center space-x-1.5">
                         <i data-lucide="list-ordered" class="w-4 h-4 text-indigo-600"></i>
@@ -1672,6 +1694,11 @@
             });
 
             document.getElementById('admin-table-count').innerText = `目前篩選顯示 ${filtered.length} 筆活動`;
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-slate-400 text-xs">目前尚無活動資料，請點擊右上角「新增活動」</td></tr>`;
+                return;
+            }
 
             tbody.innerHTML = filtered.map(e => {
                 let statusBadge = '';
@@ -1853,8 +1880,8 @@
         }
 
         function openSyncModal() {
-            const savedUrl = localStorage.getItem('tw_nye_gas_url_cloud') || localStorage.getItem('tw_nye_gas_url_light') || '';
-            document.getElementById('gas-url-input').value = savedUrl;
+            const savedUrl = getActiveGasUrl();
+            document.getElementById('gas-url-input').value = savedUrl.includes("請替換") ? "" : savedUrl;
             document.getElementById('sync-modal').classList.remove('hidden');
         }
 
