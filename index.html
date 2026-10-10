@@ -117,7 +117,7 @@
         <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-pink-200/40 rounded-full blur-3xl animate-soft-glow" style="animation-delay: 4s;"></div>
     </div>
 
-    <!-- Header Navigation (含頂部社群小圖示入口) -->
+    <!-- Header Navigation (含頂部官方社群圖示) -->
     <header class="sticky top-0 z-40 clean-panel border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
@@ -131,7 +131,7 @@
             </div>
 
             <div class="flex items-center space-x-2 sm:space-x-4">
-                <!-- 頂部官方社群快速連結 -->
+                <!-- 官方社群平台入口 -->
                 <div class="flex items-center space-x-1 sm:space-x-1.5 border-r border-slate-200 pr-2 sm:pr-4">
                     <a href="https://www.instagram.com/livetws/" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded-lg text-slate-500 hover:text-pink-600 hover:bg-pink-50 transition" title="Instagram">
                         <i data-lucide="instagram" class="w-4 h-4"></i>
@@ -310,7 +310,7 @@
             </div>
         </div>
 
-        <!-- ==================== ADMIN TAB (管理系統 - 懸浮吸頂工具列，滑動永不迷失) ==================== -->
+        <!-- ==================== ADMIN TAB (管理系統 - 懸浮吸頂工具列) ==================== -->
         <div id="view-admin" class="space-y-6 hidden animate-fadeIn">
             <!-- 安全登入視窗 -->
             <div id="admin-login-box" class="clean-panel p-8 rounded-2xl border border-indigo-100 shadow-xl max-w-md mx-auto text-center space-y-4 my-12">
@@ -343,7 +343,7 @@
                         <h2 class="text-2xl font-bold text-slate-900">全臺跨年與元旦升旗行程管理</h2>
                     </div>
 
-                    <!-- 次要系統設定按鈕 (整齊緊湊，絕不破版)[cite: 2] -->
+                    <!-- 次要系統設定按鈕 -->
                     <div class="flex flex-wrap items-center gap-2">
                         <button onclick="openCategoryManageModal()" class="px-3.5 py-2 bg-white hover:bg-slate-50 text-slate-700 rounded-xl text-xs sm:text-sm font-medium border border-slate-200 shadow-2xs flex items-center space-x-1.5 transition">
                             <i data-lucide="layers" class="w-4 h-4 text-indigo-600"></i><span>分類管理與排序</span>
@@ -380,9 +380,8 @@
                     </div>
                 </div>
 
-                <!-- ★ 核心表格懸浮吸頂工具列 (Sticky Toolbar) - 解決滑動找不到操作項目[cite: 4] -->
+                <!-- 核心表格懸浮吸頂工具列 (Sticky Toolbar) -->
                 <div class="sticky top-16 z-30 bg-white/95 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-indigo-100 shadow-md flex flex-col md:flex-row gap-3 items-center justify-between">
-                    <!-- 搜尋 -->
                     <div class="relative w-full md:w-72">
                         <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                             <i data-lucide="search" class="w-4 h-4"></i>
@@ -391,7 +390,6 @@
                             class="w-full pl-9 pr-3 py-2 bg-slate-50 focus:bg-white border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-indigo-500">
                     </div>
 
-                    <!-- 分區過濾 -->
                     <div class="flex items-center space-x-1 w-full md:w-auto overflow-x-auto hide-scrollbar">
                         <button onclick="setAdminRegionFilter('all')" class="admin-region-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-900 text-white whitespace-nowrap" data-region="all">全選</button>
                         <button onclick="setAdminRegionFilter('北部')" class="admin-region-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-600 border border-slate-200 whitespace-nowrap" data-region="北部">北部</button>
@@ -400,13 +398,12 @@
                         <button onclick="setAdminRegionFilter('東部與離島')" class="admin-region-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-600 border border-slate-200 whitespace-nowrap" data-region="東部與離島">東部離島</button>
                     </div>
 
-                    <!-- 核心操作按鈕：新增活動 (常駐吸頂)[cite: 4] -->
                     <button onclick="openAddModal()" class="w-full md:w-auto px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center space-x-1.5 shadow-md shadow-indigo-600/25 shrink-0 transition">
                         <i data-lucide="plus" class="w-4 h-4"></i><span>新增活動</span>
                     </button>
                 </div>
 
-                <!-- 活動資料清單表格 -->
+                <!-- 活動清單表格 -->
                 <div>
                     <div class="flex items-center justify-between mb-3 px-1">
                         <h3 class="text-sm font-semibold text-slate-800">活動清單與狀態設定 (依縣市由北至南排序)</h3>
@@ -433,15 +430,13 @@
 
     </main>
 
-    <!-- 頁尾 (含官方社群專屬列、全域瀏覽人次，已完全移除即時雲端同步文字) -->
+    <!-- 頁尾 (含官方社群專屬列、全域瀏覽人次) -->
     <footer class="w-full py-8 mt-10 border-t border-slate-200 bg-white/70 backdrop-blur-md text-center text-xs text-slate-500 z-10 relative">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-            <!-- 品牌版權 -->
             <div class="font-medium text-slate-700">
                 <span>© livetws 跨年晚會資訊</span>
             </div>
 
-            <!-- 官方社群平台入口 -->
             <div class="flex items-center space-x-2">
                 <span class="text-slate-400 text-[11px] mr-1">追蹤官方社群：</span>
                 <a href="https://www.instagram.com/livetws/" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-3 py-1.5 bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 text-pink-700 rounded-xl border border-pink-200 transition shadow-2xs font-semibold">
@@ -455,7 +450,6 @@
                 </a>
             </div>
 
-            <!-- 全站瀏覽累積人次 -->
             <div class="flex items-center space-x-2 bg-indigo-50 border border-indigo-100 text-indigo-700 px-3.5 py-1.5 rounded-full font-medium shadow-2xs">
                 <i data-lucide="flame" class="w-4 h-4 text-orange-500 animate-pulse"></i>
                 <span>全站累積瀏覽人次：</span>
@@ -465,7 +459,7 @@
         </div>
     </footer>
 
-    <!-- Mobile Bottom Dock Navigation (保留原版完整四按鈕) -->
+    <!-- Mobile Bottom Dock Navigation -->
     <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 clean-panel border-t border-slate-200 px-4 py-2 flex justify-around items-center shadow-lg" style="padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));">
         <button onclick="switchTab('home')" id="mob-nav-home" class="mob-tab flex flex-col items-center justify-center py-1 px-3 text-indigo-600">
             <i data-lucide="compass" class="w-5 h-5 mb-1"></i>
@@ -485,7 +479,7 @@
         </button>
     </nav>
 
-    <!-- Detail Modal (含多海報展示與更新時間) -->
+    <!-- Detail Modal -->
     <div id="detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-slate-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div id="modal-content" class="overflow-y-auto p-6 space-y-6"></div>
@@ -511,7 +505,7 @@
     <!-- Form Modal (新增/編輯活動 - 頂部固定動作列、支援多海報上傳、單圖移除、表單防呆錯誤提醒) -->
     <div id="form-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-indigo-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
-            <!-- 頂部常駐標題與操作按鈕列 (解決滑到下面找不到儲存) -->
+            <!-- 頂部常駐標題與操作按鈕列 -->
             <div class="p-4 sm:p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50 sticky top-0 z-10">
                 <div>
                     <h3 id="form-modal-title" class="text-lg sm:text-xl font-bold text-slate-900">新增活動</h3>
@@ -519,11 +513,11 @@
                 </div>
                 <div class="flex items-center space-x-2">
                     <button type="button" onclick="closeFormModal()" class="px-4 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-700 text-xs sm:text-sm font-medium border border-slate-200 shadow-2xs transition">取消</button>
-                    <button type="button" onclick="triggerFormSubmit()" id="form-save-btn" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-semibold shadow-md shadow-indigo-600/25 transition">儲存活動</button>
+                    <button type="button" onclick="executeFormSave()" id="form-save-btn" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-semibold shadow-md shadow-indigo-600/25 transition">儲存活動</button>
                 </div>
             </div>
 
-            <form id="event-form" onsubmit="handleFormSubmit(event)" class="overflow-y-auto p-5 sm:p-6 space-y-4">
+            <form id="event-form" class="overflow-y-auto p-5 sm:p-6 space-y-4">
                 <input type="hidden" id="event-id">
                 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -589,7 +583,6 @@
                     <div id="input-image-box" class="hidden">
                         <input type="text" id="input-image" placeholder="貼上主視覺圖片網址 (https://...)" oninput="previewUrlImageSingle('input-image', 'image-preview', 'image-preview-container')" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-sm">
                     </div>
-                    <!-- 預覽縮圖 ＋ 移除按鈕 -->
                     <div id="image-preview-container" class="hidden relative inline-block">
                         <img id="image-preview" src="" alt="封面預覽" class="h-28 object-cover rounded-xl border border-slate-200 shadow-sm">
                         <button type="button" onclick="removeSingleImage('input-image', 'input-image-file', 'image-preview', 'image-preview-container', 'image-upload-status')" class="absolute -top-2 -right-2 bg-rose-500 text-white rounded-full p-1 shadow-md hover:bg-rose-600">
@@ -619,9 +612,7 @@
                     <div id="input-lineup-image-box" class="hidden">
                         <input type="text" id="input-lineup-image-manual" placeholder="貼上海報網址 (多個以逗號隔開)" onchange="addManualImageToStore('input-lineup-image-manual', 'lineup-images-store', 'lineup-gallery-container')" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-sm">
                     </div>
-                    <!-- 隱藏字串儲存欄位 -->
                     <input type="hidden" id="lineup-images-store">
-                    <!-- 多圖九宮格預覽矩陣 -->
                     <div id="lineup-gallery-container" class="grid grid-cols-3 sm:grid-cols-4 gap-2 pt-1"></div>
                 </div>
 
@@ -793,7 +784,6 @@
                    DEFAULT_GAS_URL;
         }
 
-        // 後台專屬即時狀態指示燈 (綠、黃、紅)
         function setAdminSyncStatus(status, text) {
             const dot = document.getElementById('admin-status-dot');
             const txt = document.getElementById('admin-status-text');
@@ -844,7 +834,6 @@
             updateStats();
             lucide.createIcons();
 
-            // 極速直連同步雲端
             await syncDataFromCloud(false);
         };
 
@@ -858,7 +847,6 @@
             localStorage.setItem('tw_nye_cat_configs_v1', JSON.stringify(categoryConfigs));
         }
 
-        // 雲端資料同步 (防快取直連)
         async function syncDataFromCloud(isManual = false) {
             setAdminSyncStatus('loading', '同步中...');
             const GAS_URL = getActiveGasUrl();
@@ -944,13 +932,12 @@
             updateStats();
         }
 
-        // 同步回 Google 試算表 (使用 text/plain 繞過 CORS 預檢)
         async function syncToGoogleSheet() {
             setAdminSyncStatus('loading', '儲存中...');
             const GAS_URL = getActiveGasUrl();
             if (!GAS_URL) {
                 setAdminSyncStatus('error', '未設定API');
-                return;
+                return false;
             }
 
             const payload = { 
@@ -966,12 +953,15 @@
                 const resJson = await res.json();
                 if (resJson && resJson.status === 'success') {
                     setAdminSyncStatus('success', '雲端已連線');
+                    return true;
                 } else {
                     setAdminSyncStatus('error', '權限錯誤');
+                    return false;
                 }
             } catch (err) {
                 console.error("即時同步至 Google 試算表失敗", err);
                 setAdminSyncStatus('error', '同步異常');
+                return false;
             }
         }
 
@@ -1062,7 +1052,6 @@
             if (el) el.classList.toggle('hidden');
         }
 
-        // 圖片壓縮輔助 Promise
         function compressImageFile(file) {
             return new Promise((resolve) => {
                 const reader = new FileReader();
@@ -1093,13 +1082,13 @@
             });
         }
 
-        // 單圖上傳 (主視覺封面)
+        // 單圖上傳 (主視覺封面 - 杜絕 Base64 退回塞入)
         async function handleSingleUpload(event, inputTargetId, previewImgId, previewContainerId, statusId) {
             const file = event.target.files[0];
             if (!file) return;
 
             const statusEl = document.getElementById(statusId);
-            if (statusEl) statusEl.innerText = '⚡ 圖片智慧壓縮中...';
+            if (statusEl) statusEl.innerText = '⚡ 圖片智慧極限壓縮中...';
 
             const comp = await compressImageFile(file);
             document.getElementById(previewImgId).src = comp.dataUrl;
@@ -1107,8 +1096,8 @@
 
             const GAS_URL = getActiveGasUrl();
             if (!GAS_URL) {
-                document.getElementById(inputTargetId).value = comp.dataUrl;
-                if (statusEl) statusEl.innerText = '⚠️ 暫存本機。';
+                alert('尚未設定 Google 試算表 API 網址，無法上傳！');
+                removeSingleImage(inputTargetId, event.target.id, previewImgId, previewContainerId, statusId);
                 return;
             }
 
@@ -1127,17 +1116,20 @@
                 const data = await res.json();
                 if (data && data.status === 'success' && data.url) {
                     document.getElementById(inputTargetId).value = data.url;
-                    if (statusEl) statusEl.innerText = '✅ 已成功永久存入 Google 雲端硬碟！';
-                } else { throw new Error(); }
+                    if (statusEl) statusEl.innerText = '✅ 已成功存入 Google 雲端硬碟！';
+                } else { 
+                    throw new Error('雲端硬碟回傳錯誤'); 
+                }
             } catch(e) {
-                document.getElementById(inputTargetId).value = comp.dataUrl;
-                if (statusEl) statusEl.innerText = '✅ 圖片壓縮完成！';
+                alert('圖片上傳至 Google 雲端硬碟失敗，請檢查資料夾權限或 API 部署！');
+                removeSingleImage(inputTargetId, event.target.id, previewImgId, previewContainerId, statusId);
             }
         }
 
         function removeSingleImage(inputTargetId, fileInputId, previewImgId, previewContainerId, statusId) {
             document.getElementById(inputTargetId).value = '';
-            document.getElementById(fileInputId).value = '';
+            const f = document.getElementById(fileInputId);
+            if (f) f.value = '';
             document.getElementById(previewImgId).src = '';
             document.getElementById(previewContainerId).classList.add('hidden');
             if (statusId) document.getElementById(statusId).innerText = '';
@@ -1153,7 +1145,7 @@
             }
         }
 
-        // 多圖上傳 (卡司海報 & 時刻表節目單海報)
+        // 多圖上傳 (卡司海報 & 時刻表海報)
         async function handleMultipleUpload(event, storeInputId, galleryContainerId, statusId) {
             const files = Array.from(event.target.files);
             if (files.length === 0) return;
@@ -1162,7 +1154,13 @@
             if (statusEl) statusEl.innerText = `⚡ 正在處理 ${files.length} 張圖片中...`;
 
             const GAS_URL = getActiveGasUrl();
+            if (!GAS_URL) {
+                alert('尚未設定 API 網址，無法上傳！');
+                return;
+            }
+
             let currentUrls = document.getElementById(storeInputId).value.split(',').filter(Boolean);
+            let successCount = 0;
 
             for (let i = 0; i < files.length; i++) {
                 if (statusEl) statusEl.innerText = `☁️ 正在存入 Google 雲端硬碟 (${i+1}/${files.length})...`;
@@ -1180,17 +1178,16 @@
                     const data = await res.json();
                     if (data && data.status === 'success' && data.url) {
                         currentUrls.push(data.url);
-                    } else {
-                        currentUrls.push(comp.dataUrl);
+                        successCount++;
                     }
                 } catch(e) {
-                    currentUrls.push(comp.dataUrl);
+                    console.error("圖片上傳失敗", e);
                 }
             }
 
             document.getElementById(storeInputId).value = currentUrls.join(',');
             renderGallery(storeInputId, galleryContainerId);
-            if (statusEl) statusEl.innerText = `✅ 已成功加入 ${files.length} 張圖片！`;
+            if (statusEl) statusEl.innerText = `✅ 已成功加入 ${successCount} 張海報！`;
             event.target.value = '';
         }
 
@@ -1271,7 +1268,6 @@
             lucide.createIcons();
         }
 
-        // 由 Google 伺服器進行密碼驗證
         async function verifyAdminPassword() {
             const pwd = document.getElementById('admin-password-input').value;
             if (!pwd) { alert('請輸入密碼！'); return; }
@@ -1610,7 +1606,6 @@
             lucide.createIcons();
         }
 
-        // 動態建立歷史年度標籤
         function buildHistoryYearTabs() {
             const container = document.getElementById('history-year-tabs');
             if (!container) return;
@@ -1820,7 +1815,6 @@
             return `<div class="space-y-2.5">${itemsHtml}</div>`;
         }
 
-        // 活動詳情彈窗 (含多海報展示與更新時間)
         function openDetailModal(id) {
             const e = events.find(item => String(item.id) === String(id));
             if (!e || e.status === 'locked') return;
@@ -1848,7 +1842,6 @@
                     </div>
                 </div>
 
-                <!-- 最後更新時間提示 -->
                 <div class="flex items-center justify-between text-xs text-slate-500 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200">
                     <span class="flex items-center space-x-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-indigo-600"></i><span>最後更新時間：</span></span>
                     <span class="font-mono font-medium text-slate-700">${e.updated_at ? e.updated_at : '2026/10/10'}</span>
@@ -2051,10 +2044,8 @@
             document.getElementById('input-is-carousel').checked = false;
             toggleCarouselOrderField();
             
-            // 重設單圖
             removeSingleImage('input-image', 'input-image-file', 'image-preview', 'image-preview-container', 'image-upload-status');
             
-            // 重設多圖庫
             document.getElementById('lineup-images-store').value = '';
             document.getElementById('schedule-images-store').value = '';
             renderGallery('lineup-images-store', 'lineup-gallery-container');
@@ -2069,7 +2060,7 @@
             if (!e) return;
 
             document.getElementById('form-modal-title').innerText = '編輯活動';
-            document.getElementById('event-id').value = e.id;
+            document.getElementById('event-id').value = String(e.id);
             document.getElementById('input-category').value = e.category || '跨年晚會';
             document.getElementById('input-city').value = e.city;
             document.getElementById('input-status').value = e.status || 'open';
@@ -2084,20 +2075,22 @@
             toggleCarouselOrderField();
             document.getElementById('input-carousel-order').value = e.carousel_order || '';
 
-            // 主視覺封面
+            // 主視覺圖片
             document.getElementById('input-image').value = e.image || '';
-            if (e.image) {
+            if (e.image && !e.image.startsWith('data:image/')) {
                 document.getElementById('image-preview').src = e.image;
                 document.getElementById('image-preview-container').classList.remove('hidden');
             } else {
                 document.getElementById('image-preview-container').classList.add('hidden');
             }
 
-            // 多圖海報庫填入
-            document.getElementById('lineup-images-store').value = e.lineup_image || '';
+            // 多圖海報庫填入 (自動過濾殘留 Base64)
+            const cleanLineup = (e.lineup_image || '').split(',').filter(u => u && !u.startsWith('data:image/')).join(',');
+            document.getElementById('lineup-images-store').value = cleanLineup;
             renderGallery('lineup-images-store', 'lineup-gallery-container');
 
-            document.getElementById('schedule-images-store').value = e.schedule_image || '';
+            const cleanSchedule = (e.schedule_image || '').split(',').filter(u => u && !u.startsWith('data:image/')).join(',');
+            document.getElementById('schedule-images-store').value = cleanSchedule;
             renderGallery('schedule-images-store', 'schedule-gallery-container');
 
             document.getElementById('form-modal').classList.remove('hidden');
@@ -2107,22 +2100,19 @@
             document.getElementById('form-modal').classList.add('hidden');
         }
 
-        function triggerFormSubmit() {
-            const form = document.getElementById('event-form');
-            if (form) form.requestSubmit();
-        }
-
-        // 徹底修復：點擊儲存防呆檢查與秒速同步
-        async function handleFormSubmit(event) {
-            event.preventDefault();
+        // 獨立表單檢驗與安全儲存函式 (解決編輯無法儲存)
+        async function executeFormSave() {
             clearFormValidationStyles();
 
             const name = document.getElementById('input-name').value.trim();
             const time = document.getElementById('input-time').value.trim();
             const location = document.getElementById('input-location').value.trim();
             const category = document.getElementById('input-category').value.trim();
+            const image = document.getElementById('input-image').value.trim();
+            const lineupImage = document.getElementById('lineup-images-store').value.trim();
+            const scheduleImage = document.getElementById('schedule-images-store').value.trim();
 
-            // 防呆高亮提醒
+            // 防呆檢驗
             if (!category) {
                 highlightErrorField('input-category', '請選擇或輸入活動類型！');
                 return;
@@ -2140,17 +2130,23 @@
                 return;
             }
 
+            // 嚴格攔截 Base64，杜絕爆掉試算表
+            if (image.startsWith('data:image/') || lineupImage.includes('data:image/') || scheduleImage.includes('data:image/')) {
+                alert('偵測到圖片為本機暫存格式 (Base64)！為保護試算表儲存上限，請重新上傳至雲端硬碟後再行儲存。');
+                return;
+            }
+
             const saveBtn = document.getElementById('form-save-btn');
-            saveBtn.innerText = '儲存同步中...';
+            saveBtn.innerText = '儲存中...';
             saveBtn.disabled = true;
 
-            const id = document.getElementById('event-id').value;
+            const editId = document.getElementById('event-id').value;
             const city = document.getElementById('input-city').value;
             const region = getRegionByCity(city);
             const nowIso = new Date().toISOString().split('T')[0];
             
             const eventData = {
-                id: id ? String(id) : 'evt-' + Date.now(),
+                id: editId ? String(editId) : 'evt-' + Date.now(),
                 category: category,
                 name: name,
                 city: city,
@@ -2158,19 +2154,20 @@
                 time: sanitizeTimeDisplay(time),
                 location: location,
                 status: document.getElementById('input-status').value,
-                image: document.getElementById('input-image').value || '',
+                image: image,
                 lineup: document.getElementById('input-lineup').value.trim(),
-                lineup_image: document.getElementById('lineup-images-store').value || '',
+                lineup_image: lineupImage,
                 link: document.getElementById('input-link').value.trim(),
                 desc: document.getElementById('input-desc').value.trim(),
-                schedule_image: document.getElementById('schedule-images-store').value || '',
+                schedule_image: scheduleImage,
                 is_carousel: document.getElementById('input-is-carousel').checked,
                 carousel_order: Number(document.getElementById('input-carousel-order').value) || 99,
                 updated_at: nowIso
             };
 
-            if (id) {
-                const index = events.findIndex(item => String(item.id) === String(id));
+            // 正確覆寫或追加
+            if (editId) {
+                const index = events.findIndex(item => String(item.id) === String(editId));
                 if (index > -1) { 
                     events[index] = eventData; 
                 } else {
@@ -2191,10 +2188,14 @@
             updateCarouselView();
             closeFormModal();
 
-            // 即時同步至雲端
-            await syncToGoogleSheet();
+            // 即時同步雲端試算表
+            const success = await syncToGoogleSheet();
             saveBtn.innerText = '儲存活動';
             saveBtn.disabled = false;
+
+            if (success) {
+                alert('活動已成功儲存並同步至 Google 試算表！');
+            }
         }
 
         function highlightErrorField(fieldId, errorMsg) {
