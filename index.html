@@ -130,21 +130,29 @@
                 </div>
             </div>
 
-            <!-- Desktop Nav Links -->
-            <nav class="hidden md:flex items-center space-x-1">
-                <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition text-indigo-600 bg-indigo-50 flex items-center space-x-2">
-                    <i data-lucide="compass" class="w-4 h-4"></i><span>探索活動</span>
-                </button>
-                <button onclick="switchTab('history')" id="nav-history" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center space-x-2">
-                    <i data-lucide="history" class="w-4 h-4"></i><span>歷史活動</span>
-                </button>
-                <button onclick="switchTab('bookmarks')" id="nav-bookmarks" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center space-x-2">
-                    <i data-lucide="bookmark" class="w-4 h-4"></i><span>我的收藏 <span id="bookmark-badge" class="ml-1 px-1.5 py-0.5 text-xs bg-indigo-600 text-white rounded-full">0</span></span>
-                </button>
-                <button onclick="switchTab('admin')" id="nav-admin" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center space-x-2">
-                    <i data-lucide="shield-check" class="w-4 h-4"></i><span>管理系統</span>
-                </button>
-            </nav>
+            <!-- 即時連線狀態燈號 (綠、黃、紅) 與 導覽按鈕 -->
+            <div class="flex items-center space-x-3">
+                <div id="status-indicator" class="flex items-center space-x-1.5 px-3 py-1 bg-white/80 border border-slate-200 rounded-full text-[11px] font-medium shadow-2xs">
+                    <span id="status-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                    <span id="status-text" class="text-slate-600 hidden sm:inline">已連線</span>
+                </div>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center space-x-1">
+                    <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition text-indigo-600 bg-indigo-50 flex items-center space-x-2">
+                        <i data-lucide="compass" class="w-4 h-4"></i><span>探索活動</span>
+                    </button>
+                    <button onclick="switchTab('history')" id="nav-history" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center space-x-2">
+                        <i data-lucide="history" class="w-4 h-4"></i><span>歷史活動</span>
+                    </button>
+                    <button onclick="switchTab('bookmarks')" id="nav-bookmarks" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center space-x-2">
+                        <i data-lucide="bookmark" class="w-4 h-4"></i><span>我的收藏 <span id="bookmark-badge" class="ml-1 px-1.5 py-0.5 text-xs bg-indigo-600 text-white rounded-full">0</span></span>
+                    </button>
+                    <button onclick="switchTab('admin')" id="nav-admin" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center space-x-2">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i><span>管理系統</span>
+                    </button>
+                </nav>
+            </div>
         </div>
     </header>
 
@@ -170,9 +178,8 @@
                 </button>
             </div>
 
-            <!-- 美化重構後的搜尋與篩選控制面板 (緊湊大器，告別撕裂) -->
+            <!-- 搜尋與篩選控制面板 (緊湊大器) -->
             <div id="event-section" class="clean-panel p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
-                <!-- 搜尋框 -->
                 <div class="relative w-full">
                     <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                         <i data-lucide="search" class="w-4 h-4"></i>
@@ -181,9 +188,7 @@
                         class="w-full pl-10 pr-4 py-2.5 bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition shadow-inner">
                 </div>
 
-                <!-- 類型與分區篩選按鈕列 -->
                 <div class="space-y-3 pt-1 border-t border-slate-100">
-                    <!-- 第一排：活動分類 -->
                     <div class="flex items-center space-x-2 overflow-x-auto hide-scrollbar pb-1">
                         <span class="text-xs font-semibold text-slate-400 shrink-0 w-10">類型:</span>
                         <div id="category-tabs-container" class="flex items-center space-x-2">
@@ -191,7 +196,6 @@
                         </div>
                     </div>
 
-                    <!-- 第二排：地理分區 -->
                     <div class="flex items-center space-x-2 overflow-x-auto hide-scrollbar">
                         <span class="text-xs font-semibold text-slate-400 shrink-0 w-10">分區:</span>
                         <div class="flex items-center space-x-2">
@@ -235,25 +239,43 @@
             </div>
         </div>
 
-        <!-- ==================== HISTORY TAB (歷史活動專區) ==================== -->
+        <!-- ==================== HISTORY TAB (歷史活動專區 - 支援搜尋與年份日期篩選) ==================== -->
         <div id="view-history" class="space-y-6 hidden animate-fadeIn">
-            <div class="clean-panel p-6 rounded-2xl border border-slate-200 shadow-sm">
-                <div class="flex items-center justify-between mb-2">
-                    <h2 class="text-2xl font-bold text-slate-900 flex items-center space-x-2">
-                        <i data-lucide="history" class="w-6 h-6 text-slate-700"></i>
-                        <span>歷史活動專區</span>
-                    </h2>
+            <div class="clean-panel p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900 flex items-center space-x-2">
+                            <i data-lucide="history" class="w-6 h-6 text-slate-700"></i>
+                            <span>歷史活動專區</span>
+                        </h2>
+                        <p class="text-sm text-slate-500 mt-1">已結束或封存的精彩晚會與活動紀錄，供您隨時回顧過往卡司與時刻表。</p>
+                    </div>
                     <span id="history-count-label" class="text-xs text-slate-600 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">0 個已結束活動</span>
                 </div>
-                <p class="text-sm text-slate-500">已結束或封存的精彩晚會與活動紀錄，供您隨時回顧過往卡司與時刻表。</p>
+
+                <!-- 歷史搜尋與日期/年度篩選列 -->
+                <div class="pt-2 border-t border-slate-100 flex flex-col md:flex-row gap-3 items-center justify-between">
+                    <div class="relative w-full md:w-80">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                            <i data-lucide="search" class="w-4 h-4"></i>
+                        </span>
+                        <input type="text" id="history-search-input" oninput="filterHistoryEvents()" placeholder="搜尋歷史活動名稱、縣市或卡司..." 
+                            class="w-full pl-9 pr-3 py-2 bg-slate-50 focus:bg-white border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div id="history-year-tabs" class="flex items-center space-x-1.5 w-full md:w-auto overflow-x-auto hide-scrollbar">
+                        <button onclick="setHistoryYear('all')" class="history-year-tab px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white shadow-xs whitespace-nowrap" data-year="all">全部年度</button>
+                    </div>
+                </div>
             </div>
+
             <div id="history-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            
             <div id="history-empty" class="hidden flex-col items-center justify-center py-20 text-center">
                 <div class="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 mb-4">
                     <i data-lucide="calendar-check" class="w-8 h-8"></i>
                 </div>
-                <h3 class="text-lg font-semibold text-slate-800 mb-1">目前尚無歷史活動紀錄</h3>
-                <p class="text-sm text-slate-500 max-w-sm">當活動時間結束或於後台設定已結束時，將自動封存收錄於此。</p>
+                <h3 class="text-lg font-semibold text-slate-800 mb-1">找不到符合的歷史活動紀錄</h3>
+                <p class="text-sm text-slate-500 max-w-sm">請嘗試更換搜尋條件或重設年度篩選。</p>
             </div>
         </div>
 
@@ -282,7 +304,7 @@
             </div>
         </div>
 
-        <!-- ==================== ADMIN TAB (管理系統) ==================== -->
+        <!-- ==================== ADMIN TAB (管理系統 - 結構化自適應按鈕群，解決縮小破版) ==================== -->
         <div id="view-admin" class="space-y-6 hidden animate-fadeIn">
             <!-- 安全登入視窗 -->
             <div id="admin-login-box" class="clean-panel p-8 rounded-2xl border border-indigo-100 shadow-xl max-w-md mx-auto text-center space-y-4 my-12">
@@ -301,34 +323,35 @@
 
             <!-- 後台解鎖控制台 -->
             <div id="admin-content-box" class="clean-panel p-6 sm:p-8 rounded-2xl border border-indigo-100 shadow-xl hidden">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-200 gap-4">
-                    <div>
-                        <div class="flex items-center space-x-2 mb-1">
-                            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700 border border-indigo-200">後台控制台</span>
-                            <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 border border-emerald-200">已驗證授權</span>
-                        </div>
-                        <h2 class="text-2xl font-bold text-slate-900">全臺跨年與元旦升旗行程管理</h2>
+                <div class="pb-6 border-b border-slate-200 space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700 border border-indigo-200">後台控制台</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 border border-emerald-200">已驗證授權</span>
                     </div>
-                    <div class="flex flex-wrap items-center gap-2">
-                        <button onclick="openCategoryManageModal()" class="px-4 py-2.5 bg-white hover:bg-slate-50 text-slate-700 rounded-xl text-sm font-medium border border-slate-200 shadow-sm flex items-center space-x-1.5 transition">
-                            <i data-lucide="layers" class="w-4 h-4 text-indigo-600"></i><span>分類管理與排序</span>
-                        </button>
-                        <button onclick="openPasswordChangeModal()" class="px-4 py-2.5 bg-white hover:bg-slate-50 text-slate-700 rounded-xl text-sm font-medium border border-slate-200 shadow-sm flex items-center space-x-1.5 transition">
-                            <i data-lucide="key" class="w-4 h-4 text-indigo-600"></i><span>修改密碼</span>
-                        </button>
-                        <button onclick="openSyncModal()" class="px-4 py-2.5 bg-white hover:bg-slate-50 text-indigo-600 rounded-xl text-sm font-medium border border-indigo-200 shadow-sm flex items-center space-x-1.5 transition">
-                            <i data-lucide="cloud-sync" class="w-4 h-4"></i><span>試算表 / API 同步</span>
-                        </button>
-                        <button onclick="openAddModal()" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-medium flex items-center space-x-2 shadow-lg shadow-indigo-600/25 transition">
-                            <i data-lucide="plus" class="w-4 h-4"></i><span>新增活動</span>
-                        </button>
-                        <button onclick="syncDataFromCloud(true)" class="px-4 py-2.5 bg-white hover:bg-slate-50 text-indigo-600 rounded-xl text-sm font-medium border border-indigo-200 shadow-sm transition flex items-center space-x-1.5">
-                            <i data-lucide="refresh-cw" class="w-4 h-4"></i><span>立即同步試算表</span>
-                        </button>
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                        <h2 class="text-2xl font-bold text-slate-900">全臺跨年與元旦升旗行程管理</h2>
+                        <!-- 結構化響應按鈕群 (均分且整齊，縮小絕不孤立破版)[cite: 2] -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-wrap items-center gap-2">
+                            <button onclick="openCategoryManageModal()" class="px-3.5 py-2 bg-white hover:bg-slate-50 text-slate-700 rounded-xl text-xs sm:text-sm font-medium border border-slate-200 shadow-2xs flex items-center justify-center space-x-1.5 transition">
+                                <i data-lucide="layers" class="w-4 h-4 text-indigo-600 shrink-0"></i><span>分類管理</span>
+                            </button>
+                            <button onclick="openPasswordChangeModal()" class="px-3.5 py-2 bg-white hover:bg-slate-50 text-slate-700 rounded-xl text-xs sm:text-sm font-medium border border-slate-200 shadow-2xs flex items-center justify-center space-x-1.5 transition">
+                                <i data-lucide="key" class="w-4 h-4 text-indigo-600 shrink-0"></i><span>修改密碼</span>
+                            </button>
+                            <button onclick="openSyncModal()" class="px-3.5 py-2 bg-white hover:bg-slate-50 text-indigo-600 rounded-xl text-xs sm:text-sm font-medium border border-indigo-200 shadow-2xs flex items-center justify-center space-x-1.5 transition">
+                                <i data-lucide="cloud-sync" class="w-4 h-4 shrink-0"></i><span>API 設定</span>
+                            </button>
+                            <button onclick="syncDataFromCloud(true)" class="px-3.5 py-2 bg-white hover:bg-slate-50 text-indigo-600 rounded-xl text-xs sm:text-sm font-medium border border-indigo-200 shadow-2xs flex items-center justify-center space-x-1.5 transition">
+                                <i data-lucide="refresh-cw" class="w-4 h-4 shrink-0"></i><span>立即同步</span>
+                            </button>
+                            <button onclick="openAddModal()" class="col-span-2 sm:col-span-1 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs sm:text-sm font-medium flex items-center justify-center space-x-1.5 shadow-md shadow-indigo-600/25 transition">
+                                <i data-lucide="plus" class="w-4 h-4 shrink-0"></i><span>新增活動</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 my-6">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 my-6">
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 shadow-sm">
                         <div class="text-slate-500 text-xs mb-1">進行中活動</div>
                         <div id="stat-total" class="text-2xl font-bold text-slate-900">0</div>
@@ -389,13 +412,11 @@
 
     </main>
 
-    <!-- 頁尾全域瀏覽與造訪人次統計 -->
+    <!-- 頁尾全域瀏覽與造訪人次統計 (已完全移除即時雲端同步字樣) -->
     <footer class="w-full py-6 mt-8 border-t border-slate-200 bg-white/70 backdrop-blur-md text-center text-xs text-slate-500 z-10 relative">
         <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div>
                 <span>© 2027 全臺跨年晚會與元旦升旗行程總覽系統</span>
-                <span class="mx-2 hidden sm:inline">·</span>
-                <span class="text-slate-400">即時雲端同步</span>
             </div>
             <div class="flex items-center space-x-2 bg-indigo-50 border border-indigo-100 text-indigo-700 px-3.5 py-1.5 rounded-full font-medium shadow-2xs">
                 <i data-lucide="flame" class="w-4 h-4 text-orange-500 animate-pulse"></i>
@@ -426,7 +447,7 @@
         </button>
     </nav>
 
-    <!-- Detail Modal -->
+    <!-- Detail Modal (含更新時間顯示) -->
     <div id="detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-slate-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div id="modal-content" class="overflow-y-auto p-6 space-y-6"></div>
@@ -449,7 +470,7 @@
         </div>
     </div>
 
-    <!-- Form Modal -->
+    <!-- Form Modal (新增/編輯活動) -->
     <div id="form-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-indigo-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div class="p-6 border-b border-slate-200 flex items-center justify-between bg-slate-50">
@@ -511,12 +532,12 @@
                     </div>
                 </div>
 
-                <!-- 1. 主視覺圖片 (封面橫幅) -->
+                <!-- 1. 主視覺圖片 (直存 Google Drive 資料夾) -->
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
                     <span class="block text-xs font-bold text-slate-800">1. 主視覺封面橫幅圖片</span>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-[11px] text-slate-500 mb-1">上傳圖片 (自動極限壓縮並存入 Google Drive)</label>
+                            <label class="block text-[11px] text-slate-500 mb-1">上傳圖片 (自動壓縮直存 Google Drive)</label>
                             <input type="file" id="input-image-file" accept="image/*" onchange="handleSmartDriveUpload(event, 'input-image', 'image-preview', 'image-preview-container', 'image-upload-status')" class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-indigo-600 file:text-white cursor-pointer">
                             <span id="image-upload-status" class="text-[11px] text-indigo-600 mt-1 block"></span>
                         </div>
@@ -650,7 +671,7 @@
             </div>
             <div class="p-6 space-y-4">
                 <p class="text-sm text-slate-600 leading-relaxed">
-                    本系統支援透過 Google Apps Script (GAS) 串接 Google 試算表進行雲端資料即時讀寫，並自動將圖片存入 Google 雲端硬碟。
+                    本系統支援透過 Google Apps Script (GAS) 串接 Google 試算表進行雲端資料即時讀寫，並自動將圖片存入指定之 Google 雲端硬碟資料夾。
                 </p>
                 <div class="space-y-2">
                     <label class="block text-xs font-semibold text-slate-700">API URL (Web App /exec)</label>
@@ -666,7 +687,7 @@
 
     <script>
         // ==========================================
-        // 【核心設定】直接綁定您的 Google Apps Script API 網址
+        // 【核心設定】直連您的 Google Apps Script API 網址
         // ==========================================
         const DEFAULT_GAS_URL = "https://script.google.com/macros/s/AKfycbwQftVg70yJwJJ6kuvy3dRFetPStKr05ntksXZzqkoB-KMNTQ8fCuT-mY95b0RYPX61/exec";
 
@@ -730,8 +751,26 @@
                    DEFAULT_GAS_URL;
         }
 
-        let currentAdminSessionHash = "";
+        // 即時狀態燈號控制 (綠、黃、紅)
+        function setSyncStatus(status, text) {
+            const dot = document.getElementById('status-dot');
+            const txt = document.getElementById('status-text');
+            if (!dot || !txt) return;
 
+            dot.className = "w-2.5 h-2.5 rounded-full";
+            if (status === 'success') {
+                dot.classList.add('bg-emerald-500');
+                txt.innerText = text || '已連線';
+            } else if (status === 'loading') {
+                dot.classList.add('bg-amber-400', 'animate-ping');
+                txt.innerText = text || '同步中...';
+            } else if (status === 'error') {
+                dot.classList.add('bg-rose-500');
+                txt.innerText = text || '連線異常';
+            }
+        }
+
+        let currentAdminSessionHash = "";
         let currentSlideIdx = 0;
         let carouselInterval = null;
         let activeCarouselEvents = [];
@@ -741,6 +780,8 @@
         let currentCategory = 'all';
         let currentRegion = 'all';
         let currentSearchQuery = '';
+        let currentHistorySearchQuery = '';
+        let currentHistoryYear = 'all';
         let currentActiveTab = 'home';
         let currentModalEventId = null;
         let isAdminUnlocked = false;
@@ -761,7 +802,7 @@
             updateStats();
             lucide.createIcons();
 
-            // 從雲端同步真實最新資料 (防快取直連)
+            // 極速直連同步雲端
             await syncDataFromCloud(false);
         };
 
@@ -775,8 +816,9 @@
             localStorage.setItem('tw_nye_cat_configs_v1', JSON.stringify(categoryConfigs));
         }
 
-        // 雲端資料同步 (含 Anti-Cache 防 CDN 快取機制)
+        // 雲端資料同步 (防快取直連)
         async function syncDataFromCloud(isManual = false) {
+            setSyncStatus('loading', '同步中...');
             const GAS_URL = getActiveGasUrl();
             if (GAS_URL) {
                 try {
@@ -806,17 +848,20 @@
                         syncCategoriesWithEvents();
                         buildDynamicCategoryTabs();
                         renderEvents();
+                        buildHistoryYearTabs();
                         renderHistoryEvents();
                         renderBookmarks();
                         renderAdminTable();
                         updateStats();
                         updateCarouselView();
                         lucide.createIcons();
+                        setSyncStatus('success', '已連線');
                         if (isManual) alert('已成功從 Google 試算表同步最新活動！');
                         return;
                     }
                 } catch (err) {
                     console.error("雲端讀取失敗，使用本機快取", err);
+                    setSyncStatus('error', '雲端連線失敗');
                 }
             }
 
@@ -832,13 +877,13 @@
             
             syncCategoriesWithEvents();
             renderEvents();
+            buildHistoryYearTabs();
             renderHistoryEvents();
             renderBookmarks();
             renderAdminTable();
             updateStats();
             updateCarouselView();
             lucide.createIcons();
-
             if (isManual) alert('請先確認 Google 試算表 API 網址設定。');
         }
 
@@ -857,23 +902,34 @@
             updateStats();
         }
 
-        // 帶上安全授權 authHash 同步回 Google 試算表 (使用 text/plain 繞過 CORS 預檢)
+        // 同步回 Google 試算表 (使用 text/plain 繞過 CORS 預檢)
         async function syncToGoogleSheet() {
+            setSyncStatus('loading', '儲存中...');
             const GAS_URL = getActiveGasUrl();
-            if (!GAS_URL) return;
+            if (!GAS_URL) {
+                setSyncStatus('error', '未設定API');
+                return;
+            }
 
             const payload = { 
                 authHash: currentAdminSessionHash,
                 events: events 
             };
             try {
-                await fetch(GAS_URL, {
+                const res = await fetch(GAS_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(payload)
                 });
+                const resJson = await res.json();
+                if (resJson && resJson.status === 'success') {
+                    setSyncStatus('success', '已同步');
+                } else {
+                    setSyncStatus('error', '權限錯誤');
+                }
             } catch (err) {
                 console.error("即時同步至 Google 試算表失敗", err);
+                setSyncStatus('error', '同步異常');
             }
         }
 
@@ -959,6 +1015,7 @@
             }
         }
 
+        // 圖片極限壓縮並直存指定的 Google 雲端硬碟資料夾
         async function handleSmartDriveUpload(event, inputTargetId, previewImgId, previewContainerId, statusId) {
             const file = event.target.files[0];
             if (!file) return;
@@ -996,7 +1053,7 @@
                         return;
                     }
 
-                    if (statusEl) statusEl.innerText = '☁️ 正在存入 Google 雲端硬碟...';
+                    if (statusEl) statusEl.innerText = '☁️ 正在存入指定 Google 雲端硬碟...';
 
                     try {
                         const res = await fetch(GAS_URL, {
@@ -1011,13 +1068,13 @@
                         const data = await res.json();
                         if (data && data.status === 'success' && data.url) {
                             document.getElementById(inputTargetId).value = data.url;
-                            if (statusEl) statusEl.innerText = '✅ 已成功存入 Google 雲端硬碟！';
+                            if (statusEl) statusEl.innerText = '✅ 已成功永久存入 Google 雲端硬碟！';
                         } else {
                             throw new Error('Upload error');
                         }
                     } catch(err) {
                         document.getElementById(inputTargetId).value = compressedDataUrl;
-                        if (statusEl) statusEl.innerText = '✅ 圖片已極限輕量化完成！';
+                        if (statusEl) statusEl.innerText = '✅ 圖片壓縮完成！';
                     }
                 };
                 img.src = e.target.result;
@@ -1078,7 +1135,7 @@
             lucide.createIcons();
         }
 
-        // 【CORS 徹底解決】使用 text/plain 送出 JSON，絕不被瀏覽器 OPTIONS 阻擋
+        // 由 Google 伺服器進行密碼驗證
         async function verifyAdminPassword() {
             const pwd = document.getElementById('admin-password-input').value;
             if (!pwd) { alert('請輸入密碼！'); return; }
@@ -1110,7 +1167,7 @@
                 }
             } catch(err) {
                 console.error("驗證錯誤細節：", err);
-                alert('雲端驗證失敗或連線逾時，請檢查 Google 試算表部署權限是否設為「所有人」。');
+                alert('雲端驗證失敗或連線逾時，請檢查 Google 試算表部署設定。');
             } finally {
                 btn.innerText = '登入';
                 btn.disabled = false;
@@ -1134,7 +1191,6 @@
         function openPasswordChangeModal() { document.getElementById('password-modal').classList.remove('hidden'); }
         function closePasswordChangeModal() { document.getElementById('password-modal').classList.add('hidden'); }
 
-        // 修改密碼需攜帶舊密碼驗證
         async function saveNewPassword() {
             const p1 = document.getElementById('new-password-input').value;
             const p2 = document.getElementById('confirm-password-input').value;
@@ -1417,10 +1473,67 @@
             lucide.createIcons();
         }
 
+        // 動態建立歷史年度標籤
+        function buildHistoryYearTabs() {
+            const container = document.getElementById('history-year-tabs');
+            if (!container) return;
+
+            const years = Array.from(new Set(events
+                .filter(e => e.status === 'closed')
+                .map(e => {
+                    const match = String(e.time).match(/\b(20\d{2})\b/);
+                    return match ? match[1] : null;
+                })
+                .filter(Boolean)
+            )).sort((a,b) => b - a);
+
+            let html = `
+                <button onclick="setHistoryYear('all')" class="history-year-tab px-3 py-1.5 rounded-lg text-xs font-semibold ${currentHistoryYear === 'all' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200'} whitespace-nowrap" data-year="all">全部年度</button>
+            `;
+
+            years.forEach(yr => {
+                const isActive = currentHistoryYear === yr;
+                html += `
+                    <button onclick="setHistoryYear('${yr}')" class="history-year-tab px-3 py-1.5 rounded-lg text-xs font-semibold ${isActive ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200'} whitespace-nowrap" data-year="${yr}">${yr} 年</button>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function setHistoryYear(yr) {
+            currentHistoryYear = yr;
+            document.querySelectorAll('.history-year-tab').forEach(btn => {
+                const isSelected = btn.getAttribute('data-year') === yr;
+                btn.className = isSelected 
+                    ? "history-year-tab px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white shadow-xs whitespace-nowrap"
+                    : "history-year-tab px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-600 border border-slate-200 whitespace-nowrap";
+            });
+            renderHistoryEvents();
+        }
+
+        function filterHistoryEvents() {
+            currentHistorySearchQuery = document.getElementById('history-search-input').value.toLowerCase().trim();
+            renderHistoryEvents();
+        }
+
         function renderHistoryEvents() {
             const grid = document.getElementById('history-grid');
             const empty = document.getElementById('history-empty');
-            const historyList = events.filter(e => e.status === 'closed');
+            
+            let historyList = events.filter(e => {
+                if (e.status !== 'closed') return false;
+
+                const matchSearch = !currentHistorySearchQuery || 
+                    (e.name && e.name.toLowerCase().includes(currentHistorySearchQuery)) ||
+                    (e.city && e.city.toLowerCase().includes(currentHistorySearchQuery)) ||
+                    (e.lineup && e.lineup.toLowerCase().includes(currentHistorySearchQuery)) ||
+                    (e.location && e.location.toLowerCase().includes(currentHistorySearchQuery));
+
+                const matchYear = (currentHistoryYear === 'all') || (String(e.time).includes(currentHistoryYear));
+
+                return matchSearch && matchYear;
+            });
 
             document.getElementById('history-count-label').innerText = `${historyList.length} 個已結束活動`;
 
@@ -1570,6 +1683,7 @@
             return `<div class="space-y-2.5">${itemsHtml}</div>`;
         }
 
+        // 活動詳情 (包含最後更新時間)
         function openDetailModal(id) {
             const e = events.find(item => String(item.id) === String(id));
             if (!e || e.status === 'locked') return;
@@ -1592,6 +1706,12 @@
                         <span class="px-3 py-1 rounded-full text-xs font-semibold ${badgeColor} text-white mb-2 inline-block shadow-sm">${e.city} (${e.category})</span>
                         <h2 class="text-2xl sm:text-3xl font-extrabold text-white drop-shadow-md">${e.name}</h2>
                     </div>
+                </div>
+
+                <!-- 最後更新時間提示 -->
+                <div class="flex items-center justify-between text-xs text-slate-500 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200">
+                    <span class="flex items-center space-x-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-indigo-600"></i><span>最後更新時間：</span></span>
+                    <span class="font-mono font-medium text-slate-700">${e.updated_at ? e.updated_at : '2026/10/10'}</span>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1838,6 +1958,7 @@
             document.getElementById('form-modal').classList.add('hidden');
         }
 
+        // 徹底解決「編輯無法儲存」問題
         async function handleFormSubmit(event) {
             event.preventDefault();
             const saveBtn = document.getElementById('form-save-btn');
@@ -1850,7 +1971,7 @@
             const nowIso = new Date().toISOString().split('T')[0];
             
             const eventData = {
-                id: id || 'evt-' + Date.now(),
+                id: id ? String(id) : 'evt-' + Date.now(),
                 category: document.getElementById('input-category').value.trim(),
                 name: document.getElementById('input-name').value.trim(),
                 city: city,
@@ -1871,7 +1992,11 @@
 
             if (id) {
                 const index = events.findIndex(item => String(item.id) === String(id));
-                if (index > -1) { events[index] = eventData; }
+                if (index > -1) { 
+                    events[index] = eventData; 
+                } else {
+                    events.unshift(eventData);
+                }
             } else {
                 events.unshift(eventData);
             }
@@ -1880,12 +2005,14 @@
             syncCategoriesWithEvents();
             buildDynamicCategoryTabs();
             renderEvents();
+            buildHistoryYearTabs();
             renderHistoryEvents();
             renderBookmarks();
             renderAdminTable();
             updateCarouselView();
             closeFormModal();
 
+            // 即時同步雲端
             await syncToGoogleSheet();
             saveBtn.innerText = '儲存活動';
             saveBtn.disabled = false;
@@ -1900,6 +2027,7 @@
                 syncCategoriesWithEvents();
                 buildDynamicCategoryTabs();
                 renderEvents();
+                buildHistoryYearTabs();
                 renderHistoryEvents();
                 renderBookmarks();
                 renderAdminTable();
