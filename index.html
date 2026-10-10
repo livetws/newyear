@@ -317,7 +317,7 @@
             </div>
         </div>
 
-        <!-- ==================== ADMIN TAB (管理系統 - 懸浮吸頂工具列、三段式分流、類型快篩、即時權重與置頂) ==================== -->
+        <!-- ==================== ADMIN TAB (管理系統) ==================== -->
         <div id="view-admin" class="space-y-6 hidden animate-fadeIn">
             <!-- 安全登入視窗 -->
             <div id="admin-login-box" class="clean-panel p-8 rounded-2xl border border-indigo-100 shadow-xl max-w-md mx-auto text-center space-y-4 my-12">
@@ -406,7 +406,7 @@
                     </button>
                 </div>
 
-                <!-- 核心表格懸浮吸頂工具列 (包含 關鍵字搜尋、分區快篩、類型快篩膠囊) -->
+                <!-- 懸浮吸頂工具列 -->
                 <div class="sticky top-16 z-30 bg-white/95 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-indigo-100 shadow-md space-y-3">
                     <div class="flex flex-col md:flex-row gap-3 items-center justify-between">
                         <div class="relative w-full md:w-72">
@@ -436,9 +436,7 @@
                             <i data-lucide="filter" class="w-3.5 h-3.5 text-indigo-500"></i>
                             <span>類型快篩:</span>
                         </span>
-                        <div id="admin-category-quick-filters" class="flex items-center space-x-1.5">
-                            <!-- 動態生成全部分類膠囊 -->
-                        </div>
+                        <div id="admin-category-quick-filters" class="flex items-center space-x-1.5"></div>
                     </div>
                 </div>
 
@@ -482,10 +480,10 @@
                     <svg class="w-3.5 h-3.5 fill-current text-pink-600" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                     </a>
                     <a href="https://www.threads.com/@livetws" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition" title="Threads">
-                        <svg class="w-4 h-4 fill-current text-slate-900" viewBox="0 0 24 24"><path d="M12.186 24C5.467 24 0 18.533 0 11.814 0 5.094 5.467 0 12.186 0c6.643 0 11.968 5.176 12.014 11.758v.481h-3.418v-.481c-.043-4.73-3.856-8.543-8.596-8.543-4.757 0-8.627 3.87-8.627 8.627 0 4.758 3.87 8.627 8.627 8.627 2.664 0 5.105-1.22 6.697-3.342l2.678 2.115C19.645 22.016 16.094 24 12.186 24zm4.148-12.75c.198 2.378-1.455 4.394-3.864 4.394-2.205 0-3.816-1.782-3.816-4.225 0-2.457 1.636-4.238 3.844-4.238 1.83 0 3.256 1.258 3.65 2.997l-3.65.65c-.092-.816-.694-1.378-1.455-1.378-1.042 0-1.72.937-1.72 2.152 0 1.201.664 2.138 1.706 2.138 1.083 0 1.693-.978 1.693-2.316v-.174h3.612z"/></svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.186 24C5.467 24 0 18.533 0 11.814 0 5.094 5.467 0 12.186 0c6.643 0 11.968 5.176 12.014 11.758v.481h-3.418v-.481c-.043-4.73-3.856-8.543-8.596-8.543-4.757 0-8.627 3.87-8.627 8.627 0 4.758 3.87 8.627 8.627 8.627 2.664 0 5.105-1.22 6.697-3.342l2.678 2.115C19.645 22.016 16.094 24 12.186 24zm4.148-12.75c.198 2.378-1.455 4.394-3.864 4.394-2.205 0-3.816-1.782-3.816-4.225 0-2.457 1.636-4.238 3.844-4.238 1.83 0 3.256 1.258 3.65 2.997l-3.65.65c-.092-.816-.694-1.378-1.455-1.378-1.042 0-1.72.937-1.72 2.152 0 1.201.664 2.138 1.706 2.138 1.083 0 1.693-.978 1.693-2.316v-.174h3.612z"/></svg>
                     </a>
                     <a href="https://www.facebook.com/100063574316191" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition" title="Facebook">
-                        <svg class="w-4 h-4 fill-current text-blue-600" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.595 0 9 1.583 9 4.615V8z"/></svg>
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.595 0 9 1.583 9 4.615V8z"/></svg>
                     </a>
                 </div>
 
@@ -598,7 +596,7 @@
         </div>
     </div>
 
-    <!-- Form Modal (支援 置頂 is_pinned、自訂權重 weight) -->
+    <!-- Form Modal (支援 售票開關、置頂 is_pinned、自訂權重 weight) -->
     <div id="form-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-indigo-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div class="p-4 sm:p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50 sticky top-0 z-10">
@@ -658,6 +656,27 @@
                     <input type="text" id="input-location" placeholder="例如：臺北市市民廣場" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-sm transition">
                 </div>
 
+                <!-- 售票資訊 (自由勾選開啟) -->
+                <div class="p-4 bg-amber-50/60 rounded-xl border border-amber-200/80 space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <input type="checkbox" id="input-is-ticket" onchange="toggleTicketFields()" class="w-4 h-4 text-amber-600 rounded border-amber-300 focus:ring-amber-500">
+                        <label for="input-is-ticket" class="text-xs font-bold text-amber-900 cursor-pointer flex items-center space-x-1.5">
+                            <i data-lucide="ticket" class="w-4 h-4 text-amber-600"></i>
+                            <span>本活動為售票活動 (勾選後前台顯示售票標籤與專屬資訊)</span>
+                        </label>
+                    </div>
+                    <div id="ticket-fields-container" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">售票說明 / 票價 (如: 早鳥票 $800 / 現場 $1200)</label>
+                            <input type="text" id="input-ticket-desc" placeholder="早鳥 $800 / 預售 $1,000 / 現場 $1,200" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">購票網址 / 售票系統連結</label>
+                            <input type="text" id="input-ticket-link" placeholder="https://kktix.com/..." class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs">
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 推薦置頂 與 輪播動態連動控制 -->
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -683,7 +702,10 @@
                 <!-- 1. 主視覺封面 -->
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
                     <div class="flex items-center justify-between">
-                        <span class="block text-xs font-bold text-slate-800">1. 主視覺封面橫幅圖片 (橫幅首圖)</span>
+                        <div>
+                            <span class="block text-xs font-bold text-slate-800">1. 主視覺封面橫幅圖片 (選填)</span>
+                            <span class="text-[11px] text-slate-400">若留空，系統將自動擷取下方第 1 張宣傳海報自適應呈現</span>
+                        </div>
                         <div class="flex items-center space-x-2">
                             <button type="button" onclick="openAssetPicker('single', 'input-image', 'image-preview', 'image-preview-container')" class="text-[11px] text-indigo-600 font-semibold hover:underline flex items-center space-x-1">
                                 <i data-lucide="image" class="w-3 h-3"></i><span>從已上傳圖庫選擇</span>
@@ -707,19 +729,22 @@
                     </div>
                 </div>
 
-                <!-- 2. 演出卡司陣容 ＋ 多張卡司海報 -->
+                <!-- 2. 演出卡司陣容 ＋ 多張卡司海報 (支援多天卡司換行) -->
                 <div class="p-4 bg-indigo-50/50 rounded-xl border border-indigo-100 space-y-3">
                     <span class="block text-xs font-bold text-indigo-900 flex items-center space-x-1.5">
                         <i data-lucide="sparkles" class="w-4 h-4 text-indigo-600"></i>
-                        <span>2. 演出卡司陣容與卡司宣傳海報 (可多選，依原圖尺寸完整顯示)</span>
+                        <span>2. 演出卡司陣容與卡司宣傳海報 (支援多天分流與原圖完整顯示)</span>
                     </span>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">演出藝人 / 樂團名單 (以逗號或空格分隔，前台自動轉標籤膠囊)</label>
-                        <input type="text" id="input-lineup" placeholder="例如：五月天, 告五人, 麋先生, 宇宙人, 孫盛希" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-500 shadow-sm transition">
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">演出藝人 / 樂團名單 (單天直接逗號隔開；多天可換行輸入，如：<code class="text-indigo-600 bg-white px-1 rounded">12/31：五月天 \n 01/01：告五人</code>)</label>
+                        <textarea id="input-lineup" rows="2" placeholder="單天：五月天, 告五人, 麋先生, 宇宙人
+多天可分行：
+12/31：告五人, 麋先生, 宇宙人
+01/01：五月天, 孫盛希, 艾怡良" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-500 shadow-sm transition"></textarea>
                     </div>
                     <div>
                         <div class="flex items-center justify-between mb-1">
-                            <label class="block text-[11px] text-slate-500">上傳卡司宣傳海報 (支援橫式與直式)</label>
+                            <label class="block text-[11px] text-slate-500">上傳卡司宣傳海報 (若無首圖將自動抓取第一張呈現)</label>
                             <div class="flex items-center space-x-2">
                                 <button type="button" onclick="openAssetPicker('multiple', 'lineup-images-store', 'lineup-gallery-container')" class="text-[11px] text-violet-700 font-semibold hover:underline flex items-center space-x-1">
                                     <i data-lucide="image" class="w-3 h-3"></i><span>從已上傳圖庫選擇</span>
@@ -738,9 +763,9 @@
                     <div id="lineup-gallery-container" class="grid grid-cols-3 sm:grid-cols-4 gap-2 pt-1"></div>
                 </div>
 
-                <!-- 3. 活動時刻表 / 演出順序 ＋ 多張節目表海報 -->
+                <!-- 3. 活動時刻表 / 演出順序 ＋ 多張節目表海報 (沒填寫自動在前台隱藏) -->
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
-                    <span class="block text-xs font-bold text-slate-800">3. 活動時刻表 / 演出順序 (支援橫式流程長圖與節目表海報)</span>
+                    <span class="block text-xs font-bold text-slate-800">3. 活動時刻表 / 演出順序 (選填，無填寫時前台自動隱藏區塊)</span>
                     <div>
                         <p class="text-xs text-slate-500 mb-1.5">每行輸入時段與活動：<code class="bg-white px-1.5 py-0.5 rounded border border-slate-200 text-indigo-600">19:00 - 20:00 | 暖身開場表演</code></p>
                         <textarea id="input-desc" rows="3" placeholder="19:00 - 20:00 | 暖身開場表演
@@ -925,8 +950,7 @@
         }
 
         // ==========================================
-        // 【核心演算法】智慧時間區間與民國/西元自動辨識解析
-        // 例如：2026/11/06 - 116/01/03 自動解析為開始與結束日期
+        // 【核心解析】智慧時間區間與民國/西元自動辨識
         // ==========================================
         function parseDateSubString(partStr, isEndDate = false) {
             if (!partStr) return null;
@@ -935,7 +959,7 @@
             if (match) {
                 let year = parseInt(match[1], 10);
                 if (year < 1900) {
-                    year += 1911; // 民國年換算西元年 (如 116 -> 2027)
+                    year += 1911; // 民國年換算 (如 116 -> 2027)
                 }
                 const month = parseInt(match[2], 10) - 1;
                 const day = parseInt(match[3], 10);
@@ -1039,6 +1063,22 @@
             return Math.abs(hash % 1000) / 1000;
         }
 
+        // ==========================================
+        // 【圖片備援與 A+B 融合模式輔助】
+        // ==========================================
+        function getEffectiveCoverImage(e) {
+            if (e.image && e.image.trim() !== '') return e.image.trim();
+            if (e.lineup_image && e.lineup_image.trim() !== '') {
+                const first = e.lineup_image.split(',').filter(Boolean)[0];
+                if (first) return first.trim();
+            }
+            return '';
+        }
+
+        function isFallbackPoster(e) {
+            return (!e.image || e.image.trim() === '') && Boolean(e.lineup_image && e.lineup_image.trim() !== '');
+        }
+
         async function sha256(message) {
             const msgBuffer = new TextEncoder().encode(message);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
@@ -1085,7 +1125,7 @@
         let currentModalEventId = null;
         let isAdminUnlocked = false;
 
-        // 後台全新多重篩選狀態
+        // 後台多重篩選狀態
         let adminCurrentRegionFilter = 'all';
         let adminCurrentCategoryFilter = 'all';
         let adminViewTab = 'active'; // 'active' (進行中), 'draft' (隱藏草稿), 'archive' (歷屆歸檔)
@@ -1281,6 +1321,7 @@
                                 const carouselRaw = String(e.is_carousel || '').trim().toLowerCase();
                                 const isCar = (carouselRaw === 'true' || carouselRaw === '1' || carouselRaw === 'yes');
                                 const isPinned = (String(e.is_pinned).trim().toLowerCase() === 'true' || e.is_pinned === 1 || e.is_pinned === '1');
+                                const isTicket = (String(e.is_ticket).trim().toLowerCase() === 'true' || e.is_ticket === 1 || e.is_ticket === '1');
                                 const orderNum = (e.carousel_order !== undefined && e.carousel_order !== null && e.carousel_order !== '') ? Number(e.carousel_order) : '';
                                 const weightVal = (e.weight !== undefined && e.weight !== null && e.weight !== '') ? Number(e.weight) : '';
 
@@ -1290,6 +1331,9 @@
                                     status: e.status || 'open',
                                     weight: weightVal,
                                     is_pinned: isPinned,
+                                    is_ticket: isTicket,
+                                    ticket_desc: e.ticket_desc || '',
+                                    ticket_link: e.ticket_link || '',
                                     time: sanitizeTimeDisplay(e.time),
                                     lineup: e.lineup || '',
                                     lineup_image: e.lineup_image || '',
@@ -1336,6 +1380,7 @@
                         const carouselRaw = String(e.is_carousel || '').trim().toLowerCase();
                         e.is_carousel = (carouselRaw === 'true' || carouselRaw === '1' || carouselRaw === 'yes');
                         e.is_pinned = (String(e.is_pinned).trim().toLowerCase() === 'true' || e.is_pinned === 1);
+                        e.is_ticket = (String(e.is_ticket).trim().toLowerCase() === 'true' || e.is_ticket === 1);
                     });
                 } catch (e) { events = []; }
             } else {
@@ -1434,17 +1479,20 @@
 
             if (currentSlideIdx >= activeCarouselEvents.length) currentSlideIdx = 0;
 
-            container.innerHTML = activeCarouselEvents.map((e, idx) => `
-                <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentSlideIdx ? 'opacity-100 z-10' : 'opacity-0 z-0'} carousel-slide cursor-pointer" data-idx="${idx}" onclick="openDetailModal('${e.id}')">
-                    ${e.image ? `<img src="${e.image}" alt="${e.name}" class="w-full h-full object-cover">` : `<div class="w-full h-full bg-gradient-to-r from-indigo-900 to-slate-900"></div>`}
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent"></div>
-                    <div class="absolute bottom-6 left-6 right-6 text-white z-10">
-                        <span class="px-2.5 py-1 rounded-md bg-indigo-600 text-xs font-bold mb-2 inline-block shadow">精選活動推薦</span>
-                        <h3 class="text-2xl sm:text-3xl font-extrabold drop-shadow">${e.name}</h3>
-                        <p class="text-xs sm:text-sm text-slate-200 mt-1 drop-shadow">${e.city} · ${e.time}</p>
+            container.innerHTML = activeCarouselEvents.map((e, idx) => {
+                const cover = getEffectiveCoverImage(e);
+                return `
+                    <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentSlideIdx ? 'opacity-100 z-10' : 'opacity-0 z-0'} carousel-slide cursor-pointer" data-idx="${idx}" onclick="openDetailModal('${e.id}')">
+                        ${cover ? `<img src="${cover}" alt="${e.name}" class="w-full h-full object-cover object-top">` : `<div class="w-full h-full bg-gradient-to-r from-indigo-900 to-slate-900"></div>`}
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6 text-white z-10">
+                            <span class="px-2.5 py-1 rounded-md bg-indigo-600 text-xs font-bold mb-2 inline-block shadow">精選活動推薦</span>
+                            <h3 class="text-2xl sm:text-3xl font-extrabold drop-shadow">${e.name}</h3>
+                            <p class="text-xs sm:text-sm text-slate-200 mt-1 drop-shadow">${e.city} · ${e.time}</p>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
 
             dots.innerHTML = activeCarouselEvents.map((_, idx) => `
                 <button onclick="goToSlide(${idx})" class="w-2.5 h-2.5 rounded-full transition-all ${idx === currentSlideIdx ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/80'} carousel-dot" data-idx="${idx}"></button>
@@ -1491,6 +1539,16 @@
             } else {
                 container.classList.add('hidden');
                 input.value = '';
+            }
+        }
+
+        function toggleTicketFields() {
+            const isChecked = document.getElementById('input-is-ticket').checked;
+            const container = document.getElementById('ticket-fields-container');
+            if (isChecked) {
+                container.classList.remove('hidden');
+            } else {
+                container.classList.add('hidden');
             }
         }
 
@@ -2034,7 +2092,10 @@
 
         function formatLineupSummary(lineupStr) {
             if (!lineupStr) return '';
-            const items = lineupStr.split(/[,，、\s]+/).filter(Boolean);
+            // 若為多天，抽取第一行展示
+            const firstLine = lineupStr.split('\n').filter(Boolean)[0] || '';
+            const cleanStr = firstLine.includes('：') ? firstLine.split('：')[1] : (firstLine.includes(':') ? firstLine.split(':')[1] : firstLine);
+            const items = cleanStr.split(/[,，、\s]+/).filter(Boolean);
             if (items.length === 0) return '';
             if (items.length <= 3) {
                 return items.join('、');
@@ -2044,7 +2105,13 @@
         }
 
         // ==========================================
-        // 【前台探索排序】置頂優先 ➔ 開放優先 (open > locked) ➔ 開始時間 ➔ 地區 ➔ 類型 ➔ 權重
+        // 【核心顯示排序】
+        // 1. 📌 置頂優先
+        // 2. 🟢 開放優先 (open > locked，灰色尚未開放卡片一律沉底)
+        // 3. 活動開始時間 (由早至晚)
+        // 4. 地區順序 (北 -> 中 -> 南 -> 東部與離島)
+        // 5. 類型聚集
+        // 6. 權重 (留白隨機自然輪替)
         // ==========================================
         function renderEvents() {
             const grid = document.getElementById('events-grid');
@@ -2119,12 +2186,17 @@
                 const isBookmarked = bookmarks.includes(String(e.id));
                 const isLocked = (e.status === 'locked');
                 const isPinned = e.is_pinned;
+                const isTicket = e.is_ticket;
                 const hasNewBadge = isRecentlyUpdated(e.updated_at);
                 const badgeColor = getRegionBadgeColor(e.region);
                 const lineupSummary = formatLineupSummary(e.lineup);
 
-                let imageHtml = e.image && e.image.trim() !== '' ? 
-                    `<img src="${e.image}" alt="${e.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" ${isLocked ? '' : `onclick="openDetailModal('${e.id}')"`}>` : 
+                // 方案 A：小卡智慧對焦頂部重點區 (object-top)
+                const cover = getEffectiveCoverImage(e);
+                const isFromPoster = isFallbackPoster(e);
+
+                let imageHtml = cover ? 
+                    `<img src="${cover}" alt="${e.name}" class="w-full h-full object-cover ${isFromPoster ? 'object-top' : 'object-center'} group-hover:scale-105 transition duration-500" ${isLocked ? '' : `onclick="openDetailModal('${e.id}')"`}>` : 
                     `<div class="w-full h-full flex items-center justify-center p-4 text-center ${isLocked ? '' : 'cursor-pointer'} bg-gradient-to-br from-indigo-900 to-slate-900" ${isLocked ? '' : `onclick="openDetailModal('${e.id}')"`}><span class="text-white font-bold text-lg drop-shadow-md">${e.name}</span></div>`;
 
                 return `
@@ -2135,6 +2207,7 @@
                             
                             <div class="absolute top-3 left-3 flex flex-wrap items-center gap-1.5">
                                 ${isPinned ? `<span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md flex items-center space-x-1"><span>📌 置頂</span></span>` : ''}
+                                ${isTicket ? `<span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-600 text-white shadow-md flex items-center space-x-1"><span>🎫 售票</span></span>` : ''}
                                 <span class="px-2.5 py-1 rounded-lg text-xs font-semibold ${badgeColor} text-white shadow-md">
                                     ${e.city} · ${e.category}
                                 </span>
@@ -2269,24 +2342,27 @@
             empty.classList.add('hidden');
             empty.classList.remove('flex');
 
-            grid.innerHTML = historyList.map(e => `
-                <div class="clean-card rounded-2xl overflow-hidden flex flex-col shadow-sm opacity-85">
-                    <div class="relative h-44 overflow-hidden flex items-center justify-center bg-slate-900 cursor-pointer" onclick="openDetailModal('${e.id}')">
-                        ${e.image ? `<img src="${e.image}" alt="${e.name}" class="w-full h-full object-cover grayscale">` : `<span class="text-white font-bold p-3 text-center">${e.name}</span>`}
-                        <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-600 text-white">${e.city} · 已結束</span>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
-                        <div>
-                            <h3 class="font-bold text-base text-slate-900 mb-1">${e.name}</h3>
-                            <p class="text-xs text-slate-500 mb-2"><i data-lucide="calendar" class="w-3.5 h-3.5 inline mr-1 text-slate-500"></i>${e.time}</p>
-                            <p class="text-xs text-slate-600 line-clamp-2"><strong class="text-slate-500">地點：</strong>${e.location}</p>
+            grid.innerHTML = historyList.map(e => {
+                const cover = getEffectiveCoverImage(e);
+                return `
+                    <div class="clean-card rounded-2xl overflow-hidden flex flex-col shadow-sm opacity-85">
+                        <div class="relative h-44 overflow-hidden flex items-center justify-center bg-slate-900 cursor-pointer" onclick="openDetailModal('${e.id}')">
+                            ${cover ? `<img src="${cover}" alt="${e.name}" class="w-full h-full object-cover object-top grayscale">` : `<span class="text-white font-bold p-3 text-center">${e.name}</span>`}
+                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-600 text-white">${e.city} · 已結束</span>
                         </div>
-                        <button onclick="openDetailModal('${e.id}')" class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition border border-slate-200">
-                            回顧活動內容
-                        </button>
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
+                            <div>
+                                <h3 class="font-bold text-base text-slate-900 mb-1">${e.name}</h3>
+                                <p class="text-xs text-slate-500 mb-2"><i data-lucide="calendar" class="w-3.5 h-3.5 inline mr-1 text-slate-500"></i>${e.time}</p>
+                                <p class="text-xs text-slate-600 line-clamp-2"><strong class="text-slate-500">地點：</strong>${e.location}</p>
+                            </div>
+                            <button onclick="openDetailModal('${e.id}')" class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition border border-slate-200">
+                                回顧活動內容
+                            </button>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
 
             lucide.createIcons();
         }
@@ -2322,11 +2398,12 @@
                 const isLocked = (e.status === 'locked');
                 const isClosed = isEffectivelyClosed(e);
                 const badgeColor = getRegionBadgeColor(e.region);
+                const cover = getEffectiveCoverImage(e);
 
                 return `
                     <div class="clean-card rounded-2xl overflow-hidden flex flex-col shadow-sm ${isLocked ? 'locked-card' : ''}">
                         <div class="relative h-44 overflow-hidden flex items-center justify-center bg-slate-900 ${isLocked ? '' : 'cursor-pointer'}" ${isLocked ? '' : `onclick="openDetailModal('${e.id}')"`}>
-                            ${e.image ? `<img src="${e.image}" alt="${e.name}" class="w-full h-full object-cover">` : `<span class="text-white font-bold p-3 text-center">${e.name}</span>`}
+                            ${cover ? `<img src="${cover}" alt="${e.name}" class="w-full h-full object-cover object-top">` : `<span class="text-white font-bold p-3 text-center">${e.name}</span>`}
                             <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-xs font-semibold ${badgeColor} text-white">${e.city}</span>
                             
                             <button onclick="event.stopPropagation(); toggleBookmark('${e.id}')" class="absolute top-3 right-3 p-2 rounded-xl bg-white/95 text-amber-500 hover:bg-slate-100 transition shadow-md">
@@ -2365,24 +2442,75 @@
             lucide.createIcons();
         }
 
-        function parseLineupBadges(lineupStr) {
+        // ==========================================
+        // 【多天演出卡司結構化解析引擎】
+        // 支援單天膠囊與多天（如 12/31：... \n 01/01：...）日曆式分組
+        // ==========================================
+        function parseLineupBadgesStructured(lineupStr) {
             if (!lineupStr) return '';
-            const items = lineupStr.split(/[,，、\s]+/).filter(Boolean);
-            if (items.length === 0) return '';
-            return `
-                <div class="flex flex-wrap gap-2 pt-0.5">
-                    ${items.map(name => `
-                        <span class="px-3.5 py-1.5 rounded-xl text-sm font-semibold bg-indigo-50 text-indigo-800 border border-indigo-200 shadow-2xs">
-                            ${name}
-                        </span>
-                    `).join('')}
-                </div>
-            `;
+            const lines = lineupStr.split('\n').map(l => l.trim()).filter(Boolean);
+            if (lines.length === 0) return '';
+
+            // 判斷是否包含多天格式 (含有冒號)
+            const hasMultipleDays = lines.some(line => line.includes('：') || line.includes(':'));
+
+            if (!hasMultipleDays) {
+                // 單天格式：一般膠囊
+                const items = lineupStr.split(/[,，、\s]+/).filter(Boolean);
+                return `
+                    <div class="flex flex-wrap gap-2 pt-0.5">
+                        ${items.map(name => `
+                            <span class="px-3.5 py-1.5 rounded-xl text-sm font-semibold bg-indigo-50 text-indigo-800 border border-indigo-200 shadow-2xs">
+                                ${name}
+                            </span>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            // 多天結構化格式
+            let dayBlocksHtml = lines.map(line => {
+                let dayTitle = '';
+                let performersStr = line;
+
+                if (line.includes('：')) {
+                    const parts = line.split('：');
+                    dayTitle = parts[0].trim();
+                    performersStr = parts.slice(1).join('：').trim();
+                } else if (line.includes(':')) {
+                    const parts = line.split(':');
+                    dayTitle = parts[0].trim();
+                    performersStr = parts.slice(1).join(':').trim();
+                }
+
+                const items = performersStr.split(/[,，、\s]+/).filter(Boolean);
+
+                return `
+                    <div class="p-3 bg-white/80 rounded-xl border border-indigo-100 shadow-2xs space-y-2">
+                        ${dayTitle ? `
+                            <div class="flex items-center space-x-1.5 text-xs font-bold text-indigo-700">
+                                <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                                <span>${dayTitle}</span>
+                            </div>
+                        ` : ''}
+                        <div class="flex flex-wrap gap-1.5">
+                            ${items.map(name => `
+                                <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-indigo-50 text-indigo-800 border border-indigo-200">
+                                    ${name}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            return `<div class="space-y-2.5 pt-0.5">${dayBlocksHtml}</div>`;
         }
 
         function parseScheduleToTimeline(descText) {
-            if (!descText) return `<p class="text-xs text-slate-400 text-center py-2">尚無詳細行程說明。</p>`;
+            if (!descText) return '';
             const lines = String(descText).split('\n').filter(l => l.trim().length > 0);
+            if (lines.length === 0) return '';
             
             let itemsHtml = lines.map(line => {
                 let parts = line.includes('|') ? line.split('|') : (line.includes('-') && line.length > 15 ? [line.substring(0, 13), line.substring(13)] : [line, '']);
@@ -2405,7 +2533,9 @@
             return `<div class="space-y-2.5">${itemsHtml}</div>`;
         }
 
-        // 活動詳情彈窗：演出卡司 與 宣傳海報 徹底拆開為獨立區塊
+        // ==========================================
+        // 【活動詳情彈窗】方案 B 劇院模式 ＋ 多天卡司 ＋ 時刻表空值隱藏 ＋ 售票專區
+        // ==========================================
         function openDetailModal(id) {
             const e = events.find(item => String(item.id) === String(id));
             if (!e) return;
@@ -2416,30 +2546,82 @@
             if (content) content.scrollTop = 0;
 
             const badgeColor = getRegionBadgeColor(e.region);
-            
-            let modalImgHtml = e.image && e.image.trim() !== '' ? 
-                `<img src="${e.image}" alt="${e.name}" class="w-full h-full object-cover cursor-pointer" onclick="openLightbox('${e.image}')">` : 
-                `<div class="w-full h-full flex items-center justify-center p-6 text-center bg-gradient-to-br from-indigo-900 to-slate-900"><span class="text-white font-extrabold text-xl">${e.name}</span></div>`;
+            const cover = getEffectiveCoverImage(e);
+            const isFromPoster = isFallbackPoster(e);
 
             const lineupImgs = (e.lineup_image || '').split(',').filter(Boolean);
             const scheduleImgs = (e.schedule_image || '').split(',').filter(Boolean);
 
-            content.innerHTML = `
-                <!-- 橫幅首圖 -->
-                <div class="relative rounded-xl overflow-hidden h-64 sm:h-80 bg-slate-900 flex items-center justify-center border border-slate-200 shadow-inner">
-                    ${modalImgHtml}
-                    ${e.image ? `<button onclick="openLightbox('${e.image}')" class="absolute bottom-4 right-4 px-3 py-1.5 bg-black/70 hover:bg-black text-white text-xs rounded-xl flex items-center space-x-1.5 backdrop-blur-sm transition shadow-lg"><i data-lucide="maximize-2" class="w-4 h-4"></i><span>放大封面</span></button>` : ''}
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none"></div>
-                    <div class="absolute bottom-4 left-4 right-4 pointer-events-none">
-                        <span class="px-3 py-1 rounded-full text-xs font-semibold ${badgeColor} text-white mb-2 inline-block shadow-sm">${e.city} (${e.category})</span>
-                        <h2 class="text-2xl sm:text-3xl font-extrabold text-white drop-shadow-md">${e.name}</h2>
+            // 方案 B：若為直式海報當首圖，採用高斯模糊擴展 ＋ 原圖等比居中（劇院級）
+            let modalBannerHtml = '';
+            if (cover) {
+                if (isFromPoster) {
+                    modalBannerHtml = `
+                        <div class="relative rounded-2xl overflow-hidden h-72 sm:h-96 bg-slate-950 flex items-center justify-center border border-slate-200 shadow-inner group">
+                            <!-- 底層毛玻璃光暈鋪底 -->
+                            <img src="${cover}" class="absolute inset-0 w-full h-full object-cover blur-2xl opacity-45 scale-110 pointer-events-none">
+                            <div class="absolute inset-0 bg-slate-950/30 pointer-events-none"></div>
+                            <!-- 上層原圖無裁切置中 -->
+                            <img src="${cover}" alt="${e.name}" class="relative max-h-full max-w-full object-contain z-10 cursor-pointer shadow-2xl rounded-lg" onclick="openLightbox('${cover}')">
+                            <button onclick="openLightbox('${cover}')" class="absolute bottom-4 right-4 px-3 py-1.5 bg-black/75 hover:bg-black text-white text-xs rounded-xl flex items-center space-x-1.5 backdrop-blur-sm transition shadow-lg z-20"><i data-lucide="maximize-2" class="w-4 h-4"></i><span>放大海報</span></button>
+                            <div class="absolute bottom-4 left-4 right-4 pointer-events-none z-20">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold ${badgeColor} text-white mb-2 inline-block shadow-sm">${e.city} (${e.category})</span>
+                                <h2 class="text-2xl sm:text-3xl font-extrabold text-white drop-shadow-lg">${e.name}</h2>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    modalBannerHtml = `
+                        <div class="relative rounded-2xl overflow-hidden h-64 sm:h-80 bg-slate-900 flex items-center justify-center border border-slate-200 shadow-inner">
+                            <img src="${cover}" alt="${e.name}" class="w-full h-full object-cover cursor-pointer" onclick="openLightbox('${cover}')">
+                            <button onclick="openLightbox('${cover}')" class="absolute bottom-4 right-4 px-3 py-1.5 bg-black/70 hover:bg-black text-white text-xs rounded-xl flex items-center space-x-1.5 backdrop-blur-sm transition shadow-lg"><i data-lucide="maximize-2" class="w-4 h-4"></i><span>放大封面</span></button>
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none"></div>
+                            <div class="absolute bottom-4 left-4 right-4 pointer-events-none">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold ${badgeColor} text-white mb-2 inline-block shadow-sm">${e.city} (${e.category})</span>
+                                <h2 class="text-2xl sm:text-3xl font-extrabold text-white drop-shadow-md">${e.name}</h2>
+                            </div>
+                        </div>
+                    `;
+                }
+            } else {
+                modalBannerHtml = `
+                    <div class="relative rounded-2xl overflow-hidden h-48 bg-gradient-to-br from-indigo-900 to-slate-900 flex items-center justify-center p-6 text-center border border-slate-200">
+                        <div>
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold ${badgeColor} text-white mb-2 inline-block">${e.city} (${e.category})</span>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-white drop-shadow">${e.name}</h2>
+                        </div>
                     </div>
-                </div>
+                `;
+            }
+
+            const hasSchedule = (e.desc && e.desc.trim().length > 0) || (scheduleImgs.length > 0);
+
+            content.innerHTML = `
+                ${modalBannerHtml}
 
                 <div class="flex items-center justify-between text-xs text-slate-500 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200">
                     <span class="flex items-center space-x-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-indigo-600"></i><span>最後更新時間：</span></span>
                     <span class="font-mono font-medium text-slate-700">${e.updated_at ? e.updated_at : '2026-10-10'}</span>
                 </div>
+
+                <!-- 售票專區 (若有啟用) -->
+                ${e.is_ticket ? `
+                    <div class="p-4 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl border border-amber-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs">
+                        <div class="space-y-1">
+                            <span class="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-600 text-white shadow-2xs">
+                                <i data-lucide="ticket" class="w-3.5 h-3.5"></i>
+                                <span>售票活動</span>
+                            </span>
+                            <p class="text-xs font-semibold text-amber-950">${e.ticket_desc || '本活動為售票活動，詳情請參考購票說明。'}</p>
+                        </div>
+                        ${e.ticket_link ? `
+                            <a href="${e.ticket_link}" target="_blank" class="px-4 py-2 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white rounded-xl text-xs font-bold shadow-md shadow-amber-600/20 flex items-center justify-center space-x-1.5 transition shrink-0">
+                                <span>立即前往購票</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </a>
+                        ` : ''}
+                    </div>
+                ` : ''}
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1 shadow-sm">
@@ -2452,18 +2634,18 @@
                     </div>
                 </div>
 
-                <!-- 1. 演出卡司陣容 (獨立緊湊精緻卡片，不塞海報)[cite: 3] -->
+                <!-- 1. 演出卡司陣容 (支援多天卡司分流) -->
                 ${e.lineup ? `
                     <div class="p-4 bg-indigo-50/50 rounded-2xl border border-indigo-100 space-y-2.5">
                         <h4 class="text-xs font-bold text-indigo-900 uppercase tracking-wider flex items-center space-x-1.5">
                             <i data-lucide="sparkles" class="w-4 h-4 text-indigo-600"></i>
                             <span>🌟 演出卡司陣容</span>
                         </h4>
-                        ${parseLineupBadges(e.lineup)}
+                        ${parseLineupBadgesStructured(e.lineup)}
                     </div>
                 ` : ''}
 
-                <!-- 2. 活動宣傳海報 (獨立展區，原圖尺寸無裁切展示) -->
+                <!-- 2. 活動宣傳海報 (獨立展區，原圖無裁切) -->
                 ${lineupImgs.length > 0 ? `
                     <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
                         <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center justify-between">
@@ -2488,31 +2670,33 @@
                     </div>
                 ` : ''}
 
-                <!-- 3. 活動時刻表 / 演出順序 -->
-                <div class="space-y-4">
-                    <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center space-x-1.5">
-                        <i data-lucide="list-ordered" class="w-4 h-4 text-indigo-600"></i>
-                        <span>活動時刻表 / 演出順序</span>
-                    </h4>
-                    ${parseScheduleToTimeline(e.desc)}
-                    ${scheduleImgs.length > 0 ? `
-                        <div class="pt-2 space-y-3">
-                            <span class="block text-xs font-semibold text-slate-600">時刻表 / 節目表海報 (${scheduleImgs.length} 張，點擊放大)：</span>
-                            <div class="space-y-4">
-                                ${scheduleImgs.map(img => `
-                                    <div class="relative rounded-2xl overflow-hidden border border-slate-200 bg-white group cursor-pointer shadow-sm flex items-center justify-center p-1.5" onclick="openLightbox('${img}')">
-                                        <img src="${img}" alt="時刻表海報" class="w-full h-auto max-h-[75vh] object-contain mx-auto rounded-xl">
-                                        <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition flex items-center justify-center opacity-0 group-hover:opacity-100 rounded-2xl">
-                                            <span class="px-4 py-2 bg-black/75 text-white rounded-xl text-xs font-semibold flex items-center space-x-1.5 backdrop-blur-sm shadow-md">
-                                                <i data-lucide="maximize-2" class="w-4 h-4"></i><span>點擊全螢幕放大</span>
-                                            </span>
+                <!-- 3. 活動時刻表 / 演出順序 (條件式渲染：沒填寫時完全不顯示) -->
+                ${hasSchedule ? `
+                    <div class="space-y-4">
+                        <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center space-x-1.5">
+                            <i data-lucide="list-ordered" class="w-4 h-4 text-indigo-600"></i>
+                            <span>活動時刻表 / 演出順序</span>
+                        </h4>
+                        ${parseScheduleToTimeline(e.desc)}
+                        ${scheduleImgs.length > 0 ? `
+                            <div class="pt-2 space-y-3">
+                                <span class="block text-xs font-semibold text-slate-600">時刻表 / 節目表海報 (${scheduleImgs.length} 張，點擊放大)：</span>
+                                <div class="space-y-4">
+                                    ${scheduleImgs.map(img => `
+                                        <div class="relative rounded-2xl overflow-hidden border border-slate-200 bg-white group cursor-pointer shadow-sm flex items-center justify-center p-1.5" onclick="openLightbox('${img}')">
+                                            <img src="${img}" alt="時刻表海報" class="w-full h-auto max-h-[75vh] object-contain mx-auto rounded-xl">
+                                            <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition flex items-center justify-center opacity-0 group-hover:opacity-100 rounded-2xl">
+                                                <span class="px-4 py-2 bg-black/75 text-white rounded-xl text-xs font-semibold flex items-center space-x-1.5 backdrop-blur-sm shadow-md">
+                                                    <i data-lucide="maximize-2" class="w-4 h-4"></i><span>點擊全螢幕放大</span>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                `).join('')}
+                                    `).join('')}
+                                </div>
                             </div>
-                        </div>
-                    ` : ''}
-                </div>
+                        ` : ''}
+                    </div>
+                ` : ''}
 
                 ${e.link ? `
                     <div class="pt-2">
@@ -2564,9 +2748,6 @@
 
         // ==========================================
         // 【後台三段式清單切換】
-        // active: 進行中 (open + locked)
-        // draft: 隱藏草稿 (hidden)
-        // archive: 歷屆歸檔 (closed / 過期2天)
         // ==========================================
         function setAdminViewTab(tab) {
             adminViewTab = tab;
@@ -2602,7 +2783,6 @@
             renderAdminTable();
         }
 
-        // 後台動態生成「活動類型快篩」膠囊
         function buildAdminCategoryQuickFilters() {
             const container = document.getElementById('admin-category-quick-filters');
             if (!container) return;
@@ -2684,26 +2864,23 @@
             await syncToGoogleSheet();
         }
 
-        // 後台表格渲染 (支援三段清單、類型快篩、即時狀態、即時置頂、即時權重、純數字輪播)
         function renderAdminTable() {
             const tbody = document.getElementById('admin-table-body');
             const searchKeyword = (document.getElementById('admin-search-input')?.value || '').toLowerCase().trim();
 
-            // 1. 三段式清單分流篩選
             let targetList = events.filter(e => {
                 const isArchived = isEffectivelyClosed(e);
                 const isDraft = (e.status === 'hidden');
 
                 if (adminViewTab === 'active') {
-                    return !isArchived && !isDraft; // 進行中 (open + locked)
+                    return !isArchived && !isDraft;
                 } else if (adminViewTab === 'draft') {
-                    return isDraft; // 隱藏與草稿
+                    return isDraft;
                 } else {
-                    return isArchived; // 歷屆歸檔
+                    return isArchived;
                 }
             });
 
-            // 2. 分區、類型快篩與搜尋關鍵字交集過濾
             let filtered = targetList.filter(e => {
                 const matchRegion = (adminCurrentRegionFilter === 'all' || e.region === adminCurrentRegionFilter);
                 const matchCategory = (adminCurrentCategoryFilter === 'all' || e.category === adminCurrentCategoryFilter);
@@ -2715,7 +2892,6 @@
                 return matchRegion && matchCategory && matchSearch;
             });
 
-            // 3. 排序：置頂優先 ➔ 開始時間 ➔ 縣市 ➔ 權重
             filtered.sort((a, b) => {
                 const pinA = a.is_pinned ? 0 : 1;
                 const pinB = b.is_pinned ? 0 : 1;
@@ -2755,7 +2931,6 @@
 
                 return `
                     <tr class="hover:bg-slate-50 transition">
-                        <!-- 即時狀態下拉選單 -->
                         <td class="p-3.5 whitespace-nowrap">
                             <select onchange="handleInlineStatusChange('${e.id}', this.value)" class="text-xs font-semibold py-1 px-2.5 rounded-lg border focus:outline-none transition ${
                                 e.status === 'open' ? 'bg-emerald-50 text-emerald-700 border-emerald-300' :
@@ -2769,7 +2944,6 @@
                                 <option value="closed" ${e.status === 'closed' ? 'selected' : ''}>已結束</option>
                             </select>
                         </td>
-                        <!-- 即時置頂按鈕 -->
                         <td class="p-3.5 whitespace-nowrap">
                             <button type="button" onclick="handleInlinePinToggle('${e.id}')" title="點擊切換置頂狀態" class="px-2 py-1 rounded-lg text-xs font-bold transition flex items-center space-x-1 ${
                                 isPinned ? 'bg-amber-500 text-white shadow-xs' : 'bg-slate-100 text-slate-400 hover:text-slate-700'
@@ -2778,7 +2952,6 @@
                                 <span>${isPinned ? '已置頂' : '一般'}</span>
                             </button>
                         </td>
-                        <!-- 即時權重輸入框 (留白則隨機) -->
                         <td class="p-3.5 whitespace-nowrap">
                             <input type="number" min="1" max="99" value="${e.weight !== undefined && e.weight !== null ? e.weight : ''}" placeholder="隨機" 
                                 onchange="handleInlineWeightChange('${e.id}', this.value)"
@@ -2792,7 +2965,6 @@
                             <div class="text-xs text-indigo-600 font-medium">${e.city} · ${e.region}</div>
                         </td>
                         <td class="p-3.5 text-xs font-semibold text-slate-700 whitespace-nowrap">${e.category}</td>
-                        <!-- 輪播 (精簡為純數字 1, 2, 3...) -->
                         <td class="p-3.5 text-xs font-semibold whitespace-nowrap">
                             ${isCar ? `<span class="bg-indigo-50 text-indigo-700 font-bold px-2.5 py-0.5 rounded-lg border border-indigo-200 shadow-2xs">${carOrder}</span>` : '<span class="text-slate-400 font-mono">-</span>'}
                         </td>
@@ -2842,6 +3014,11 @@
             document.getElementById('input-status').value = 'hidden';
             document.getElementById('input-weight').value = '';
             document.getElementById('input-is-pinned').checked = false;
+            document.getElementById('input-is-ticket').checked = false;
+            document.getElementById('input-ticket-desc').value = '';
+            document.getElementById('input-ticket-link').value = '';
+            toggleTicketFields();
+
             document.getElementById('input-is-carousel').checked = false;
             document.getElementById('input-carousel-order').value = '';
             toggleCarouselOrderField();
@@ -2871,6 +3048,13 @@
             document.getElementById('input-status').value = e.status || 'open';
             document.getElementById('input-weight').value = (e.weight !== undefined && e.weight !== null) ? e.weight : '';
             document.getElementById('input-is-pinned').checked = (e.is_pinned === true || e.is_pinned === 'true');
+            
+            const hasTicket = (e.is_ticket === true || e.is_ticket === 'true' || e.is_ticket === 1);
+            document.getElementById('input-is-ticket').checked = hasTicket;
+            document.getElementById('input-ticket-desc').value = e.ticket_desc || '';
+            document.getElementById('input-ticket-link').value = e.ticket_link || '';
+            toggleTicketFields();
+
             document.getElementById('input-name').value = e.name;
             document.getElementById('input-time').value = sanitizeTimeDisplay(e.time);
             document.getElementById('input-location').value = e.location;
@@ -2923,6 +3107,9 @@
             const carouselOrderVal = document.getElementById('input-carousel-order').value.trim();
             const weightVal = document.getElementById('input-weight').value.trim();
             const isPinned = document.getElementById('input-is-pinned').checked;
+            const isTicket = document.getElementById('input-is-ticket').checked;
+            const ticketDesc = document.getElementById('input-ticket-desc').value.trim();
+            const ticketLink = document.getElementById('input-ticket-link').value.trim();
 
             if (!category) {
                 highlightErrorField('input-category', '請選擇或輸入活動類型！');
@@ -2974,6 +3161,9 @@
                 status: document.getElementById('input-status').value,
                 weight: weightVal === '' ? '' : Number(weightVal),
                 is_pinned: isPinned,
+                is_ticket: isTicket,
+                ticket_desc: ticketDesc,
+                ticket_link: ticketLink,
                 image: image,
                 lineup: document.getElementById('input-lineup').value.trim(),
                 lineup_image: lineupImage,
