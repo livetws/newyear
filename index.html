@@ -120,7 +120,6 @@
     <!-- Header Navigation (防折行、正版社群 SVG、管理圖示化、收藏連動金黃變色) -->
     <header class="sticky top-0 z-40 clean-panel border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
-            <!-- 標題 (禁止折行) -->
             <div class="flex items-center space-x-2.5 sm:space-x-3 cursor-pointer shrink-0" onclick="switchTab('home')">
                 <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-violet-600 to-pink-500 flex items-center justify-center shadow-md shadow-indigo-500/20 shrink-0">
                     <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
@@ -131,7 +130,6 @@
                 </div>
             </div>
 
-            <!-- 右側導覽與社群 -->
             <div class="flex items-center space-x-1.5 sm:space-x-3 shrink-0">
                 <!-- 官方社群平台原生高解析 SVG 圖標 -->
                 <div class="flex items-center space-x-1 border-r border-slate-200 pr-2 sm:pr-3">
@@ -154,12 +152,10 @@
                     <button onclick="switchTab('history')" id="nav-history" class="nav-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center space-x-1.5">
                         <i data-lucide="history" class="w-4 h-4"></i><span>歷史活動</span>
                     </button>
-                    <!-- 我的收藏 (移除數字，改動態金色變色) -->
                     <button onclick="switchTab('bookmarks')" id="nav-bookmarks" class="nav-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center space-x-1.5">
                         <i id="nav-bookmark-icon" data-lucide="bookmark" class="w-4 h-4 text-slate-400 transition-colors"></i>
                         <span>我的收藏</span>
                     </button>
-                    <!-- 管理系統 (單一盾牌安全圖示) -->
                     <button onclick="switchTab('admin')" id="nav-admin" title="進入管理系統" class="nav-btn p-2 rounded-xl text-sm font-medium transition text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 border border-transparent hover:border-indigo-100 flex items-center justify-center">
                         <i data-lucide="shield-check" class="w-5 h-5"></i>
                     </button>
@@ -339,7 +335,6 @@
                     <div class="space-y-1">
                         <div class="flex items-center space-x-2">
                             <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700 border border-indigo-200">後台控制台</span>
-                            <!-- 專屬管理員即時狀態指示燈 (綠、黃、紅) -->
                             <div id="admin-status-indicator" class="flex items-center space-x-1.5 px-3 py-0.5 bg-white border border-slate-200 rounded-full text-xs font-medium shadow-2xs">
                                 <span id="admin-status-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
                                 <span id="admin-status-text" class="text-slate-700">雲端已連線</span>
@@ -364,7 +359,7 @@
                     </div>
                 </div>
 
-                <!-- 數據概覽卡片 (支援4種狀態) -->
+                <!-- 數據概覽卡片 -->
                 <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
                     <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 shadow-2xs">
                         <div class="text-slate-500 text-xs mb-1">進行中活動</div>
@@ -434,7 +429,7 @@
                             <thead class="bg-slate-100 text-slate-600 text-xs uppercase border-b border-slate-200">
                                 <tr>
                                     <th class="p-3.5 whitespace-nowrap">即時狀態切換</th>
-                                    <th class="p-3.5">活動名稱 / 縣市</th>
+                                    <th class="p-3.5">活動名稱 (點擊預覽) / 縣市</th>
                                     <th class="p-3.5 whitespace-nowrap">類型</th>
                                     <th class="p-3.5 whitespace-nowrap">輪播推薦</th>
                                     <th class="p-3.5 whitespace-nowrap">活動時間</th>
@@ -503,7 +498,7 @@
         </button>
     </nav>
 
-    <!-- Detail Modal (海報與時刻表自適應原圖尺寸完整顯示，絕無裁切) -->
+    <!-- Detail Modal (演出卡司 與 宣傳海報 獨立拆開呈現) -->
     <div id="detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-slate-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div id="modal-content" class="overflow-y-auto p-6 space-y-6"></div>
@@ -582,7 +577,7 @@
                     <input type="text" id="input-location" placeholder="例如：臺北市市民廣場" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-sm transition">
                 </div>
 
-                <!-- 輪播動態連動控制 (勾選後預設為空白並強制填寫) -->
+                <!-- 輪播動態連動控制 -->
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div class="flex items-center space-x-3">
                         <input type="checkbox" id="input-is-carousel" onchange="toggleCarouselOrderField()" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
@@ -621,7 +616,7 @@
                     </div>
                 </div>
 
-                <!-- 2. 演出卡司陣容 ＋ 多張卡司海報 (自適應原圖尺寸完整呈現) -->
+                <!-- 2. 演出卡司陣容 ＋ 多張卡司海報 -->
                 <div class="p-4 bg-indigo-50/50 rounded-xl border border-indigo-100 space-y-3">
                     <span class="block text-xs font-bold text-indigo-900 flex items-center space-x-1.5">
                         <i data-lucide="sparkles" class="w-4 h-4 text-indigo-600"></i>
@@ -652,7 +647,7 @@
                     <div id="lineup-gallery-container" class="grid grid-cols-3 sm:grid-cols-4 gap-2 pt-1"></div>
                 </div>
 
-                <!-- 3. 活動時刻表 / 演出順序 ＋ 多張節目表海報 (自適應原圖尺寸完整顯示) -->
+                <!-- 3. 活動時刻表 / 演出順序 ＋ 多張節目表海報 -->
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
                     <span class="block text-xs font-bold text-slate-800">3. 活動時刻表 / 演出順序 (支援橫式流程長圖與節目表海報)</span>
                     <div>
@@ -831,9 +826,8 @@
             return timeStr;
         }
 
-        // 解析日期時間物件 (用於時間排序與過期計算)
         function parseEventDate(timeStr) {
-            if (!timeStr) return new Date(8640000000000000); // 無時間排最後
+            if (!timeStr) return new Date(8640000000000000);
             const cleaned = sanitizeTimeDisplay(timeStr);
             const match = cleaned.match(/(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})/);
             if (match) {
@@ -851,18 +845,15 @@
             return new Date(8640000000000000);
         }
 
-        // 活動結束滿 2 天判定 (48小時)
         function isEventExpiredTwoDays(timeStr) {
             if (!timeStr) return false;
             const d = parseEventDate(timeStr);
             if (d.getTime() >= 8640000000000000) return false;
-            // 結束日期的隔天午夜起算 48 小時
             const endOfEventDay = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59).getTime();
             const twoDaysAfter = endOfEventDay + (2 * 24 * 60 * 60 * 1000);
             return Date.now() > twoDaysAfter;
         }
 
-        // 判定是否屬於「歷史活動」：手動設為 closed 或 時間過期超過2天
         function isEffectivelyClosed(e) {
             return e.status === 'closed' || isEventExpiredTwoDays(e.time);
         }
@@ -913,7 +904,7 @@
         let currentModalEventId = null;
         let isAdminUnlocked = false;
         let adminCurrentRegionFilter = 'all';
-        let adminViewTab = 'active'; // 'active' (進行中) 或 'archive' (歷屆歸檔)
+        let adminViewTab = 'active';
 
         let categoryConfigs = [
             { name: '跨年晚會', order: 1, enabled: true },
@@ -931,10 +922,8 @@
             updateStats();
             lucide.createIcons();
 
-            // 恢復上次瀏覽的分頁 (Hash 或 LocalStorage)
             restoreSavedTab();
 
-            // 監聽網址 Hash 變動
             window.addEventListener('hashchange', () => {
                 const h = window.location.hash.replace('#', '');
                 if (['home', 'history', 'bookmarks', 'admin'].includes(h)) {
@@ -1093,7 +1082,6 @@
             }
         }
 
-        // 輪播呈現：徹底解決重整消失問題 (多條件相容)
         function updateCarouselView() {
             const container = document.getElementById('hero-carousel-container');
             const dots = document.getElementById('carousel-dots');
@@ -1171,7 +1159,6 @@
             });
         }
 
-        // 輪播勾選連動：預設空白不偷塞
         function toggleCarouselOrderField() {
             const isChecked = document.getElementById('input-is-carousel').checked;
             const container = document.getElementById('carousel-order-container');
@@ -1220,7 +1207,6 @@
             });
         }
 
-        // 單圖上傳 (主視覺封面 - 杜絕 Base64 退回塞入)
         async function handleSingleUpload(event, inputTargetId, previewImgId, previewContainerId, statusId) {
             const file = event.target.files[0];
             if (!file) return;
@@ -1283,7 +1269,6 @@
             }
         }
 
-        // 多圖上傳 (海報與時刻表)
         async function handleMultipleUpload(event, storeInputId, galleryContainerId, statusId) {
             const files = Array.from(event.target.files);
             if (files.length === 0) return;
@@ -1363,7 +1348,6 @@
             renderGallery(storeInputId, galleryContainerId);
         }
 
-        // 已上傳圖庫資產選擇器
         let currentPickerMode = 'single';
         let currentPickerStoreTarget = '';
         let currentPickerPreviewTarget = '';
@@ -1450,7 +1434,6 @@
             }
         }
 
-        // 分頁切換 (含記憶維持與 Hash 更新)
         function switchTab(tabId, updateHash = true) {
             currentActiveTab = tabId;
             localStorage.setItem('tw_nye_active_tab', tabId);
@@ -1716,13 +1699,11 @@
             }
         }
 
-        // 探索活動渲染 (各縣市活動按日期優先排序，過期與隱藏排除)
         function renderEvents() {
             const grid = document.getElementById('events-grid');
             const emptyState = document.getElementById('empty-state');
             
             let filtered = events.filter(e => {
-                // 排除歷史歸檔(已結束或滿2天) 與 隱藏活動
                 if (isEffectivelyClosed(e) || e.status === 'hidden') return false;
 
                 const cfg = categoryConfigs.find(c => c.name === e.category);
@@ -1738,9 +1719,6 @@
                 return matchCat && matchRegion && matchSearch;
             });
 
-            // 排序邏輯：
-            // 若選擇「各縣市活動」：日期優先 (先後順序) ➔ 地區順序 (北中南東)
-            // 其他分類：狀態優先 (開放領先) ➔ 地區順序 ➔ 日期
             filtered.sort((a, b) => {
                 if (currentCategory === '各縣市活動') {
                     const dateA = parseEventDate(a.time).getTime();
@@ -1825,7 +1803,6 @@
                                     <i data-lucide="map-pin" class="w-3.5 h-3.5 text-rose-500 shrink-0"></i>
                                     <span class="line-clamp-1">${e.location}</span>
                                 </p>
-                                <!-- 尚未開放時一律隱藏卡司名單；開放後字級放大並顯示前3個+...等 -->
                                 ${(!isLocked && lineupSummary) ? `
                                     <div class="text-sm font-semibold text-indigo-800 bg-indigo-50/80 px-3 py-1.5 rounded-xl border border-indigo-100 flex items-center space-x-1.5">
                                         <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-600 shrink-0"></i>
@@ -2024,12 +2001,13 @@
             lucide.createIcons();
         }
 
+        // 活動詳情內卡司膠囊標籤
         function parseLineupBadges(lineupStr) {
             if (!lineupStr) return '';
             const items = lineupStr.split(/[,，、\s]+/).filter(Boolean);
             if (items.length === 0) return '';
             return `
-                <div class="flex flex-wrap gap-2.5 pt-1">
+                <div class="flex flex-wrap gap-2 pt-0.5">
                     ${items.map(name => `
                         <span class="px-3.5 py-1.5 rounded-xl text-sm font-semibold bg-indigo-50 text-indigo-800 border border-indigo-200 shadow-2xs">
                             ${name}
@@ -2064,15 +2042,15 @@
             return `<div class="space-y-2.5">${itemsHtml}</div>`;
         }
 
-        // 活動詳情彈窗
+        // 活動詳情彈窗：卡司與宣傳海報徹底拆開為獨立區塊
         function openDetailModal(id) {
             const e = events.find(item => String(item.id) === String(id));
-            if (!e || e.status === 'locked' || e.status === 'hidden') return;
+            if (!e) return;
 
             currentModalEventId = id;
             const isBookmarked = bookmarks.includes(String(id));
             const content = document.getElementById('modal-content');
-            if (content) content.scrollTop = 0; // 捲軸強制歸零
+            if (content) content.scrollTop = 0;
 
             const badgeColor = getRegionBadgeColor(e.region);
             
@@ -2097,7 +2075,7 @@
 
                 <div class="flex items-center justify-between text-xs text-slate-500 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200">
                     <span class="flex items-center space-x-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-indigo-600"></i><span>最後更新時間：</span></span>
-                    <span class="font-mono font-medium text-slate-700">${e.updated_at ? e.updated_at : '2026/10/10'}</span>
+                    <span class="font-mono font-medium text-slate-700">${e.updated_at ? e.updated_at : '2026-10-10'}</span>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -2111,33 +2089,43 @@
                     </div>
                 </div>
 
-                ${(e.lineup || lineupImgs.length > 0) ? `
-                    <div class="space-y-4 p-4.5 bg-indigo-50/40 rounded-2xl border border-indigo-100">
+                <!-- 1. 演出卡司陣容 (獨立緊湊精緻卡片，不塞海報) -->
+                ${e.lineup ? `
+                    <div class="p-4 bg-indigo-50/50 rounded-2xl border border-indigo-100 space-y-2.5">
                         <h4 class="text-xs font-bold text-indigo-900 uppercase tracking-wider flex items-center space-x-1.5">
                             <i data-lucide="sparkles" class="w-4 h-4 text-indigo-600"></i>
                             <span>🌟 演出卡司陣容</span>
                         </h4>
                         ${parseLineupBadges(e.lineup)}
-                        ${lineupImgs.length > 0 ? `
-                            <div class="pt-2 space-y-3">
-                                <span class="block text-xs font-semibold text-slate-600">宣傳海報 (${lineupImgs.length} 張，點擊放大)：</span>
-                                <div class="space-y-4">
-                                    ${lineupImgs.map(img => `
-                                        <div class="relative rounded-2xl overflow-hidden border border-slate-200 bg-slate-900/5 group cursor-pointer shadow-sm flex items-center justify-center p-1" onclick="openLightbox('${img}')">
-                                            <img src="${img}" alt="卡司海報" class="w-full h-auto max-h-[75vh] object-contain mx-auto rounded-xl">
-                                            <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition flex items-center justify-center opacity-0 group-hover:opacity-100">
-                                                <span class="px-4 py-2 bg-black/75 text-white rounded-xl text-xs font-semibold flex items-center space-x-1.5 backdrop-blur-sm">
-                                                    <i data-lucide="maximize-2" class="w-4 h-4"></i><span>點擊全螢幕放大</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-                        ` : ''}
                     </div>
                 ` : ''}
 
+                <!-- 2. 活動宣傳海報 (獨立展區，原圖尺寸無裁切展示) -->
+                ${lineupImgs.length > 0 ? `
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center justify-between">
+                            <span class="flex items-center space-x-1.5">
+                                <i data-lucide="image" class="w-4 h-4 text-indigo-600"></i>
+                                <span>活動宣傳海報 (${lineupImgs.length} 張)</span>
+                            </span>
+                            <span class="text-[11px] text-slate-400 font-normal">點擊可放大全螢幕檢視</span>
+                        </h4>
+                        <div class="space-y-4">
+                            ${lineupImgs.map(img => `
+                                <div class="relative rounded-2xl overflow-hidden border border-slate-200 bg-white group cursor-pointer shadow-sm flex items-center justify-center p-1.5" onclick="openLightbox('${img}')">
+                                    <img src="${img}" alt="宣傳海報" class="w-full h-auto max-h-[75vh] object-contain mx-auto rounded-xl">
+                                    <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition flex items-center justify-center opacity-0 group-hover:opacity-100 rounded-2xl">
+                                        <span class="px-4 py-2 bg-black/75 text-white rounded-xl text-xs font-semibold flex items-center space-x-1.5 backdrop-blur-sm shadow-md">
+                                            <i data-lucide="maximize-2" class="w-4 h-4"></i><span>點擊全螢幕放大</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+
+                <!-- 3. 活動時刻表 / 演出順序 -->
                 <div class="space-y-4">
                     <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center space-x-1.5">
                         <i data-lucide="list-ordered" class="w-4 h-4 text-indigo-600"></i>
@@ -2149,10 +2137,10 @@
                             <span class="block text-xs font-semibold text-slate-600">時刻表 / 節目表海報 (${scheduleImgs.length} 張，點擊放大)：</span>
                             <div class="space-y-4">
                                 ${scheduleImgs.map(img => `
-                                    <div class="relative rounded-2xl overflow-hidden border border-slate-200 bg-slate-900/5 group cursor-pointer shadow-sm flex items-center justify-center p-1" onclick="openLightbox('${img}')">
+                                    <div class="relative rounded-2xl overflow-hidden border border-slate-200 bg-white group cursor-pointer shadow-sm flex items-center justify-center p-1.5" onclick="openLightbox('${img}')">
                                         <img src="${img}" alt="時刻表海報" class="w-full h-auto max-h-[75vh] object-contain mx-auto rounded-xl">
-                                        <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition flex items-center justify-center opacity-0 group-hover:opacity-100">
-                                            <span class="px-4 py-2 bg-black/75 text-white rounded-xl text-xs font-semibold flex items-center space-x-1.5 backdrop-blur-sm">
+                                        <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition flex items-center justify-center opacity-0 group-hover:opacity-100 rounded-2xl">
+                                            <span class="px-4 py-2 bg-black/75 text-white rounded-xl text-xs font-semibold flex items-center space-x-1.5 backdrop-blur-sm shadow-md">
                                                 <i data-lucide="maximize-2" class="w-4 h-4"></i><span>點擊全螢幕放大</span>
                                             </span>
                                         </div>
@@ -2211,7 +2199,6 @@
             modal.classList.remove('flex');
         }
 
-        // 後台頁籤分流：進行中 vs 歷屆歸檔
         function setAdminViewTab(tab) {
             adminViewTab = tab;
             const btnActive = document.getElementById('admin-tab-active');
@@ -2240,7 +2227,6 @@
             renderAdminTable();
         }
 
-        // 後台表格即時下拉切換狀態 (免進編輯彈窗直接修改)
         async function handleInlineStatusChange(eventId, newStatus) {
             const idx = events.findIndex(e => String(e.id) === String(eventId));
             if (idx === -1) return;
@@ -2297,7 +2283,6 @@
             tbody.innerHTML = filtered.map(e => {
                 return `
                     <tr class="hover:bg-slate-50 transition">
-                        <!-- 即時狀態下拉選單 (免開彈窗直接改) -->
                         <td class="p-3.5 whitespace-nowrap">
                             <select onchange="handleInlineStatusChange('${e.id}', this.value)" class="text-xs font-semibold py-1 px-2.5 rounded-lg border focus:outline-none transition ${
                                 e.status === 'open' ? 'bg-emerald-50 text-emerald-700 border-emerald-300' :
@@ -2311,8 +2296,12 @@
                                 <option value="closed" ${e.status === 'closed' ? 'selected' : ''}>已結束</option>
                             </select>
                         </td>
+                        <!-- 活動名稱支援一鍵點擊檢視活動資訊詳情 -->
                         <td class="p-3.5">
-                            <div class="font-bold text-slate-900 max-w-[180px] sm:max-w-xs truncate" title="${e.name}">${e.name}</div>
+                            <button type="button" onclick="openDetailModal('${e.id}')" class="text-left font-bold text-slate-900 hover:text-indigo-600 hover:underline max-w-[180px] sm:max-w-xs truncate flex items-center space-x-1 group" title="點擊預覽活動詳情">
+                                <span>${e.name}</span>
+                                <i data-lucide="eye" class="w-3.5 h-3.5 text-slate-400 group-hover:text-indigo-600 shrink-0"></i>
+                            </button>
                             <div class="text-xs text-indigo-600 font-medium">${e.city} · ${e.region}</div>
                         </td>
                         <td class="p-3.5 text-xs font-semibold text-slate-700 whitespace-nowrap">${e.category}</td>
@@ -2327,6 +2316,8 @@
                     </tr>
                 `;
             }).join('');
+
+            lucide.createIcons();
         }
 
         function updateStats() {
@@ -2352,7 +2343,6 @@
             });
         }
 
-        // 開啟新增視窗：捲軸強制歸零
         function openAddModal() {
             clearFormValidationStyles();
             document.getElementById('form-modal-title').innerText = '新增活動';
@@ -2370,12 +2360,11 @@
             renderGallery('schedule-images-store', 'schedule-gallery-container');
 
             const formEl = document.getElementById('event-form');
-            if (formEl) formEl.scrollTop = 0; // 捲軸強制置頂
+            if (formEl) formEl.scrollTop = 0;
 
             document.getElementById('form-modal').classList.remove('hidden');
         }
 
-        // 開啟編輯視窗：捲軸強制歸零
         function openEditModal(id) {
             clearFormValidationStyles();
             const e = events.find(item => String(item.id) === String(id));
@@ -2415,7 +2404,7 @@
             renderGallery('schedule-images-store', 'schedule-gallery-container');
 
             const formEl = document.getElementById('event-form');
-            if (formEl) formEl.scrollTop = 0; // 捲軸強制置頂
+            if (formEl) formEl.scrollTop = 0;
 
             document.getElementById('form-modal').classList.remove('hidden');
         }
@@ -2424,7 +2413,6 @@
             document.getElementById('form-modal').classList.add('hidden');
         }
 
-        // 表單儲存：支援隱藏狀態與輪播防呆強制驗證
         async function executeFormSave() {
             clearFormValidationStyles();
 
@@ -2455,7 +2443,6 @@
                 return;
             }
 
-            // 輪播強制填寫驗證
             if (isCarousel) {
                 const parsedOrder = Number(carouselOrderVal);
                 if (!carouselOrderVal || isNaN(parsedOrder) || parsedOrder < 1 || parsedOrder > 10) {
@@ -2464,7 +2451,6 @@
                 }
             }
 
-            // 嚴格攔截 Base64
             if (image.startsWith('data:image/') || lineupImage.includes('data:image/') || scheduleImage.includes('data:image/')) {
                 alert('偵測到圖片為本機暫存格式 (Base64)！為保護試算表儲存上限，請重新上傳至雲端硬碟後再行儲存。');
                 return;
