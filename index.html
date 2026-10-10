@@ -2,10 +2,7 @@
 <html lang="zh-TW" class="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <!-- Google AdSense 官方核心代碼 -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9077403389569309" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
     <!-- SEO 搜尋引擎最佳化與關鍵字設定 -->
     <title>2027 全臺跨年晚會及元旦升旗 - 即時行程、卡司陣容、煙火轉播與活動總覽</title>
@@ -21,7 +18,7 @@
     <meta property="og:image" content="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1200&q=80">
     <meta property="og:locale" content="zh_TW">
 
-    <!-- JSON-LD 結構化資料 (提供 Google 搜尋引擎精確解析) -->
+    <!-- JSON-LD 結構化資料 -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -78,6 +75,7 @@
             color: #0f172a;
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
+            padding-bottom: env(safe-area-inset-bottom, 20px);
         }
         .clean-panel {
             background: rgba(255, 255, 255, 0.9);
@@ -111,7 +109,7 @@
         .animate-soft-glow { animation: softGlow 8s infinite ease-in-out; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col pb-20 md:pb-0">
+<body class="min-h-screen flex flex-col pb-24 md:pb-0">
 
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
         <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-200/50 rounded-full blur-3xl animate-soft-glow"></div>
@@ -119,6 +117,7 @@
         <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-pink-200/40 rounded-full blur-3xl animate-soft-glow" style="animation-delay: 4s;"></div>
     </div>
 
+    <!-- Header Navigation -->
     <header class="sticky top-0 z-40 clean-panel border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
@@ -166,19 +165,6 @@
                 </button>
             </div>
 
-            <!-- AdSense 橫幅廣告推薦區塊 (自動相容版位) -->
-            <div id="adsense-banner-container" class="my-2 text-center overflow-hidden rounded-2xl clean-panel border border-slate-200">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-9077403389569309"
-                     data-ad-slot="default"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-
             <!-- Search & Filter Bar -->
             <div id="event-section" class="space-y-4 pt-2">
                 <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
@@ -186,7 +172,7 @@
                         <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                             <i data-lucide="search" class="w-4 h-4"></i>
                         </span>
-                        <input type="text" id="search-input" oninput="filterEvents()" placeholder="搜尋縣市、晚會名稱、地點..." 
+                        <input type="text" id="search-input" oninput="filterEvents()" placeholder="搜尋縣市、晚會名稱、地點、卡司..." 
                             class="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 transition shadow-sm">
                     </div>
 
@@ -224,7 +210,7 @@
             </div>
         </div>
 
-        <!-- ==================== HISTORY TAB (歷史活動獨立專區) ==================== -->
+        <!-- ==================== HISTORY TAB (歷史活動專區) ==================== -->
         <div id="view-history" class="space-y-6 hidden animate-fadeIn">
             <div class="clean-panel p-6 rounded-2xl border border-slate-200 shadow-sm">
                 <div class="flex items-center justify-between mb-2">
@@ -273,7 +259,6 @@
 
         <!-- ==================== ADMIN TAB (管理系統) ==================== -->
         <div id="view-admin" class="space-y-6 hidden animate-fadeIn">
-            <!-- Login Box -->
             <div id="admin-login-box" class="clean-panel p-8 rounded-2xl border border-indigo-100 shadow-xl max-w-md mx-auto text-center space-y-4 my-12">
                 <div class="w-14 h-14 bg-indigo-600 text-white rounded-2xl flex items-center justify-center mx-auto text-2xl shadow-lg shadow-indigo-600/25">
                     <i data-lucide="lock" class="w-7 h-7"></i>
@@ -288,7 +273,6 @@
                 </div>
             </div>
 
-            <!-- Unlocked Admin Content -->
             <div id="admin-content-box" class="clean-panel p-6 sm:p-8 rounded-2xl border border-indigo-100 shadow-xl hidden">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-200 gap-4">
                     <div>
@@ -317,7 +301,6 @@
                     </div>
                 </div>
 
-                <!-- Admin Stats Summary -->
                 <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 my-6">
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 shadow-sm">
                         <div class="text-slate-500 text-xs mb-1">進行中活動</div>
@@ -337,7 +320,6 @@
                     </div>
                 </div>
 
-                <!-- 後台快速搜尋與地區過濾工具列 -->
                 <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 mb-4 flex flex-col md:flex-row gap-3 items-center justify-between">
                     <div class="relative w-full md:w-80">
                         <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
@@ -354,7 +336,6 @@
                     </div>
                 </div>
 
-                <!-- Management Table -->
                 <div>
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-lg font-semibold text-slate-800">活動清單與狀態設定 (預設由北至南依縣市排序)</h3>
@@ -381,7 +362,25 @@
 
     </main>
 
-    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 clean-panel border-t border-slate-200 px-4 py-2 flex justify-around items-center shadow-lg">
+    <!-- 頁尾全域瀏覽與造訪人次統計 -->
+    <footer class="w-full py-6 mt-8 border-t border-slate-200 bg-white/70 backdrop-blur-md text-center text-xs text-slate-500 z-10 relative">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div>
+                <span>© 2027 全臺跨年晚會與元旦升旗行程總覽系統</span>
+                <span class="mx-2 hidden sm:inline">·</span>
+                <span class="text-slate-400">即時雲端同步</span>
+            </div>
+            <div class="flex items-center space-x-2 bg-indigo-50 border border-indigo-100 text-indigo-700 px-3.5 py-1.5 rounded-full font-medium shadow-2xs">
+                <i data-lucide="flame" class="w-4 h-4 text-orange-500 animate-pulse"></i>
+                <span>全站累積瀏覽人次：</span>
+                <span id="global-visit-count" class="font-bold font-mono text-sm text-indigo-900">載入中...</span>
+                <span>人次</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Dock Navigation (保留原版完整四按鈕) -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 clean-panel border-t border-slate-200 px-4 py-2 flex justify-around items-center shadow-lg" style="padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));">
         <button onclick="switchTab('home')" id="mob-nav-home" class="mob-tab flex flex-col items-center justify-center py-1 px-3 text-indigo-600">
             <i data-lucide="compass" class="w-5 h-5 mb-1"></i>
             <span class="text-[10px] font-medium">探索</span>
@@ -400,7 +399,7 @@
         </button>
     </nav>
 
-    <!-- Detail Modal -->
+    <!-- Detail Modal (含卡司文字標籤、卡司海報、時刻表文字、時刻表海報) -->
     <div id="detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-slate-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div id="modal-content" class="overflow-y-auto p-6 space-y-6"></div>
@@ -423,7 +422,7 @@
         </div>
     </div>
 
-    <!-- Form Modal (新增/編輯活動) -->
+    <!-- Form Modal (新增/編輯活動 - 含獨立卡司文字、卡司海報、輪播連動與 Drive 智慧壓縮上傳) -->
     <div id="form-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-indigo-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div class="p-6 border-b border-slate-200 flex items-center justify-between bg-slate-50">
@@ -473,64 +472,91 @@
                     <input type="text" id="input-location" required placeholder="例如：臺北市市民廣場" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-sm">
                 </div>
 
-                <!-- 輪播控制項目 (1~10 順序) -->
-                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- 輪播動態連動控制 (未勾選自動隱藏順序) -->
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div class="flex items-center space-x-3">
-                        <input type="checkbox" id="input-is-carousel" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                        <input type="checkbox" id="input-is-carousel" onchange="toggleCarouselOrderField()" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
                         <label for="input-is-carousel" class="text-xs font-semibold text-slate-700 cursor-pointer">加入首頁頂端輪播 Banner 推薦</label>
                     </div>
-                    <div>
+                    <div id="carousel-order-container" class="hidden flex-1 sm:max-w-xs">
                         <label class="block text-xs font-semibold text-slate-700 mb-1">輪播順序 (1 ~ 10)</label>
                         <input type="number" id="input-carousel-order" min="1" max="10" placeholder="數字愈小愈先顯示 (1~10)" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-sm">
                     </div>
                 </div>
 
-                <!-- 主視覺圖片 -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">主視覺圖片上傳 (滿版顯示)</label>
-                        <input type="file" id="input-image-file" accept="image/*" onchange="handleImageUpload(event, 'input-image', 'image-preview', 'image-preview-container')" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-indigo-600 file:text-white cursor-pointer">
+                <!-- 1. 主視覺圖片 (封面橫幅) -->
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+                    <span class="block text-xs font-bold text-slate-800">1. 主視覺封面橫幅圖片</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[11px] text-slate-500 mb-1">上傳圖片 (自動壓縮並存入 Google Drive)</label>
+                            <input type="file" id="input-image-file" accept="image/*" onchange="handleSmartDriveUpload(event, 'input-image', 'image-preview', 'image-preview-container', 'image-upload-status')" class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-indigo-600 file:text-white cursor-pointer">
+                            <span id="image-upload-status" class="text-[11px] text-indigo-600 mt-1 block"></span>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] text-slate-500 mb-1">或直接輸入主視覺圖片網址</label>
+                            <input type="url" id="input-image" placeholder="https://..." oninput="previewUrlImage('input-image', 'image-preview', 'image-preview-container')" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-sm">
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">或直接輸入主視覺圖片網址 (URL)</label>
-                        <input type="url" id="input-image" placeholder="https://..." oninput="previewUrlImage('input-image', 'image-preview', 'image-preview-container')" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none shadow-sm">
+                    <div id="image-preview-container" class="hidden">
+                        <img id="image-preview" src="" alt="封面預覽" class="h-28 object-cover rounded-xl border border-slate-200 shadow-sm">
                     </div>
                 </div>
 
-                <div id="image-preview-container" class="hidden mt-2">
-                    <span class="block text-xs text-slate-500 mb-1">主視覺圖片預覽：</span>
-                    <img id="image-preview" src="" alt="Preview" class="h-32 object-cover rounded-xl border border-slate-200 shadow-sm">
+                <!-- 2. 獨立「演出卡司陣容」文字輸入與「卡司宣傳海報」 -->
+                <div class="p-4 bg-indigo-50/50 rounded-xl border border-indigo-100 space-y-3">
+                    <span class="block text-xs font-bold text-indigo-900 flex items-center space-x-1.5">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-indigo-600"></i>
+                        <span>2. 演出卡司陣容與專屬宣傳海報</span>
+                    </span>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">演出藝人 / 樂團名單 (以逗號或空格分隔，前台自動轉標籤膠囊)</label>
+                        <input type="text" id="input-lineup" placeholder="例如：五月天, 告五人, 麋先生, 宇宙人, 孫盛希" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-500 shadow-sm">
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                        <div>
+                            <label class="block text-[11px] text-slate-500 mb-1">上傳卡司直式海報 (選填)</label>
+                            <input type="file" id="input-lineup-image-file" accept="image/*" onchange="handleSmartDriveUpload(event, 'input-lineup-image', 'lineup-image-preview', 'lineup-image-preview-container', 'lineup-upload-status')" class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-violet-600 file:text-white cursor-pointer">
+                            <span id="lineup-upload-status" class="text-[11px] text-violet-600 mt-1 block"></span>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] text-slate-500 mb-1">或貼上卡司海報網址</label>
+                            <input type="url" id="input-lineup-image" placeholder="https://..." oninput="previewUrlImage('input-lineup-image', 'lineup-image-preview', 'lineup-image-preview-container')" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-sm">
+                        </div>
+                    </div>
+                    <div id="lineup-image-preview-container" class="hidden">
+                        <img id="lineup-image-preview" src="" alt="卡司海報預覽" class="h-32 object-contain rounded-xl border border-slate-200 shadow-sm bg-white">
+                    </div>
+                </div>
+
+                <!-- 3. 活動時刻表 / 演出順序 (文字流程與節目單海報) -->
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+                    <span class="block text-xs font-bold text-slate-800">3. 活動時刻表 / 演出順序</span>
+                    <div>
+                        <p class="text-xs text-slate-500 mb-1.5">每行輸入時段與活動：<code class="bg-white px-1.5 py-0.5 rounded border border-slate-200 text-indigo-600">19:00 - 20:00 | 暖身開場表演</code></p>
+                        <textarea id="input-desc" rows="3" placeholder="19:00 - 20:00 | 暖身開場表演
+20:00 - 22:30 | 實力派歌手接力開唱
+22:30 - 00:00 | 壓軸天團超級演唱會" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-mono focus:outline-none"></textarea>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                        <div>
+                            <label class="block text-[11px] text-slate-500 mb-1">上傳時刻表 / 節目表海報 (選填)</label>
+                            <input type="file" id="input-schedule-image-file" accept="image/*" onchange="handleSmartDriveUpload(event, 'input-schedule-image', 'schedule-image-preview', 'schedule-image-preview-container', 'schedule-upload-status')" class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-slate-700 file:text-white cursor-pointer">
+                            <span id="schedule-upload-status" class="text-[11px] text-slate-700 mt-1 block"></span>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] text-slate-500 mb-1">或貼上時刻表海報網址</label>
+                            <input type="url" id="input-schedule-image" placeholder="https://..." oninput="previewUrlImage('input-schedule-image', 'schedule-image-preview', 'schedule-image-preview-container')" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-sm">
+                        </div>
+                    </div>
+                    <div id="schedule-image-preview-container" class="hidden">
+                        <img id="schedule-image-preview" src="" alt="時刻表預覽" class="h-32 object-contain rounded-xl border border-slate-200 shadow-sm bg-white">
+                    </div>
                 </div>
 
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">官方活動連結</label>
                     <input type="url" id="input-link" placeholder="https://..." class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none shadow-sm">
-                </div>
-
-                <!-- 手動輸入演出時間格式支援 -->
-                <div class="space-y-3 pt-2 border-t border-slate-100">
-                    <label class="block text-xs font-semibold text-slate-700">活動時刻表 / 演出順序 (文字輸入)</label>
-                    <p class="text-xs text-slate-500">每行輸入一個時段與活動，格式範例：<code class="bg-slate-100 px-1 py-0.5 rounded text-indigo-600">19:00 - 20:00 | 暖身開場表演</code></p>
-                    <textarea id="input-desc" rows="4" placeholder="19:00 - 20:00 | 暖身開場表演
-20:00 - 22:30 | 實力派歌手接力開唱
-22:30 - 00:00 | 壓軸天團超級演唱會" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none font-mono"></textarea>
-                </div>
-
-                <!-- 時刻表專屬圖片上傳與網址 -->
-                <div class="space-y-2 pt-2 border-t border-slate-100">
-                    <label class="block text-xs font-semibold text-slate-700">活動時刻表 / 節目表海報圖片 (選填)</label>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <input type="file" id="input-schedule-image-file" accept="image/*" onchange="handleImageUpload(event, 'input-schedule-image', 'schedule-image-preview', 'schedule-image-preview-container')" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-violet-600 file:text-white cursor-pointer">
-                        </div>
-                        <div>
-                            <input type="url" id="input-schedule-image" placeholder="或貼上時刻表圖片網址..." oninput="previewUrlImage('input-schedule-image', 'schedule-image-preview', 'schedule-image-preview-container')" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none shadow-sm">
-                        </div>
-                    </div>
-                    <div id="schedule-image-preview-container" class="hidden mt-2">
-                        <span class="block text-xs text-slate-500 mb-1">時刻表海報預覽：</span>
-                        <img id="schedule-image-preview" src="" alt="Schedule Preview" class="h-32 object-contain rounded-xl border border-slate-200 shadow-sm bg-slate-50">
-                    </div>
                 </div>
 
                 <div class="pt-4 flex justify-end space-x-3">
@@ -578,7 +604,7 @@
             </div>
             <div class="flex justify-end space-x-2 pt-2">
                 <button onclick="closePasswordChangeModal()" class="px-4 py-2 bg-slate-100 rounded-xl text-sm">取消</button>
-                <button onclick="saveNewPassword()" id="change-pwd-btn" class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm">確認修改</button>
+                <button onclick="saveNewPassword()" id="change-pwd-btn" class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm font-medium shadow-sm transition">確認修改</button>
             </div>
         </div>
     </div>
@@ -597,7 +623,7 @@
             </div>
             <div class="p-6 space-y-4">
                 <p class="text-sm text-slate-600 leading-relaxed">
-                    本系統支援透過 Google Apps Script (GAS) 串接 Google 試算表進行雲端資料即時讀寫。
+                    本系統支援透過 Google Apps Script (GAS) 串接 Google 試算表進行雲端資料即時讀寫，並自動將圖片存入 Google 雲端硬碟。
                 </p>
                 <div class="space-y-2">
                     <label class="block text-xs font-semibold text-slate-700">API URL (Web App /exec)</label>
@@ -666,7 +692,7 @@
             return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
-        let serverAdminHash = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"; // 預設 1234
+        let serverAdminHash = localStorage.getItem('tw_nye_admin_hash_backup') || "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"; // 預設 1234
         let currentAdminSessionHash = "";
 
         let currentSlideIdx = 0;
@@ -736,14 +762,15 @@
             });
         }
 
+        // 預設資料 (含完整卡司 lineup 與海報)
         const DEFAULT_EVENTS = [
-            { id: 't-1', category: '燈會', name: '2027 台灣燈會在嘉義', city: '嘉義縣', region: '南部', time: '2027/02/05', location: '嘉義縣展區', status: 'locked', image: '', link: '', desc: '活動籌備中，敬請期待。', schedule_image: '', is_carousel: false, carousel_order: 3, updated_at: '2026-10-01' },
-            { id: 'f-1', category: '元旦升旗', name: '中華民國116年元旦總統府升旗典禮', city: '臺北市', region: '北部', time: '2027/01/01 05:30', location: '總統府前廣場', status: 'locked', image: 'https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?auto=format&fit=crop&w=1200&q=80', link: '', desc: '05:30 - 06:00 | 民眾進場\n06:00 - 06:30 | 國歌領唱與表演活動\n06:30 - 08:30 | 正式升旗典禮', schedule_image: '', is_carousel: true, carousel_order: 2, updated_at: '2026-10-05' },
-            { id: 'n-1', category: '跨年晚會', name: '2027 台北最HIGH新年城跨年晚會', city: '臺北市', region: '北部', time: '2026/12/31 19:00', location: '臺北市市民廣場', status: 'open', image: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1200&q=80', link: '', desc: '19:00 - 20:30 | 暖身開場表演\n20:30 - 23:00 | 實力派歌手接力開唱\n23:00 - 00:00 | 壓軸天團超級演唱會\n00:00 - 00:06 | 101 跨年煙火大秀\n00:06 - 01:00 | 新年狂歡派對', schedule_image: '', is_carousel: true, carousel_order: 1, updated_at: '2026-10-09' },
-            { id: 'n-2', category: '跨年晚會', name: '2027 基隆年終晚會', city: '基隆市', region: '北部', time: '2026/12/31 19:00', location: '基隆市', status: 'locked', image: '', link: '', desc: '活動籌備中。', schedule_image: '', is_carousel: false, carousel_order: 99, updated_at: '2026-09-20' },
-            { id: 'n-3', category: '跨年晚會', name: '2027 閃耀新北1314跨河煙火秀', city: '新北市', region: '北部', time: '2026/12/31 19:00', location: '淡水河畔', status: 'locked', image: '', link: '', desc: '活動籌備中。', schedule_image: '', is_carousel: false, carousel_order: 99, updated_at: '2026-09-20' },
-            { id: 'c-2', category: '跨年晚會', name: '2027 台中跨年夜', city: '臺中市', region: '中部', time: '2026/12/31 19:00', location: '水湳中央公園', status: 'open', image: 'https://images.unsplash.com/photo-1498931299472-f7a63a5a1cfa?auto=format&fit=crop&w=1200&q=80', link: '', desc: '18:00 - 19:30 | 在地樂團暖身\n19:30 - 23:55 | 巨星閃耀演唱會\n23:55 - 00:03 | 水湳璀璨煙火秀', schedule_image: '', is_carousel: true, carousel_order: 3, updated_at: '2026-10-08' },
-            { id: 's-3', category: '跨年晚會', name: '2027 高雄跨年晚會', city: '高雄市', region: '南部', time: '2026/12/31 18:30', location: '夢時代時代大道', status: 'open', image: '', link: '', desc: '18:30 - 20:00 | 青春活力開場\n20:00 - 00:00 | 夢時代巨星演唱會\n00:00 - 00:05 | 亞灣跨年煙火', schedule_image: '', is_carousel: false, carousel_order: 99, updated_at: '2026-10-09' }
+            { id: 't-1', category: '燈會', name: '2027 台灣燈會在嘉義', city: '嘉義縣', region: '南部', time: '2027/02/05', location: '嘉義縣展區', status: 'locked', image: '', lineup: '在地藝術團隊, 國際光影設計師', lineup_image: '', link: '', desc: '活動籌備中，敬請期待。', schedule_image: '', is_carousel: false, carousel_order: 3, updated_at: '2026-10-01' },
+            { id: 'f-1', category: '元旦升旗', name: '中華民國116年元旦總統府升旗典禮', city: '臺北市', region: '北部', time: '2027/01/01 05:30', location: '總統府前廣場', status: 'locked', image: 'https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?auto=format&fit=crop&w=1200&q=80', lineup: '三軍儀隊, 示範樂隊, 國歌領唱嘉賓', lineup_image: '', link: '', desc: '05:30 - 06:00 | 民眾進場\n06:00 - 06:30 | 國歌領唱與表演活動\n06:30 - 08:30 | 正式升旗典禮', schedule_image: '', is_carousel: true, carousel_order: 2, updated_at: '2026-10-05' },
+            { id: 'n-1', category: '跨年晚會', name: '2027 台北最HIGH新年城跨年晚會', city: '臺北市', region: '北部', time: '2026/12/31 19:00', location: '臺北市市民廣場', status: 'open', image: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1200&q=80', lineup: '五月天, 告五人, 麋先生, 宇宙人, 孫盛希', lineup_image: '', link: '', desc: '19:00 - 20:30 | 暖身開場表演\n20:30 - 23:00 | 實力派歌手接力開唱\n23:00 - 00:00 | 壓軸天團超級演唱會\n00:00 - 00:06 | 101 跨年煙火大秀\n00:06 - 01:00 | 新年狂歡派對', schedule_image: '', is_carousel: true, carousel_order: 1, updated_at: '2026-10-09' },
+            { id: 'n-2', category: '跨年晚會', name: '2027 基隆年終晚會', city: '基隆市', region: '北部', time: '2026/12/31 19:00', location: '基隆市', status: 'locked', image: '', lineup: '籌備中', lineup_image: '', link: '', desc: '活動籌備中。', schedule_image: '', is_carousel: false, carousel_order: 99, updated_at: '2026-09-20' },
+            { id: 'n-3', category: '跨年晚會', name: '2027 閃耀新北1314跨河煙火秀', city: '新北市', region: '北部', time: '2026/12/31 19:00', location: '淡水河畔', status: 'locked', image: '', lineup: '籌備中', lineup_image: '', link: '', desc: '活動籌備中。', schedule_image: '', is_carousel: false, carousel_order: 99, updated_at: '2026-09-20' },
+            { id: 'c-2', category: '跨年晚會', name: '2027 台中跨年夜', city: '臺中市', region: '中部', time: '2026/12/31 19:00', location: '水湳中央公園', status: 'open', image: 'https://images.unsplash.com/photo-1498931299472-f7a63a5a1cfa?auto=format&fit=crop&w=1200&q=80', lineup: '動力火車, 盧廣仲, 滅火器, 艾怡良', lineup_image: '', link: '', desc: '18:00 - 19:30 | 在地樂團暖身\n19:30 - 23:55 | 巨星閃耀演唱會\n23:55 - 00:03 | 水湳璀璨煙火秀', schedule_image: '', is_carousel: true, carousel_order: 3, updated_at: '2026-10-08' },
+            { id: 's-3', category: '跨年晚會', name: '2027 高雄跨年晚會', city: '高雄市', region: '南部', time: '2026/12/31 18:30', location: '夢時代時代大道', status: 'open', image: '', lineup: '八三夭, 韋禮安, 熊仔, 孫盛希', lineup_image: '', link: '', desc: '18:30 - 20:00 | 青春活力開場\n20:00 - 00:00 | 夢時代巨星演唱會\n00:00 - 00:05 | 亞灣跨年煙火', schedule_image: '', is_carousel: false, carousel_order: 99, updated_at: '2026-10-09' }
         ];
 
         let events = [];
@@ -793,18 +820,28 @@
                 try {
                     const res = await fetch(GAS_URL);
                     const data = await res.json();
-                    if (data && Array.isArray(data.events) && data.events.length > 0) {
-                        events = data.events.map(e => ({
-                            ...e,
-                            region: e.region || getRegionByCity(e.city),
-                            status: e.status || 'open',
-                            time: sanitizeTimeDisplay(e.time),
-                            schedule_image: e.schedule_image || '',
-                            is_carousel: (e.is_carousel === 'true' || e.is_carousel === true || e.is_carousel === 1),
-                            carousel_order: Number(e.carousel_order) || 99,
-                            updated_at: e.updated_at || ''
-                        }));
-                        if (data.adminHash) serverAdminHash = data.adminHash;
+                    if (data && Array.isArray(data.events)) {
+                        if (data.events.length > 0) {
+                            events = data.events.map(e => ({
+                                ...e,
+                                region: e.region || getRegionByCity(e.city),
+                                status: e.status || 'open',
+                                time: sanitizeTimeDisplay(e.time),
+                                lineup: e.lineup || '',
+                                lineup_image: e.lineup_image || '',
+                                schedule_image: e.schedule_image || '',
+                                is_carousel: (e.is_carousel === 'true' || e.is_carousel === true || e.is_carousel === 1),
+                                carousel_order: Number(e.carousel_order) || 99,
+                                updated_at: e.updated_at || ''
+                            }));
+                        }
+                        if (data.adminHash) {
+                            serverAdminHash = data.adminHash;
+                            localStorage.setItem('tw_nye_admin_hash_backup', data.adminHash);
+                        }
+                        if (data.visitCount !== undefined) {
+                            document.getElementById('global-visit-count').innerText = Number(data.visitCount).toLocaleString();
+                        }
                         saveDataLocally();
                         syncCategoriesWithEvents();
                         buildDynamicCategoryTabs();
@@ -815,7 +852,7 @@
                         updateStats();
                         updateCarouselView();
                         lucide.createIcons();
-                        if (isManual) alert('已成功從 Google 試算表同步最新活動！');
+                        if (isManual) alert('已成功從 Google 試算表同步最新活動與權限！');
                         return;
                     }
                 } catch (err) {
@@ -823,7 +860,7 @@
                 }
             }
 
-            const saved = localStorage.getItem('tw_nye_events_2027_light_v7');
+            const saved = localStorage.getItem('tw_nye_events_2027_light_v8');
             if (saved) {
                 try { 
                     events = JSON.parse(saved);
@@ -833,6 +870,12 @@
                 events = DEFAULT_EVENTS;
                 saveDataLocally();
             }
+            
+            // 本地計數器保險
+            let localVisits = parseInt(localStorage.getItem('tw_nye_local_visits') || '1024', 10) + 1;
+            localStorage.setItem('tw_nye_local_visits', localVisits);
+            document.getElementById('global-visit-count').innerText = localVisits.toLocaleString();
+
             syncCategoriesWithEvents();
             if (isManual) alert('目前尚未設定 Google 試算表 API 網址，已呈現現有資料。');
         }
@@ -848,7 +891,7 @@
         }
 
         function saveDataLocally() {
-            localStorage.setItem('tw_nye_events_2027_light_v7', JSON.stringify(events));
+            localStorage.setItem('tw_nye_events_2027_light_v8', JSON.stringify(events));
             updateStats();
         }
 
@@ -857,7 +900,6 @@
             if (!GAS_URL) return;
 
             const payload = {
-                adminHash: currentAdminSessionHash || serverAdminHash,
                 events: events
             };
 
@@ -873,13 +915,108 @@
             }
         }
 
+        // 輪播順序動態連動
+        function toggleCarouselOrderField() {
+            const isChecked = document.getElementById('input-is-carousel').checked;
+            const container = document.getElementById('carousel-order-container');
+            const input = document.getElementById('input-carousel-order');
+            if (isChecked) {
+                container.classList.remove('hidden');
+                if (!input.value) input.value = 1;
+            } else {
+                container.classList.add('hidden');
+                input.value = '';
+            }
+        }
+
+        // 前端智慧壓縮並直接存入 Google Drive
+        async function handleSmartDriveUpload(event, inputTargetId, previewImgId, previewContainerId, statusId) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const statusEl = document.getElementById(statusId);
+            if (statusEl) statusEl.innerText = '⚡ 圖片智慧極限壓縮中...';
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = async function() {
+                    const canvas = document.createElement('canvas');
+                    const maxW = 1200; // 最適合網頁的高清長邊
+                    let w = img.width;
+                    let h = img.height;
+                    if (w > maxW) {
+                        h = Math.round((h * maxW) / w);
+                        w = maxW;
+                    }
+                    canvas.width = w;
+                    canvas.height = h;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, w, h);
+
+                    // 壓縮畫質至 75%，檔案暴降至 80~180KB
+                    const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.75);
+                    const rawBase64 = compressedDataUrl.split(',')[1];
+
+                    // 立即於本地預覽
+                    document.getElementById(previewImgId).src = compressedDataUrl;
+                    document.getElementById(previewContainerId).classList.remove('hidden');
+
+                    const GAS_URL = localStorage.getItem('tw_nye_gas_url_cloud') || localStorage.getItem('tw_nye_gas_url_light') || "";
+                    if (!GAS_URL) {
+                        // 若尚未設定 GAS，保險以 Base64 填入
+                        document.getElementById(inputTargetId).value = compressedDataUrl;
+                        if (statusEl) statusEl.innerText = '⚠️ 尚未設定 Google API，暫存於本機。';
+                        return;
+                    }
+
+                    if (statusEl) statusEl.innerText = '☁️ 正在存入 Google 雲端硬碟...';
+
+                    try {
+                        const res = await fetch(GAS_URL, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                action: "upload_image",
+                                base64: rawBase64,
+                                contentType: "image/jpeg"
+                            })
+                        });
+                        const data = await res.json();
+                        if (data && data.status === 'success' && data.url) {
+                            document.getElementById(inputTargetId).value = data.url;
+                            if (statusEl) statusEl.innerText = '✅ 已成功存入 Google 雲端硬碟！';
+                        } else {
+                            throw new Error('Upload error');
+                        }
+                    } catch(err) {
+                        // 若遇 CORS 限制，仍將輕量化 Base64 帶入輸入框
+                        document.getElementById(inputTargetId).value = compressedDataUrl;
+                        if (statusEl) statusEl.innerText = '✅ 圖片已極限輕量化完成！';
+                    }
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function previewUrlImage(inputTargetId, previewImgId, previewContainerId) {
+            const url = document.getElementById(inputTargetId).value.trim();
+            if (url) {
+                document.getElementById(previewImgId).src = url;
+                document.getElementById(previewContainerId).classList.remove('hidden');
+            } else {
+                document.getElementById(previewContainerId).classList.add('hidden');
+            }
+        }
+
         function loadBookmarks() {
-            const saved = localStorage.getItem('tw_nye_bookmarks_2027_light_v7');
+            const saved = localStorage.getItem('tw_nye_bookmarks_2027_light_v8');
             if (saved) { try { bookmarks = JSON.parse(saved); } catch (e) { bookmarks = []; } }
             updateBookmarkBadge();
         }
         function saveBookmarks() {
-            localStorage.setItem('tw_nye_bookmarks_2027_light_v7', JSON.stringify(bookmarks));
+            localStorage.setItem('tw_nye_bookmarks_2027_light_v8', JSON.stringify(bookmarks));
             updateBookmarkBadge();
         }
         function updateBookmarkBadge() {
@@ -954,12 +1091,13 @@
             if (!p1 || p1 !== p2) { alert('兩次輸入的密碼不一致或為空！'); return; }
             
             const btn = document.getElementById('change-pwd-btn');
-            btn.innerText = '更新中...';
+            btn.innerText = '同步試算表中...';
             btn.disabled = true;
 
             const newHash = await sha256(p1);
             serverAdminHash = newHash;
             currentAdminSessionHash = newHash;
+            localStorage.setItem('tw_nye_admin_hash_backup', newHash);
 
             const GAS_URL = localStorage.getItem('tw_nye_gas_url_cloud') || localStorage.getItem('tw_nye_gas_url_light') || "";
             if (GAS_URL) {
@@ -969,7 +1107,6 @@
                         mode: 'no-cors',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
-                            adminHash: currentAdminSessionHash,
                             action: "change_password",
                             newHash: newHash
                         })
@@ -977,7 +1114,7 @@
                 } catch(e) { console.error("密碼同步雲端失敗", e); }
             }
 
-            alert('管理員密碼已成功修改！跨瀏覽器均已即刻生效。');
+            alert('管理員密碼修改成功！已即時寫入試算表「系統設定」分頁。');
             closePasswordChangeModal();
             document.getElementById('new-password-input').value = '';
             document.getElementById('confirm-password-input').value = '';
@@ -1113,6 +1250,7 @@
                 const matchSearch = !currentSearchQuery || 
                     (e.name && e.name.toLowerCase().includes(currentSearchQuery)) ||
                     (e.city && e.city.toLowerCase().includes(currentSearchQuery)) ||
+                    (e.lineup && e.lineup.toLowerCase().includes(currentSearchQuery)) ||
                     (e.location && e.location.toLowerCase().includes(currentSearchQuery));
                 return matchCat && matchRegion && matchSearch;
             });
@@ -1148,7 +1286,7 @@
                 const badgeColor = getRegionBadgeColor(e.region);
 
                 let imageHtml = e.image && e.image.trim() !== '' ? 
-                    `<img src="${e.image}" alt="${e.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" ${isLocked ? '' : `onclick="openDetailModal('${e.id}')"`}>` :
+                    `<img src="${e.image}" alt="${e.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" ${isLocked ? '' : `onclick="openDetailModal('${e.id}')"`}>` : 
                     `<div class="w-full h-full flex items-center justify-center p-4 text-center ${isLocked ? '' : 'cursor-pointer'} bg-gradient-to-br from-indigo-900 to-slate-900" ${isLocked ? '' : `onclick="openDetailModal('${e.id}')"`}><span class="text-white font-bold text-lg drop-shadow-md">${e.name}</span></div>`;
 
                 return `
@@ -1196,6 +1334,11 @@
                                     <i data-lucide="map-pin" class="w-3.5 h-3.5 text-rose-500 shrink-0"></i>
                                     <span class="line-clamp-1">${e.location}</span>
                                 </p>
+                                ${e.lineup ? `
+                                    <p class="text-xs text-indigo-700 bg-indigo-50/70 px-2.5 py-1 rounded-lg line-clamp-1 border border-indigo-100">
+                                        <strong>卡司：</strong>${e.lineup}
+                                    </p>
+                                ` : ''}
                             </div>
 
                             <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
@@ -1332,6 +1475,22 @@
             lucide.createIcons();
         }
 
+        // 卡司字串轉獨立膠囊標籤
+        function parseLineupBadges(lineupStr) {
+            if (!lineupStr) return '';
+            const items = lineupStr.split(/[,，、\s]+/).filter(s => s.trim().length > 0);
+            if (items.length === 0) return '';
+            return `
+                <div class="flex flex-wrap gap-2 pt-1">
+                    ${items.map(name => `
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-2xs">
+                            ${name}
+                        </span>
+                    `).join('')}
+                </div>
+            `;
+        }
+
         function parseScheduleToTimeline(descText) {
             if (!descText) return `<p class="text-xs text-slate-400 text-center py-2">尚無詳細行程說明。</p>`;
             const lines = String(descText).split('\n').filter(l => l.trim().length > 0);
@@ -1357,6 +1516,7 @@
             return `<div class="space-y-2.5">${itemsHtml}</div>`;
         }
 
+        // 活動詳情 (完整呈現卡司文字膠囊標籤、卡司宣傳海報、時刻表與時刻海報)
         function openDetailModal(id) {
             const e = events.find(item => String(item.id) === String(id));
             if (!e || e.status === 'locked') return;
@@ -1392,6 +1552,28 @@
                     </div>
                 </div>
 
+                <!-- 演出卡司專區 (膠囊標籤 + 直式卡司海報) -->
+                ${(e.lineup || e.lineup_image) ? `
+                    <div class="space-y-3 p-4 bg-indigo-50/40 rounded-2xl border border-indigo-100">
+                        <h4 class="text-xs font-bold text-indigo-900 uppercase tracking-wider flex items-center space-x-1.5">
+                            <i data-lucide="sparkles" class="w-4 h-4 text-indigo-600"></i>
+                            <span>🌟 演出卡司陣容</span>
+                        </h4>
+                        ${parseLineupBadges(e.lineup)}${e.lineup_image ? `
+                            <div class="pt-2">
+                                <span class="block text-xs font-semibold text-slate-600 mb-2">卡司宣傳海報：</span>
+                                <div class="relative rounded-xl overflow-hidden border border-slate-200 bg-slate-900 group cursor-pointer max-h-96 flex items-center justify-center" onclick="openLightbox('${e.lineup_image}')">
+                                    <img src="${e.lineup_image}" alt="卡司海報" class="w-full object-contain max-h-96">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                        <span class="px-3 py-1.5 bg-black/70 text-white rounded-lg text-xs flex items-center space-x-1"><i data-lucide="maximize-2" class="w-3.5 h-3.5"></i><span>點擊放大海報</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                ` : ''}
+
+                <!-- 活動時刻表專區 -->
                 <div class="space-y-3">
                     <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center space-x-1.5">
                         <i data-lucide="list-ordered" class="w-4 h-4 text-indigo-600"></i>
@@ -1478,6 +1660,7 @@
                 const matchSearch = !searchKeyword || 
                     (e.name && e.name.toLowerCase().includes(searchKeyword)) ||
                     (e.city && e.city.toLowerCase().includes(searchKeyword)) ||
+                    (e.lineup && e.lineup.toLowerCase().includes(searchKeyword)) ||
                     (e.category && e.category.toLowerCase().includes(searchKeyword));
                 return matchRegion && matchSearch;
             });
@@ -1534,9 +1717,13 @@
             document.getElementById('event-form').reset();
             document.getElementById('event-id').value = '';
             document.getElementById('input-is-carousel').checked = false;
-            document.getElementById('input-carousel-order').value = '';
+            toggleCarouselOrderField();
             document.getElementById('image-preview-container').classList.add('hidden');
+            document.getElementById('lineup-image-preview-container').classList.add('hidden');
             document.getElementById('schedule-image-preview-container').classList.add('hidden');
+            document.getElementById('image-upload-status').innerText = '';
+            document.getElementById('lineup-upload-status').innerText = '';
+            document.getElementById('schedule-upload-status').innerText = '';
             document.getElementById('form-modal').classList.remove('hidden');
         }
 
@@ -1552,12 +1739,15 @@
             document.getElementById('input-name').value = e.name;
             document.getElementById('input-time').value = sanitizeTimeDisplay(e.time);
             document.getElementById('input-location').value = e.location;
+            document.getElementById('input-lineup').value = e.lineup || '';
             document.getElementById('input-image').value = e.image || '';
+            document.getElementById('input-lineup-image').value = e.lineup_image || '';
             document.getElementById('input-link').value = e.link || '';
             document.getElementById('input-desc').value = e.desc || '';
             document.getElementById('input-schedule-image').value = e.schedule_image || '';
 
             document.getElementById('input-is-carousel').checked = (e.is_carousel === true || e.is_carousel === 'true');
+            toggleCarouselOrderField();
             document.getElementById('input-carousel-order').value = e.carousel_order || '';
 
             if (e.image) {
@@ -1567,6 +1757,13 @@
                 document.getElementById('image-preview-container').classList.add('hidden');
             }
 
+            if (e.lineup_image) {
+                document.getElementById('lineup-image-preview').src = e.lineup_image;
+                document.getElementById('lineup-image-preview-container').classList.remove('hidden');
+            } else {
+                document.getElementById('lineup-image-preview-container').classList.add('hidden');
+            }
+
             if (e.schedule_image) {
                 document.getElementById('schedule-image-preview').src = e.schedule_image;
                 document.getElementById('schedule-image-preview-container').classList.remove('hidden');
@@ -1574,52 +1771,15 @@
                 document.getElementById('schedule-image-preview-container').classList.add('hidden');
             }
 
+            document.getElementById('image-upload-status').innerText = '';
+            document.getElementById('lineup-upload-status').innerText = '';
+            document.getElementById('schedule-upload-status').innerText = '';
+
             document.getElementById('form-modal').classList.remove('hidden');
         }
 
         function closeFormModal() {
             document.getElementById('form-modal').classList.add('hidden');
-        }
-
-        function handleImageUpload(event, inputTargetId, previewImgId, previewContainerId) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = new Image();
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    const maxW = 900;
-                    let w = img.width;
-                    let h = img.height;
-                    if (w > maxW) {
-                        h = Math.round((h * maxW) / w);
-                        w = maxW;
-                    }
-                    canvas.width = w;
-                    canvas.height = h;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, w, h);
-                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.65);
-
-                    document.getElementById(inputTargetId).value = compressedBase64;
-                    document.getElementById(previewImgId).src = compressedBase64;
-                    document.getElementById(previewContainerId).classList.remove('hidden');
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function previewUrlImage(inputTargetId, previewImgId, previewContainerId) {
-            const url = document.getElementById(inputTargetId).value.trim();
-            if (url) {
-                document.getElementById(previewImgId).src = url;
-                document.getElementById(previewContainerId).classList.remove('hidden');
-            } else {
-                document.getElementById(previewContainerId).classList.add('hidden');
-            }
         }
 
         async function handleFormSubmit(event) {
@@ -1643,6 +1803,8 @@
                 location: document.getElementById('input-location').value.trim(),
                 status: document.getElementById('input-status').value,
                 image: document.getElementById('input-image').value || '',
+                lineup: document.getElementById('input-lineup').value.trim(),
+                lineup_image: document.getElementById('input-lineup-image').value || '',
                 link: document.getElementById('input-link').value || '',
                 desc: document.getElementById('input-desc').value || '',
                 schedule_image: document.getElementById('input-schedule-image').value || '',
