@@ -120,6 +120,7 @@
     <!-- Header Navigation (支援後台自訂 Logo、防破圖自動回退、自訂標題、正版社群 SVG、管理圖示化、收藏金色連動) -->
     <header class="sticky top-0 z-40 clean-panel border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
+            <!-- 標題與官方專屬 Logo (禁止折行) -->
             <div class="flex items-center space-x-2.5 sm:space-x-3 cursor-pointer shrink-0" onclick="switchTab('home')">
                 <div id="header-logo-wrapper" class="w-10 h-10 rounded-xl overflow-hidden shadow-sm shrink-0 flex items-center justify-center">
                     <!-- 動態渲染 Logo 或 經典星號 fallback -->
@@ -186,7 +187,7 @@
                 </button>
             </div>
 
-            <!-- 搜尋與篩選控制面板 -->
+            <!-- 搜尋與篩選控制面板 (含 本週活動 篩選) -->
             <div id="event-section" class="clean-panel p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
                 <div class="relative w-full">
                     <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -316,7 +317,7 @@
             </div>
         </div>
 
-        <!-- ==================== ADMIN TAB (管理系統 - 懸浮吸頂工具列、分流視圖、即時權重、置頂切換) ==================== -->
+        <!-- ==================== ADMIN TAB (管理系統 - 懸浮吸頂工具列、三段式分流、類型快篩、即時權重與置頂) ==================== -->
         <div id="view-admin" class="space-y-6 hidden animate-fadeIn">
             <!-- 安全登入視窗 -->
             <div id="admin-login-box" class="clean-panel p-8 rounded-2xl border border-indigo-100 shadow-xl max-w-md mx-auto text-center space-y-4 my-12">
@@ -389,37 +390,56 @@
                     </div>
                 </div>
 
-                <div class="flex items-center space-x-2 border-b border-slate-200 pb-2">
+                <!-- 三段式清單視圖切換：進行中 VS 隱藏草稿 VS 歷屆歸檔 -->
+                <div class="flex flex-wrap items-center gap-2 border-b border-slate-200 pb-3">
                     <button onclick="setAdminViewTab('active')" id="admin-tab-active" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white shadow-xs transition flex items-center space-x-1.5">
-                        <i data-lucide="play-circle" class="w-4 h-4"></i><span>進行中活動清單</span>
+                        <i data-lucide="play-circle" class="w-4 h-4"></i><span>🚀 進行中活動清單</span>
                         <span id="admin-active-count-badge" class="ml-1 px-1.5 py-0.2 bg-white/20 rounded-full text-[10px]">0</span>
                     </button>
+                    <button onclick="setAdminViewTab('draft')" id="admin-tab-draft" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white hover:bg-slate-50 text-slate-600 border border-slate-200 transition flex items-center space-x-1.5">
+                        <i data-lucide="file-edit" class="w-4 h-4"></i><span>📝 隱藏與草稿清單</span>
+                        <span id="admin-draft-count-badge" class="ml-1 px-1.5 py-0.2 bg-amber-100 text-amber-800 rounded-full text-[10px]">0</span>
+                    </button>
                     <button onclick="setAdminViewTab('archive')" id="admin-tab-archive" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white hover:bg-slate-50 text-slate-600 border border-slate-200 transition flex items-center space-x-1.5">
-                        <i data-lucide="archive" class="w-4 h-4"></i><span>歷屆歸檔活動清單 (過期2天/結束)</span>
+                        <i data-lucide="archive" class="w-4 h-4"></i><span>🏛️ 歷屆歸檔清單</span>
                         <span id="admin-archive-count-badge" class="ml-1 px-1.5 py-0.2 bg-slate-200 text-slate-700 rounded-full text-[10px]">0</span>
                     </button>
                 </div>
 
-                <div class="sticky top-16 z-30 bg-white/95 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-indigo-100 shadow-md flex flex-col md:flex-row gap-3 items-center justify-between">
-                    <div class="relative w-full md:w-72">
-                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                            <i data-lucide="search" class="w-4 h-4"></i>
+                <!-- 核心表格懸浮吸頂工具列 (包含 關鍵字搜尋、分區快篩、類型快篩膠囊) -->
+                <div class="sticky top-16 z-30 bg-white/95 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-indigo-100 shadow-md space-y-3">
+                    <div class="flex flex-col md:flex-row gap-3 items-center justify-between">
+                        <div class="relative w-full md:w-72">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                                <i data-lucide="search" class="w-4 h-4"></i>
+                            </span>
+                            <input type="text" id="admin-search-input" oninput="renderAdminTable()" placeholder="快速搜尋活動、縣市或卡司..." 
+                                class="w-full pl-9 pr-3 py-2 bg-slate-50 focus:bg-white border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-indigo-500">
+                        </div>
+
+                        <div class="flex items-center space-x-1 w-full md:w-auto overflow-x-auto hide-scrollbar">
+                            <button onclick="setAdminRegionFilter('all')" class="admin-region-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-900 text-white whitespace-nowrap" data-region="all">全選分區</button>
+                            <button onclick="setAdminRegionFilter('北部')" class="admin-region-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-600 border border-slate-200 whitespace-nowrap" data-region="北部">北部</button>
+                            <button onclick="setAdminRegionFilter('中部')" class="admin-region-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-600 border border-slate-200 whitespace-nowrap" data-region="中部">中部</button>
+                            <button onclick="setAdminRegionFilter('南部')" class="admin-region-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-600 border border-slate-200 whitespace-nowrap" data-region="南部">南部</button>
+                            <button onclick="setAdminRegionFilter('東部與離島')" class="admin-region-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-600 border border-slate-200 whitespace-nowrap" data-region="東部與離島">東部離島</button>
+                        </div>
+
+                        <button onclick="openAddModal()" class="w-full md:w-auto px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center space-x-1.5 shadow-md shadow-indigo-600/25 shrink-0 transition">
+                            <i data-lucide="plus" class="w-4 h-4"></i><span>新增活動</span>
+                        </button>
+                    </div>
+
+                    <!-- 管理系統動態活動類型快篩按鈕列 -->
+                    <div class="pt-2 border-t border-slate-100 flex items-center space-x-1.5 overflow-x-auto hide-scrollbar">
+                        <span class="text-xs font-semibold text-slate-400 shrink-0 mr-1 flex items-center space-x-1">
+                            <i data-lucide="filter" class="w-3.5 h-3.5 text-indigo-500"></i>
+                            <span>類型快篩:</span>
                         </span>
-                        <input type="text" id="admin-search-input" oninput="renderAdminTable()" placeholder="快速搜尋活動、縣市或卡司..." 
-                            class="w-full pl-9 pr-3 py-2 bg-slate-50 focus:bg-white border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-indigo-500">
+                        <div id="admin-category-quick-filters" class="flex items-center space-x-1.5">
+                            <!-- 動態生成全部分類膠囊 -->
+                        </div>
                     </div>
-
-                    <div class="flex items-center space-x-1 w-full md:w-auto overflow-x-auto hide-scrollbar">
-                        <button onclick="setAdminRegionFilter('all')" class="admin-region-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-900 text-white whitespace-nowrap" data-region="all">全選</button>
-                        <button onclick="setAdminRegionFilter('北部')" class="admin-region-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-600 border border-slate-200 whitespace-nowrap" data-region="北部">北部</button>
-                        <button onclick="setAdminRegionFilter('中部')" class="admin-region-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-600 border border-slate-200 whitespace-nowrap" data-region="中部">中部</button>
-                        <button onclick="setAdminRegionFilter('南部')" class="admin-region-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-600 border border-slate-200 whitespace-nowrap" data-region="南部">南部</button>
-                        <button onclick="setAdminRegionFilter('東部與離島')" class="admin-region-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-600 border border-slate-200 whitespace-nowrap" data-region="東部與離島">東部離島</button>
-                    </div>
-
-                    <button onclick="openAddModal()" class="w-full md:w-auto px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center space-x-1.5 shadow-md shadow-indigo-600/25 shrink-0 transition">
-                        <i data-lucide="plus" class="w-4 h-4"></i><span>新增活動</span>
-                    </button>
                 </div>
 
                 <div>
@@ -461,11 +481,11 @@
                 <a href="https://www.instagram.com/livetws/" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-3 py-1.5 bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 text-pink-700 rounded-xl border border-pink-200 transition shadow-2xs font-semibold">
                     <svg class="w-3.5 h-3.5 fill-current text-pink-600" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                     </a>
-                    <a href="https://www.threads.com/@livetws" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-3 py-1.5 bg-slate-50 hover:bg-slate-100 text-slate-800 rounded-xl border border-slate-200 transition shadow-2xs font-semibold">
-                    <svg class="w-3.5 h-3.5 fill-current text-slate-900" viewBox="0 0 24 24"><path d="M12.186 24C5.467 24 0 18.533 0 11.814 0 5.094 5.467 0 12.186 0c6.643 0 11.968 5.176 12.014 11.758v.481h-3.418v-.481c-.043-4.73-3.856-8.543-8.596-8.543-4.757 0-8.627 3.87-8.627 8.627 0 4.758 3.87 8.627 8.627 8.627 2.664 0 5.105-1.22 6.697-3.342l2.678 2.115C19.645 22.016 16.094 24 12.186 24zm4.148-12.75c.198 2.378-1.455 4.394-3.864 4.394-2.205 0-3.816-1.782-3.816-4.225 0-2.457 1.636-4.238 3.844-4.238 1.83 0 3.256 1.258 3.65 2.997l-3.65.65c-.092-.816-.694-1.378-1.455-1.378-1.042 0-1.72.937-1.72 2.152 0 1.201.664 2.138 1.706 2.138 1.083 0 1.693-.978 1.693-2.316v-.174h3.612z"/></svg>
+                    <a href="https://www.threads.com/@livetws" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition" title="Threads">
+                        <svg class="w-4 h-4 fill-current text-slate-900" viewBox="0 0 24 24"><path d="M12.186 24C5.467 24 0 18.533 0 11.814 0 5.094 5.467 0 12.186 0c6.643 0 11.968 5.176 12.014 11.758v.481h-3.418v-.481c-.043-4.73-3.856-8.543-8.596-8.543-4.757 0-8.627 3.87-8.627 8.627 0 4.758 3.87 8.627 8.627 8.627 2.664 0 5.105-1.22 6.697-3.342l2.678 2.115C19.645 22.016 16.094 24 12.186 24zm4.148-12.75c.198 2.378-1.455 4.394-3.864 4.394-2.205 0-3.816-1.782-3.816-4.225 0-2.457 1.636-4.238 3.844-4.238 1.83 0 3.256 1.258 3.65 2.997l-3.65.65c-.092-.816-.694-1.378-1.455-1.378-1.042 0-1.72.937-1.72 2.152 0 1.201.664 2.138 1.706 2.138 1.083 0 1.693-.978 1.693-2.316v-.174h3.612z"/></svg>
                     </a>
-                    <a href="https://www.facebook.com/100063574316191" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-xl border border-blue-200 transition shadow-2xs font-semibold">
-                    <svg class="w-3.5 h-3.5 fill-current text-blue-600" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.595 0 9 1.583 9 4.615V8z"/></svg>
+                    <a href="https://www.facebook.com/100063574316191" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition" title="Facebook">
+                        <svg class="w-4 h-4 fill-current text-blue-600" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.595 0 9 1.583 9 4.615V8z"/></svg>
                     </a>
                 </div>
 
@@ -849,7 +869,7 @@
         // ==========================================
         const DEFAULT_GAS_URL = "https://script.google.com/macros/s/AKfycbwQftVg70yJwJJ6kuvy3dRFetPStKr05ntksXZzqkoB-KMNTQ8fCuT-mY95b0RYPX61/exec";
 
-        // 宜蘭縣正確歸入「東部與離島」
+        // 宜蘭縣正確劃入「東部與離島」
         const REGION_MAP = {
             '基隆市': '北部', '臺北市': '北部', '新北市': '北部', '桃園市': '北部', '新竹市': '北部', '新竹縣': '北部',
             '苗栗縣': '中部', '臺中市': '中部', '彰化縣': '中部', '南投縣': '中部', '雲林縣': '中部',
@@ -905,8 +925,8 @@
         }
 
         // ==========================================
-        // 【核心演算法】智慧時間區間與民國年/西元年雙向自動辨識
-        // 例如：2026/11/06 - 116/01/03 自動判斷
+        // 【核心演算法】智慧時間區間與民國/西元自動辨識解析
+        // 例如：2026/11/06 - 116/01/03 自動解析為開始與結束日期
         // ==========================================
         function parseDateSubString(partStr, isEndDate = false) {
             if (!partStr) return null;
@@ -1064,8 +1084,11 @@
         let currentActiveTab = 'home';
         let currentModalEventId = null;
         let isAdminUnlocked = false;
+
+        // 後台全新多重篩選狀態
         let adminCurrentRegionFilter = 'all';
-        let adminViewTab = 'active';
+        let adminCurrentCategoryFilter = 'all';
+        let adminViewTab = 'active'; // 'active' (進行中), 'draft' (隱藏草稿), 'archive' (歷屆歸檔)
 
         let categoryConfigs = [
             { name: '跨年晚會', order: 1, enabled: true },
@@ -1080,6 +1103,7 @@
             loadBookmarks();
             buildDynamicCategoryTabs();
             renderBookmarks();
+            buildAdminCategoryQuickFilters();
             renderAdminTable();
             updateStats();
             lucide.createIcons();
@@ -1283,6 +1307,7 @@
                             saveDataLocally();
                             syncCategoriesWithEvents();
                             buildDynamicCategoryTabs();
+                            buildAdminCategoryQuickFilters();
                             renderEvents();
                             buildHistoryYearTabs();
                             renderHistoryEvents();
@@ -1318,6 +1343,8 @@
             }
             
             syncCategoriesWithEvents();
+            buildDynamicCategoryTabs();
+            buildAdminCategoryQuickFilters();
             renderEvents();
             buildHistoryYearTabs();
             renderHistoryEvents();
@@ -1828,6 +1855,7 @@
             if (isAdminUnlocked) {
                 loginBox.classList.add('hidden');
                 contentBox.classList.remove('hidden');
+                buildAdminCategoryQuickFilters();
                 renderAdminTable();
                 updateStats();
             } else {
@@ -1922,6 +1950,7 @@
             });
             saveCategoryConfigsLocally();
             buildDynamicCategoryTabs();
+            buildAdminCategoryQuickFilters();
             renderEvents();
             closeCategoryManageModal();
             alert('分類設定已成功儲存！');
@@ -2015,7 +2044,7 @@
         }
 
         // ==========================================
-        // 【核心顯示排序】置頂優先 ➔ 活動開始時間 ➔ 地區順位 ➔ 類型 ➔ 權重
+        // 【前台探索排序】置頂優先 ➔ 開放優先 (open > locked) ➔ 開始時間 ➔ 地區 ➔ 類型 ➔ 權重
         // ==========================================
         function renderEvents() {
             const grid = document.getElementById('events-grid');
@@ -2050,22 +2079,27 @@
                 const pinB = b.is_pinned ? 0 : 1;
                 if (pinA !== pinB) return pinA - pinB;
 
-                // 2. 第二順位：活動開始時間 (由早至晚、越先登場越先看)
+                // 2. 第二順位：開放狀態 (open 優先於 locked，灰色未開放卡片一律沉底)
+                const statusA = (a.status === 'open') ? 0 : 1;
+                const statusB = (b.status === 'open') ? 0 : 1;
+                if (statusA !== statusB) return statusA - statusB;
+
+                // 3. 第三順位：活動開始時間 (由早至晚、越先登場越先看)
                 const startA = parseEventRange(a.time).startDate.getTime();
                 const startB = parseEventRange(b.time).startDate.getTime();
                 if (startA !== startB) return startA - startB;
 
-                // 3. 第三順位：地區順位 (北 -> 中 -> 南 -> 東部離島)
+                // 4. 第四順位：地區順位 (北 -> 中 -> 南 -> 東部與離島)
                 const regionOrderA = REGION_PRIORITY[a.region] || 9;
                 const regionOrderB = REGION_PRIORITY[b.region] || 9;
                 if (regionOrderA !== regionOrderB) return regionOrderA - regionOrderB;
 
-                // 4. 第四順位：同類型排在一起
+                // 5. 第五順位：同類型排在一起
                 const catA = String(a.category || '');
                 const catB = String(b.category || '');
                 if (catA !== catB) return catA.localeCompare(catB, 'zh-TW');
 
-                // 5. 第五順位：同條件下的權重排序 (留白則隨機散列自然排序)
+                // 6. 第六順位：排序權重 (未填則隨機散列自然排序)
                 const wA = (a.weight !== undefined && a.weight !== null && a.weight !== '') ? Number(a.weight) : (1000 + getRandomOrderValue(a.id));
                 const wB = (b.weight !== undefined && b.weight !== null && b.weight !== '') ? Number(b.weight) : (1000 + getRandomOrderValue(b.id));
                 return wA - wB;
@@ -2371,6 +2405,7 @@
             return `<div class="space-y-2.5">${itemsHtml}</div>`;
         }
 
+        // 活動詳情彈窗：演出卡司 與 宣傳海報 徹底拆開為獨立區塊
         function openDetailModal(id) {
             const e = events.find(item => String(item.id) === String(id));
             if (!e) return;
@@ -2417,7 +2452,7 @@
                     </div>
                 </div>
 
-                <!-- 1. 演出卡司陣容 (獨立緊湊精緻卡片，不塞海報) -->
+                <!-- 1. 演出卡司陣容 (獨立緊湊精緻卡片，不塞海報)[cite: 3] -->
                 ${e.lineup ? `
                     <div class="p-4 bg-indigo-50/50 rounded-2xl border border-indigo-100 space-y-2.5">
                         <h4 class="text-xs font-bold text-indigo-900 uppercase tracking-wider flex items-center space-x-1.5">
@@ -2527,20 +2562,32 @@
             modal.classList.remove('flex');
         }
 
+        // ==========================================
+        // 【後台三段式清單切換】
+        // active: 進行中 (open + locked)
+        // draft: 隱藏草稿 (hidden)
+        // archive: 歷屆歸檔 (closed / 過期2天)
+        // ==========================================
         function setAdminViewTab(tab) {
             adminViewTab = tab;
             const btnActive = document.getElementById('admin-tab-active');
+            const btnDraft = document.getElementById('admin-tab-draft');
             const btnArchive = document.getElementById('admin-tab-archive');
             const titleEl = document.getElementById('admin-table-title');
 
+            [btnActive, btnDraft, btnArchive].forEach(btn => {
+                btn.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white hover:bg-slate-50 text-slate-600 border border-slate-200 transition flex items-center space-x-1.5";
+            });
+
             if (tab === 'active') {
                 btnActive.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white shadow-xs transition flex items-center space-x-1.5";
-                btnArchive.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white hover:bg-slate-50 text-slate-600 border border-slate-200 transition flex items-center space-x-1.5";
-                titleEl.innerText = "進行中活動清單 (含開放、尚未開放與隱藏)";
+                titleEl.innerText = "🚀 進行中活動清單 (前台公開顯示中)";
+            } else if (tab === 'draft') {
+                btnDraft.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-amber-500 text-white shadow-xs transition flex items-center space-x-1.5";
+                titleEl.innerText = "📝 隱藏與草稿清單 (前台完全不公開)";
             } else {
                 btnArchive.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 text-white shadow-xs transition flex items-center space-x-1.5";
-                btnActive.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white hover:bg-slate-50 text-slate-600 border border-slate-200 transition flex items-center space-x-1.5";
-                titleEl.innerText = "歷屆歸檔活動清單 (已標註結束或結束滿2天之活動)";
+                titleEl.innerText = "🏛️ 歷屆歸檔活動清單 (已結束或逾期2天)";
             }
             renderAdminTable();
         }
@@ -2551,6 +2598,42 @@
                 btn.className = btn.getAttribute('data-region') === region 
                     ? "admin-region-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-900 text-white whitespace-nowrap"
                     : "admin-region-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-600 border border-slate-200 whitespace-nowrap";
+            });
+            renderAdminTable();
+        }
+
+        // 後台動態生成「活動類型快篩」膠囊
+        function buildAdminCategoryQuickFilters() {
+            const container = document.getElementById('admin-category-quick-filters');
+            if (!container) return;
+
+            const allCats = Array.from(new Set([
+                '跨年晚會', '元旦升旗', '各縣市活動', '燈會',
+                ...categoryConfigs.map(c => c.name),
+                ...events.map(e => e.category)
+            ].filter(Boolean)));
+
+            let html = `
+                <button onclick="setAdminCategoryFilter('all')" class="admin-cat-filter px-2.5 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition ${adminCurrentCategoryFilter === 'all' ? 'bg-indigo-600 text-white' : 'bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200'}" data-cat="all">全部類型</button>
+            `;
+
+            allCats.forEach(cat => {
+                const isSelected = (adminCurrentCategoryFilter === cat);
+                html += `
+                    <button onclick="setAdminCategoryFilter('${cat}')" class="admin-cat-filter px-2.5 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition ${isSelected ? 'bg-indigo-600 text-white' : 'bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200'}" data-cat="${cat}">${cat}</button>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function setAdminCategoryFilter(cat) {
+            adminCurrentCategoryFilter = cat;
+            document.querySelectorAll('.admin-cat-filter').forEach(btn => {
+                const isSelected = btn.getAttribute('data-cat') === cat;
+                btn.className = isSelected 
+                    ? "admin-cat-filter px-2.5 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition bg-indigo-600 text-white shadow-2xs"
+                    : "admin-cat-filter px-2.5 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200";
             });
             renderAdminTable();
         }
@@ -2574,7 +2657,6 @@
             await syncToGoogleSheet();
         }
 
-        // 即時切換置頂
         async function handleInlinePinToggle(eventId) {
             const idx = events.findIndex(e => String(e.id) === String(eventId));
             if (idx === -1) return;
@@ -2602,27 +2684,38 @@
             await syncToGoogleSheet();
         }
 
+        // 後台表格渲染 (支援三段清單、類型快篩、即時狀態、即時置頂、即時權重、純數字輪播)
         function renderAdminTable() {
             const tbody = document.getElementById('admin-table-body');
             const searchKeyword = (document.getElementById('admin-search-input')?.value || '').toLowerCase().trim();
 
+            // 1. 三段式清單分流篩選
             let targetList = events.filter(e => {
                 const isArchived = isEffectivelyClosed(e);
-                if (adminViewTab === 'active' && isArchived) return false;
-                if (adminViewTab === 'archive' && !isArchived) return false;
-                return true;
+                const isDraft = (e.status === 'hidden');
+
+                if (adminViewTab === 'active') {
+                    return !isArchived && !isDraft; // 進行中 (open + locked)
+                } else if (adminViewTab === 'draft') {
+                    return isDraft; // 隱藏與草稿
+                } else {
+                    return isArchived; // 歷屆歸檔
+                }
             });
 
+            // 2. 分區、類型快篩與搜尋關鍵字交集過濾
             let filtered = targetList.filter(e => {
                 const matchRegion = (adminCurrentRegionFilter === 'all' || e.region === adminCurrentRegionFilter);
+                const matchCategory = (adminCurrentCategoryFilter === 'all' || e.category === adminCurrentCategoryFilter);
                 const matchSearch = !searchKeyword || 
                     (e.name && e.name.toLowerCase().includes(searchKeyword)) ||
                     (e.city && e.city.toLowerCase().includes(searchKeyword)) ||
                     (e.lineup && e.lineup.toLowerCase().includes(searchKeyword)) ||
                     (e.category && e.category.toLowerCase().includes(searchKeyword));
-                return matchRegion && matchSearch;
+                return matchRegion && matchCategory && matchSearch;
             });
 
+            // 3. 排序：置頂優先 ➔ 開始時間 ➔ 縣市 ➔ 權重
             filtered.sort((a, b) => {
                 const pinA = a.is_pinned ? 0 : 1;
                 const pinB = b.is_pinned ? 0 : 1;
@@ -2646,7 +2739,12 @@
             document.getElementById('admin-table-count').innerText = `目前分流顯示 ${filtered.length} 筆活動`;
 
             if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="8" class="p-8 text-center text-slate-400 text-xs">${adminViewTab === 'active' ? '目前尚無進行中活動資料，請點擊上方「新增活動」' : '目前歷屆歸檔區尚無活動資料'}</td></tr>`;
+                let emptyMsg = '目前尚無符合條件的活動資料';
+                if (adminViewTab === 'active') emptyMsg = '目前尚無進行中活動資料，請點擊上方「新增活動」';
+                if (adminViewTab === 'draft') emptyMsg = '目前尚無隱藏或草稿資料';
+                if (adminViewTab === 'archive') emptyMsg = '目前歷屆歸檔區尚無活動資料';
+
+                tbody.innerHTML = `<tr><td colspan="8" class="p-8 text-center text-slate-400 text-xs">${emptyMsg}</td></tr>`;
                 return;
             }
 
@@ -2711,18 +2809,21 @@
         }
 
         function updateStats() {
-            const activeList = events.filter(e => !isEffectivelyClosed(e));
+            const activeList = events.filter(e => !isEffectivelyClosed(e) && e.status !== 'hidden');
+            const draftList = events.filter(e => e.status === 'hidden');
             const archiveList = events.filter(e => isEffectivelyClosed(e));
 
             document.getElementById('stat-total').innerText = activeList.length;
             document.getElementById('stat-open').innerText = events.filter(e => e.status === 'open' && !isEffectivelyClosed(e)).length;
             document.getElementById('stat-locked').innerText = events.filter(e => e.status === 'locked' && !isEffectivelyClosed(e)).length;
-            document.getElementById('stat-hidden').innerText = events.filter(e => e.status === 'hidden').length;
+            document.getElementById('stat-hidden').innerText = draftList.length;
             document.getElementById('stat-closed').innerText = archiveList.length;
 
             const badgeActive = document.getElementById('admin-active-count-badge');
+            const badgeDraft = document.getElementById('admin-draft-count-badge');
             const badgeArchive = document.getElementById('admin-archive-count-badge');
             if (badgeActive) badgeActive.innerText = activeList.length;
+            if (badgeDraft) badgeDraft.innerText = draftList.length;
             if (badgeArchive) badgeArchive.innerText = archiveList.length;
         }
 
@@ -2898,6 +2999,7 @@
             saveDataLocally();
             syncCategoriesWithEvents();
             buildDynamicCategoryTabs();
+            buildAdminCategoryQuickFilters();
             renderEvents();
             buildHistoryYearTabs();
             renderHistoryEvents();
@@ -2933,6 +3035,7 @@
                 saveBookmarks();
                 syncCategoriesWithEvents();
                 buildDynamicCategoryTabs();
+                buildAdminCategoryQuickFilters();
                 renderEvents();
                 buildHistoryYearTabs();
                 renderHistoryEvents();
