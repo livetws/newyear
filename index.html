@@ -95,7 +95,6 @@
                 </div>
             </div>
 
-            <!-- Desktop Nav Links -->
             <nav class="hidden md:flex items-center space-x-1">
                 <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition text-indigo-600 bg-indigo-50 flex items-center space-x-2">
                     <i data-lucide="compass" class="w-4 h-4"></i><span>探索活動</span>
@@ -156,7 +155,7 @@
 
                 <div class="flex items-center justify-between text-xs text-slate-500 px-1">
                     <span id="result-count">載入中...</span>
-                    <span></span>
+                    <span id="sync-status-indicator" class="text-xs text-slate-400"></span>
                 </div>
             </div>
 
@@ -202,7 +201,7 @@
                 </div>
                 <div>
                     <h3 class="text-lg font-bold text-slate-900">管理者系統安全登入</h3>
-                    <p class="text-xs text-slate-500 mt-1">請輸入您的管理員密碼</p>
+                    <p class="text-xs text-slate-500 mt-1">請輸入管理員密碼</p>
                 </div>
                 <div class="flex space-x-2 pt-2">
                     <input type="password" id="admin-password-input" placeholder="請輸入密碼..." class="flex-1 px-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:outline-none">
@@ -288,12 +287,12 @@
         </div>
     </div>
 
-    <!-- Form Modal (新增與編輯活動) -->
+    <!-- Form Modal (新增/編輯活動 - 完整保留圖片上傳與手寫時刻表) -->
     <div id="form-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-indigo-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div class="p-6 border-b border-slate-200 flex items-center justify-between bg-slate-50">
                 <h3 id="form-modal-title" class="text-xl font-bold text-slate-900">新增活動</h3>
-                <button onclick="closeFormModal()"><i data-lucide="x" class="w-6 h-6"></i></button>
+                <button onclick="closeFormModal()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-6 h-6"></i></button>
             </div>
             <form id="event-form" onsubmit="handleFormSubmit(event)" class="overflow-y-auto p-6 space-y-4">
                 <input type="hidden" id="event-id">
@@ -301,7 +300,9 @@
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">活動類型 *</label>
                         <select id="input-category" required class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm">
-                            <option value="跨年晚會">跨年晚會</option><option value="元旦升旗">元旦升旗</option><option value="燈會">燈會</option>
+                            <option value="跨年晚會">跨年晚會</option>
+                            <option value="元旦升旗">元旦升旗</option>
+                            <option value="燈會">燈會</option>
                         </select>
                     </div>
                     <div>
@@ -313,34 +314,58 @@
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">開放狀態 *</label>
                         <select id="input-status" required class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm">
-                            <option value="open">開放 (可點擊瀏覽)</option><option value="locked">尚未公布 (反灰鎖定)</option>
+                            <option value="open">開放 (可點擊瀏覽)</option>
+                            <option value="locked">尚未公布 (反灰鎖定)</option>
                         </select>
                     </div>
                 </div>
+
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div><label class="block text-xs font-semibold text-slate-700 mb-1">活動名稱 *</label><input type="text" id="input-name" required class="w-full px-3.5 py-2.5 border rounded-xl text-sm"></div>
-                    <div><label class="block text-xs font-semibold text-slate-700 mb-1">活動時間 *</label><input type="text" id="input-time" required class="w-full px-3.5 py-2.5 border rounded-xl text-sm"></div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">活動名稱 *</label>
+                        <input type="text" id="input-name" required placeholder="例如：2027 臺北最HIGH新年城" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">活動時間 *</label>
+                        <input type="text" id="input-time" required placeholder="2026/12/31 19:00" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm">
+                    </div>
                 </div>
-                <div><label class="block text-xs font-semibold text-slate-700 mb-1">活動地點 *</label><input type="text" id="input-location" required class="w-full px-3.5 py-2.5 border rounded-xl text-sm"></div>
-                
-                <!-- 圖片上傳與預覽 -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div><label class="block text-xs font-semibold text-slate-700 mb-1">主視覺圖片上傳</label><input type="file" id="input-image-file" accept="image/*" onchange="handleImageUpload(event)" class="w-full text-xs file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-indigo-600 file:text-white"></div>
-                    <div><label class="block text-xs font-semibold text-slate-700 mb-1">或圖片網址 (URL)</label><input type="url" id="input-image" class="w-full px-3.5 py-2.5 border rounded-xl text-sm"></div>
-                </div>
-                <div id="image-preview-container" class="hidden mt-2"><img id="image-preview" src="" alt="Preview" class="h-32 object-cover rounded-xl border"></div>
-                
-                <div><label class="block text-xs font-semibold text-slate-700 mb-1">官方活動連結</label><input type="url" id="input-link" class="w-full px-3.5 py-2.5 border rounded-xl text-sm"></div>
-                
-                <!-- 活動時刻表手寫輸入 -->
+
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">活動時刻表 / 演出順序 (每行一筆)</label>
-                    <textarea id="input-desc" rows="4" placeholder="19:00 - 20:00 | 暖身開場&#10;20:00 - 23:00 | 巨星開唱" class="w-full px-3.5 py-2.5 border rounded-xl text-sm font-mono"></textarea>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">活動地點 *</label>
+                    <input type="text" id="input-location" required placeholder="例如：臺北市市民廣場" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm">
+                </div>
+
+                <!-- 圖片上傳與網址 -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">主視覺圖片上傳</label>
+                        <input type="file" id="input-image-file" accept="image/*" onchange="handleImageUpload(event)" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-indigo-600 file:text-white cursor-pointer">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">或直接輸入圖片網址 (URL)</label>
+                        <input type="url" id="input-image" placeholder="https://..." class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm">
+                    </div>
+                </div>
+
+                <div id="image-preview-container" class="hidden mt-2">
+                    <img id="image-preview" src="" alt="Preview" class="h-32 object-cover rounded-xl border border-slate-200 shadow-sm">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">官方活動連結</label>
+                    <input type="url" id="input-link" placeholder="https://..." class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm">
+                </div>
+
+                <!-- 手動輸入演出時間格式 -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">活動時刻表 / 演出順序</label>
+                    <textarea id="input-desc" rows="4" placeholder="19:00 - 20:00 | 暖身開場表演&#10;20:00 - 23:00 | 實力歌手接力演唱" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm font-mono"></textarea>
                 </div>
 
                 <div class="pt-4 flex justify-end space-x-3">
-                    <button type="button" onclick="closeFormModal()" class="px-5 py-2.5 rounded-xl bg-white border text-sm">取消</button>
-                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-indigo-600 text-white text-sm shadow-lg">儲存活動</button>
+                    <button type="button" onclick="closeFormModal()" class="px-5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm">取消</button>
+                    <button type="submit" id="submit-btn" class="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium shadow-lg">儲存活動</button>
                 </div>
             </form>
         </div>
@@ -457,6 +482,7 @@
             lucide.createIcons();
         };
 
+        // 讀取：優先讀取 Google 試算表
         async function loadData() {
             const GAS_URL = localStorage.getItem('tw_nye_gas_url_light') || "";
             if (GAS_URL) {
@@ -469,10 +495,11 @@
                             region: e.region || REGION_MAP[e.city] || '北部',
                             status: e.status || 'open'
                         }));
+                        localStorage.setItem('tw_nye_events_2027_light_v7', JSON.stringify(events));
                         return;
                     }
                 } catch (err) {
-                    console.error("從 Google 試算表讀取失敗，改用本機資料", err);
+                    console.error("雲端讀取失敗，使用本機暫存", err);
                 }
             }
             const saved = localStorage.getItem('tw_nye_events_2027_light_v7');
@@ -480,13 +507,29 @@
                 try { events = JSON.parse(saved); } catch (e) { events = DEFAULT_EVENTS; }
             } else {
                 events = DEFAULT_EVENTS;
-                saveData();
+                saveDataLocally();
             }
         }
 
-        function saveData() {
+        function saveDataLocally() {
             localStorage.setItem('tw_nye_events_2027_light_v7', JSON.stringify(events));
             updateStats();
+        }
+
+        // 雙向寫入：背景 POST 回傳試算表
+        async function syncToGoogleSheet() {
+            const GAS_URL = localStorage.getItem('tw_nye_gas_url_light') || "";
+            if (!GAS_URL) return;
+            try {
+                await fetch(GAS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(events)
+                });
+            } catch (err) {
+                console.error("寫入 Google 試算表失敗", err);
+            }
         }
 
         function loadBookmarks() {
@@ -581,7 +624,7 @@
         function setCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.cat-tab').forEach(btn => {
-                btn.className = btn.getAttribute('data-cat') === cat ? "cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-indigo-600 text-white shadow-md" : "cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shadow-sm";
+                btn.className = btn.getAttribute('data-cat') === cat ? "cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-indigo-600 text-white shadow-md shadow-indigo-600/20" : "cat-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shadow-sm";
             });
             renderEvents();
         }
@@ -782,7 +825,7 @@
         function openLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox-modal').classList.remove('hidden'); }
         function closeLightbox() { document.getElementById('lightbox-modal').classList.add('hidden'); }
 
-        // Admin Table & Management
+        // 後台管理功能
         function renderAdminTable() {
             const tbody = document.getElementById('admin-table-body');
             tbody.innerHTML = events.map(e => `
@@ -851,8 +894,12 @@
             reader.readAsDataURL(file);
         }
 
-        function handleFormSubmit(event) {
+        async function handleFormSubmit(event) {
             event.preventDefault();
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.innerText = '儲存中...';
+            submitBtn.disabled = true;
+
             const id = document.getElementById('event-id').value;
             const city = document.getElementById('input-city').value;
             const region = REGION_MAP[city] || '北部';
@@ -869,39 +916,47 @@
                 link: document.getElementById('input-link').value,
                 desc: document.getElementById('input-desc').value
             };
+
             if (id) {
                 const idx = events.findIndex(item => String(item.id) === String(id));
                 if (idx > -1) events[idx] = eventData;
             } else {
                 events.unshift(eventData);
             }
-            saveData();
+
+            saveDataLocally();
             renderEvents();
             renderBookmarks();
             renderAdminTable();
             closeFormModal();
+
+            // 背景寫入 Google 試算表
+            await syncToGoogleSheet();
+            submitBtn.innerText = '儲存活動';
+            submitBtn.disabled = false;
         }
 
-        function deleteEvent(id) {
+        async function deleteEvent(id) {
             if (confirm('確定要刪除這項活動嗎？')) {
                 events = events.filter(e => String(e.id) !== String(id));
                 bookmarks = bookmarks.filter(bId => String(bId) !== String(id));
-                saveData();
-                saveBookmarks();
+                saveDataLocally();
                 renderEvents();
                 renderBookmarks();
                 renderAdminTable();
+                await syncToGoogleSheet();
             }
         }
 
-        function resetDefaultData() {
+        async function resetDefaultData() {
             if (confirm('確定要載入預設的活動清單嗎？')) {
                 events = DEFAULT_EVENTS;
-                saveData();
+                saveDataLocally();
                 renderEvents();
                 renderBookmarks();
                 renderAdminTable();
-                alert('已成功恢復預設資料！');
+                await syncToGoogleSheet();
+                alert('已恢復預設資料並同步！');
             }
         }
 
@@ -913,7 +968,7 @@
         function saveGasSettings() {
             const url = document.getElementById('gas-url-input').value.trim();
             localStorage.setItem('tw_nye_gas_url_light', url);
-            alert('已成功儲存！網頁即將重新整理以從 Google 試算表載入資料。');
+            alert('已成功儲存同步網址！網頁即將重新整理。');
             location.reload();
         }
     </script>
