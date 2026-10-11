@@ -1656,7 +1656,7 @@
                 return `
                     <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentSlideIdx ? 'opacity-100 z-10' : 'opacity-0 z-0'} carousel-slide cursor-pointer overflow-hidden" data-idx="${idx}" onclick="openDetailModal('${e.id}')">
                         ${cover ? `
-                            <img src="${cover}" alt="${e.name}" class="w-full h-full object-cover object-center">
+                            <img src="${cover}" alt="${e.name}" class="w-full h-full object-cover object-top">
                         ` : `<div class="w-full h-full bg-gradient-to-r from-indigo-900 to-slate-900"></div>`}
                         <!-- 第 2 點：文字底層淡化漸層遮罩，字體更顯眼 -->
                         <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none z-10"></div>
@@ -2844,7 +2844,7 @@
             if (cover) {
                 modalBannerHtml = `
                     <div class="relative rounded-2xl overflow-hidden h-64 sm:h-80 bg-slate-900 border border-slate-200 shadow-inner group">
-                        <img src="${cover}" alt="${e.name}" class="w-full h-full object-cover object-center cursor-pointer" onclick="openLightbox('${cover}')">
+                        <img src="${cover}" alt="${e.name}" class="w-full h-full object-cover object-top cursor-pointer" onclick="openLightbox('${cover}')">
                         <!-- 第 2 點：底層淡化漸層遮罩，文字立體清晰 -->
                         <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent pointer-events-none z-10"></div>
                         <button onclick="openLightbox('${cover}')" class="absolute bottom-3 right-3 px-3 py-1.5 bg-black/60 hover:bg-black text-white text-xs rounded-xl flex items-center space-x-1 backdrop-blur-sm transition shadow-lg z-20">
