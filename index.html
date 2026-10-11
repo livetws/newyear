@@ -166,7 +166,7 @@
 
         <!-- ==================== HOME TAB (探索活動) ==================== -->
         <div id="view-home" class="space-y-8 animate-fadeIn">
-            <!-- Hero Carousel Banner (圖片上下左右絕對置中) -->
+            <!-- Hero Carousel Banner (上下左右絕對居中) -->
             <div class="relative rounded-2xl overflow-hidden clean-panel border border-indigo-100 shadow-xl h-64 sm:h-80 bg-slate-950">
                 <div id="hero-carousel-container" class="relative w-full h-full flex items-center justify-center">
                     <div class="text-slate-400 text-sm flex items-center space-x-2 animate-pulse">
@@ -183,7 +183,7 @@
                 </button>
             </div>
 
-            <!-- 搜尋與篩選控制面板 (含 本週活動 篩選) -->
+            <!-- 搜尋與篩選控制面板 -->
             <div id="event-section" class="clean-panel p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
                 <div class="relative w-full">
                     <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -205,7 +205,6 @@
                         <span class="text-xs font-semibold text-slate-400 shrink-0 w-10">分區:</span>
                         <div class="flex items-center space-x-2">
                             <button onclick="setRegion('all')" class="region-tab px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-600 text-white shadow-xs transition whitespace-nowrap" data-region="all">全臺</button>
-                            <!-- 本週活動 獨立篩選標籤 -->
                             <button onclick="setRegion('this_week')" class="region-tab px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-white text-indigo-700 hover:bg-indigo-50 border border-indigo-200 transition whitespace-nowrap flex items-center space-x-1" data-region="this_week">
                                 <i data-lucide="flame" class="w-3.5 h-3.5 text-orange-500"></i>
                                 <span>本週活動</span>
@@ -329,7 +328,7 @@
                     </div>
 
                     <div class="flex flex-wrap items-center gap-2">
-                        <!-- 第 10 點：每週活動週報入口按鈕 -->
+                        <!-- 每週活動週報入口按鈕 -->
                         <button onclick="openWeeklyReportModal()" class="px-3.5 py-2 bg-gradient-to-r from-indigo-50 to-purple-50 hover:from-indigo-100 hover:to-purple-100 text-indigo-700 rounded-xl text-xs sm:text-sm font-semibold border border-indigo-200 shadow-2xs flex items-center space-x-1.5 transition">
                             <i data-lucide="newspaper" class="w-4 h-4 text-indigo-600"></i><span>📰 每週活動週報</span>
                         </button>
@@ -452,14 +451,13 @@
 
     </main>
 
-    <!-- 頁尾 (第 8 點：精緻高度、社群三鍵小膠囊一致化) -->
+    <!-- 頁尾 (社群小膠囊一致化、精簡高度) -->
     <footer class="w-full py-4 mt-8 border-t border-slate-200 bg-white/70 backdrop-blur-md text-center text-xs text-slate-500 z-10 relative">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-3">
             <div class="font-medium text-slate-700">
                 <span>© livetws 跨年晚會資訊</span>
             </div>
 
-            <!-- 社群三鍵統一精緻膠囊化 -->
             <div class="flex items-center space-x-2">
                 <a href="https://www.instagram.com/livetws/" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-3 py-1.5 bg-pink-50 hover:bg-pink-100 text-pink-700 rounded-xl border border-pink-200 transition shadow-2xs font-semibold">
                     <svg class="w-3.5 h-3.5 fill-current text-pink-600" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -504,15 +502,19 @@
         </button>
     </nav>
 
-    <!-- Detail Modal (發布時間並列、入場方式、海報純圖滿版、多重售票專區) -->
+    <!-- Detail Modal (毛玻璃光暈、單張滿版/多張雙欄、YouTube嵌入、底部左側活動連結) -->
     <div id="detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-slate-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
-            <div id="modal-content" class="overflow-y-auto p-6 space-y-6"></div>
-            <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-end space-x-3">
-                <button onclick="closeDetailModal()" class="px-5 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 text-sm font-medium border border-slate-200 shadow-sm transition">關閉</button>
-                <button id="modal-bookmark-btn" onclick="toggleBookmarkFromModal()" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium flex items-center space-x-2 shadow-md shadow-indigo-600/20 transition">
-                    <i data-lucide="bookmark" class="w-4 h-4"></i><span>加入收藏</span>
-                </button>
+            <div id="modal-content" class="overflow-y-auto p-5 sm:p-6 space-y-4"></div>
+            <!-- 底部操作列 (活動連結放最左側) -->
+            <div class="p-3.5 bg-slate-50 border-t border-slate-200 flex items-center justify-between gap-2">
+                <div id="modal-external-link-container"></div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="closeDetailModal()" class="px-4 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-700 text-xs sm:text-sm font-medium border border-slate-200 shadow-sm transition">關閉</button>
+                    <button id="modal-bookmark-btn" onclick="toggleBookmarkFromModal()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-medium flex items-center space-x-1.5 shadow-md shadow-indigo-600/20 transition">
+                        <i data-lucide="bookmark" class="w-4 h-4"></i><span>加入收藏</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -527,7 +529,7 @@
         </div>
     </div>
 
-    <!-- Weekly Report Modal (第 10 點：每週活動週報專區) -->
+    <!-- Weekly Report Modal (每週活動週報) -->
     <div id="weekly-report-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-3xl rounded-2xl overflow-hidden border border-indigo-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div class="p-4 sm:p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50 sticky top-0 z-10">
@@ -556,7 +558,6 @@
                     <span id="weekly-report-summary-text" class="font-medium text-indigo-900">本週活動總計：0 場</span>
                     <span class="text-slate-500">點擊下方任一活動列，可即時展開該場卡司</span>
                 </div>
-                <!-- 活動依時間 ➔ 縣市 條列容器 -->
                 <div id="weekly-report-list" class="space-y-2.5"></div>
             </div>
 
@@ -622,10 +623,9 @@
         </div>
     </div>
 
-    <!-- Form Modal (第 1 點輪播水平展開、第 2 點入場方式、第 4 點發布時間、第 5/6/7 點多重票務方式) -->
+    <!-- Form Modal -->
     <div id="form-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-indigo-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
-            <!-- 頂部精簡 Header：標題與快捷推廣設定 (向右平滑展開輪播順序輸入框) -->
             <div class="p-4 sm:p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50 sticky top-0 z-10">
                 <div class="flex items-center space-x-3">
                     <h3 id="form-modal-title" class="text-lg sm:text-xl font-bold text-slate-900">新增活動</h3>
@@ -634,7 +634,6 @@
                             <input type="checkbox" id="input-is-pinned" class="w-3.5 h-3.5 text-amber-500 rounded border-slate-300 focus:ring-amber-400">
                             <span class="text-xs font-bold text-amber-700">📌 置頂</span>
                         </label>
-                        <!-- 第 1 點：向右平滑展開輪播順序 -->
                         <div class="flex items-center space-x-1.5 bg-white px-2.5 py-1 rounded-xl border border-slate-200 shadow-2xs">
                             <label class="flex items-center space-x-1.5 cursor-pointer hover:border-indigo-400 transition">
                                 <input type="checkbox" id="input-is-carousel" onchange="toggleCarouselOrderInline()" class="w-3.5 h-3.5 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
@@ -655,7 +654,7 @@
             <form id="event-form" class="overflow-y-auto p-5 sm:p-6 space-y-4">
                 <input type="hidden" id="event-id">
 
-                <!-- 第 4 點：發布時間 (可隨機更改或預設當下) -->
+                <!-- 發布時間 -->
                 <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div class="flex items-center space-x-2">
                         <i data-lucide="send" class="w-4 h-4 text-indigo-600 shrink-0"></i>
@@ -667,7 +666,7 @@
                     </div>
                 </div>
                 
-                <!-- 基本規格網格 (第 2 點：新增 入場方式) -->
+                <!-- 基本規格網格 -->
                 <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">活動類型 *</label>
@@ -701,9 +700,8 @@
                         <input type="text" id="input-name" placeholder="例如：2027 臺北最HIGH新年城" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-2xs">
                     </div>
                     <div>
-                        <!-- 第 1 點：已精確刪除括號提示文字 -->
                         <label class="block text-xs font-semibold text-slate-700 mb-1">活動時間 *</label>
-                        <input type="text" id="input-time" placeholder="2026/12/31 19:00 或 2026/11/06 - 116/01/03" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-2xs"[cite: 1]>
+                        <input type="text" id="input-time" placeholder="2026/12/31 19:00 或 2026/11/06 - 116/01/03" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-2xs">
                     </div>
                 </div>
 
@@ -712,7 +710,6 @@
                         <label class="block text-xs font-semibold text-slate-700 mb-1">活動地點 *</label>
                         <input type="text" id="input-location" placeholder="例如：臺北市市民廣場" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-2xs">
                     </div>
-                    <!-- 第 2 點：入場方式獨立欄位 -->
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">入場方式 (例如：免費自由入場 / 憑票入場)</label>
                         <input list="admission-datalist" id="input-admission" placeholder="免費自由入場、憑發票換票..." class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-2xs">
@@ -725,7 +722,7 @@
                     </div>
                 </div>
 
-                <!-- 第 5、6、7 點：自訂票務標題 ＋ 多種售票/索票方式動態新增 -->
+                <!-- 票務資訊 (方式名稱選填，動態增減) -->
                 <div class="p-3.5 bg-amber-50/70 rounded-2xl border border-amber-200 space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-2">
@@ -777,12 +774,12 @@
                     <div id="image-preview-container" class="hidden relative inline-block">
                         <img id="image-preview" src="" alt="封面預覽" class="h-24 object-cover rounded-xl border border-slate-200 shadow-sm">
                         <button type="button" onclick="removeSingleImage('input-image', 'input-image-file', 'image-preview', 'image-preview-container', 'image-upload-status')" class="absolute -top-2 -right-2 bg-rose-500 text-white rounded-full p-1 shadow-md hover:bg-rose-600">
-                            <i data-lucide="x" class="w-3 h-3"></i>
+                            <i data-lucide="x" class="w-3.5 h-3.5"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- 第 2 點：簡化標題為「2. 演出卡司及海報」 -->
+                <!-- 2. 演出卡司及海報 (支援圖片前後排序) -->
                 <div class="p-3.5 bg-indigo-50/50 rounded-xl border border-indigo-100 space-y-2.5">
                     <span class="block text-xs font-bold text-indigo-900 flex items-center space-x-1.5">
                         <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-600"></i>
@@ -797,7 +794,7 @@
                     </div>
                     <div>
                         <div class="flex items-center justify-between mb-1">
-                            <label class="block text-[11px] text-slate-500">上傳卡司宣傳海報</label>
+                            <label class="block text-[11px] text-slate-500">上傳卡司宣傳海報 (可多選，支援左右排序調整)</label>
                             <div class="flex items-center space-x-2">
                                 <button type="button" onclick="openAssetPicker('multiple', 'lineup-images-store', 'lineup-gallery-container')" class="text-[11px] text-violet-700 font-semibold hover:underline flex items-center space-x-1">
                                     <i data-lucide="image" class="w-3 h-3"></i><span>圖庫選擇</span>
@@ -813,10 +810,10 @@
                         <input type="text" id="input-lineup-image-manual" placeholder="貼上海報網址 (多個以逗號隔開)" onchange="addManualImageToStore('input-lineup-image-manual', 'lineup-images-store', 'lineup-gallery-container')" class="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs">
                     </div>
                     <input type="hidden" id="lineup-images-store">
-                    <div id="lineup-gallery-container" class="grid grid-cols-3 sm:grid-cols-4 gap-2 pt-1"></div>
+                    <div id="lineup-gallery-container" class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1"></div>
                 </div>
 
-                <!-- 第 3 點：簡化標題為「3. 活動流程」 -->
+                <!-- 3. 活動流程 (支援流程圖前後排序) -->
                 <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
                     <span class="block text-xs font-bold text-slate-800">3. 活動流程</span>
                     <div>
@@ -826,7 +823,7 @@
                     </div>
                     <div>
                         <div class="flex items-center justify-between mb-1">
-                            <label class="block text-[11px] text-slate-500">上傳時刻表 / 流程海報</label>
+                            <label class="block text-[11px] text-slate-500">上傳時刻表 / 流程海報 (支援左右排序調整)</label>
                             <div class="flex items-center space-x-2">
                                 <button type="button" onclick="openAssetPicker('multiple', 'schedule-images-store', 'schedule-gallery-container')" class="text-[11px] text-slate-700 font-semibold hover:underline flex items-center space-x-1">
                                     <i data-lucide="image" class="w-3 h-3"></i><span>圖庫選擇</span>
@@ -842,13 +839,22 @@
                         <input type="text" id="input-schedule-image-manual" placeholder="貼上海報網址 (多個以逗號隔開)" onchange="addManualImageToStore('input-schedule-image-manual', 'schedule-images-store', 'schedule-gallery-container')" class="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs">
                     </div>
                     <input type="hidden" id="schedule-images-store">
-                    <div id="schedule-gallery-container" class="grid grid-cols-3 sm:grid-cols-4 gap-2 pt-1"></div>
+                    <div id="schedule-gallery-container" class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1"></div>
                 </div>
 
-                <!-- 4. 活動內容 (未輸入前台自動不顯示) -->
+                <!-- 4. 活動內容 (未輸入前台自動隱藏) -->
                 <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
                     <span class="block text-xs font-bold text-slate-800">4. 活動內容 (選填)</span>
                     <textarea id="input-content" rows="3" placeholder="輸入活動詳細特色說明、周邊市集、煙火倒數亮點、交通接駁管制等資訊..." class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-indigo-500"></textarea>
+                </div>
+
+                <!-- YouTube 影音嵌入 -->
+                <div class="p-3.5 bg-rose-50/50 rounded-xl border border-rose-100 space-y-2">
+                    <label class="block text-xs font-bold text-rose-900 flex items-center space-x-1.5">
+                        <i data-lucide="youtube" class="w-3.5 h-3.5 text-rose-600"></i>
+                        <span>YouTube 影片 / 轉播直播連結 (選填)</span>
+                    </label>
+                    <input type="text" id="input-youtube" placeholder="https://www.youtube.com/watch?v=... 或 https://youtu.be/..." class="w-full px-3.5 py-2 bg-white border border-rose-200 rounded-xl text-xs focus:outline-none focus:border-rose-500">
                 </div>
 
                 <!-- 活動連結 -->
@@ -1128,6 +1134,13 @@
             return (!e.image || e.image.trim() === '') && Boolean(e.lineup_image && e.lineup_image.trim() !== '');
         }
 
+        function extractYouTubeEmbedUrl(url) {
+            if (!url) return '';
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}` : '';
+        }
+
         async function sha256(message) {
             const msgBuffer = new TextEncoder().encode(message);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
@@ -1385,6 +1398,7 @@
                                     ticket_title: e.ticket_title || '售票方式',
                                     ticket_plans_json: e.ticket_plans_json || '[]',
                                     content: e.content || '',
+                                    youtube_url: e.youtube_url || '',
                                     time: sanitizeTimeDisplay(e.time),
                                     lineup: e.lineup || '',
                                     lineup_image: e.lineup_image || '',
@@ -1500,7 +1514,7 @@
             }
         }
 
-        // 第 9 點：輪播圖上下左右絕對居中 (object-center)
+        // 輪播：過期活動強制剔除、上下左右絕對居中 (object-center)
         function updateCarouselView() {
             const container = document.getElementById('hero-carousel-container');
             const dots = document.getElementById('carousel-dots');
@@ -1508,6 +1522,7 @@
 
             activeCarouselEvents = events
                 .filter(e => {
+                    // 若活動已標記結束或時間過期 2 天，即便有勾選輪播也強制排除
                     if (isEffectivelyClosed(e) || e.status === 'hidden') return false;
                     const cRaw = String(e.is_carousel).trim().toLowerCase();
                     return (cRaw === 'true' || cRaw === '1' || cRaw === 'yes');
@@ -1584,7 +1599,6 @@
             });
         }
 
-        // 第 1 點：向右平滑展開輪播順序輸入框
         function toggleCarouselOrderInline() {
             const isChecked = document.getElementById('input-is-carousel').checked;
             const box = document.getElementById('carousel-order-inline-box');
@@ -1598,7 +1612,6 @@
             }
         }
 
-        // 第 4 點：一鍵設定發布時間為現在
         function setCurrentPublishTime() {
             const now = new Date();
             const y = now.getFullYear();
@@ -1609,7 +1622,6 @@
             document.getElementById('input-published-at').value = `${y}/${m}/${d} ${hh}:${mm}`;
         }
 
-        // 第 5、6、7 點：動態票務清單管理
         let currentTicketPlans = [];
 
         function toggleTicketSection() {
@@ -1647,7 +1659,7 @@
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         <div>
-                            <label class="block text-[10px] font-semibold text-slate-600 mb-0.5">方式名稱 * (如: 早鳥預售 / 發票兌換)</label>
+                            <label class="block text-[10px] font-semibold text-slate-600 mb-0.5">方式名稱 (選填，如: 早鳥預售 / 發票兌換)</label>
                             <input type="text" value="${plan.name || ''}" oninput="updateTicketPlan(${idx}, 'name', this.value)" placeholder="例如：線上預售票、現場排隊取票" class="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs">
                         </div>
                         <div>
@@ -1845,20 +1857,41 @@
             document.getElementById(manualInputId).value = '';
         }
 
+        // 圖片前後自由排序支援與懸浮提示活動名稱
         function renderGallery(storeInputId, galleryContainerId) {
             const container = document.getElementById(galleryContainerId);
             const urls = document.getElementById(storeInputId).value.split(',').filter(Boolean);
+            const actName = document.getElementById('input-name')?.value.trim() || '當前活動';
             
             container.innerHTML = urls.map((url, idx) => `
-                <div class="relative group rounded-lg overflow-hidden border border-slate-200 aspect-video bg-slate-100 flex items-center justify-center shadow-2xs p-1">
+                <div class="relative group rounded-lg overflow-hidden border border-slate-200 aspect-video bg-slate-100 flex items-center justify-center shadow-2xs p-1" title="${actName} - 海報 #${idx + 1}">
                     <img src="${url}" class="max-w-full max-h-full object-contain">
-                    <button type="button" onclick="removeImageFromStore('${storeInputId}', '${galleryContainerId}', ${idx})" class="absolute top-1 right-1 bg-rose-600 hover:bg-rose-700 text-white p-1 rounded-full shadow-md transition">
-                        <i data-lucide="x" class="w-3 h-3"></i>
-                    </button>
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-between px-2">
+                        <button type="button" onclick="moveImageOrder('${storeInputId}', '${galleryContainerId}', ${idx}, -1)" class="p-1 bg-white/90 text-slate-700 hover:text-indigo-600 rounded-md transition ${idx === 0 ? 'opacity-30 cursor-not-allowed' : ''}" title="往前移動">
+                            <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
+                        </button>
+                        <button type="button" onclick="removeImageFromStore('${storeInputId}', '${galleryContainerId}', ${idx})" class="p-1 bg-rose-600 text-white rounded-md hover:bg-rose-700 transition" title="移除此圖">
+                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                        </button>
+                        <button type="button" onclick="moveImageOrder('${storeInputId}', '${galleryContainerId}', ${idx}, 1)" class="p-1 bg-white/90 text-slate-700 hover:text-indigo-600 rounded-md transition ${idx === urls.length - 1 ? 'opacity-30 cursor-not-allowed' : ''}" title="往後移動">
+                            <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
                 </div>
             `).join('');
 
             lucide.createIcons();
+        }
+
+        function moveImageOrder(storeInputId, galleryContainerId, idx, direction) {
+            let urls = document.getElementById(storeInputId).value.split(',').filter(Boolean);
+            const targetIdx = idx + direction;
+            if (targetIdx < 0 || targetIdx >= urls.length) return;
+            const temp = urls[idx];
+            urls[idx] = urls[targetIdx];
+            urls[targetIdx] = temp;
+            document.getElementById(storeInputId).value = urls.join(',');
+            renderGallery(storeInputId, galleryContainerId);
         }
 
         function removeImageFromStore(storeInputId, galleryContainerId, targetIdx) {
@@ -2238,9 +2271,6 @@
             }
         }
 
-        // ==========================================
-        // 【核心前台排序】置頂 ➔ 開放 ➔ 尚未開放 ➔ 開始時間 ➔ 地區 ➔ 類型 ➔ 權重
-        // ==========================================
         function renderEvents() {
             const grid = document.getElementById('events-grid');
             const emptyState = document.getElementById('empty-state');
@@ -2575,7 +2605,7 @@
                 return `
                     <div class="flex flex-wrap gap-2 pt-0.5">
                         ${items.map(name => `
-                            <span class="px-3.5 py-1.5 rounded-xl text-sm font-semibold bg-indigo-50 text-indigo-800 border border-indigo-200 shadow-2xs">
+                            <span class="px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-50 text-indigo-800 border border-indigo-200 shadow-2xs">
                                 ${name}
                             </span>
                         `).join('')}
@@ -2609,7 +2639,7 @@
                         ` : ''}
                         <div class="flex flex-wrap gap-1.5">
                             ${items.map(name => `
-                                <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-indigo-50 text-indigo-800 border border-indigo-200">
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-indigo-50 text-indigo-800 border border-indigo-200">
                                     ${name}
                                 </span>
                             `).join('')}
@@ -2618,7 +2648,7 @@
                 `;
             }).join('');
 
-            return `<div class="space-y-2.5 pt-0.5">${dayBlocksHtml}</div>`;
+            return `<div class="space-y-2 pt-0.5">${dayBlocksHtml}</div>`;
         }
 
         function parseScheduleToTimeline(descText) {
@@ -2637,19 +2667,38 @@
                 }
 
                 return `
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between py-3 px-4 bg-white rounded-xl border border-slate-100 shadow-2xs hover:border-indigo-100 transition">
-                        ${timeStr ? `<span class="font-mono text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1.5 rounded-lg mb-1.5 sm:mb-0 w-fit">${timeStr}</span>` : '<span></span>'}
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between py-2.5 px-3.5 bg-white rounded-xl border border-slate-100 shadow-2xs hover:border-indigo-100 transition">
+                        ${timeStr ? `<span class="font-mono text-xs font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-lg mb-1 sm:mb-0 w-fit">${timeStr}</span>` : '<span></span>'}
                         <span class="text-xs sm:text-sm font-medium text-slate-700 sm:text-right pl-1">${actStr}</span>
                     </div>
                 `;
             }).join('');
 
-            return `<div class="space-y-2.5">${itemsHtml}</div>`;
+            return `<div class="space-y-2">${itemsHtml}</div>`;
         }
 
-        // ==========================================
-        // 【活動詳情彈窗】第 2 點入場方式、第 3 點排版順序、第 4 點發布時間並列、第 6/7 點多重票務
-        // ==========================================
+        // 渲染海報網格 (單張時滿版，多張時雙欄並排)
+        function renderPosterGrid(imagesArray) {
+            if (!imagesArray || imagesArray.length === 0) return '';
+            const isSingle = imagesArray.length === 1;
+
+            return `
+                <div class="${isSingle ? 'w-full' : 'grid grid-cols-1 sm:grid-cols-2 gap-3'}">
+                    ${imagesArray.map(img => `
+                        <div class="relative rounded-2xl overflow-hidden border border-slate-200 bg-white group cursor-pointer shadow-sm flex items-center justify-center p-1" onclick="openLightbox('${img}')">
+                            <img src="${img}" alt="海報" class="w-full h-auto ${isSingle ? 'max-h-[85vh]' : 'max-h-[60vh]'} object-contain mx-auto rounded-xl">
+                            <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition flex items-center justify-center opacity-0 group-hover:opacity-100 rounded-2xl">
+                                <span class="px-3.5 py-1.5 bg-black/75 text-white rounded-xl text-xs font-semibold flex items-center space-x-1.5 backdrop-blur-sm shadow-md">
+                                    <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i><span>放大檢視</span>
+                                </span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // 活動詳情彈窗
         function openDetailModal(id) {
             const e = events.find(item => String(item.id) === String(id));
             if (!e) return;
@@ -2665,41 +2714,33 @@
 
             const lineupImgs = (e.lineup_image || '').split(',').filter(Boolean);
             const scheduleImgs = (e.schedule_image || '').split(',').filter(Boolean);
+            const youtubeEmbed = extractYouTubeEmbedUrl(e.youtube_url);
 
+            // 頂部首圖：消除黑框，套用高強度毛玻璃環境光暈
             let modalBannerHtml = '';
             if (cover) {
-                if (isFromPoster) {
-                    modalBannerHtml = `
-                        <div class="relative rounded-2xl overflow-hidden h-72 sm:h-96 bg-slate-950 flex items-center justify-center border border-slate-200 shadow-inner group">
-                            <img src="${cover}" class="absolute inset-0 w-full h-full object-cover blur-2xl opacity-45 scale-110 pointer-events-none">
-                            <div class="absolute inset-0 bg-slate-950/30 pointer-events-none"></div>
-                            <img src="${cover}" alt="${e.name}" class="relative max-h-full max-w-full object-contain z-10 cursor-pointer shadow-2xl rounded-lg" onclick="openLightbox('${cover}')">
-                            <button onclick="openLightbox('${cover}')" class="absolute bottom-4 right-4 px-3 py-1.5 bg-black/75 hover:bg-black text-white text-xs rounded-xl flex items-center space-x-1.5 backdrop-blur-sm transition shadow-lg z-20"><i data-lucide="maximize-2" class="w-4 h-4"></i><span>放大海報</span></button>
-                            <div class="absolute bottom-4 left-4 right-4 pointer-events-none z-20">
-                                <span class="px-3 py-1 rounded-full text-xs font-semibold ${badgeColor} text-white mb-2 inline-block shadow-sm">${e.city} (${e.category})</span>
-                                <h2 class="text-2xl sm:text-3xl font-extrabold text-white drop-shadow-lg">${e.name}</h2>
-                            </div>
+                modalBannerHtml = `
+                    <div class="relative rounded-2xl overflow-hidden h-64 sm:h-80 bg-slate-100 flex items-center justify-center border border-slate-200 shadow-inner group">
+                        <!-- 底層高斯模糊環境色彩暈染 (無任何黑框) -->
+                        <img src="${cover}" class="absolute inset-0 w-full h-full object-cover blur-3xl opacity-80 scale-125 pointer-events-none">
+                        <div class="absolute inset-0 bg-white/20 backdrop-blur-xs pointer-events-none"></div>
+                        <!-- 上層原圖 (橫幅居中/直式靠上) -->
+                        <img src="${cover}" alt="${e.name}" class="relative max-h-full max-w-full object-contain ${isFromPoster ? 'object-top' : 'object-center'} z-10 cursor-pointer shadow-xl rounded-lg" onclick="openLightbox('${cover}')">
+                        <button onclick="openLightbox('${cover}')" class="absolute bottom-3 right-3 px-3 py-1.5 bg-black/60 hover:bg-black text-white text-xs rounded-xl flex items-center space-x-1 backdrop-blur-sm transition shadow-lg z-20">
+                            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i><span>放大</span>
+                        </button>
+                        <div class="absolute bottom-3 left-3 right-16 pointer-events-none z-20">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold ${badgeColor} text-white mb-1.5 inline-block shadow-sm">${e.city} (${e.category})</span>
+                            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 drop-shadow-sm line-clamp-2">${e.name}</h2>
                         </div>
-                    `;
-                } else {
-                    modalBannerHtml = `
-                        <div class="relative rounded-2xl overflow-hidden h-64 sm:h-80 bg-slate-900 flex items-center justify-center border border-slate-200 shadow-inner">
-                            <img src="${cover}" alt="${e.name}" class="w-full h-full object-cover cursor-pointer" onclick="openLightbox('${cover}')">
-                            <button onclick="openLightbox('${cover}')" class="absolute bottom-4 right-4 px-3 py-1.5 bg-black/70 hover:bg-black text-white text-xs rounded-xl flex items-center space-x-1.5 backdrop-blur-sm transition shadow-lg"><i data-lucide="maximize-2" class="w-4 h-4"></i><span>放大封面</span></button>
-                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none"></div>
-                            <div class="absolute bottom-4 left-4 right-4 pointer-events-none">
-                                <span class="px-3 py-1 rounded-full text-xs font-semibold ${badgeColor} text-white mb-2 inline-block shadow-sm">${e.city} (${e.category})</span>
-                                <h2 class="text-2xl sm:text-3xl font-extrabold text-white drop-shadow-md">${e.name}</h2>
-                            </div>
-                        </div>
-                    `;
-                }
+                    </div>
+                `;
             } else {
                 modalBannerHtml = `
-                    <div class="relative rounded-2xl overflow-hidden h-48 bg-gradient-to-br from-indigo-900 to-slate-900 flex items-center justify-center p-6 text-center border border-slate-200">
+                    <div class="relative rounded-2xl overflow-hidden h-40 bg-gradient-to-br from-indigo-900 to-slate-900 flex items-center justify-center p-6 text-center border border-slate-200">
                         <div>
                             <span class="px-3 py-1 rounded-full text-xs font-semibold ${badgeColor} text-white mb-2 inline-block">${e.city} (${e.category})</span>
-                            <h2 class="text-2xl sm:text-3xl font-extrabold text-white drop-shadow">${e.name}</h2>
+                            <h2 class="text-xl sm:text-2xl font-extrabold text-white drop-shadow">${e.name}</h2>
                         </div>
                     </div>
                 `;
@@ -2708,7 +2749,6 @@
             const hasSchedule = (e.desc && e.desc.trim().length > 0) || (scheduleImgs.length > 0);
             const hasContent = Boolean(e.content && e.content.trim().length > 0);
 
-            // 解析多筆票務方式
             let plans = [];
             try {
                 plans = JSON.parse(e.ticket_plans_json || '[]');
@@ -2717,39 +2757,39 @@
             content.innerHTML = `
                 ${modalBannerHtml}
 
-                <!-- 第 4 點：發布時間與最後更新時間並列 -->
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs text-slate-500 bg-slate-50 px-3.5 py-2.5 rounded-xl border border-slate-200">
+                <!-- 時間列：去框、去底色、間距縮小緊湊 -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-[11px] sm:text-xs text-slate-400 pt-0.5 px-0.5">
                     <div class="flex items-center space-x-1">
                         <i data-lucide="send" class="w-3.5 h-3.5 text-indigo-500"></i>
                         <span>發布時間：</span>
-                        <span class="font-mono font-medium text-slate-700">${e.published_at || e.updated_at || '2026/11/01 10:00'}</span>
+                        <span class="font-mono text-slate-600">${e.published_at || e.updated_at || '2026/11/01 10:00'}</span>
                     </div>
                     <div class="flex items-center space-x-1">
-                        <i data-lucide="clock" class="w-3.5 h-3.5 text-indigo-600"></i>
+                        <i data-lucide="clock" class="w-3.5 h-3.5 text-indigo-500"></i>
                         <span>最後更新：</span>
-                        <span class="font-mono font-medium text-slate-700">${e.updated_at ? e.updated_at : '2026-10-10'}</span>
+                        <span class="font-mono text-slate-600">${e.updated_at ? e.updated_at : '2026-10-10'}</span>
                     </div>
                 </div>
 
-                <!-- 第 3 點：時間、地點在上方；第 2 點：入場方式並列 -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-1 shadow-2xs">
-                        <div class="text-xs text-slate-500 flex items-center space-x-1"><i data-lucide="calendar" class="w-3.5 h-3.5 text-indigo-600"></i><span>活動時間</span></div>
+                <!-- 核心資訊卡：活動時間、活動地點、入場方式 -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1 shadow-2xs">
+                        <div class="text-[11px] text-slate-500 flex items-center space-x-1"><i data-lucide="calendar" class="w-3.5 h-3.5 text-indigo-600"></i><span>活動時間</span></div>
                         <div class="text-xs sm:text-sm font-semibold text-slate-900">${e.time}</div>
                     </div>
-                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-1 shadow-2xs">
-                        <div class="text-xs text-slate-500 flex items-center space-x-1"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-rose-500"></i><span>活動地點</span></div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1 shadow-2xs">
+                        <div class="text-[11px] text-slate-500 flex items-center space-x-1"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-rose-500"></i><span>活動地點</span></div>
                         <div class="text-xs sm:text-sm font-semibold text-slate-900">${e.location}</div>
                     </div>
-                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-1 shadow-2xs">
-                        <div class="text-xs text-slate-500 flex items-center space-x-1"><i data-lucide="door-open" class="w-3.5 h-3.5 text-emerald-600"></i><span>入場方式</span></div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1 shadow-2xs">
+                        <div class="text-[11px] text-slate-500 flex items-center space-x-1"><i data-lucide="door-open" class="w-3.5 h-3.5 text-emerald-600"></i><span>入場方式</span></div>
                         <div class="text-xs sm:text-sm font-semibold text-emerald-700">${e.admission || '免費自由入場'}</div>
                     </div>
                 </div>
 
-                <!-- 第 3、5、6、7 點：下方展開多種票務方式專區 -->
+                <!-- 票務專區 (支援多重方式，方式名稱選填) -->
                 ${e.is_ticket ? `
-                    <div class="p-4 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl border border-amber-200 space-y-3 shadow-2xs">
+                    <div class="p-3.5 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl border border-amber-200 space-y-2.5 shadow-2xs">
                         <div class="flex items-center space-x-1.5">
                             <span class="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-600 text-white shadow-2xs">
                                 <i data-lucide="ticket" class="w-3.5 h-3.5"></i>
@@ -2758,29 +2798,40 @@
                         </div>
                         <div class="space-y-2">
                             ${plans.length > 0 ? plans.map(p => `
-                                <div class="p-3 bg-white/90 rounded-xl border border-amber-200/80 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-                                    <div class="space-y-1">
-                                        <div class="text-xs font-bold text-amber-950 flex items-center space-x-1.5">
-                                            <span>🔹 ${p.name || '票務方式'}</span>
-                                        </div>
+                                <div class="p-2.5 bg-white/90 rounded-xl border border-amber-200/80 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                                    <div class="space-y-0.5">
+                                        ${p.name ? `<div class="text-xs font-bold text-amber-950">🔹 ${p.name}</div>` : ''}
                                         ${p.time ? `<div class="text-[11px] text-slate-600"><strong class="text-amber-800">開放時間：</strong>${p.time}</div>` : ''}
                                         ${p.desc ? `<div class="text-[11px] text-slate-600"><strong class="text-amber-800">門票/條件：</strong>${p.desc}</div>` : ''}
                                     </div>
                                     ${p.link ? `
-                                        <a href="${p.link}" target="_blank" class="px-3.5 py-1.5 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white rounded-xl text-xs font-bold shadow-md shadow-amber-600/20 flex items-center justify-center space-x-1 transition shrink-0">
-                                            <span>前往索票/購票</span>
+                                        <a href="${p.link}" target="_blank" class="px-3 py-1 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white rounded-xl text-xs font-bold shadow-md shadow-amber-600/20 flex items-center justify-center space-x-1 transition shrink-0">
+                                            <span>前往購票/索票</span>
                                             <i data-lucide="arrow-right" class="w-3 h-3"></i>
                                         </a>
                                     ` : ''}
                                 </div>
-                            `).join('') : '<div class="text-xs text-amber-900">本場活動需憑票或索票入場，詳情依主辦單位公告為準。</div>'}
+                            `).join('') : '<div class="text-xs text-amber-900">本場活動需憑票或索票入場，詳情請依主辦公告。</div>'}
                         </div>
                     </div>
                 ` : ''}
 
-                <!-- 1. 演出卡司陣容 -->
+                <!-- YouTube 嵌入影音 (有輸入才顯示) -->
+                ${youtubeEmbed ? `
+                    <div class="space-y-1.5">
+                        <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center space-x-1.5">
+                            <i data-lucide="play-circle" class="w-4 h-4 text-rose-600"></i>
+                            <span>官方活動影音 / 轉播</span>
+                        </h4>
+                        <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-black">
+                            <iframe src="${youtubeEmbed}" class="absolute inset-0 w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                ` : ''}
+
+                <!-- 1. 演出卡司及海報 -->
                 ${e.lineup ? `
-                    <div class="p-4 bg-indigo-50/50 rounded-2xl border border-indigo-100 space-y-2.5">
+                    <div class="p-3.5 bg-indigo-50/50 rounded-2xl border border-indigo-100 space-y-2">
                         <h4 class="text-xs font-bold text-indigo-900 uppercase tracking-wider flex items-center space-x-1.5">
                             <i data-lucide="sparkles" class="w-4 h-4 text-indigo-600"></i>
                             <span>🌟 演出卡司及海報</span>
@@ -2789,76 +2840,53 @@
                     </div>
                 ` : ''}
 
-                <!-- 2. 活動宣傳海報 (滿版純圖呈現，無張數與多餘文字) -->
-                ${lineupImgs.length > 0 ? `
-                    <div class="space-y-4">
-                        ${lineupImgs.map(img => `
-                            <div class="relative rounded-2xl overflow-hidden border border-slate-200 bg-white group cursor-pointer shadow-sm flex items-center justify-center p-1" onclick="openLightbox('${img}')">
-                                <img src="${img}" alt="宣傳海報" class="w-full h-auto max-h-[85vh] object-contain mx-auto rounded-xl">
-                                <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition flex items-center justify-center opacity-0 group-hover:opacity-100 rounded-2xl">
-                                    <span class="px-4 py-2 bg-black/75 text-white rounded-xl text-xs font-semibold flex items-center space-x-1.5 backdrop-blur-sm shadow-md">
-                                        <i data-lucide="maximize-2" class="w-4 h-4"></i><span>點擊放大檢視</span>
-                                    </span>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                ` : ''}
+                <!-- 卡司宣傳海報 (單張滿版，多張雙欄並排) -->
+                ${lineupImgs.length > 0 ? renderPosterGrid(lineupImgs) : ''}
 
-                <!-- 3. 活動流程 (無填寫自動完全隱藏) -->
+                <!-- 3. 活動流程 (標題放大一號，無填寫自動隱藏) -->
                 ${hasSchedule ? `
-                    <div class="space-y-3">
-                        <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center space-x-1.5">
+                    <div class="space-y-2.5">
+                        <h4 class="text-sm sm:text-base font-bold text-slate-800 uppercase tracking-wider flex items-center space-x-1.5">
                             <i data-lucide="list-ordered" class="w-4 h-4 text-indigo-600"></i>
                             <span>活動流程</span>
                         </h4>
                         ${parseScheduleToTimeline(e.desc)}
-                        ${scheduleImgs.length > 0 ? `
-                            <div class="space-y-3 pt-1">
-                                ${scheduleImgs.map(img => `
-                                    <div class="relative rounded-2xl overflow-hidden border border-slate-200 bg-white group cursor-pointer shadow-sm flex items-center justify-center p-1" onclick="openLightbox('${img}')">
-                                        <img src="${img}" alt="活動流程海報" class="w-full h-auto max-h-[85vh] object-contain mx-auto rounded-xl">
-                                        <div class="absolute inset-0 bg-black/25 group-hover:bg-black/45 transition flex items-center justify-center opacity-0 group-hover:opacity-100 rounded-2xl">
-                                            <span class="px-4 py-2 bg-black/75 text-white rounded-xl text-xs font-semibold flex items-center space-x-1.5 backdrop-blur-sm shadow-md">
-                                                <i data-lucide="maximize-2" class="w-4 h-4"></i><span>點擊放大流程表</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        ` : ''}
+                        ${scheduleImgs.length > 0 ? renderPosterGrid(scheduleImgs) : ''}
                     </div>
                 ` : ''}
 
-                <!-- 4. 活動內容 (無填寫自動隱藏) -->
+                <!-- 4. 活動內容 (未輸入自動隱藏) -->
                 ${hasContent ? `
-                    <div class="space-y-2">
+                    <div class="space-y-1.5">
                         <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center space-x-1.5">
                             <i data-lucide="file-text" class="w-4 h-4 text-indigo-600"></i>
                             <span>活動內容</span>
                         </h4>
-                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs text-slate-700 whitespace-pre-line leading-relaxed shadow-2xs">${e.content}</div>
-                    </div>
-                ` : ''}
-
-                <!-- 活動連結 -->
-                ${e.link ? `
-                    <div class="pt-2">
-                        <a href="${e.link}" target="_blank" class="inline-flex items-center space-x-2 text-sm text-indigo-600 hover:text-indigo-700 font-medium bg-indigo-50 px-4 py-2.5 rounded-xl border border-indigo-200 transition shadow-sm">
-                            <i data-lucide="external-link" class="w-4 h-4"></i>
-                            <span>活動連結</span>
-                        </a>
+                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 text-xs text-slate-700 whitespace-pre-line leading-relaxed shadow-2xs">${e.content}</div>
                     </div>
                 ` : ''}
             `;
 
+            // 活動連結整合至彈窗底部最左側
+            const linkContainer = document.getElementById('modal-external-link-container');
+            if (e.link) {
+                linkContainer.innerHTML = `
+                    <a href="${e.link}" target="_blank" class="inline-flex items-center space-x-1.5 text-xs text-indigo-600 hover:text-indigo-700 font-semibold bg-indigo-50 hover:bg-indigo-100 px-3 py-2 rounded-xl border border-indigo-200 transition shadow-2xs">
+                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                        <span>活動連結</span>
+                    </a>
+                `;
+            } else {
+                linkContainer.innerHTML = '';
+            }
+
             const bBtn = document.getElementById('modal-bookmark-btn');
             if (isBookmarked) {
                 bBtn.innerHTML = `<i data-lucide="bookmark" class="w-4 h-4 fill-amber-400 text-amber-500"></i><span>已收藏</span>`;
-                bBtn.className = "px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-sm font-medium flex items-center space-x-2 shadow-md shadow-purple-600/20 transition";
+                bBtn.className = "px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs sm:text-sm font-medium flex items-center space-x-1.5 shadow-md shadow-purple-600/20 transition";
             } else {
                 bBtn.innerHTML = `<i data-lucide="bookmark" class="w-4 h-4"></i><span>加入收藏</span>`;
-                bBtn.className = "px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium flex items-center space-x-2 shadow-md shadow-indigo-600/20 transition";
+                bBtn.className = "px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-medium flex items-center space-x-1.5 shadow-md shadow-indigo-600/20 transition";
             }
 
             document.getElementById('detail-modal').classList.remove('hidden');
@@ -2890,14 +2918,10 @@
             modal.classList.remove('flex');
         }
 
-        // ==========================================
-        // 【第 10 點：每週活動週報功能實作】
-        // 時間排序 ➔ 各縣市順位 ➔ 點擊展開卡司 ➔ 複製/列印
-        // ==========================================
+        // 每週活動週報功能實作
         let weeklyReportEvents = [];
 
         function openWeeklyReportModal() {
-            // 抓取本週活動範圍 (週一 00:00:00 至 週日 23:59:59)
             const now = new Date();
             const currentDay = now.getDay();
             const distanceToMonday = (currentDay === 0 ? -6 : 1 - currentDay);
@@ -2907,13 +2931,11 @@
             const formatDate = (d) => `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}`;
             document.getElementById('weekly-report-date-range').innerText = `統計區間：${formatDate(monday)} (一) ～ ${formatDate(sunday)} (日)`;
 
-            // 篩選本週有效活動 (排除已完全封存與隱藏草稿)
             weeklyReportEvents = events.filter(e => {
                 if (e.status === 'hidden' || isEffectivelyClosed(e)) return false;
                 return isEventInThisWeek(e.time);
             });
 
-            // 嚴格依「活動時間 (早至晚) ➔ 各縣市順位 (北中南東) ➔ 權重」排序
             weeklyReportEvents.sort((a, b) => {
                 const startA = parseEventRange(a.time).startDate.getTime();
                 const startB = parseEventRange(b.time).startDate.getTime();
@@ -3013,9 +3035,6 @@
             window.print();
         }
 
-        // ==========================================
-        // 【後台三段式清單切換】
-        // ==========================================
         function setAdminViewTab(tab) {
             adminViewTab = tab;
             const btnActive = document.getElementById('admin-tab-active');
@@ -3294,6 +3313,7 @@
             toggleTicketSection();
 
             document.getElementById('input-content').value = '';
+            document.getElementById('input-youtube').value = '';
 
             removeSingleImage('input-image', 'input-image-file', 'image-preview', 'image-preview-container', 'image-upload-status');
             
@@ -3342,6 +3362,7 @@
             document.getElementById('input-time').value = sanitizeTimeDisplay(e.time);
             document.getElementById('input-location').value = e.location;
             document.getElementById('input-content').value = e.content || '';
+            document.getElementById('input-youtube').value = e.youtube_url || '';
             document.getElementById('input-lineup').value = e.lineup || '';
             document.getElementById('input-link').value = e.link || '';
             document.getElementById('input-desc').value = e.desc || '';
@@ -3391,6 +3412,7 @@
             const isTicket = document.getElementById('input-is-ticket').checked;
             const ticketTitle = document.getElementById('input-ticket-title').value.trim() || '售票方式';
             const contentVal = document.getElementById('input-content').value.trim();
+            const youtubeVal = document.getElementById('input-youtube').value.trim();
 
             if (!category) {
                 highlightErrorField('input-category', '請選擇或輸入活動類型！');
@@ -3448,6 +3470,7 @@
                 ticket_title: ticketTitle,
                 ticket_plans_json: JSON.stringify(currentTicketPlans),
                 content: contentVal,
+                youtube_url: youtubeVal,
                 image: image,
                 lineup: document.getElementById('input-lineup').value.trim(),
                 lineup_image: lineupImage,
@@ -3509,6 +3532,7 @@
                 saveBookmarks();
                 syncCategoriesWithEvents();
                 buildDynamicCategoryTabs();
+                buildAdminCategoryQuickFilters();
                 renderEvents();
                 buildHistoryYearTabs();
                 renderHistoryEvents();
