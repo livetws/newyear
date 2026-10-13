@@ -130,7 +130,7 @@
                 print-color-adjust: exact;
             }
             header, footer, nav, #admin-login-box, #admin-content-box, .no-print,
-            button, .carousel-slide, #hero-carousel-container, #event-section {
+            button, .carousel-slide, #hero-carousel-container, #event-section, #admin-fab-btn {
                 display: none !important;
             }
             #weekly-report-modal {
@@ -395,7 +395,8 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                <!-- 數據總覽 (新增每日瀏覽統計小卡片) -->
+                <div class="grid grid-cols-2 sm:grid-cols-6 gap-3">
                     <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 shadow-2xs">
                         <div class="text-slate-500 text-xs mb-1">進行中活動</div>
                         <div id="stat-total" class="text-xl font-bold text-slate-900">0</div>
@@ -416,9 +417,20 @@
                         <div class="text-slate-500 text-xs mb-1">歷史已歸檔</div>
                         <div id="stat-closed" class="text-xl font-bold text-slate-500">0</div>
                     </div>
+                    <!-- 第 6 點：每日瀏覽量快速卡片 -->
+                    <div class="bg-indigo-50/70 p-3.5 rounded-xl border border-indigo-200 shadow-2xs cursor-pointer hover:bg-indigo-100/70 transition" onclick="openDailyStatsModal()" title="點擊檢視近 7 日每日瀏覽趨勢">
+                        <div class="text-indigo-800 text-xs mb-1 flex items-center justify-between">
+                            <span>今日瀏覽</span>
+                            <i data-lucide="trending-up" class="w-3.5 h-3.5 text-indigo-600"></i>
+                        </div>
+                        <div class="flex items-baseline space-x-1.5">
+                            <span id="stat-today-visits" class="text-xl font-extrabold text-indigo-950 font-mono">0</span>
+                            <span class="text-[10px] text-indigo-600">次 (昨日: <span id="stat-yesterday-visits">0</span>)</span>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- 關鍵修改：新增活動按鈕移到三段式清單分頁列最前面第一位 -->
+                <!-- 三段式清單分頁列 (新增活動按鈕排在最前面第一位) -->
                 <div class="flex flex-wrap items-center gap-2 border-b border-slate-200 pb-3">
                     <button onclick="openAddModal()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-1.5 shadow-md shadow-indigo-600/25 shrink-0 transition">
                         <i data-lucide="plus" class="w-4 h-4"></i><span>新增活動</span>
@@ -437,14 +449,14 @@
                     </button>
                 </div>
 
-                <!-- 懸浮吸頂工具列 (輸入關鍵字即觸發全域跨狀態搜尋) -->
+                <!-- 懸浮吸頂工具列 (第 3 點：加上 autocomplete="off" 防止重整殘留文字) -->
                 <div class="sticky top-16 z-30 bg-white/95 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-indigo-100 shadow-md space-y-3">
                     <div class="flex flex-col md:flex-row gap-3 items-center justify-between">
                         <div class="relative w-full md:w-80">
                             <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                                 <i data-lucide="search" class="w-4 h-4"></i>
                             </span>
-                            <input type="text" id="admin-search-input" oninput="renderAdminTable()" placeholder="全域搜尋活動、縣市、卡司 (跨進行/隱藏/歷屆)..." 
+                            <input type="text" id="admin-search-input" autocomplete="off" oninput="renderAdminTable()" placeholder="全域搜尋活動、縣市、卡司 (跨進行/隱藏/歷屆)..." 
                                 class="w-full pl-9 pr-3 py-2 bg-slate-50 focus:bg-white border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-indigo-500">
                         </div>
 
@@ -457,7 +469,7 @@
                         </div>
                     </div>
 
-                    <!-- 活動類型快篩按鈕列 (支援即時動態重繪) -->
+                    <!-- 活動類型快篩按鈕列 -->
                     <div class="pt-2 border-t border-slate-100 flex items-center space-x-1.5 overflow-x-auto hide-scrollbar">
                         <span class="text-xs font-semibold text-slate-400 shrink-0 mr-1 flex items-center space-x-1">
                             <i data-lucide="filter" class="w-3.5 h-3.5 text-indigo-500"></i>
@@ -494,6 +506,12 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 第 5 點：後台右下角懸浮吸頂新增按鈕 (Floating Action Button, FAB) -->
+            <button id="admin-fab-btn" onclick="openAddModal()" class="fixed bottom-6 right-6 z-40 p-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-full shadow-2xl shadow-indigo-600/40 flex items-center space-x-2 transition-all transform hover:scale-105 active:scale-95 hidden no-print" title="快速新增活動">
+                <i data-lucide="plus" class="w-6 h-6 stroke-[2.5]"></i>
+                <span class="text-sm font-bold pr-1">新增活動</span>
+            </button>
         </div>
 
     </main>
@@ -549,15 +567,31 @@
         </button>
     </nav>
 
+    <!-- 第 6 點：每日瀏覽統計彈窗 -->
+    <div id="daily-stats-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden no-print">
+        <div class="clean-panel w-full max-w-md rounded-2xl overflow-hidden border border-indigo-200 shadow-2xl flex flex-col bg-white p-6 space-y-4 max-h-[85vh]">
+            <div class="flex items-center justify-between border-b pb-3">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="trending-up" class="w-5 h-5 text-indigo-600"></i>
+                    <h3 class="text-lg font-bold text-slate-900">每日造訪流量統計</h3>
+                </div>
+                <button onclick="closeDailyStatsModal()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <p class="text-xs text-slate-500">統計每日實際瀏覽頁面人次，協助評估社群推播宣傳成效。</p>
+            <div id="daily-stats-list" class="space-y-2 overflow-y-auto max-h-[50vh] pr-1"></div>
+            <div class="flex justify-end pt-3 border-t">
+                <button onclick="closeDailyStatsModal()" class="px-4 py-2 bg-slate-100 rounded-xl text-xs font-semibold text-slate-700">關閉</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Detail Modal (字級全面放大統一、靠頂滿版首圖、淡化遮罩、活動內容多圖展示、底部一鍵社群分享列) -->
     <div id="detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden no-print">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-slate-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div id="modal-content" class="overflow-y-auto p-5 sm:p-6 space-y-4"></div>
-            <!-- 底部操作列 (左側活動連結 ＋ 一鍵社群分享列) -->
             <div class="p-3.5 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div class="flex flex-wrap items-center gap-2">
                     <div id="modal-external-link-container"></div>
-                    <!-- 一鍵社群分享膠囊按鈕列 -->
                     <div id="modal-social-share-bar" class="flex items-center space-x-1.5 pl-1 sm:border-l sm:border-slate-200"></div>
                 </div>
                 <div class="flex items-center space-x-2 self-end sm:self-auto">
@@ -591,7 +625,6 @@
                     </h3>
                     <p id="weekly-report-date-range" class="text-xs text-slate-500 mt-0.5">統計區間：載入中...</p>
                 </div>
-                <!-- 週別切換控制器 (列印時隱藏) -->
                 <div class="flex items-center space-x-1.5 self-start sm:self-auto no-print">
                     <button onclick="changeWeeklyReportWeek(-1)" class="px-2.5 py-1.5 bg-white hover:bg-slate-100 text-slate-700 rounded-lg text-xs font-semibold border border-slate-200 flex items-center space-x-1 transition shadow-2xs" title="查看上一週">
                         <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i><span>上一週</span>
@@ -629,7 +662,7 @@
         </div>
     </div>
 
-    <!-- Branding Modal (新增社群分享預覽縮圖 Open Graph 上傳器) -->
+    <!-- Branding Modal (第 1 點：附贈一鍵複製靜態 OG 標籤與社群快取除錯連結) -->
     <div id="branding-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden no-print">
         <div class="clean-panel w-full max-w-lg rounded-2xl overflow-hidden border border-slate-200 shadow-2xl flex flex-col bg-white p-6 space-y-4 max-h-[85vh]">
             <div class="flex items-center justify-between border-b pb-3">
@@ -703,6 +736,16 @@
                     <div id="brand-og-preview-box" class="flex items-center space-x-3 pt-1">
                         <img id="brand-og-preview" src="" alt="社群縮圖預覽" class="h-16 w-32 rounded-lg object-cover border shadow-sm bg-slate-900 hidden">
                         <span id="brand-og-empty-hint" class="text-xs text-slate-400">目前使用系統預設煙火主視覺縮圖</span>
+                    </div>
+
+                    <!-- 第 1 點：除錯輔助與標籤生成區塊 -->
+                    <div class="pt-2 border-t border-indigo-200/60 flex flex-wrap items-center justify-between gap-2 text-[11px]">
+                        <button type="button" onclick="copyOgMetaTagCode()" class="text-indigo-700 hover:underline font-semibold flex items-center space-x-1">
+                            <i data-lucide="copy" class="w-3.5 h-3.5"></i><span>複製靜態 OG HTML 標籤碼</span>
+                        </button>
+                        <a href="https://developers.facebook.com/tools/debug/" target="_blank" class="text-slate-500 hover:text-indigo-600 hover:underline flex items-center space-x-1">
+                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i><span>FB/LINE 縮圖快取清除工具</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1076,6 +1119,7 @@
             </div>
         </div>
     </div>
+
 <!-- ==================== SCRIPT 核心業務邏輯與演算法 ==================== -->
     <script>
         const DEFAULT_GAS_URL = "https://script.google.com/macros/s/AKfycbwQftVg70yJwJJ6kuvy3dRFetPStKr05ntksXZzqkoB-KMNTQ8fCuT-mY95b0RYPX61/exec";
@@ -1123,12 +1167,15 @@
         let adminCurrentCategoryFilter = 'all';
         let adminViewTab = 'active';
 
-        // 載入優化狀態鎖：標記非首頁視圖是否已按需渲染
+        // 載入優化狀態鎖
         let isHistoryRendered = false;
         let isBookmarksRendered = false;
         let isAdminTableRendered = false;
 
-        // 每週活動週報當前週偏移量 (0: 當週, -1: 上週, 1: 下週)
+        // 第 6 點：每日造訪統計數據儲存陣列
+        let dailyVisitsData = [];
+
+        // 每週活動週報當前週偏移量
         let weeklyReportWeekOffset = 0;
         let weeklyReportEvents = [];
 
@@ -1142,14 +1189,15 @@
             { name: '燈會', order: 4, enabled: true }
         ];
 
-        // 載入效能大幅優化：只在開頭執行首頁所需邏輯
         window.onload = async function() {
+            // 第 3 點：強制清除後台搜尋關鍵字，杜絕重新整理殘留
+            clearAdminSearchInput();
+
             loadSavedBranding();
             loadCategoryConfigs();
             loadBookmarks();
             buildDynamicCategoryTabs();
             
-            // 讀取本機快取以求極速首屏呈現
             loadLocalEventsCache();
             renderEvents();
             updateCarouselView();
@@ -1168,9 +1216,16 @@
                 handleUrlEventDeepLink();
             });
 
-            // 背景靜默非同步同步雲端最新數據
             await syncDataFromCloud(false);
         };
+
+        // 第 3 點：後台搜尋框徹底清空
+        function clearAdminSearchInput() {
+            const adminSearch = document.getElementById('admin-search-input');
+            if (adminSearch) {
+                adminSearch.value = '';
+            }
+        }
 
         function loadLocalEventsCache() {
             const saved = localStorage.getItem('tw_nye_events_2027_production');
@@ -1438,6 +1493,21 @@
             }
         }
 
+        // 第 1 點：複製靜態 OG 標籤代碼 (幫助社群爬蟲抓取圖片)
+        function copyOgMetaTagCode() {
+            const ogUrl = siteBranding.ogImageUrl || document.getElementById('brand-input-og-image')?.value.trim();
+            if (!ogUrl) {
+                alert('請先上傳或填寫社群分享預覽圖網址！');
+                return;
+            }
+            const snippet = `<meta property="og:image" content="${ogUrl}">`;
+            navigator.clipboard.writeText(snippet).then(() => {
+                alert(`已複製 OG 標籤程式碼：\n${snippet}\n\n如需在未載入 JS 時 100% 確保爬蟲秒抓，可將此行貼回 index.html 的 <head> 內！`);
+            }).catch(() => {
+                prompt("請手動複製下列標籤碼：", snippet);
+            });
+        }
+
         function openBrandingModal() {
             document.getElementById('brand-input-title').value = siteBranding.title || "LIVE 演唱會｜2027跨年晚會";
             document.getElementById('brand-input-subtitle').value = siteBranding.subtitle || "跨年煙火、元旦升旗與活動即時行程總覽";
@@ -1547,7 +1617,17 @@
             switchTab(tabId);
         }
 
-        // 延遲按需渲染機制：使用者切換到該分頁時才進行 DOM 渲染，加速載入
+        // 第 5 點：依據是否在後台動態顯示/隱藏右下角懸浮吸頂新增按鈕 (FAB)
+        function updateFabVisibility(tabId) {
+            const fab = document.getElementById('admin-fab-btn');
+            if (!fab) return;
+            if (tabId === 'admin' && isAdminUnlocked) {
+                fab.classList.remove('hidden');
+            } else {
+                fab.classList.add('hidden');
+            }
+        }
+
         function switchTab(tabId, updateHash = true) {
             currentActiveTab = tabId;
             localStorage.setItem('tw_nye_active_tab', tabId);
@@ -1584,7 +1664,6 @@
                 }
             });
 
-            // 按需延遲渲染各分頁
             if (tabId === 'history' && !isHistoryRendered) {
                 buildHistoryYearTabs();
                 renderHistoryEvents();
@@ -1593,6 +1672,7 @@
                 renderBookmarks();
                 isBookmarksRendered = true;
             } else if (tabId === 'admin') {
+                clearAdminSearchInput(); // 第 3 點：進入後台清空搜尋框
                 updateAdminAuthView();
                 if (isAdminUnlocked && !isAdminTableRendered) {
                     buildAdminCategoryQuickFilters();
@@ -1601,6 +1681,7 @@
                 }
             }
 
+            updateFabVisibility(tabId);
             window.scrollTo({ top: 0, behavior: 'smooth' });
             lucide.createIcons();
         }
@@ -1638,7 +1719,6 @@
             localStorage.setItem('tw_nye_cat_configs_v1', JSON.stringify(categoryConfigs));
         }
 
-        // 徹底修正：尊重管理員原本設定的 enabled 狀態，不強行把關閉的分類轉為開啟
         function syncCategoriesWithEvents() {
             const currentCatNames = Array.from(new Set(events.map(e => e.category).filter(Boolean)));
             currentCatNames.forEach(cat => {
@@ -1674,6 +1754,12 @@
                         if (data.categoryConfigs && Array.isArray(data.categoryConfigs) && data.categoryConfigs.length > 0) {
                             categoryConfigs = data.categoryConfigs;
                             saveCategoryConfigsLocally();
+                        }
+
+                        // 第 6 點：解析每日瀏覽統計報表
+                        if (data.dailyVisits && Array.isArray(data.dailyVisits)) {
+                            dailyVisitsData = data.dailyVisits;
+                            updateDailyVisitsDisplay();
                         }
 
                         if (Array.isArray(data.events)) {
@@ -1723,7 +1809,6 @@
                             updateStats();
                             updateCarouselView();
 
-                            // 標記需在切換分頁時重新更新
                             isHistoryRendered = false;
                             isBookmarksRendered = false;
                             isAdminTableRendered = false;
@@ -1745,6 +1830,54 @@
             }
 
             if (isManual) alert('請先確認 Google 試算表 API 網址設定。');
+        }
+
+        // 第 6 點：更新每日造訪人次卡片數值 (今日 & 昨日)
+        function updateDailyVisitsDisplay() {
+            if (!dailyVisitsData || dailyVisitsData.length === 0) return;
+            const now = new Date();
+            const formatYmd = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+            
+            const todayStr = formatYmd(now);
+            const yesterdayDate = new Date(now.getTime() - 86400000);
+            const yesterdayStr = formatYmd(yesterdayDate);
+
+            const todayItem = dailyVisitsData.find(item => item.date === todayStr);
+            const yesterdayItem = dailyVisitsData.find(item => item.date === yesterdayStr);
+
+            const todayCount = todayItem ? Number(todayItem.count) : 0;
+            const yesterdayCount = yesterdayItem ? Number(yesterdayItem.count) : 0;
+
+            const elToday = document.getElementById('stat-today-visits');
+            const elYesterday = document.getElementById('stat-yesterday-visits');
+            if (elToday) elToday.innerText = todayCount.toLocaleString();
+            if (elYesterday) elYesterday.innerText = yesterdayCount.toLocaleString();
+        }
+
+        // 第 6 點：開啟每日流量趨勢彈窗
+        function openDailyStatsModal() {
+            const list = document.getElementById('daily-stats-list');
+            if (!list) return;
+
+            if (!dailyVisitsData || dailyVisitsData.length === 0) {
+                list.innerHTML = `<div class="p-8 text-center text-xs text-slate-400">目前尚無每日造訪紀錄（將於使用者瀏覽時由試算表自動每日建立）。</div>`;
+            } else {
+                // 依日期由新至舊排序
+                const sorted = [...dailyVisitsData].sort((a,b) => b.date.localeCompare(a.date));
+                list.innerHTML = sorted.map(item => `
+                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between text-xs font-medium">
+                        <span class="font-mono text-slate-700 font-bold">${item.date}</span>
+                        <span class="px-2.5 py-1 bg-indigo-50 border border-indigo-200 text-indigo-700 font-mono font-bold rounded-lg">${Number(item.count).toLocaleString()} 人次</span>
+                    </div>
+                `).join('');
+            }
+
+            document.getElementById('daily-stats-modal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeDailyStatsModal() {
+            document.getElementById('daily-stats-modal').classList.add('hidden');
         }
 
         function saveDataLocally() {
@@ -1785,7 +1918,6 @@
             }
         }
 
-        // 輪播圖靠頂滿版 (object-top)
         function updateCarouselView() {
             const container = document.getElementById('hero-carousel-container');
             const dots = document.getElementById('carousel-dots');
@@ -2301,7 +2433,9 @@
                 if (data && data.status === "success" && data.authorized) {
                     isAdminUnlocked = true;
                     currentAdminSessionHash = hash;
+                    clearAdminSearchInput(); // 第 3 點：驗證通過進入後台清空搜尋框
                     updateAdminAuthView();
+                    updateFabVisibility('admin'); // 第 5 點：啟用 FAB
                     document.getElementById('admin-password-input').value = '';
                     setAdminSyncStatus('success', '雲端已連線');
                 } else {
@@ -2326,9 +2460,11 @@
                 renderAdminTable();
                 updateStats();
                 isAdminTableRendered = true;
+                updateFabVisibility('admin');
             } else {
                 loginBox.classList.remove('hidden');
                 contentBox.classList.add('hidden');
+                updateFabVisibility('home');
             }
         }
 
@@ -2397,7 +2533,6 @@
             renderCategoryConfigList();
         }
 
-        // 分類管理渲染列表：包含防呆刪除按鈕
         function renderCategoryConfigList() {
             const listEl = document.getElementById('category-config-list');
             deduplicateCategoryConfigs();
@@ -2427,7 +2562,6 @@
             lucide.createIcons();
         }
 
-        // 分類防呆刪除機制：嚴禁刪除尚有活動使用中的分類
         async function deleteCategoryWithValidation(idx) {
             const targetCat = categoryConfigs[idx];
             if (!targetCat) return;
@@ -2435,7 +2569,6 @@
             const nameInput = document.getElementById(`cfg-name-${idx}`);
             const currentCatName = nameInput ? nameInput.value.trim() : targetCat.name;
 
-            // 嚴格掃描全庫所有活動（包含開放、隱藏草稿、已結束歸檔）
             const usedEvents = events.filter(e => e.category === currentCatName || e.category === targetCat.name);
 
             if (usedEvents.length > 0) {
@@ -2450,7 +2583,6 @@
                 buildDynamicCategoryTabs();
                 buildAdminCategoryQuickFilters();
 
-                // 同步寫入試算表
                 const GAS_URL = getActiveGasUrl();
                 if (GAS_URL) {
                     try {
@@ -2525,7 +2657,6 @@
             alert('分類設定已成功儲存並同步至雲端試算表！全網所有訪客將即刻同步最新順序。');
         }
 
-        // 嚴格過濾：探索頁面只渲染 enabled === true 的分類
         function buildDynamicCategoryTabs() {
             const container = document.getElementById('category-tabs-container');
             if (!container) return;
@@ -2647,7 +2778,6 @@
             let filtered = events.filter(e => {
                 if (isEffectivelyClosed(e) || e.status === 'hidden') return false;
 
-                // 嚴格過濾：若分類被關閉，則不顯示其活動
                 const cfg = categoryConfigs.find(c => c.name === e.category);
                 if (cfg && !cfg.enabled) return false;
 
@@ -2890,7 +3020,6 @@
             lucide.createIcons();
         }
 
-        // 收藏切換與即時取消收藏支援
         function toggleBookmark(id) {
             const index = bookmarks.indexOf(String(id));
             if (index > -1) { 
@@ -2903,7 +3032,6 @@
             renderBookmarks();
         }
 
-        // 我的收藏清單渲染：點擊卡片右上角金色書籤即可即時取消收藏並移出
         function renderBookmarks() {
             const grid = document.getElementById('bookmarks-grid');
             const empty = document.getElementById('bookmarks-empty');
@@ -2931,7 +3059,6 @@
                             ${cover ? `<img src="${cover}" alt="${e.name}" class="w-full h-full object-cover object-top">` : `<span class="text-white font-bold p-3 text-center">${e.name}</span>`}
                             <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-xs font-semibold ${badgeColor} text-white">${e.city}</span>
                             
-                            <!-- 支援即時取消收藏 -->
                             <button onclick="event.stopPropagation(); toggleBookmark('${e.id}')" class="absolute top-3 right-3 p-2 rounded-xl bg-white/95 text-amber-500 hover:bg-rose-50 hover:text-rose-600 transition shadow-md" title="點擊取消收藏">
                                 <i data-lucide="bookmark" class="w-4 h-4 fill-amber-400"></i>
                             </button>
@@ -3072,10 +3199,19 @@
             `;
         }
 
+        // 第 2 點：單篇活動分享自動帶入專屬首圖與活動網址，讓社群平台優先抓取該活動圖片
         function shareToSocial(platform, eventName, eventId) {
+            const targetEvent = events.find(e => String(e.id) === String(eventId));
+            const eventCover = targetEvent ? getEffectiveCoverImage(targetEvent) : '';
             const baseUrl = window.location.origin + window.location.pathname;
             const shareUrl = `${baseUrl}#home?event=${encodeURIComponent(eventId)}`;
-            const shareText = `🎉 2027 跨年晚會推薦：【${eventName}】最新演出時刻表與卡司總覽！`;
+            
+            // 組織文案：包含活動名稱、時間、卡司與活動專屬首圖網址
+            let shareText = `🎉 2027 跨年晚會推薦：【${eventName}】\n📍 地點：${targetEvent ? targetEvent.location : ''}\n⏰ 時間：${targetEvent ? targetEvent.time : ''}`;
+            if (targetEvent && targetEvent.lineup) {
+                const lineupShort = formatLineupSummary(targetEvent.lineup);
+                if (lineupShort) shareText += `\n🌟 卡司：${lineupShort}`;
+            }
 
             if (platform === 'native' && navigator.share) {
                 navigator.share({
@@ -3087,13 +3223,15 @@
             }
 
             if (platform === 'threads') {
-                const url = `https://threads.net/intent/post?text=${encodeURIComponent(shareText + '\n👉 ' + shareUrl)}`;
+                const fullText = `${shareText}\n\n👉 即時行程資訊：${shareUrl}` + (eventCover ? `\n🖼️ 活動海報：${eventCover}` : '');
+                const url = `https://threads.net/intent/post?text=${encodeURIComponent(fullText)}`;
                 window.open(url, '_blank');
             } else if (platform === 'facebook') {
                 const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
                 window.open(url, '_blank');
             } else if (platform === 'line') {
-                const url = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
+                const lineMsg = `${shareText}\n👉 即時時刻表：${shareUrl}` + (eventCover ? `\n🖼️ ${eventCover}` : '');
+                const url = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(lineMsg)}`;
                 window.open(url, '_blank');
             } else if (platform === 'copy') {
                 navigator.clipboard.writeText(shareUrl).then(() => {
@@ -3104,7 +3242,6 @@
             }
         }
 
-        // 活動詳情彈窗
         async function openDetailModal(id) {
             const e = events.find(item => String(item.id) === String(id));
             if (!e) return;
@@ -3766,8 +3903,18 @@
             });
         }
 
+        // 第 4 點：徹底清空所有圖片上傳提示文字，防止殘留重複顯示
+        function clearAllUploadStatusLabels() {
+            ['image-upload-status', 'lineup-upload-status', 'schedule-upload-status', 'content-upload-status', 'brand-logo-upload-status', 'brand-og-upload-status'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = '';
+            });
+        }
+
         function openAddModal() {
             clearFormValidationStyles();
+            clearAllUploadStatusLabels(); // 第 4 點：清空上傳狀態文字
+
             document.getElementById('form-modal-title').innerText = '新增活動';
             document.getElementById('event-form').reset();
             document.getElementById('event-id').value = '';
@@ -3806,6 +3953,8 @@
 
         function openEditModal(id) {
             clearFormValidationStyles();
+            clearAllUploadStatusLabels(); // 第 4 點：清空上傳狀態文字
+
             const e = events.find(item => String(item.id) === String(id));
             if (!e) return;
 
@@ -3872,6 +4021,7 @@
         function closeFormModal() {
             document.getElementById('form-modal').classList.add('hidden');
             document.getElementById('event-form').reset();
+            clearAllUploadStatusLabels(); // 第 4 點：清空上傳狀態文字
             removeSingleImage('input-image', 'input-image-file', 'image-preview', 'image-preview-container', 'image-upload-status');
             document.getElementById('lineup-images-store').value = '';
             document.getElementById('schedule-images-store').value = '';
