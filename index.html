@@ -11,11 +11,11 @@
     <meta name="author" content="livetws 跨年晚會資訊">
     <meta name="robots" content="index, follow">
 
-    <!-- Open Graph 社群分享卡片 (預設指定直連縮圖) -->
+    <!-- Open Graph 社群分享卡片 (支援後台動態上傳與更換) -->
     <meta property="og:title" id="og-page-title" content="LIVE 演唱會｜2027跨年晚會 - 即時行程與活動總覽">
     <meta property="og:description" id="og-page-desc" content="快速查詢全臺各縣市 2027 跨年煙火晚會、元旦升旗、各縣市活動與燈會，即時掌握最新卡司演出陣容與時刻表！">
     <meta property="og:type" content="website">
-    <meta property="og:image" id="og-page-image" content="https://lh3.googleusercontent.com/d/1clkcdAdlpo1ZMuRdUjrn0mtLtQhoK_PO">
+    <meta property="og:image" id="og-page-image" content="https://lh3.googleusercontent.com/d/1clkcdAdlpo1ZMuRdUjrn0mtLtQhoK_PO?auto=format&fit=crop&w=1200&q=80">
     <meta property="og:locale" content="zh_TW">
 
     <!-- JSON-LD 結構化資料 -->
@@ -108,6 +108,7 @@
         }
         .animate-soft-glow { animation: softGlow 8s infinite ease-in-out; }
 
+        /* 後台表格獨立雙向滾動與表頭凍結 */
         .table-scroll-container {
             max-height: 68vh;
             overflow: auto;
@@ -120,6 +121,7 @@
             background-color: #f1f5f9;
         }
 
+        /* 專屬列印樣式 (自動展開週報卡司與地點，隱藏按鈕) */
         @media print {
             body {
                 background: #ffffff !important;
@@ -160,7 +162,7 @@
         <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-pink-200/40 rounded-full blur-3xl animate-soft-glow" style="animation-delay: 4s;"></div>
     </div>
 
-    <!-- Header Navigation -->
+    <!-- Header Navigation (重複點擊自動重整、清空搜尋並平滑置頂) -->
     <header class="sticky top-0 z-40 clean-panel border-b border-slate-200 no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
             <div class="flex items-center space-x-2.5 sm:space-x-3 cursor-pointer shrink-0" onclick="handleNavClick('home')">
@@ -209,7 +211,7 @@
 
         <!-- ==================== HOME TAB (探索活動) ==================== -->
         <div id="view-home" class="space-y-8 animate-fadeIn">
-            <!-- Hero Carousel Banner -->
+            <!-- Hero Carousel Banner (靠頂滿版 object-top，活動時間快到的優先輪播) -->
             <div class="relative rounded-2xl overflow-hidden clean-panel border border-indigo-100 shadow-xl h-64 sm:h-80 bg-slate-900">
                 <div id="hero-carousel-container" class="relative w-full h-full flex items-center justify-center">
                     <div class="text-slate-400 text-sm flex items-center space-x-2 animate-pulse">
@@ -226,7 +228,7 @@
                 </button>
             </div>
 
-            <!-- 搜尋與篩選控制面板 -->
+            <!-- 搜尋與篩選控制面板 (支援純數字 202611、民國 11511 智慧日期快搜) -->
             <div id="event-section" class="clean-panel p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
                 <div class="relative w-full">
                     <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -248,6 +250,7 @@
                         <span class="text-xs font-semibold text-slate-400 shrink-0 w-10">分區:</span>
                         <div class="flex items-center space-x-2">
                             <button onclick="setRegion('all')" class="region-tab px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-600 text-white shadow-xs transition whitespace-nowrap" data-region="all">全臺</button>
+                            <!-- 本週活動 獨立篩選標籤 -->
                             <button onclick="setRegion('this_week')" class="region-tab px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-white text-indigo-700 hover:bg-indigo-50 border border-indigo-200 transition whitespace-nowrap flex items-center space-x-1" data-region="this_week">
                                 <i data-lucide="flame" class="w-3.5 h-3.5 text-orange-500"></i>
                                 <span>本週活動</span>
@@ -284,7 +287,7 @@
                             <i data-lucide="history" class="w-6 h-6 text-slate-700"></i>
                             <span>歷史活動專區</span>
                         </h2>
-                        <p class="text-sm text-slate-500 mt-1">活動日結束隔天凌晨起即納入精彩活動紀錄，供您隨時回顧過往卡司與時刻表。</p>
+                        <p class="text-sm text-slate-500 mt-1">活動日結束滿 2 天或已封存之精彩活動紀錄，供您隨時回顧過往卡司與時刻表。</p>
                     </div>
                     <span id="history-count-label" class="text-xs text-slate-600 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">0 個已結束活動</span>
                 </div>
@@ -356,9 +359,10 @@
                 </div>
             </div>
 
-            <!-- 後台解鎖控制台 -->
+            <!-- 後台解鎖控制台 (排版重構：標題專屬一行、6 個功能按鈕整齊單列排列) -->
             <div id="admin-content-box" class="clean-panel p-5 sm:p-7 rounded-2xl border border-indigo-100 shadow-xl hidden space-y-5">
                 <div class="pb-4 border-b border-slate-200 space-y-3.5">
+                    <!-- 第一行：狀態與標題專屬列 (徹底舒展不擠壓) -->
                     <div class="flex flex-wrap items-center gap-2.5">
                         <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700 border border-indigo-200">後台控制台</span>
                         <div id="admin-status-indicator" class="flex items-center space-x-1.5 px-3 py-0.5 bg-white border border-slate-200 rounded-full text-xs font-medium shadow-2xs">
@@ -368,6 +372,7 @@
                         <h2 class="text-xl sm:text-2xl font-bold text-slate-900 ml-1">全臺跨年與元旦升旗行程管理</h2>
                     </div>
 
+                    <!-- 第二行：功能按鈕整齊排列於獨立一行 (徹底消除按鈕落單破碎) -->
                     <div class="flex flex-wrap items-center gap-2 pt-1">
                         <button onclick="openWeeklyReportModal()" class="px-3.5 py-2 bg-gradient-to-r from-indigo-50 to-purple-50 hover:from-indigo-100 hover:to-purple-100 text-indigo-700 rounded-xl text-xs sm:text-sm font-semibold border border-indigo-200 shadow-2xs flex items-center space-x-1.5 transition">
                             <i data-lucide="newspaper" class="w-4 h-4 text-indigo-600"></i><span>📰 每週活動週報</span>
@@ -390,7 +395,7 @@
                     </div>
                 </div>
 
-                <!-- 數據總覽 -->
+                <!-- 數據總覽 (新增每日瀏覽統計小卡片) -->
                 <div class="grid grid-cols-2 sm:grid-cols-6 gap-3">
                     <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 shadow-2xs">
                         <div class="text-slate-500 text-xs mb-1">進行中活動</div>
@@ -412,6 +417,7 @@
                         <div class="text-slate-500 text-xs mb-1">歷史已歸檔</div>
                         <div id="stat-closed" class="text-xl font-bold text-slate-500">0</div>
                     </div>
+                    <!-- 第 6 點：每日瀏覽量快速卡片 -->
                     <div class="bg-indigo-50/70 p-3.5 rounded-xl border border-indigo-200 shadow-2xs cursor-pointer hover:bg-indigo-100/70 transition" onclick="openDailyStatsModal()" title="點擊檢視近 7 日每日瀏覽趨勢">
                         <div class="text-indigo-800 text-xs mb-1 flex items-center justify-between">
                             <span>今日瀏覽</span>
@@ -424,7 +430,7 @@
                     </div>
                 </div>
 
-                <!-- 三段式清單分頁列 -->
+                <!-- 三段式清單分頁列 (新增活動按鈕排在最前面第一位) -->
                 <div class="flex flex-wrap items-center gap-2 border-b border-slate-200 pb-3">
                     <button onclick="openAddModal()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-1.5 shadow-md shadow-indigo-600/25 shrink-0 transition">
                         <i data-lucide="plus" class="w-4 h-4"></i><span>新增活動</span>
@@ -443,7 +449,7 @@
                     </button>
                 </div>
 
-                <!-- 懸浮吸頂工具列 -->
+                <!-- 懸浮吸頂工具列 (第 3 點：加上 autocomplete="off" 防止重整殘留文字) -->
                 <div class="sticky top-16 z-30 bg-white/95 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-indigo-100 shadow-md space-y-3">
                     <div class="flex flex-col md:flex-row gap-3 items-center justify-between">
                         <div class="relative w-full md:w-80">
@@ -463,6 +469,7 @@
                         </div>
                     </div>
 
+                    <!-- 活動類型快篩按鈕列 -->
                     <div class="pt-2 border-t border-slate-100 flex items-center space-x-1.5 overflow-x-auto hide-scrollbar">
                         <span class="text-xs font-semibold text-slate-400 shrink-0 mr-1 flex items-center space-x-1">
                             <i data-lucide="filter" class="w-3.5 h-3.5 text-indigo-500"></i>
@@ -478,6 +485,7 @@
                         <span id="admin-table-count" class="text-xs text-slate-500"></span>
                     </div>
 
+                    <!-- 解決水平捲動拉不到底的痛點：獨立限高容器 ＋ 表頭吸頂凍結 -->
                     <div class="table-scroll-container border border-slate-200 rounded-xl shadow-xs">
                         <table class="w-full text-left text-sm text-slate-700">
                             <thead class="bg-slate-100 text-slate-600 text-xs uppercase border-b border-slate-200">
@@ -499,7 +507,7 @@
                 </div>
             </div>
 
-            <!-- 右下角懸浮吸頂新增按鈕 (FAB) -->
+            <!-- 第 5 點：後台右下角懸浮吸頂新增按鈕 (Floating Action Button, FAB) -->
             <button id="admin-fab-btn" onclick="openAddModal()" class="fixed bottom-6 right-6 z-40 p-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-full shadow-2xl shadow-indigo-600/40 flex items-center space-x-2 transition-all transform hover:scale-105 active:scale-95 hidden no-print" title="快速新增活動">
                 <i data-lucide="plus" class="w-6 h-6 stroke-[2.5]"></i>
                 <span class="text-sm font-bold pr-1">新增活動</span>
@@ -508,7 +516,7 @@
 
     </main>
 
-    <!-- 頁尾 -->
+    <!-- 頁尾 (社群小膠囊一致化、精簡高度) -->
     <footer class="w-full py-4 mt-8 border-t border-slate-200 bg-white/70 backdrop-blur-md text-center text-xs text-slate-500 z-10 relative no-print">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-3">
             <div class="font-medium text-slate-700">
@@ -559,7 +567,7 @@
         </button>
     </nav>
 
-    <!-- 每日瀏覽統計彈窗 -->
+    <!-- 第 6 點：每日瀏覽統計彈窗 -->
     <div id="daily-stats-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden no-print">
         <div class="clean-panel w-full max-w-md rounded-2xl overflow-hidden border border-indigo-200 shadow-2xl flex flex-col bg-white p-6 space-y-4 max-h-[85vh]">
             <div class="flex items-center justify-between border-b pb-3">
@@ -577,7 +585,7 @@
         </div>
     </div>
 
-    <!-- Detail Modal -->
+    <!-- Detail Modal (字級全面放大統一、靠頂滿版首圖、淡化遮罩、活動內容多圖展示、底部一鍵社群分享列) -->
     <div id="detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden no-print">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-slate-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div id="modal-content" class="overflow-y-auto p-5 sm:p-6 space-y-4"></div>
@@ -606,7 +614,7 @@
         </div>
     </div>
 
-    <!-- Weekly Report Modal -->
+    <!-- Weekly Report Modal (每週活動週報列印時自動展開全部卡司與地點) -->
     <div id="weekly-report-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
         <div class="clean-panel w-full max-w-3xl rounded-2xl overflow-hidden border border-indigo-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div class="p-4 sm:p-5 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50 sticky top-0 z-10">
@@ -654,7 +662,7 @@
         </div>
     </div>
 
-    <!-- Branding Modal -->
+    <!-- Branding Modal (第 1 點：附贈一鍵複製靜態 OG 標籤與社群快取除錯連結) -->
     <div id="branding-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden no-print">
         <div class="clean-panel w-full max-w-lg rounded-2xl overflow-hidden border border-slate-200 shadow-2xl flex flex-col bg-white p-6 space-y-4 max-h-[85vh]">
             <div class="flex items-center justify-between border-b pb-3">
@@ -678,6 +686,7 @@
                     <input type="text" id="brand-input-subtitle" placeholder="跨年煙火、元旦升旗與活動即時行程總覽" class="w-full px-3.5 py-2.5 border rounded-xl text-sm focus:outline-none focus:border-indigo-500">
                 </div>
 
+                <!-- 品牌 Logo 圖示 -->
                 <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
                     <div class="flex items-center justify-between">
                         <span class="block text-xs font-bold text-slate-800">1. 網站品牌 Logo 圖示</span>
@@ -702,6 +711,7 @@
                     </div>
                 </div>
 
+                <!-- 社群分享預覽圖 (Open Graph Image) -->
                 <div class="p-3.5 bg-indigo-50/50 rounded-xl border border-indigo-100 space-y-2.5">
                     <div class="flex items-center justify-between">
                         <div>
@@ -728,6 +738,7 @@
                         <span id="brand-og-empty-hint" class="text-xs text-slate-400">目前使用系統預設煙火主視覺縮圖</span>
                     </div>
 
+                    <!-- 第 1 點：除錯輔助與標籤生成區塊 -->
                     <div class="pt-2 border-t border-indigo-200/60 flex flex-wrap items-center justify-between gap-2 text-[11px]">
                         <button type="button" onclick="copyOgMetaTagCode()" class="text-indigo-700 hover:underline font-semibold flex items-center space-x-1">
                             <i data-lucide="copy" class="w-3.5 h-3.5"></i><span>複製靜態 OG HTML 標籤碼</span>
@@ -746,7 +757,7 @@
         </div>
     </div>
 
-    <!-- Form Modal (新增/編輯活動表單) -->
+    <!-- Form Modal (新增/編輯活動表單：活動內容多圖上傳、輪播向右展開、圖片排序) -->
     <div id="form-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden no-print">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-indigo-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div class="p-3.5 sm:p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50 sticky top-0 z-10">
@@ -757,6 +768,7 @@
                             <input type="checkbox" id="input-is-pinned" class="w-3.5 h-3.5 text-amber-500 rounded border-slate-300 focus:ring-amber-400">
                             <span class="text-xs font-bold text-amber-700">置頂</span>
                         </label>
+                        <!-- 輪播勾選後向右平滑展開順序輸入框 -->
                         <div class="flex items-center space-x-1.5 bg-white px-2.5 py-1 rounded-xl border border-slate-200 shadow-2xs">
                             <label class="flex items-center space-x-1.5 cursor-pointer hover:border-indigo-400 transition">
                                 <input type="checkbox" id="input-is-carousel" onchange="toggleCarouselOrderInline()" class="w-3.5 h-3.5 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
@@ -774,9 +786,11 @@
                 </div>
             </div>
 
+            <!-- 表單內容區 (頂部間距收緊) -->
             <form id="event-form" class="overflow-y-auto p-4 sm:p-5 space-y-3.5">
                 <input type="hidden" id="event-id">
 
+                <!-- 發布時間 (空間間距緊湊化) -->
                 <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div class="flex items-center space-x-1.5">
                         <i data-lucide="send" class="w-4 h-4 text-indigo-600 shrink-0"></i>
@@ -788,6 +802,7 @@
                     </div>
                 </div>
                 
+                <!-- 基本規格網格 -->
                 <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">活動類型 *</label>
@@ -796,7 +811,7 @@
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">所屬縣市 *</label>
-                        <select id="input-city" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-2xs">
+                        <select id="input-city" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-2xs">
                             <option value="基隆市">基隆市</option><option value="臺北市">臺北市</option><option value="新北市">新北市</option><option value="桃園市">桃園市</option><option value="新竹市">新竹市</option><option value="新竹縣">新竹縣</option><option value="苗栗縣">苗栗縣</option><option value="臺中市">臺中市</option><option value="彰化縣">彰化縣</option><option value="南投縣">南投縣</option><option value="雲林縣">雲林縣</option><option value="嘉義市">嘉義市</option><option value="嘉義縣">嘉義縣</option><option value="臺南市">臺南市</option><option value="高雄市">高雄市</option><option value="屏東縣">屏東縣</option><option value="宜蘭縣">宜蘭縣</option><option value="花蓮縣">花蓮縣</option><option value="臺東縣">臺東縣</option><option value="澎湖縣">澎湖縣</option><option value="金門縣">金門縣</option><option value="連江縣">連江縣</option>
                         </select>
                     </div>
@@ -810,8 +825,8 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">排序權重 (選填，越小越前面)</label>
-                        <input type="number" id="input-weight" min="1" max="99" placeholder="不填則自動排" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-2xs">
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">排序權重 (選填)</label>
+                        <input type="number" id="input-weight" min="1" max="99" placeholder="不填則隨機" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-indigo-500 shadow-2xs">
                     </div>
                 </div>
 
@@ -843,7 +858,7 @@
                     </div>
                 </div>
 
-                <!-- 票務資訊 -->
+                <!-- 票務資訊 (方式名稱選填，動態增減) -->
                 <div class="p-3.5 bg-amber-50/70 rounded-2xl border border-amber-200 space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-2">
@@ -900,7 +915,7 @@
                     </div>
                 </div>
 
-                <!-- 2. 演出卡司及海報 -->
+                <!-- 2. 演出卡司及海報 (支援圖片前後排序) -->
                 <div class="p-3.5 bg-indigo-50/50 rounded-xl border border-indigo-100 space-y-2.5">
                     <span class="block text-xs font-bold text-indigo-900 flex items-center space-x-1.5">
                         <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-600"></i>
@@ -934,7 +949,7 @@
                     <div id="lineup-gallery-container" class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1"></div>
                 </div>
 
-                <!-- 3. 活動流程 -->
+                <!-- 3. 活動流程 (支援流程圖前後排序) -->
                 <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
                     <span class="block text-xs font-bold text-slate-800">3. 活動流程</span>
                     <div>
@@ -963,11 +978,12 @@
                     <div id="schedule-gallery-container" class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1"></div>
                 </div>
 
-                <!-- 4. 活動內容 (多圖上傳與排序) -->
+                <!-- 4. 活動內容 (新增多圖上傳功能) -->
                 <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
                     <span class="block text-xs font-bold text-slate-800">4. 活動內容 (選填)</span>
                     <textarea id="input-content" rows="3" placeholder="輸入活動詳細特色說明、周邊市集、煙火倒數亮點、交通接駁管制等資訊..." class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-indigo-500"></textarea>
                     
+                    <!-- 活動內容圖片上傳器 -->
                     <div class="pt-1 border-t border-slate-200/60">
                         <div class="flex items-center justify-between mb-1">
                             <label class="block text-[11px] text-slate-500">上傳活動內容說明圖片 (支援多圖上傳與排序)</label>
@@ -1024,7 +1040,7 @@
         </div>
     </div>
 
-    <!-- Category Manage Modal (自動去重 ＋ 新增分類 ＋ 防呆刪除功能) -->
+    <!-- Category Manage Modal (自動去重 ＋ 新增分類 ＋ 附防呆刪除功能) -->
     <div id="category-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden no-print">
         <div class="clean-panel w-full max-w-xl rounded-2xl overflow-hidden border border-slate-200 shadow-2xl flex flex-col bg-white p-6 space-y-4 max-h-[85vh]">
             <div class="flex items-center justify-between border-b pb-3">
@@ -1035,6 +1051,7 @@
                 <button onclick="closeCategoryManageModal()" class="text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
             </div>
 
+            <!-- 新增分類操作按鈕 -->
             <div class="flex justify-between items-center bg-indigo-50/70 p-2.5 rounded-xl border border-indigo-100">
                 <span class="text-xs font-bold text-indigo-950">分類項目清單 (支援刪除保護)</span>
                 <button type="button" onclick="addNewCategoryRow()" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-bold flex items-center space-x-1 shadow-2xs transition">
@@ -1121,11 +1138,13 @@
             '宜蘭縣', '花蓮縣', '臺東縣', '澎湖縣', '金門縣', '連江縣'
         ];
 
+        const REGION_PRIORITY = { '北部': 1, '中部': 2, '南部': 3, '東部與離島': 4 };
+
         let siteBranding = {
             title: "LIVE 演唱會｜2027跨年晚會",
             subtitle: "跨年煙火、元旦升旗與活動即時行程總覽",
             logoUrl: "",
-            ogImageUrl: "https://lh3.googleusercontent.com/d/1clkcdAdlpo1ZMuRdUjrn0mtLtQhoK_PO"
+            ogImageUrl: ""
         };
 
         let currentAdminSessionHash = "";
@@ -1148,7 +1167,12 @@
         let adminCurrentCategoryFilter = 'all';
         let adminViewTab = 'active';
 
-        // 每日造訪統計數據儲存陣列
+        // 載入優化狀態鎖
+        let isHistoryRendered = false;
+        let isBookmarksRendered = false;
+        let isAdminTableRendered = false;
+
+        // 第 6 點：每日造訪統計數據儲存陣列
         let dailyVisitsData = [];
 
         // 每週活動週報當前週偏移量
@@ -1166,13 +1190,14 @@
         ];
 
         window.onload = async function() {
+            // 第 3 點：強制清除後台搜尋關鍵字，杜絕重新整理殘留
             clearAdminSearchInput();
+
             loadSavedBranding();
             loadCategoryConfigs();
             loadBookmarks();
             buildDynamicCategoryTabs();
             
-            // 快取優先秒開渲染
             loadLocalEventsCache();
             renderEvents();
             updateCarouselView();
@@ -1194,6 +1219,7 @@
             await syncDataFromCloud(false);
         };
 
+        // 第 3 點：後台搜尋框徹底清空
         function clearAdminSearchInput() {
             const adminSearch = document.getElementById('admin-search-input');
             if (adminSearch) {
@@ -1324,19 +1350,18 @@
             }
         }
 
-        // 第 5 點：活動日結束隔天凌晨 00:00 起判定為已過期歷史活動
-        function isEventPastMidnight(timeStr) {
+        function isEventExpiredTwoDays(timeStr) {
             if (!timeStr) return false;
             const range = parseEventRange(timeStr);
             if (range.endDate.getTime() >= 8640000000000000) return false;
-
-            const endD = range.endDate;
-            const midnightOfEndDay = new Date(endD.getFullYear(), endD.getMonth(), endD.getDate(), 23, 59, 59, 999).getTime();
-            return Date.now() > midnightOfEndDay;
+            
+            const endOfEvent = range.endDate.getTime();
+            const twoDaysAfter = endOfEvent + (2 * 24 * 60 * 60 * 1000);
+            return Date.now() > twoDaysAfter;
         }
 
         function isEffectivelyClosed(e) {
-            return e.status === 'closed' || isEventPastMidnight(e.time);
+            return e.status === 'closed' || isEventExpiredTwoDays(e.time);
         }
 
         function isEventInThisWeek(timeStr, targetWeekOffset = 0) {
@@ -1357,6 +1382,16 @@
             const end = range.endDate.getTime();
 
             return (s <= sunTime && end >= monTime);
+        }
+
+        function getRandomOrderValue(id) {
+            let hash = 0;
+            const s = String(id || '');
+            for (let i = 0; i < s.length; i++) {
+                hash = ((hash << 5) - hash) + s.charCodeAt(i);
+                hash |= 0;
+            }
+            return Math.abs(hash % 1000) / 1000;
         }
 
         function getEffectiveCoverImage(e) {
@@ -1410,9 +1445,6 @@
             if (saved) {
                 try { siteBranding = JSON.parse(saved); } catch(e){}
             }
-            if (!siteBranding.ogImageUrl) {
-                siteBranding.ogImageUrl = "https://lh3.googleusercontent.com/d/1clkcdAdlpo1ZMuRdUjrn0mtLtQhoK_PO";
-            }
             applySiteBranding();
         }
 
@@ -1420,7 +1452,7 @@
             const title = siteBranding.title || "LIVE 演唱會｜2027跨年晚會";
             const subtitle = siteBranding.subtitle || "跨年煙火、元旦升旗與活動即時行程總覽";
             const logoUrl = siteBranding.logoUrl || "";
-            const ogImageUrl = siteBranding.ogImageUrl || "https://lh3.googleusercontent.com/d/1clkcdAdlpo1ZMuRdUjrn0mtLtQhoK_PO";
+            const ogImageUrl = siteBranding.ogImageUrl || "";
 
             document.getElementById('header-site-title').innerText = title;
             document.getElementById('header-site-subtitle').innerText = subtitle;
@@ -1461,8 +1493,13 @@
             }
         }
 
+        // 第 1 點：複製靜態 OG 標籤代碼 (幫助社群爬蟲抓取圖片)
         function copyOgMetaTagCode() {
-            const ogUrl = siteBranding.ogImageUrl || document.getElementById('brand-input-og-image')?.value.trim() || "https://lh3.googleusercontent.com/d/1clkcdAdlpo1ZMuRdUjrn0mtLtQhoK_PO";
+            const ogUrl = siteBranding.ogImageUrl || document.getElementById('brand-input-og-image')?.value.trim();
+            if (!ogUrl) {
+                alert('請先上傳或填寫社群分享預覽圖網址！');
+                return;
+            }
             const snippet = `<meta property="og:image" content="${ogUrl}">`;
             navigator.clipboard.writeText(snippet).then(() => {
                 alert(`已複製 OG 標籤程式碼：\n${snippet}\n\n如需在未載入 JS 時 100% 確保爬蟲秒抓，可將此行貼回 index.html 的 <head> 內！`);
@@ -1475,7 +1512,7 @@
             document.getElementById('brand-input-title').value = siteBranding.title || "LIVE 演唱會｜2027跨年晚會";
             document.getElementById('brand-input-subtitle').value = siteBranding.subtitle || "跨年煙火、元旦升旗與活動即時行程總覽";
             document.getElementById('brand-input-logo').value = siteBranding.logoUrl || "";
-            document.getElementById('brand-input-og-image').value = siteBranding.ogImageUrl || "https://lh3.googleusercontent.com/d/1clkcdAdlpo1ZMuRdUjrn0mtLtQhoK_PO";
+            document.getElementById('brand-input-og-image').value = siteBranding.ogImageUrl || "";
             
             const logoPreview = document.getElementById('brand-logo-preview');
             const logoHint = document.getElementById('brand-logo-empty-hint');
@@ -1512,7 +1549,7 @@
             const title = document.getElementById('brand-input-title').value.trim();
             const subtitle = document.getElementById('brand-input-subtitle').value.trim();
             const logoUrl = document.getElementById('brand-input-logo').value.trim();
-            const ogImageUrl = document.getElementById('brand-input-og-image').value.trim() || "https://lh3.googleusercontent.com/d/1clkcdAdlpo1ZMuRdUjrn0mtLtQhoK_PO";
+            const ogImageUrl = document.getElementById('brand-input-og-image').value.trim();
 
             if (!title) {
                 alert('網站主標題不得為空！');
@@ -1563,19 +1600,11 @@
             switchTab(targetTab, false);
         }
 
-        // 第 6 點：點擊 LOGO 或「探索活動」，安全重整重置
         function handleNavClick(tabId) {
-            if (tabId === 'home') {
-                resetSearch();
-                currentSlideIdx = 0;
-                renderSlideStates();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                syncDataFromCloud(false);
-                return;
-            }
-
             if (currentActiveTab === tabId) {
-                if (tabId === 'history') {
+                if (tabId === 'home') {
+                    resetSearch();
+                } else if (tabId === 'history') {
                     document.getElementById('history-search-input').value = '';
                     currentHistorySearchQuery = '';
                     setHistoryYear('all');
@@ -1588,6 +1617,7 @@
             switchTab(tabId);
         }
 
+        // 第 5 點：依據是否在後台動態顯示/隱藏右下角懸浮吸頂新增按鈕 (FAB)
         function updateFabVisibility(tabId) {
             const fab = document.getElementById('admin-fab-btn');
             if (!fab) return;
@@ -1598,7 +1628,6 @@
             }
         }
 
-        // 徹底拔除死鎖變數，切換時必定完整渲染該分頁
         function switchTab(tabId, updateHash = true) {
             currentActiveTab = tabId;
             localStorage.setItem('tw_nye_active_tab', tabId);
@@ -1635,17 +1664,20 @@
                 }
             });
 
-            if (tabId === 'history') {
+            if (tabId === 'history' && !isHistoryRendered) {
                 buildHistoryYearTabs();
                 renderHistoryEvents();
-            } else if (tabId === 'bookmarks') {
+                isHistoryRendered = true;
+            } else if (tabId === 'bookmarks' && !isBookmarksRendered) {
                 renderBookmarks();
+                isBookmarksRendered = true;
             } else if (tabId === 'admin') {
-                clearAdminSearchInput();
+                clearAdminSearchInput(); // 第 3 點：進入後台清空搜尋框
                 updateAdminAuthView();
-                if (isAdminUnlocked) {
+                if (isAdminUnlocked && !isAdminTableRendered) {
                     buildAdminCategoryQuickFilters();
                     renderAdminTable();
+                    isAdminTableRendered = true;
                 }
             }
 
@@ -1724,6 +1756,7 @@
                             saveCategoryConfigsLocally();
                         }
 
+                        // 第 6 點：解析每日瀏覽統計報表
                         if (data.dailyVisits && Array.isArray(data.dailyVisits)) {
                             dailyVisitsData = data.dailyVisits;
                             updateDailyVisitsDisplay();
@@ -1776,9 +1809,13 @@
                             updateStats();
                             updateCarouselView();
 
-                            if (currentActiveTab === 'history') { buildHistoryYearTabs(); renderHistoryEvents(); }
-                            if (currentActiveTab === 'bookmarks') { renderBookmarks(); }
-                            if (currentActiveTab === 'admin' && isAdminUnlocked) { renderAdminTable(); }
+                            isHistoryRendered = false;
+                            isBookmarksRendered = false;
+                            isAdminTableRendered = false;
+
+                            if (currentActiveTab === 'history') { buildHistoryYearTabs(); renderHistoryEvents(); isHistoryRendered = true; }
+                            if (currentActiveTab === 'bookmarks') { renderBookmarks(); isBookmarksRendered = true; }
+                            if (currentActiveTab === 'admin' && isAdminUnlocked) { renderAdminTable(); isAdminTableRendered = true; }
 
                             lucide.createIcons();
                             setAdminSyncStatus('success', '雲端已連線');
@@ -1795,6 +1832,7 @@
             if (isManual) alert('請先確認 Google 試算表 API 網址設定。');
         }
 
+        // 第 6 點：更新每日造訪人次卡片數值 (今日 & 昨日)
         function updateDailyVisitsDisplay() {
             if (!dailyVisitsData || dailyVisitsData.length === 0) return;
             const now = new Date();
@@ -1816,6 +1854,7 @@
             if (elYesterday) elYesterday.innerText = yesterdayCount.toLocaleString();
         }
 
+        // 第 6 點：開啟每日流量趨勢彈窗
         function openDailyStatsModal() {
             const list = document.getElementById('daily-stats-list');
             if (!list) return;
@@ -1823,6 +1862,7 @@
             if (!dailyVisitsData || dailyVisitsData.length === 0) {
                 list.innerHTML = `<div class="p-8 text-center text-xs text-slate-400">目前尚無每日造訪紀錄（將於使用者瀏覽時由試算表自動每日建立）。</div>`;
             } else {
+                // 依日期由新至舊排序
                 const sorted = [...dailyVisitsData].sort((a,b) => b.date.localeCompare(a.date));
                 list.innerHTML = sorted.map(item => `
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between text-xs font-medium">
@@ -1878,48 +1918,34 @@
             }
         }
 
-        // 第 4 點：智慧時效輪播池 (5天內迫近 + 手動勾選輪播，過天自動下架)
         function updateCarouselView() {
             const container = document.getElementById('hero-carousel-container');
             const dots = document.getElementById('carousel-dots');
             if (!container || !dots) return;
 
             const nowTime = Date.now();
-            const fiveDaysMs = 5 * 24 * 60 * 60 * 1000;
 
-            activeCarouselEvents = events.filter(e => {
-                if (isEffectivelyClosed(e) || e.status === 'hidden' || e.status === 'locked') return false;
+            activeCarouselEvents = events
+                .filter(e => {
+                    if (isEffectivelyClosed(e) || e.status === 'hidden') return false;
+                    const cRaw = String(e.is_carousel).trim().toLowerCase();
+                    return (cRaw === 'true' || cRaw === '1' || cRaw === 'yes');
+                })
+                .sort((a, b) => {
+                    const startA = parseEventRange(a.time).startDate.getTime();
+                    const startB = parseEventRange(b.time).startDate.getTime();
+                    const diffA = Math.abs(startA - nowTime);
+                    const diffB = Math.abs(startB - nowTime);
+                    if (diffA !== diffB) return diffA - diffB;
 
-                const range = parseEventRange(e.time);
-                const startTime = range.startDate.getTime();
-                const diffTime = startTime - nowTime;
+                    const ordA = Number(a.carousel_order) || 999;
+                    const ordB = Number(b.carousel_order) || 999;
+                    return ordA - ordB;
+                })
+                .slice(0, 10);
 
-                // 條件 A：距離活動日 5 天以內即將開始
-                const isWithinFiveDays = (diffTime <= fiveDaysMs && range.endDate.getTime() >= nowTime);
-
-                // 條件 B：後台明確勾選輪播
-                const cRaw = String(e.is_carousel).trim().toLowerCase();
-                const isManualCarousel = (cRaw === 'true' || cRaw === '1' || cRaw === 'yes');
-
-                return (isWithinFiveDays || isManualCarousel);
-            });
-
-            // 輪播排序：手動填順序 (1~10) 優先，其餘依活動時間先後
-            activeCarouselEvents.sort((a, b) => {
-                const ordA = (a.carousel_order !== undefined && a.carousel_order !== null && a.carousel_order !== '') ? Number(a.carousel_order) : 999;
-                const ordB = (b.carousel_order !== undefined && b.carousel_order !== null && b.carousel_order !== '') ? Number(b.carousel_order) : 999;
-                if (ordA !== ordB) return ordA - ordB;
-
-                const startA = parseEventRange(a.time).startDate.getTime();
-                const startB = parseEventRange(b.time).startDate.getTime();
-                return startA - startB;
-            });
-
-            activeCarouselEvents = activeCarouselEvents.slice(0, 10);
-
-            // 備援：若無符合場次，選取最近 3 場公開活動
             if (activeCarouselEvents.length === 0) {
-                activeCarouselEvents = events.filter(e => !isEffectivelyClosed(e) && e.status === 'open').slice(0, 3);
+                activeCarouselEvents = events.filter(e => !isEffectivelyClosed(e) && e.status !== 'hidden').slice(0, 3);
             }
 
             if (activeCarouselEvents.length === 0) {
@@ -1973,17 +1999,11 @@
             renderSlideStates();
             startCarousel();
         }
-
-        // 安全防護版輪播渲染（不拋錯、不中斷 JS）
         function renderSlideStates() {
-            const slides = document.querySelectorAll('.carousel-slide');
-            const dots = document.querySelectorAll('.carousel-dot');
-            if (!slides || slides.length === 0) return;
-
-            slides.forEach((slide, idx) => {
+            document.querySelectorAll('.carousel-slide').forEach((slide, idx) => {
                 slide.className = `absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentSlideIdx ? 'opacity-100 z-10' : 'opacity-0 z-0'} carousel-slide cursor-pointer overflow-hidden`;
             });
-            dots.forEach((dot, idx) => {
+            document.querySelectorAll('.carousel-dot').forEach((dot, idx) => {
                 dot.className = `w-2.5 h-2.5 rounded-full transition-all ${idx === currentSlideIdx ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/80'} carousel-dot`;
             });
         }
@@ -2413,9 +2433,9 @@
                 if (data && data.status === "success" && data.authorized) {
                     isAdminUnlocked = true;
                     currentAdminSessionHash = hash;
-                    clearAdminSearchInput();
+                    clearAdminSearchInput(); // 第 3 點：驗證通過進入後台清空搜尋框
                     updateAdminAuthView();
-                    updateFabVisibility('admin');
+                    updateFabVisibility('admin'); // 第 5 點：啟用 FAB
                     document.getElementById('admin-password-input').value = '';
                     setAdminSyncStatus('success', '雲端已連線');
                 } else {
@@ -2439,6 +2459,7 @@
                 buildAdminCategoryQuickFilters();
                 renderAdminTable();
                 updateStats();
+                isAdminTableRendered = true;
                 updateFabVisibility('admin');
             } else {
                 loginBox.classList.remove('hidden');
@@ -2750,7 +2771,6 @@
             return false;
         }
 
-        // 第 3 點：首頁排序黃金法則 (手動置頂最前 ➔ 自訂權重 weight 絕對優先 ➔ 時間 ➔ 縣市)
         function renderEvents() {
             const grid = document.getElementById('events-grid');
             const emptyState = document.getElementById('empty-state');
@@ -2782,40 +2802,29 @@
             });
 
             filtered.sort((a, b) => {
-                // 1. 手動置頂最優先
                 const pinA = a.is_pinned ? 0 : 1;
                 const pinB = b.is_pinned ? 0 : 1;
                 if (pinA !== pinB) return pinA - pinB;
 
-                // 2. 開放狀態優先於未開放
                 const statusA = (a.status === 'open') ? 0 : 1;
                 const statusB = (b.status === 'open') ? 0 : 1;
                 if (statusA !== statusB) return statusA - statusB;
 
-                // 3. 後台排序權重 (weight) 絕對優先 (數字越小越前面，如 1 > 2 > 3)
-                const hasWeightA = (a.weight !== undefined && a.weight !== null && a.weight !== '');
-                const hasWeightB = (b.weight !== undefined && b.weight !== null && b.weight !== '');
-                if (hasWeightA && hasWeightB) {
-                    if (Number(a.weight) !== Number(b.weight)) {
-                        return Number(a.weight) - Number(b.weight);
-                    }
-                } else if (hasWeightA) {
-                    return -1;
-                } else if (hasWeightB) {
-                    return 1;
-                }
-
-                // 4. 未填權重時，依活動開始時間先後自然排列
                 const startA = parseEventRange(a.time).startDate.getTime();
                 const startB = parseEventRange(b.time).startDate.getTime();
                 if (startA !== startB) return startA - startB;
 
-                // 5. 時間相同時，依標準縣市順序排列
-                const idxA = CITY_ORDER.indexOf(a.city);
-                const idxB = CITY_ORDER.indexOf(b.city);
-                const orderCityA = (idxA !== -1 ? idxA : 99);
-                const orderCityB = (idxB !== -1 ? idxB : 99);
-                return orderCityA - orderCityB;
+                const regionOrderA = REGION_PRIORITY[a.region] || 9;
+                const regionOrderB = REGION_PRIORITY[b.region] || 9;
+                if (regionOrderA !== regionOrderB) return regionOrderA - regionOrderB;
+
+                const catA = String(a.category || '');
+                const catB = String(b.category || '');
+                if (catA !== catB) return catA.localeCompare(catB, 'zh-TW');
+
+                const wA = (a.weight !== undefined && a.weight !== null && a.weight !== '') ? Number(a.weight) : (1000 + getRandomOrderValue(a.id));
+                const wB = (b.weight !== undefined && b.weight !== null && b.weight !== '') ? Number(b.weight) : (1000 + getRandomOrderValue(b.id));
+                return wA - wB;
             });
 
             if (filtered.length === 0) {
@@ -3190,12 +3199,14 @@
             `;
         }
 
+        // 第 2 點：單篇活動分享自動帶入專屬首圖與活動網址，讓社群平台優先抓取該活動圖片
         function shareToSocial(platform, eventName, eventId) {
             const targetEvent = events.find(e => String(e.id) === String(eventId));
             const eventCover = targetEvent ? getEffectiveCoverImage(targetEvent) : '';
             const baseUrl = window.location.origin + window.location.pathname;
             const shareUrl = `${baseUrl}#home?event=${encodeURIComponent(eventId)}`;
             
+            // 組織文案：包含活動名稱、時間、卡司與活動專屬首圖網址
             let shareText = `🎉 2027 跨年晚會推薦：【${eventName}】\n📍 地點：${targetEvent ? targetEvent.location : ''}\n⏰ 時間：${targetEvent ? targetEvent.time : ''}`;
             if (targetEvent && targetEvent.lineup) {
                 const lineupShort = formatLineupSummary(targetEvent.lineup);
@@ -3231,23 +3242,17 @@
             }
         }
 
-        // 第 2 點：開啟活動彈窗，雙層捲軸強制歸零
         async function openDetailModal(id) {
             const e = events.find(item => String(item.id) === String(id));
             if (!e) return;
-
-            const modal = document.getElementById('detail-modal');
-            const content = document.getElementById('modal-content');
-            const cardPanel = modal ? modal.querySelector('.clean-panel') : null;
-            if (content) content.scrollTop = 0;
-            if (modal) modal.scrollTop = 0;
-            if (cardPanel) cardPanel.scrollTop = 0;
 
             e.view_count = (Number(e.view_count) || 0) + 1;
             saveDataLocally();
 
             currentModalEventId = id;
             const isBookmarked = bookmarks.includes(String(id));
+            const content = document.getElementById('modal-content');
+            if (content) content.scrollTop = 0;
 
             const badgeColor = getRegionBadgeColor(e.region);
             const cover = getEffectiveCoverImage(e);
@@ -3445,21 +3450,10 @@
 
             document.getElementById('detail-modal').classList.remove('hidden');
             lucide.createIcons();
-
-            requestAnimationFrame(() => {
-                if (content) content.scrollTop = 0;
-                if (modal) modal.scrollTop = 0;
-            });
         }
 
         function closeDetailModal() {
-            const modal = document.getElementById('detail-modal');
-            const content = document.getElementById('modal-content');
-            if (content) content.scrollTop = 0;
-            if (modal) {
-                modal.scrollTop = 0;
-                modal.classList.add('hidden');
-            }
+            document.getElementById('detail-modal').classList.add('hidden');
             currentModalEventId = null;
         }
 
@@ -3532,8 +3526,8 @@
                 const orderCityB = (idxB !== -1 ? idxB : 99);
                 if (orderCityA !== orderCityB) return orderCityA - orderCityB;
 
-                const wA = (a.weight !== undefined && a.weight !== null && a.weight !== '') ? Number(a.weight) : 999;
-                const wB = (b.weight !== undefined && b.weight !== null && b.weight !== '') ? Number(b.weight) : 999;
+                const wA = (a.weight !== undefined && a.weight !== null && a.weight !== '') ? Number(a.weight) : (1000 + getRandomOrderValue(a.id));
+                const wB = (b.weight !== undefined && b.weight !== null && b.weight !== '') ? Number(b.weight) : (1000 + getRandomOrderValue(b.id));
                 return wA - wB;
             });
 
@@ -3633,7 +3627,7 @@
                 titleEl.innerText = "📝 隱藏與草稿清單 (前台完全不公開)";
             } else {
                 btnArchive.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 text-white shadow-xs transition flex items-center space-x-1.5";
-                titleEl.innerText = "🏛️ 歷屆歸檔活動清單 (已結束或逾期)";
+                titleEl.innerText = "🏛️ 歷屆歸檔活動清單 (已結束或逾期2天)";
             }
             renderAdminTable();
         }
@@ -3749,7 +3743,6 @@
             await syncToGoogleSheet();
         }
 
-        // 後台活動表格渲染：100% 穩定呈現所有活動
         function renderAdminTable() {
             const tbody = document.getElementById('admin-table-body');
             const searchKeyword = (document.getElementById('admin-search-input')?.value || '').toLowerCase().trim();
@@ -3776,7 +3769,7 @@
 
                 if (adminViewTab === 'active') document.getElementById('admin-table-title').innerText = "🚀 進行中活動清單 (前台公開顯示中)";
                 if (adminViewTab === 'draft') document.getElementById('admin-table-title').innerText = "📝 隱藏與草稿清單 (前台完全不公開)";
-                if (adminViewTab === 'archive') document.getElementById('admin-table-title').innerText = "🏛️ 歷屆歸檔活動清單 (已結束或逾期)";
+                if (adminViewTab === 'archive') document.getElementById('admin-table-title').innerText = "🏛️ 歷屆歸檔活動清單 (已結束或逾期2天)";
             }
 
             let filtered = targetList.filter(e => {
@@ -3798,16 +3791,6 @@
                 const pinB = b.is_pinned ? 0 : 1;
                 if (pinA !== pinB) return pinA - pinB;
 
-                const hasWeightA = (a.weight !== undefined && a.weight !== null && a.weight !== '');
-                const hasWeightB = (b.weight !== undefined && b.weight !== null && b.weight !== '');
-                if (hasWeightA && hasWeightB) {
-                    if (Number(a.weight) !== Number(b.weight)) return Number(a.weight) - Number(b.weight);
-                } else if (hasWeightA) {
-                    return -1;
-                } else if (hasWeightB) {
-                    return 1;
-                }
-
                 const startA = parseEventRange(a.time).startDate.getTime();
                 const startB = parseEventRange(b.time).startDate.getTime();
                 if (startA !== startB) return startA - startB;
@@ -3816,7 +3799,11 @@
                 const idxB = CITY_ORDER.indexOf(b.city);
                 const orderCityA = (idxA !== -1 ? idxA : 99);
                 const orderCityB = (idxB !== -1 ? idxB : 99);
-                return orderCityA - orderCityB;
+                if (orderCityA !== orderCityB) return orderCityA - orderCityB;
+
+                const wA = (a.weight !== undefined && a.weight !== null && a.weight !== '') ? Number(a.weight) : (1000 + getRandomOrderValue(a.id));
+                const wB = (b.weight !== undefined && b.weight !== null && b.weight !== '') ? Number(b.weight) : (1000 + getRandomOrderValue(b.id));
+                return wA - wB;
             });
 
             document.getElementById('admin-table-count').innerText = isGlobalSearch ? `全庫搜尋共找到 ${filtered.length} 筆資料` : `目前分流顯示 ${filtered.length} 筆活動`;
@@ -3856,7 +3843,7 @@
                             </button>
                         </td>
                         <td class="p-3.5 whitespace-nowrap">
-                            <input type="number" min="1" max="99" value="${e.weight !== undefined && e.weight !== null ? e.weight : ''}" placeholder="-" 
+                            <input type="number" min="1" max="99" value="${e.weight !== undefined && e.weight !== null ? e.weight : ''}" placeholder="隨機" 
                                 onchange="handleInlineWeightChange('${e.id}', this.value)"
                                 class="w-14 px-2 py-1 bg-white border border-slate-200 rounded-lg text-xs font-mono font-semibold text-center text-slate-800 focus:outline-none focus:border-indigo-500 shadow-2xs">
                         </td>
@@ -3916,6 +3903,7 @@
             });
         }
 
+        // 第 4 點：徹底清空所有圖片上傳提示文字，防止殘留重複顯示
         function clearAllUploadStatusLabels() {
             ['image-upload-status', 'lineup-upload-status', 'schedule-upload-status', 'content-upload-status', 'brand-logo-upload-status', 'brand-og-upload-status'].forEach(id => {
                 const el = document.getElementById(id);
@@ -3925,7 +3913,7 @@
 
         function openAddModal() {
             clearFormValidationStyles();
-            clearAllUploadStatusLabels();
+            clearAllUploadStatusLabels(); // 第 4 點：清空上傳狀態文字
 
             document.getElementById('form-modal-title').innerText = '新增活動';
             document.getElementById('event-form').reset();
@@ -3965,7 +3953,7 @@
 
         function openEditModal(id) {
             clearFormValidationStyles();
-            clearAllUploadStatusLabels();
+            clearAllUploadStatusLabels(); // 第 4 點：清空上傳狀態文字
 
             const e = events.find(item => String(item.id) === String(id));
             if (!e) return;
@@ -4033,7 +4021,7 @@
         function closeFormModal() {
             document.getElementById('form-modal').classList.add('hidden');
             document.getElementById('event-form').reset();
-            clearAllUploadStatusLabels();
+            clearAllUploadStatusLabels(); // 第 4 點：清空上傳狀態文字
             removeSingleImage('input-image', 'input-image-file', 'image-preview', 'image-preview-container', 'image-upload-status');
             document.getElementById('lineup-images-store').value = '';
             document.getElementById('schedule-images-store').value = '';
