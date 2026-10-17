@@ -180,8 +180,8 @@
                     <a href="https://www.threads.com/@livetws" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition" title="Threads">
                         <svg class="w-4 h-4 fill-current text-slate-900" viewBox="0 0 24 24"><path d="M12.186 24C5.467 24 0 18.533 0 11.814 0 5.094 5.467 0 12.186 0c6.643 0 11.968 5.176 12.014 11.758v.481h-3.418v-.481c-.043-4.73-3.856-8.543-8.596-8.543-4.757 0-8.627 3.87-8.627 8.627 0 4.758 3.87 8.627 8.627 8.627 2.664 0 5.105-1.22 6.697-3.342l2.678 2.115C19.645 22.016 16.094 24 12.186 24zm4.148-12.75c.198 2.378-1.455 4.394-3.864 4.394-2.205 0-3.816-1.782-3.816-4.225 0-2.457 1.636-4.238 3.844-4.238 1.83 0 3.256 1.258 3.65 2.997l-3.65.65c-.092-.816-.694-1.378-1.455-1.378-1.042 0-1.72.937-1.72 2.152 0 1.201.664 2.138 1.706 2.138 1.083 0 1.693-.978 1.693-2.316v-.174h3.612z"/></svg>
                     </a>
-                    <a href="https://www.facebook.com/100063574316191" target="_blank" rel="noopener noreferrer" class="p-1.5 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition" title="Facebook">
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.595 0 9 1.583 9 4.615V8z"/></svg>
+                    <a href="https://www.facebook.com/100063574316191" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-xl border border-blue-200 transition shadow-2xs font-semibold">
+                        <svg class="w-3.5 h-3.5 fill-current text-blue-600" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.595 0 9 1.583 9 4.615V8z"/></svg>
                     </a>
                 </div>
 
@@ -208,7 +208,7 @@
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 z-10 relative">
 
         <!-- ==================== HOME TAB (探索活動) ==================== -->
-        <div id="view-home" class="space-y-8 animate-fadeIn">
+        <div id="view-home" class="space-y-8 animate-fadeIn relative">
             <!-- Hero Carousel Banner (第四點：5天內+輪播序 智慧動態輪播池) -->
             <div class="relative rounded-2xl overflow-hidden clean-panel border border-indigo-100 shadow-xl h-64 sm:h-80 bg-slate-900">
                 <div id="hero-carousel-container" class="relative w-full h-full flex items-center justify-center">
@@ -261,8 +261,13 @@
                 </div>
             </div>
 
-            <!-- Events Grid (第三點：黃金排序法則呈現；若初次載入中顯示骨架動畫) -->
+            <!-- Events Grid (第三點：黃金排序法則呈現；初次載入中顯示骨架動畫) -->
             <div id="events-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+            <!-- 第四點：首頁右下角回到 TOP 浮動按鈕 -->
+            <button id="back-to-top-btn" onclick="scrollToTopSmooth()" class="fixed bottom-24 md:bottom-10 right-6 z-40 w-11 h-11 bg-white/95 hover:bg-indigo-600 text-slate-600 hover:text-white rounded-full border border-slate-200 shadow-xl flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none translate-y-3" title="回到頂部">
+                <i data-lucide="chevron-up" class="w-5 h-5"></i>
+            </button>
 
             <!-- Empty State -->
             <div id="empty-state" class="hidden flex-col items-center justify-center py-16 text-center">
@@ -372,7 +377,7 @@
                     <!-- 第二行：功能按鈕整齊排列於獨立一行 -->
                     <div class="flex flex-wrap items-center gap-2 pt-1">
                         <button onclick="openWeeklyReportModal()" class="px-3.5 py-2 bg-gradient-to-r from-indigo-50 to-purple-50 hover:from-indigo-100 hover:to-purple-100 text-indigo-700 rounded-xl text-xs sm:text-sm font-semibold border border-indigo-200 shadow-2xs flex items-center space-x-1.5 transition">
-                            <i data-lucide="newspaper" class="w-4 h-4 text-indigo-600"></i><span>📰 每週活動週報</span>
+                            <i data-lucide="newspaper" class="w-4 h-4 text-indigo-600"></i><span>每週活動週報</span>
                         </button>
                         <button onclick="openBrandingModal()" class="px-3.5 py-2 bg-white hover:bg-slate-50 text-slate-700 rounded-xl text-xs sm:text-sm font-medium border border-slate-200 shadow-2xs flex items-center space-x-1.5 transition">
                             <i data-lucide="palette" class="w-4 h-4 text-pink-600"></i><span>網站品牌與Logo設定</span>
@@ -426,25 +431,25 @@
                     </div>
                 </div>
 
-                <!-- 四段式清單分頁列 (第七點：獨立新增「🤖 探索雷達」第4分頁) -->
+                <!-- 四段式清單分頁列 (第六點：單一ICON、精簡名稱：進行中、隱藏與草稿、歷史活動、探索雷達) -->
                 <div class="flex flex-wrap items-center gap-2 border-b border-slate-200 pb-3">
                     <button onclick="openAddModal()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-1.5 shadow-md shadow-indigo-600/25 shrink-0 transition">
                         <i data-lucide="plus" class="w-4 h-4"></i><span>新增活動</span>
                     </button>
                     <button onclick="setAdminViewTab('active')" id="admin-tab-active" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-xs transition flex items-center space-x-1.5">
-                        <i data-lucide="play-circle" class="w-4 h-4"></i><span>🚀 進行中活動清單</span>
+                        <i data-lucide="play-circle" class="w-4 h-4"></i><span>進行中</span>
                         <span id="admin-active-count-badge" class="ml-1 px-1.5 py-0.2 bg-indigo-200 text-indigo-900 rounded-full text-[10px]">0</span>
                     </button>
                     <button onclick="setAdminViewTab('draft')" id="admin-tab-draft" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white hover:bg-slate-50 text-slate-600 border border-slate-200 transition flex items-center space-x-1.5">
-                        <i data-lucide="file-edit" class="w-4 h-4"></i><span>📝 隱藏與草稿清單</span>
+                        <i data-lucide="file-edit" class="w-4 h-4"></i><span>隱藏與草稿</span>
                         <span id="admin-draft-count-badge" class="ml-1 px-1.5 py-0.2 bg-amber-100 text-amber-800 rounded-full text-[10px]">0</span>
                     </button>
                     <button onclick="setAdminViewTab('archive')" id="admin-tab-archive" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white hover:bg-slate-50 text-slate-600 border border-slate-200 transition flex items-center space-x-1.5">
-                        <i data-lucide="archive" class="w-4 h-4"></i><span>🏛️ 歷屆歸檔清單</span>
+                        <i data-lucide="archive" class="w-4 h-4"></i><span>歷史活動</span>
                         <span id="admin-archive-count-badge" class="ml-1 px-1.5 py-0.2 bg-slate-200 text-slate-700 rounded-full text-[10px]">0</span>
                     </button>
                     <button onclick="setAdminViewTab('radar')" id="admin-tab-radar" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white hover:bg-purple-50 text-purple-700 border border-purple-200 transition flex items-center space-x-1.5 shadow-2xs">
-                        <i data-lucide="radar" class="w-4 h-4 text-purple-600"></i><span>🤖 探索雷達清單</span>
+                        <i data-lucide="radar" class="w-4 h-4 text-purple-600"></i><span>探索雷達</span>
                         <span id="admin-radar-count-badge" class="ml-1 px-1.5 py-0.2 bg-purple-100 text-purple-800 rounded-full text-[10px] font-bold">0</span>
                     </button>
                 </div>
@@ -534,8 +539,8 @@
                 </div>
             </div>
 
-            <!-- 後台右下角懸浮吸頂新增按鈕 (FAB) -->
-            <button id="admin-fab-btn" onclick="openAddModal()" class="fixed bottom-6 right-6 z-40 p-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-full shadow-2xl shadow-indigo-600/40 flex items-center space-x-2 transition-all transform hover:scale-105 active:scale-95 hidden no-print" title="快速新增活動">
+            <!-- 第五點：後台右下角懸浮吸頂新增按鈕 (調整層級 z-50 與位置，徹底防止被底部遮擋) -->
+            <button id="admin-fab-btn" onclick="openAddModal()" class="fixed bottom-24 md:bottom-10 right-6 z-50 p-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-full shadow-2xl shadow-indigo-600/40 flex items-center space-x-2 transition-all transform hover:scale-105 active:scale-95 hidden no-print" title="快速新增活動">
                 <i data-lucide="plus" class="w-6 h-6 stroke-[2.5]"></i>
                 <span class="text-sm font-bold pr-1">新增活動</span>
             </button>
@@ -553,7 +558,6 @@
             <div class="flex items-center space-x-2">
                 <a href="https://www.instagram.com/livetws/" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-3 py-1.5 bg-pink-50 hover:bg-pink-100 text-pink-700 rounded-xl border border-pink-200 transition shadow-2xs font-semibold">
                     <svg class="w-3.5 h-3.5 fill-current text-pink-600" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    <span>Instagram</span>
                 </a>
                 <a href="https://www.threads.com/@livetws" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-3 py-1.5 bg-slate-50 hover:bg-slate-100 text-slate-800 rounded-xl border border-slate-200 transition shadow-2xs font-semibold">
                     <svg class="w-3.5 h-3.5 fill-current text-slate-900" viewBox="0 0 24 24"><path d="M12.186 24C5.467 24 0 18.533 0 11.814 0 5.094 5.467 0 12.186 0c6.643 0 11.968 5.176 12.014 11.758v.481h-3.418v-.481c-.043-4.73-3.856-8.543-8.596-8.543-4.757 0-8.627 3.87-8.627 8.627 0 4.758 3.87 8.627 8.627 8.627 2.664 0 5.105-1.22 6.697-3.342l2.678 2.115C19.645 22.016 16.094 24 12.186 24zm4.148-12.75c.198 2.378-1.455 4.394-3.864 4.394-2.205 0-3.816-1.782-3.816-4.225 0-2.457 1.636-4.238 3.844-4.238 1.83 0 3.256 1.258 3.65 2.997l-3.65.65c-.092-.816-.694-1.378-1.455-1.378-1.042 0-1.72.937-1.72 2.152 0 1.201.664 2.138 1.706 2.138 1.083 0 1.693-.978 1.693-2.316v-.174h3.612z"/></svg>
@@ -767,7 +771,7 @@
         </div>
     </div>
 
-    <!-- Form Modal (新增/編輯活動表單：完整支援 29 個欄位含轉播資訊) -->
+    <!-- Form Modal (新增/編輯活動表單：第 3 點：區塊排序鏡像對照前台顯示) -->
     <div id="form-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden no-print">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-indigo-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div class="p-3.5 sm:p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50 sticky top-0 z-10">
@@ -795,11 +799,11 @@
                 </div>
             </div>
 
-            <!-- 表單內容區 -->
+            <!-- 表單內容區 (依序鏡像對照前台顯示順序) -->
             <form id="event-form" class="overflow-y-auto p-4 sm:p-5 space-y-3.5">
                 <input type="hidden" id="event-id">
 
-                <!-- 發布時間 -->
+                <!-- 1. 發布時間 -->
                 <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div class="flex items-center space-x-1.5">
                         <i data-lucide="send" class="w-4 h-4 text-indigo-600 shrink-0"></i>
@@ -811,7 +815,7 @@
                     </div>
                 </div>
                 
-                <!-- 基本規格網格 -->
+                <!-- 2. 基本規格與欄位 -->
                 <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">活動類型 *</label>
@@ -867,7 +871,7 @@
                     </div>
                 </div>
 
-                <!-- 票務資訊 -->
+                <!-- 3. 票務資訊 -->
                 <div class="p-3.5 bg-amber-50/70 rounded-2xl border border-amber-200 space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-2">
@@ -894,11 +898,11 @@
                     </div>
                 </div>
 
-                <!-- 1. 主視覺封面 -->
+                <!-- 4. 主視覺封面 (前台置頂 Banner) -->
                 <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
                     <div class="flex items-center justify-between">
                         <div>
-                            <span class="block text-xs font-bold text-slate-800">1. 主視覺封面 (選填)</span>
+                            <span class="block text-xs font-bold text-slate-800">4. 主視覺封面 (選填)</span>
                             <span class="text-[10px] text-slate-400">留空時自動擷取下方宣傳海報自適應呈現</span>
                         </div>
                         <div class="flex items-center space-x-2">
@@ -924,11 +928,11 @@
                     </div>
                 </div>
 
-                <!-- 2. 演出卡司及海報 -->
+                <!-- 5. 演出卡司及海報 -->
                 <div class="p-3.5 bg-indigo-50/50 rounded-xl border border-indigo-100 space-y-2.5">
                     <span class="block text-xs font-bold text-indigo-900 flex items-center space-x-1.5">
                         <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-600"></i>
-                        <span>2. 演出卡司及海報</span>
+                        <span>5. 演出卡司及海報</span>
                     </span>
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">演出藝人 / 樂團名單 (以逗號或直線分隔，如：<code class="text-indigo-600 bg-white px-1 rounded">五月天, Taylor Swift、告五人 | Bruno Mars</code>)</label>
@@ -955,9 +959,9 @@
                     <div id="lineup-gallery-container" class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1"></div>
                 </div>
 
-                <!-- 3. 活動流程 -->
+                <!-- 6. 活動流程 -->
                 <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
-                    <span class="block text-xs font-bold text-slate-800">3. 活動流程</span>
+                    <span class="block text-xs font-bold text-slate-800">6. 活動流程</span>
                     <div>
                         <p class="text-xs text-slate-500 mb-1">每行時段與內容：<code class="bg-white px-1 py-0.5 rounded border border-slate-200 text-indigo-600">19:00 - 20:00 | 開場表演</code></p>
                         <textarea id="input-desc" rows="2" placeholder="19:00 - 20:00 | 暖身開場表演&#10;20:00 - 22:30 | 歌手接力開唱" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-mono focus:outline-none"></textarea>
@@ -983,9 +987,9 @@
                     <div id="schedule-gallery-container" class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1"></div>
                 </div>
 
-                <!-- 4. 活動內容 (多圖上傳) -->
+                <!-- 7. 活動內容 (多圖上傳) -->
                 <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
-                    <span class="block text-xs font-bold text-slate-800">4. 活動內容 (選填)</span>
+                    <span class="block text-xs font-bold text-slate-800">7. 活動內容 (選填)</span>
                     <textarea id="input-content" rows="3" placeholder="輸入活動詳細特色說明、周邊市集、煙火倒數亮點、交通接駁管制等資訊..." class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-indigo-500"></textarea>
                     
                     <div class="pt-1 border-t border-slate-200/60">
@@ -1009,26 +1013,26 @@
                     <div id="content-gallery-container" class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1"></div>
                 </div>
 
-                <!-- 轉播資訊 (第四點：支援文字與超連結 [文字](網址)，網址不直接秀出) -->
-                <div class="p-3.5 bg-sky-50/60 rounded-xl border border-sky-100 space-y-2">
-                    <label class="block text-xs font-bold text-sky-950 flex items-center space-x-1.5">
-                        <i data-lucide="tv" class="w-3.5 h-3.5 text-sky-600"></i>
-                        <span>轉播資訊 (電視 / 網路直播 / 廣播，選填)</span>
-                    </label>
-                    <p class="text-[11px] text-slate-500">可填寫電視頻道或連結語法：<code class="bg-white px-1 py-0.5 rounded border border-sky-200 text-sky-700">[LINE直播](https://...)</code>，前台只會顯示漂亮文字，網址不會直接露出！</p>
-                    <textarea id="input-broadcast" rows="2" placeholder="電視轉播：三立都會台、TVBS歡樂台&#10;網路直播：[LINE TODAY 現場直播](https://today.line.me/...)&#10;廣播電台：好事989" class="w-full px-3 py-2 bg-white border border-sky-200 rounded-xl text-xs focus:outline-none focus:border-sky-500 shadow-2xs"></textarea>
-                </div>
-
-                <!-- YouTube 影音嵌入 -->
+                <!-- 8. YouTube 影音嵌入 (第 2 點：維持原本順序位置) -->
                 <div class="p-3.5 bg-rose-50/50 rounded-xl border border-rose-100 space-y-2">
                     <label class="block text-xs font-bold text-rose-900 flex items-center space-x-1.5">
                         <i data-lucide="youtube" class="w-3.5 h-3.5 text-rose-600"></i>
-                        <span>YouTube 影片 / 轉播直播連結 (選填)</span>
+                        <span>8. YouTube 影片 / 轉播直播連結 (選填)</span>
                     </label>
                     <input type="text" id="input-youtube" placeholder="https://www.youtube.com/watch?v=... 或 https://youtu.be/..." class="w-full px-3.5 py-2 bg-white border border-rose-200 rounded-xl text-xs focus:outline-none focus:border-rose-500">
                 </div>
 
-                <!-- 活動連結 -->
+                <!-- 9. 轉播資訊 (第 1 點：移至最後面，支援文字與乾淨超連結不秀出長網址) -->
+                <div class="p-3.5 bg-sky-50/60 rounded-xl border border-sky-100 space-y-2">
+                    <label class="block text-xs font-bold text-sky-950 flex items-center space-x-1.5">
+                        <i data-lucide="tv" class="w-3.5 h-3.5 text-sky-600"></i>
+                        <span>9. 轉播資訊 (電視 / 網路直播 / 廣播，選填)</span>
+                    </label>
+                    <p class="text-[11px] text-slate-500">可填寫電視頻道或連結語法：<code class="bg-white px-1 py-0.5 rounded border border-sky-200 text-sky-700">[LINE直播](https://...)</code>，前台只會顯示乾淨文字，網址不直接外露！</p>
+                    <textarea id="input-broadcast" rows="2" placeholder="電視轉播：三立都會台、TVBS歡樂台&#10;網路直播：[LINE TODAY 現場直播](https://today.line.me/...)&#10;廣播電台：好事989" class="w-full px-3 py-2 bg-white border border-sky-200 rounded-xl text-xs focus:outline-none focus:border-sky-500 shadow-2xs"></textarea>
+                </div>
+
+                <!-- 10. 活動連結 (底部收尾) -->
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">活動連結</label>
                     <input type="text" id="input-link" placeholder="https://..." class="w-full px-3.5 py-2 border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-none shadow-2xs">
@@ -1176,7 +1180,7 @@
         let currentModalEventId = null;
         let isAdminUnlocked = false;
 
-        let isInitialLoading = true; // 第二點：初次載入旗標，防止閃爍無活動
+        let isInitialLoading = true; // 初次載入狀態鎖
 
         let adminCurrentRegionFilter = 'all';
         let adminCurrentCategoryFilter = 'all';
@@ -1214,6 +1218,9 @@
             restoreSavedTab();
             handleUrlEventDeepLink();
 
+            // 監聽滾動以控制首頁「回到 TOP」浮動按鈕淡入淡出
+            window.addEventListener('scroll', handleWindowScroll);
+
             window.addEventListener('hashchange', () => {
                 const hashFull = window.location.hash.replace('#', '');
                 const h = hashFull.split('?')[0];
@@ -1225,6 +1232,23 @@
 
             await syncDataFromCloud(false);
         };
+
+        // 第四點：首頁右下角回到 TOP 捲動監聽
+        function handleWindowScroll() {
+            const topBtn = document.getElementById('back-to-top-btn');
+            if (!topBtn) return;
+            if (currentActiveTab === 'home' && window.scrollY > 300) {
+                topBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+                topBtn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            } else {
+                topBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+                topBtn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            }
+        }
+
+        function scrollToTopSmooth() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         function clearAdminSearchInput() {
             const adminSearch = document.getElementById('admin-search-input');
@@ -1697,6 +1721,7 @@
             }
 
             updateFabVisibility(tabId);
+            handleWindowScroll(); // 切換時自動評估回到頂端按鈕
             window.scrollTo({ top: 0, behavior: 'smooth' });
             lucide.createIcons();
         }
@@ -2389,6 +2414,9 @@
             if (siteBranding.logoUrl && !siteBranding.logoUrl.startsWith('data:image/')) {
                 allCloudImages.push(siteBranding.logoUrl);
             }
+            if (siteBranding.ogImageUrl && !siteBranding.ogImageUrl.startsWith('data:image/')) {
+                allCloudImages.push(siteBranding.ogImageUrl);
+            }
             allCloudImages = Array.from(new Set(allCloudImages));
 
             const grid = document.getElementById('asset-grid');
@@ -2817,28 +2845,43 @@
             return false;
         }
 
-        // 第三點：首頁排序黃金法則
-        // 置頂最優先 ➔ 自然時間（近到遠）➔ 縣市地理順序（基隆至連江）➔ 同縣市內活動權重 (weight: 1 > 2 > 3...)
+        // 第八點優化：首頁排序黃金法則
+        // 1. 置頂最優先 (is_pinned)
+        // 2. 開放狀態優先於未開放
+        // 3. 純日期（年-月-日）早的優先
+        // 4. 同一日期的活動 ➔ 強制優先依照縣市自然順序 (基隆至連江)
+        // 5. 同一日、同縣市內 ➔ 依手動權重 (weight: 1 > 2 > 3...) 排序
+        // 6. 若權重相同 ➔ 依具體時間早晚與隨機雜湊
         function sortEventsByGoldenRule(eventList) {
             return eventList.sort((a, b) => {
+                // 1. 手動置頂最優先
                 const pinA = a.is_pinned ? 0 : 1;
                 const pinB = b.is_pinned ? 0 : 1;
                 if (pinA !== pinB) return pinA - pinB;
 
+                // 2. 開放狀態優先
                 const statusA = (a.status === 'open') ? 0 : 1;
                 const statusB = (b.status === 'open') ? 0 : 1;
                 if (statusA !== statusB) return statusA - statusB;
 
-                const startA = parseEventRange(a.time).startDate.getTime();
-                const startB = parseEventRange(b.time).startDate.getTime();
-                if (startA !== startB) return startA - startB;
+                const startA = parseEventRange(a.time).startDate;
+                const startB = parseEventRange(b.time).startDate;
 
+                // 取得當天凌晨 00:00:00 時間戳（歸一化日期天數）
+                const dayA = new Date(startA.getFullYear(), startA.getMonth(), startA.getDate()).getTime();
+                const dayB = new Date(startB.getFullYear(), startB.getMonth(), startB.getDate()).getTime();
+
+                // 3. 日期不同：天數早的優先
+                if (dayA !== dayB) return dayA - dayB;
+
+                // 4. 同一天：強制依照全臺縣市自然順序排序 (CITY_ORDER: 基隆市 ➔ 臺北市 ➔ 新北市...)
                 const idxA = CITY_ORDER.indexOf(a.city);
                 const idxB = CITY_ORDER.indexOf(b.city);
                 const orderCityA = (idxA !== -1 ? idxA : 99);
                 const orderCityB = (idxB !== -1 ? idxB : 99);
                 if (orderCityA !== orderCityB) return orderCityA - orderCityB;
 
+                // 5. 同一日、同縣市：依活動權重排序 (weight: 數值越小越前面，未填寫排後面)
                 const hasWeightA = (a.weight !== undefined && a.weight !== null && a.weight !== '' && !isNaN(Number(a.weight)));
                 const hasWeightB = (b.weight !== undefined && b.weight !== null && b.weight !== '' && !isNaN(Number(b.weight)));
 
@@ -2851,6 +2894,12 @@
                     return 1;
                 }
 
+                // 6. 同日、同縣市、同權重：依具體時間早晚
+                const exactTimeA = startA.getTime();
+                const exactTimeB = startB.getTime();
+                if (exactTimeA !== exactTimeB) return exactTimeA - exactTimeB;
+
+                // 7. 隨機雜湊備援
                 return getRandomOrderValue(a.id) - getRandomOrderValue(b.id);
             });
         }
@@ -2859,7 +2908,7 @@
             const grid = document.getElementById('events-grid');
             const emptyState = document.getElementById('empty-state');
             
-            // 第二點：若正在初次非同步載入，顯示載入動畫與骨架，不顯示無活動
+            // 初次非同步載入時顯示旋轉動畫與骨架
             if (isInitialLoading) {
                 emptyState.classList.add('hidden');
                 emptyState.classList.remove('flex');
@@ -2935,8 +2984,9 @@
                             <div class="absolute top-3 left-3 flex flex-wrap items-center gap-1.5">
                                 ${isPinned ? `<span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md flex items-center space-x-1"><span>置頂</span></span>` : ''}
                                 ${isTicket ? `<span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-600 text-white shadow-md flex items-center space-x-1"><span>🎫 售票</span></span>` : ''}
+                                <!-- 第九點：左上角膠囊只顯示縣市，移除類型 -->
                                 <span class="px-2.5 py-1 rounded-lg text-xs font-semibold ${badgeColor} text-white shadow-md">
-                                    ${e.city} · ${e.category}
+                                    ${e.city}
                                 </span>
                                 ${hasNewBadge ? `<span class="px-2 py-0.5 rounded-lg text-[10px] font-extrabold bg-gradient-to-r from-red-500 to-rose-600 text-white shadow-md animate-pulse">NEW</span>` : ''}
                             </div>
@@ -3314,9 +3364,8 @@
             }
         }
 
-        // 第二點：詳情彈窗強制雙層 instant 捲軸歸零置頂；支援預覽雷達池；加入第四點轉播資訊
+        // 第二點：詳情彈窗強制雙層 instant 捲軸歸零置頂；支援預覽雷達池；加入轉播資訊乾淨超連結
         async function openDetailModal(id) {
-            // 第一點：同時搜尋正式庫與探索雷達池
             const e = events.find(item => String(item.id) === String(id)) || 
                       radarEvents.find(item => String(item.id) === String(id));
             if (!e) return;
@@ -3434,31 +3483,6 @@
                     </div>
                 ` : ''}
 
-                <!-- 第四點：轉播資訊 (未填寫時完全不顯示，填寫時只呈現乾淨超連結不露出裸網址) -->
-                ${e.broadcast_info && e.broadcast_info.trim().length > 0 ? `
-                    <div class="p-4 bg-sky-50/70 rounded-2xl border border-sky-100 space-y-2">
-                        <h4 class="text-base sm:text-lg font-bold text-sky-950 flex items-center space-x-2">
-                            <i data-lucide="tv" class="w-5 h-5 text-sky-600"></i>
-                            <span>電視／網路轉播資訊</span>
-                        </h4>
-                        <div class="text-sm text-slate-800 whitespace-pre-line leading-relaxed pl-1">
-                            ${formatBroadcastText(e.broadcast_info)}
-                        </div>
-                    </div>
-                ` : ''}
-
-                ${youtubeEmbed ? `
-                    <div class="space-y-2">
-                        <h4 class="text-base sm:text-lg font-bold text-slate-900 uppercase tracking-wider flex items-center space-x-2">
-                            <i data-lucide="play-circle" class="w-5 h-5 text-rose-600"></i>
-                            <span>官方活動影音 / 轉播</span>
-                        </h4>
-                        <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-black">
-                            <iframe src="${youtubeEmbed}" class="absolute inset-0 w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                ` : ''}
-
                 ${e.lineup ? `
                     <div class="p-4 bg-indigo-50/50 rounded-2xl border border-indigo-100 space-y-2.5">
                         <h4 class="text-base sm:text-lg font-bold text-indigo-950 uppercase tracking-wider flex items-center space-x-2">
@@ -3492,6 +3516,32 @@
                             <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-sm sm:text-base text-slate-800 whitespace-pre-line leading-relaxed shadow-2xs">${e.content}</div>
                         ` : ''}
                         ${contentImgs.length > 0 ? renderPosterGrid(contentImgs) : ''}
+                    </div>
+                ` : ''}
+
+                <!-- 第 2 點：YouTube 影音嵌入 (維持在原本版面位置) -->
+                ${youtubeEmbed ? `
+                    <div class="space-y-2">
+                        <h4 class="text-base sm:text-lg font-bold text-slate-900 uppercase tracking-wider flex items-center space-x-2">
+                            <i data-lucide="play-circle" class="w-5 h-5 text-rose-600"></i>
+                            <span>官方活動影音 / 轉播</span>
+                        </h4>
+                        <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-black">
+                            <iframe src="${youtubeEmbed}" class="absolute inset-0 w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                ` : ''}
+
+                <!-- 第 1 點：轉播資訊 (放在最後面，未填寫完全隱藏，填寫時乾淨超連結不露出裸網址) -->
+                ${e.broadcast_info && e.broadcast_info.trim().length > 0 ? `
+                    <div class="p-4 bg-sky-50/70 rounded-2xl border border-sky-100 space-y-2">
+                        <h4 class="text-base sm:text-lg font-bold text-sky-950 flex items-center space-x-2">
+                            <i data-lucide="tv" class="w-5 h-5 text-sky-600"></i>
+                            <span>電視／網路轉播資訊</span>
+                        </h4>
+                        <div class="text-sm text-slate-800 whitespace-pre-line leading-relaxed pl-1">
+                            ${formatBroadcastText(e.broadcast_info)}
+                        </div>
                     </div>
                 ` : ''}
             `;
@@ -3721,19 +3771,19 @@
 
             if (tab === 'active') {
                 btnActive.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-xs transition flex items-center space-x-1.5";
-                titleEl.innerText = "🚀 進行中活動清單 (前台公開顯示中)";
+                titleEl.innerText = "進行中活動清單 (前台公開顯示中)";
                 if (radarPanel) radarPanel.classList.add('hidden');
             } else if (tab === 'draft') {
                 btnDraft.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-amber-500 text-white shadow-xs transition flex items-center space-x-1.5";
-                titleEl.innerText = "📝 隱藏與草稿清單 (前台完全不公開)";
+                titleEl.innerText = "隱藏與草稿清單 (前台完全不公開)";
                 if (radarPanel) radarPanel.classList.add('hidden');
             } else if (tab === 'archive') {
                 btnArchive.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 text-white shadow-xs transition flex items-center space-x-1.5";
-                titleEl.innerText = "🏛️ 歷屆歸檔活動清單 (已結束或隔日 00:00 自動歸檔)";
+                titleEl.innerText = "歷史活動清單 (已結束或隔日 00:00 自動歸檔)";
                 if (radarPanel) radarPanel.classList.add('hidden');
             } else if (tab === 'radar') {
                 btnRadar.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-purple-600 text-white shadow-xs transition flex items-center space-x-1.5";
-                titleEl.innerText = "🤖 探索雷達清單 (全自動背景掃描 + 社群情報解析待審核池)";
+                titleEl.innerText = "探索雷達清單 (全自動背景掃描 + 社群情報解析待審核池)";
                 if (radarPanel) radarPanel.classList.remove('hidden');
             }
             renderAdminTable();
@@ -3850,7 +3900,7 @@
             await syncToGoogleSheet();
         }
 
-        // 第七點：後台表格渲染（支援正式庫與探索雷達專屬審核池；第一點：雷達活動名稱點擊預覽）
+        // 第七點：後台表格渲染（支援正式庫與探索雷達專屬審核池；雷達清單活動名稱點擊預覽）
         function renderAdminTable() {
             const tbody = document.getElementById('admin-table-body');
             const searchKeyword = (document.getElementById('admin-search-input')?.value || '').toLowerCase().trim();
@@ -3860,11 +3910,11 @@
 
             if (isGlobalSearch) {
                 targetList = (adminViewTab === 'radar') ? radarEvents : events;
-                document.getElementById('admin-table-title').innerText = `🔍 全域跨狀態搜尋結果`;
+                document.getElementById('admin-table-title').innerText = `全域跨狀態搜尋結果`;
             } else {
                 if (adminViewTab === 'radar') {
                     targetList = radarEvents;
-                    document.getElementById('admin-table-title').innerText = "🤖 探索雷達清單 (手動審核轉入正式庫)";
+                    document.getElementById('admin-table-title').innerText = "探索雷達清單 (手動審核轉入正式庫)";
                 } else {
                     targetList = events.filter(e => {
                         const isArchived = isEffectivelyClosed(e);
@@ -3875,9 +3925,9 @@
                         return isArchived;
                     });
 
-                    if (adminViewTab === 'active') document.getElementById('admin-table-title').innerText = "🚀 進行中活動清單 (前台公開顯示中)";
-                    if (adminViewTab === 'draft') document.getElementById('admin-table-title').innerText = "📝 隱藏與草稿清單 (前台完全不公開)";
-                    if (adminViewTab === 'archive') document.getElementById('admin-table-title').innerText = "🏛️ 歷屆歸檔活動清單 (已結束或隔日 00:00 自動歸檔)";
+                    if (adminViewTab === 'active') document.getElementById('admin-table-title').innerText = "進行中活動清單 (前台公開顯示中)";
+                    if (adminViewTab === 'draft') document.getElementById('admin-table-title').innerText = "隱藏與草稿清單 (前台完全不公開)";
+                    if (adminViewTab === 'archive') document.getElementById('admin-table-title').innerText = "歷史活動清單 (已結束或隔日 00:00 自動歸檔)";
                 }
             }
 
@@ -3901,7 +3951,7 @@
 
             if (filtered.length === 0) {
                 let emptyMsg = (adminViewTab === 'radar') 
-                    ? '🎉 目前雷達探索池暫無待審核活動！點擊上方「立即手動掃描」或貼入社群貼文探索新活動。' 
+                    ? '目前雷達探索池暫無待審核活動！點擊上方「立即手動掃描」或貼入社群貼文探索新活動。' 
                     : (isGlobalSearch ? '找不到任何符合搜尋條件的活動' : '目前尚無符合條件的活動資料');
                 tbody.innerHTML = `<tr><td colspan="9" class="p-8 text-center text-slate-400 text-xs">${emptyMsg}</td></tr>`;
                 return;
@@ -3913,7 +3963,7 @@
                     return `
                         <tr class="hover:bg-purple-50/50 transition">
                             <td class="p-3.5 whitespace-nowrap">
-                                <span class="px-2.5 py-1 bg-purple-100 text-purple-800 rounded-lg text-xs font-bold border border-purple-200">🤖 雷達待審</span>
+                                <span class="px-2.5 py-1 bg-purple-100 text-purple-800 rounded-lg text-xs font-bold border border-purple-200">雷達待審</span>
                             </td>
                             <td class="p-3.5 whitespace-nowrap">
                                 ${isDuplicateInMain ? `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-300">正式庫已存在</span>` : `<span class="text-xs text-slate-400">全新活動</span>`}
@@ -4038,7 +4088,7 @@
                     }
                     renderAdminTable();
                     updateStats();
-                    alert(`✅ 全臺雷達掃描完成！本次自動發現並收錄了 ${data.newCount} 場全新活動至探索待審池。`);
+                    alert(`全臺雷達掃描完成！本次自動發現並收錄了 ${data.newCount} 場全新活動至探索待審池。`);
                 } else {
                     alert('掃描失敗或無回應：' + (data.message || '請確認 GAS 權限'));
                 }
@@ -4091,11 +4141,11 @@
             const isDupMain = events.some(e => e.name === actName && e.city === city);
             const isDupRadar = radarEvents.some(e => e.name === actName && e.city === city);
             if (isDupMain) {
-                alert(`⚠️ 偵測到「${actName}」已經存在於正式活動資料庫中，已為您自動防重複阻擋！`);
+                alert(`偵測到「${actName}」已經存在於正式活動資料庫中，已為您自動防重複阻擋！`);
                 return;
             }
             if (isDupRadar) {
-                alert(`⚠️ 該活動「${actName}」已經在探索雷達池中，請直接進行審核。`);
+                alert(`該活動「${actName}」已經在探索雷達池中，請直接進行審核。`);
                 return;
             }
 
@@ -4138,7 +4188,7 @@
             updateStats();
             syncRadarToGoogleSheet();
             input.value = '';
-            alert(`🎉 已成功解析並將「${actName}」加入探索雷達池！您可以點擊「審核轉入」微調後正式發布。`);
+            alert(`已成功解析並將「${actName}」加入探索雷達池！您可以點擊「審核轉入」微調後正式發布。`);
         }
 
         function UtilitiesFormatNow() {
