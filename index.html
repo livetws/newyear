@@ -2033,15 +2033,18 @@
             }
         }
 
-        function setCurrentPublishTime() {
-            const now = new Date();
-            const y = now.getFullYear();
-            const m = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            const hh = String(now.getHours()).padStart(2, '0');
-            const mm = String(now.getMinutes()).padStart(2, '0');
-            document.getElementById('input-published-at').value = `${y}/${m}/${d} ${hh}:${mm}`;
-        }
+       function setCurrentPublishTime() {
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = String(now.getMonth() + 1).padStart(2, '0');
+    const d = String(now.getDate()).padStart(2, '0');
+    const hh = String(now.getHours()).padStart(2, '0');
+    const mm = String(now.getMinutes()).padStart(2, '0');
+    const targetInput = document.getElementById('input-published-at');
+    if (targetInput) {
+        targetInput.value = `${y}/${m}/${d} ${hh}:${mm}`;
+    }
+}
 
         function toggleTicketSection() {
             const isChecked = document.getElementById('input-is-ticket').checked;
@@ -4068,15 +4071,15 @@
             alert(`🎉 已成功解析並將「${actName}」加入探索雷達池！您可以點擊「審核轉入」微調後正式發布。`);
         }
 
-        function UtilitiesFormatNow() {
-            const d = new Date();
-            const y = d.getFullYear();
-            const m = String(d.getMonth() + 1).padStart(2, '0');
-            const day = String(d.getDate()).padStart(2, '0');
-            const hh = String(d.getHours()).padStart(2, '0');
-            const mm = String(d.getMinutes()).padStart(2, '0');
-            return `${y}/${m}/${day} ${hh}:${mm}`;
-        }
+function UtilitiesFormatNow() {
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = String(now.getMonth() + 1).padStart(2, '0');
+    const d = String(now.getDate()).padStart(2, '0');
+    const hh = String(now.getHours()).padStart(2, '0');
+    const mm = String(now.getMinutes()).padStart(2, '0');
+    return `${y}/${m}/${d} ${hh}:${mm}`;
+}
 
         function convertRadarToMainModal(radarId) {
             const item = radarEvents.find(r => String(r.id) === String(radarId));
