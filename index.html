@@ -261,7 +261,7 @@
                 </div>
             </div>
 
-            <!-- Events Grid (第三點：黃金排序法則呈現) -->
+            <!-- Events Grid (第三點：黃金排序法則呈現；若初次載入中顯示骨架動畫) -->
             <div id="events-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
             <!-- Empty State -->
@@ -443,7 +443,6 @@
                         <i data-lucide="archive" class="w-4 h-4"></i><span>🏛️ 歷屆歸檔清單</span>
                         <span id="admin-archive-count-badge" class="ml-1 px-1.5 py-0.2 bg-slate-200 text-slate-700 rounded-full text-[10px]">0</span>
                     </button>
-                    <!-- 第七點：純程式探索雷達專屬分頁按鈕 -->
                     <button onclick="setAdminViewTab('radar')" id="admin-tab-radar" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white hover:bg-purple-50 text-purple-700 border border-purple-200 transition flex items-center space-x-1.5 shadow-2xs">
                         <i data-lucide="radar" class="w-4 h-4 text-purple-600"></i><span>🤖 探索雷達清單</span>
                         <span id="admin-radar-count-badge" class="ml-1 px-1.5 py-0.2 bg-purple-100 text-purple-800 rounded-full text-[10px] font-bold">0</span>
@@ -456,7 +455,7 @@
                         <div class="flex items-center space-x-2">
                             <span class="p-2 bg-purple-600 text-white rounded-xl shadow-xs"><i data-lucide="radar" class="w-5 h-5"></i></span>
                             <div>
-                                <h4 class="text-sm font-bold text-purple-950">全臺雙引擎活動雷達 (官方開放庫＋即時新聞 RSS 每 3 小時自動巡檢)</h4>
+                                <h4 class="text-sm font-bold text-purple-950">全臺三引擎活動雷達 (文化部藝文庫＋觀光署＋即時新聞 RSS 每 3 小時自動巡檢)</h4>
                                 <p class="text-[11px] text-purple-700">自動抓取全臺音樂祭、聖誕節、萬聖節與跨年活動，支援手動貼入社群貼文智慧轉換，經您核准才公開！</p>
                             </div>
                         </div>
@@ -554,6 +553,7 @@
             <div class="flex items-center space-x-2">
                 <a href="https://www.instagram.com/livetws/" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-3 py-1.5 bg-pink-50 hover:bg-pink-100 text-pink-700 rounded-xl border border-pink-200 transition shadow-2xs font-semibold">
                     <svg class="w-3.5 h-3.5 fill-current text-pink-600" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    <span>Instagram</span>
                 </a>
                 <a href="https://www.threads.com/@livetws" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-3 py-1.5 bg-slate-50 hover:bg-slate-100 text-slate-800 rounded-xl border border-slate-200 transition shadow-2xs font-semibold">
                     <svg class="w-3.5 h-3.5 fill-current text-slate-900" viewBox="0 0 24 24"><path d="M12.186 24C5.467 24 0 18.533 0 11.814 0 5.094 5.467 0 12.186 0c6.643 0 11.968 5.176 12.014 11.758v.481h-3.418v-.481c-.043-4.73-3.856-8.543-8.596-8.543-4.757 0-8.627 3.87-8.627 8.627 0 4.758 3.87 8.627 8.627 8.627 2.664 0 5.105-1.22 6.697-3.342l2.678 2.115C19.645 22.016 16.094 24 12.186 24zm4.148-12.75c.198 2.378-1.455 4.394-3.864 4.394-2.205 0-3.816-1.782-3.816-4.225 0-2.457 1.636-4.238 3.844-4.238 1.83 0 3.256 1.258 3.65 2.997l-3.65.65c-.092-.816-.694-1.378-1.455-1.378-1.042 0-1.72.937-1.72 2.152 0 1.201.664 2.138 1.706 2.138 1.083 0 1.693-.978 1.693-2.316v-.174h3.612z"/></svg>
@@ -767,7 +767,7 @@
         </div>
     </div>
 
-    <!-- Form Modal (新增/編輯活動表單：完整支援 28 個欄位) -->
+    <!-- Form Modal (新增/編輯活動表單：完整支援 29 個欄位含轉播資訊) -->
     <div id="form-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden no-print">
         <div class="clean-panel w-full max-w-2xl rounded-2xl overflow-hidden border border-indigo-200 shadow-2xl max-h-[90vh] flex flex-col bg-white">
             <div class="p-3.5 sm:p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50 sticky top-0 z-10">
@@ -1009,6 +1009,16 @@
                     <div id="content-gallery-container" class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1"></div>
                 </div>
 
+                <!-- 轉播資訊 (第四點：支援文字與超連結 [文字](網址)，網址不直接秀出) -->
+                <div class="p-3.5 bg-sky-50/60 rounded-xl border border-sky-100 space-y-2">
+                    <label class="block text-xs font-bold text-sky-950 flex items-center space-x-1.5">
+                        <i data-lucide="tv" class="w-3.5 h-3.5 text-sky-600"></i>
+                        <span>轉播資訊 (電視 / 網路直播 / 廣播，選填)</span>
+                    </label>
+                    <p class="text-[11px] text-slate-500">可填寫電視頻道或連結語法：<code class="bg-white px-1 py-0.5 rounded border border-sky-200 text-sky-700">[LINE直播](https://...)</code>，前台只會顯示漂亮文字，網址不會直接露出！</p>
+                    <textarea id="input-broadcast" rows="2" placeholder="電視轉播：三立都會台、TVBS歡樂台&#10;網路直播：[LINE TODAY 現場直播](https://today.line.me/...)&#10;廣播電台：好事989" class="w-full px-3 py-2 bg-white border border-sky-200 rounded-xl text-xs focus:outline-none focus:border-sky-500 shadow-2xs"></textarea>
+                </div>
+
                 <!-- YouTube 影音嵌入 -->
                 <div class="p-3.5 bg-rose-50/50 rounded-xl border border-rose-100 space-y-2">
                     <label class="block text-xs font-bold text-rose-900 flex items-center space-x-1.5">
@@ -1166,6 +1176,8 @@
         let currentModalEventId = null;
         let isAdminUnlocked = false;
 
+        let isInitialLoading = true; // 第二點：初次載入旗標，防止閃爍無活動
+
         let adminCurrentRegionFilter = 'all';
         let adminCurrentCategoryFilter = 'all';
         let adminViewTab = 'active';
@@ -1230,12 +1242,16 @@
                         e.is_carousel = (cRaw === 'true' || cRaw === '1' || cRaw === 'yes');
                         e.is_pinned = (String(e.is_pinned).trim().toLowerCase() === 'true' || e.is_pinned === 1);
                         e.is_ticket = (String(e.is_ticket).trim().toLowerCase() === 'true' || e.is_ticket === 1);
+                        e.broadcast_info = e.broadcast_info || '';
                     });
                 } catch(e) { events = []; }
             }
             const savedRadar = localStorage.getItem('tw_nye_radar_events_cache');
             if (savedRadar) {
                 try { radarEvents = JSON.parse(savedRadar); } catch(e) { radarEvents = []; }
+            }
+            if (events.length > 0) {
+                isInitialLoading = false;
             }
         }
 
@@ -1403,6 +1419,20 @@
             const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
             const match = url.match(regExp);
             return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}` : '';
+        }
+
+        // 第四點：轉播資訊文字解析，將 [文字](網址) 轉為乾淨連結，不直接秀出裸網址
+        function formatBroadcastText(text) {
+            if (!text) return '';
+            let formatted = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, function(match, label, url) {
+                return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 text-sky-700 hover:text-sky-900 font-bold underline decoration-sky-300 underline-offset-2"><span>${label}</span><svg class="w-3.5 h-3.5 inline ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>`;
+            });
+
+            formatted = formatted.replace(/(^|[^"'])(https?:\/\/[^\s<]+)/g, function(match, prefix, url) {
+                return `${prefix}<a href="${url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 text-sky-700 hover:text-sky-900 font-bold underline decoration-sky-300 underline-offset-2"><span>👉 點此前往轉播平台</span><svg class="w-3.5 h-3.5 inline ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>`;
+            });
+
+            return formatted;
         }
 
         async function sha256(message) {
@@ -1775,6 +1805,7 @@
                                     content: e.content || '',
                                     content_images: e.content_images || '',
                                     youtube_url: e.youtube_url || '',
+                                    broadcast_info: e.broadcast_info || '',
                                     time: sanitizeTimeDisplay(e.time),
                                     lineup: e.lineup || '',
                                     lineup_image: e.lineup_image || '',
@@ -1789,6 +1820,7 @@
                                 document.getElementById('global-visit-count').innerText = Number(data.visitCount).toLocaleString();
                             }
 
+                            isInitialLoading = false; // 解除初始載入狀態
                             saveDataLocally();
                             syncCategoriesWithEvents();
                             buildDynamicCategoryTabs();
@@ -1816,6 +1848,8 @@
                     setAdminSyncStatus('error', '連線異常');
                 }
             }
+            isInitialLoading = false;
+            renderEvents();
             if (isManual) alert('請先確認 Google 試算表 API 網址設定。');
         }
 
@@ -2033,18 +2067,18 @@
             }
         }
 
-       function setCurrentPublishTime() {
-    const now = new Date();
-    const y = now.getFullYear();
-    const m = String(now.getMonth() + 1).padStart(2, '0');
-    const d = String(now.getDate()).padStart(2, '0');
-    const hh = String(now.getHours()).padStart(2, '0');
-    const mm = String(now.getMinutes()).padStart(2, '0');
-    const targetInput = document.getElementById('input-published-at');
-    if (targetInput) {
-        targetInput.value = `${y}/${m}/${d} ${hh}:${mm}`;
-    }
-}
+        function setCurrentPublishTime() {
+            const now = new Date();
+            const y = now.getFullYear();
+            const m = String(now.getMonth() + 1).padStart(2, '0');
+            const d = String(now.getDate()).padStart(2, '0');
+            const hh = String(now.getHours()).padStart(2, '0');
+            const mm = String(now.getMinutes()).padStart(2, '0');
+            const targetInput = document.getElementById('input-published-at');
+            if (targetInput) {
+                targetInput.value = `${y}/${m}/${d} ${hh}:${mm}`;
+            }
+        }
 
         function toggleTicketSection() {
             const isChecked = document.getElementById('input-is-ticket').checked;
@@ -2825,6 +2859,21 @@
             const grid = document.getElementById('events-grid');
             const emptyState = document.getElementById('empty-state');
             
+            // 第二點：若正在初次非同步載入，顯示載入動畫與骨架，不顯示無活動
+            if (isInitialLoading) {
+                emptyState.classList.add('hidden');
+                emptyState.classList.remove('flex');
+                grid.innerHTML = `
+                    <div class="col-span-full flex flex-col items-center justify-center py-20 text-center">
+                        <i data-lucide="loader" class="w-8 h-8 animate-spin text-indigo-600 mb-3"></i>
+                        <h3 class="text-base font-semibold text-slate-700">活動資料載入中...</h3>
+                        <p class="text-xs text-slate-400 mt-1">正在即時連線雲端資料庫，請稍候</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
             let filtered = events.filter(e => {
                 if (isEffectivelyClosed(e) || e.status === 'hidden') return false;
 
@@ -3265,9 +3314,11 @@
             }
         }
 
-        // 第二點：詳情彈窗強制雙層 instant 捲軸歸零置頂
+        // 第二點：詳情彈窗強制雙層 instant 捲軸歸零置頂；支援預覽雷達池；加入第四點轉播資訊
         async function openDetailModal(id) {
-            const e = events.find(item => String(item.id) === String(id));
+            // 第一點：同時搜尋正式庫與探索雷達池
+            const e = events.find(item => String(item.id) === String(id)) || 
+                      radarEvents.find(item => String(item.id) === String(id));
             if (!e) return;
 
             e.view_count = (Number(e.view_count) || 0) + 1;
@@ -3278,6 +3329,7 @@
             const content = document.getElementById('modal-content');
             const outerModal = document.getElementById('detail-modal');
 
+            // 雙層強制歸零置頂
             if (content) content.scrollTop = 0;
             if (outerModal) outerModal.scrollTop = 0;
 
@@ -3378,6 +3430,19 @@
                                     ` : ''}
                                 </div>
                             `).join('') : '<div class="text-sm text-amber-900">本場活動需憑票或索票入場，詳情請依主辦公告。</div>'}
+                        </div>
+                    </div>
+                ` : ''}
+
+                <!-- 第四點：轉播資訊 (未填寫時完全不顯示，填寫時只呈現乾淨超連結不露出裸網址) -->
+                ${e.broadcast_info && e.broadcast_info.trim().length > 0 ? `
+                    <div class="p-4 bg-sky-50/70 rounded-2xl border border-sky-100 space-y-2">
+                        <h4 class="text-base sm:text-lg font-bold text-sky-950 flex items-center space-x-2">
+                            <i data-lucide="tv" class="w-5 h-5 text-sky-600"></i>
+                            <span>電視／網路轉播資訊</span>
+                        </h4>
+                        <div class="text-sm text-slate-800 whitespace-pre-line leading-relaxed pl-1">
+                            ${formatBroadcastText(e.broadcast_info)}
                         </div>
                     </div>
                 ` : ''}
@@ -3689,7 +3754,7 @@
             if (!container) return;
 
             const allCats = Array.from(new Set([
-                '跨年晚會', '元旦升旗', '各縣市活動', '燈會',
+                '跨年晚會', '元旦升旗', '各縣市活動', '燈會', '音樂祭', '聖誕節', '萬聖節',
                 ...categoryConfigs.map(c => c.name),
                 ...events.map(e => e.category)
             ].filter(Boolean)));
@@ -3785,7 +3850,7 @@
             await syncToGoogleSheet();
         }
 
-        // 第七點：後台表格渲染（支援正式庫與探索雷達專屬審核池）
+        // 第七點：後台表格渲染（支援正式庫與探索雷達專屬審核池；第一點：雷達活動名稱點擊預覽）
         function renderAdminTable() {
             const tbody = document.getElementById('admin-table-body');
             const searchKeyword = (document.getElementById('admin-search-input')?.value || '').toLowerCase().trim();
@@ -3856,7 +3921,11 @@
                             <td class="p-3.5 whitespace-nowrap text-xs text-slate-400">-</td>
                             <td class="p-3.5 whitespace-nowrap text-xs text-slate-400">0 次</td>
                             <td class="p-3.5">
-                                <div class="font-bold text-slate-900">${e.name}</div>
+                                <!-- 第一點：雷達清單活動名稱可點擊彈出預覽視窗 -->
+                                <button type="button" onclick="openDetailModal('${e.id}')" class="text-left font-bold text-slate-900 hover:text-purple-600 hover:underline max-w-[180px] sm:max-w-xs truncate flex items-center space-x-1 group" title="點擊預覽雷達活動詳情">
+                                    <span>${e.name}</span>
+                                    <i data-lucide="eye" class="w-3.5 h-3.5 text-slate-400 group-hover:text-purple-600 shrink-0"></i>
+                                </button>
                                 <div class="text-xs text-purple-700 font-semibold">${e.city} · ${e.region} · ${e.location}</div>
                             </td>
                             <td class="p-3.5 text-xs font-semibold text-slate-700 whitespace-nowrap">${e.category}</td>
@@ -4051,6 +4120,7 @@
                 content: text,
                 content_images: "",
                 youtube_url: "",
+                broadcast_info: "",
                 image: "",
                 lineup: "",
                 lineup_image: "",
@@ -4071,15 +4141,15 @@
             alert(`🎉 已成功解析並將「${actName}」加入探索雷達池！您可以點擊「審核轉入」微調後正式發布。`);
         }
 
-function UtilitiesFormatNow() {
-    const now = new Date();
-    const y = now.getFullYear();
-    const m = String(now.getMonth() + 1).padStart(2, '0');
-    const d = String(now.getDate()).padStart(2, '0');
-    const hh = String(now.getHours()).padStart(2, '0');
-    const mm = String(now.getMinutes()).padStart(2, '0');
-    return `${y}/${m}/${d} ${hh}:${mm}`;
-}
+        function UtilitiesFormatNow() {
+            const now = new Date();
+            const y = now.getFullYear();
+            const m = String(now.getMonth() + 1).padStart(2, '0');
+            const d = String(now.getDate()).padStart(2, '0');
+            const hh = String(now.getHours()).padStart(2, '0');
+            const mm = String(now.getMinutes()).padStart(2, '0');
+            return `${y}/${m}/${d} ${hh}:${mm}`;
+        }
 
         function convertRadarToMainModal(radarId) {
             const item = radarEvents.find(r => String(r.id) === String(radarId));
@@ -4097,6 +4167,7 @@ function UtilitiesFormatNow() {
             document.getElementById('input-content').value = item.content || '';
             document.getElementById('input-lineup').value = item.lineup || '';
             document.getElementById('input-link').value = item.link || '';
+            document.getElementById('input-broadcast').value = item.broadcast_info || '';
             if (item.image) {
                 document.getElementById('input-image').value = item.image;
                 document.getElementById('image-preview').src = item.image;
@@ -4176,6 +4247,7 @@ function UtilitiesFormatNow() {
             toggleTicketSection();
 
             document.getElementById('input-content').value = '';
+            document.getElementById('input-broadcast').value = '';
             document.getElementById('input-youtube').value = '';
 
             removeSingleImage('input-image', 'input-image-file', 'image-preview', 'image-preview-container', 'image-upload-status');
@@ -4230,6 +4302,7 @@ function UtilitiesFormatNow() {
             document.getElementById('input-time').value = sanitizeTimeDisplay(e.time);
             document.getElementById('input-location').value = e.location;
             document.getElementById('input-content').value = e.content || '';
+            document.getElementById('input-broadcast').value = e.broadcast_info || '';
             document.getElementById('input-youtube').value = e.youtube_url || '';
             document.getElementById('input-lineup').value = e.lineup || '';
             document.getElementById('input-link').value = e.link || '';
@@ -4295,6 +4368,7 @@ function UtilitiesFormatNow() {
             const isTicket = document.getElementById('input-is-ticket').checked;
             const ticketTitle = document.getElementById('input-ticket-title').value.trim() || '售票方式';
             const contentVal = document.getElementById('input-content').value.trim();
+            const broadcastVal = document.getElementById('input-broadcast').value.trim();
             const youtubeVal = document.getElementById('input-youtube').value.trim();
 
             if (!category) {
@@ -4362,6 +4436,7 @@ function UtilitiesFormatNow() {
                 content: contentVal,
                 content_images: contentImages,
                 youtube_url: youtubeVal,
+                broadcast_info: broadcastVal,
                 image: image,
                 lineup: document.getElementById('input-lineup').value.trim(),
                 lineup_image: lineupImage,
