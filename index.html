@@ -426,7 +426,7 @@
                     </div>
                 </div>
 
-                <!-- 四段式清單分頁列 (第七點：獨立新增「🤖 AI 雷達探索清單」第4分頁) -->
+                <!-- 四段式清單分頁列 (第七點：獨立新增「🤖 探索雷達」第4分頁) -->
                 <div class="flex flex-wrap items-center gap-2 border-b border-slate-200 pb-3">
                     <button onclick="openAddModal()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-1.5 shadow-md shadow-indigo-600/25 shrink-0 transition">
                         <i data-lucide="plus" class="w-4 h-4"></i><span>新增活動</span>
@@ -443,9 +443,9 @@
                         <i data-lucide="archive" class="w-4 h-4"></i><span>🏛️ 歷屆歸檔清單</span>
                         <span id="admin-archive-count-badge" class="ml-1 px-1.5 py-0.2 bg-slate-200 text-slate-700 rounded-full text-[10px]">0</span>
                     </button>
-                    <!-- 第七點：AI 雷達探索專屬分頁按鈕 -->
+                    <!-- 第七點：純程式探索雷達專屬分頁按鈕 -->
                     <button onclick="setAdminViewTab('radar')" id="admin-tab-radar" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white hover:bg-purple-50 text-purple-700 border border-purple-200 transition flex items-center space-x-1.5 shadow-2xs">
-                        <i data-lucide="bot" class="w-4 h-4 text-purple-600"></i><span>🤖 AI 雷達探索清單</span>
+                        <i data-lucide="radar" class="w-4 h-4 text-purple-600"></i><span>🤖 探索雷達清單</span>
                         <span id="admin-radar-count-badge" class="ml-1 px-1.5 py-0.2 bg-purple-100 text-purple-800 rounded-full text-[10px] font-bold">0</span>
                     </button>
                 </div>
@@ -456,8 +456,8 @@
                         <div class="flex items-center space-x-2">
                             <span class="p-2 bg-purple-600 text-white rounded-xl shadow-xs"><i data-lucide="radar" class="w-5 h-5"></i></span>
                             <div>
-                                <h4 class="text-sm font-bold text-purple-950">全臺活動自動雷達探索中心 (每3小時背景巡檢)</h4>
-                                <p class="text-[11px] text-purple-700">自動抓取全臺官方開放活動，支援手動貼上 FB / IG / Threads 貼文智慧轉換，經您核准才公開！</p>
+                                <h4 class="text-sm font-bold text-purple-950">全臺雙引擎活動雷達 (官方開放庫＋即時新聞 RSS 每 3 小時自動巡檢)</h4>
+                                <p class="text-[11px] text-purple-700">自動抓取全臺音樂祭、聖誕節、萬聖節與跨年活動，支援手動貼入社群貼文智慧轉換，經您核准才公開！</p>
                             </div>
                         </div>
                         <div class="flex items-center space-x-2">
@@ -469,7 +469,7 @@
 
                     <!-- 社群貼文情報解析框 -->
                     <div class="pt-2 border-t border-purple-200/60 flex flex-col sm:flex-row gap-2">
-                        <input type="text" id="social-post-input" placeholder="貼上 FB、IG、Threads 貼文內容或標題 (自動辨識縣市、時間、卡司與活動名)..." 
+                        <input type="text" id="social-post-input" placeholder="貼上 FB、IG、Threads 貼文內容或標題 (純前端正則自動辨識縣市、時間、卡司與活動名)..." 
                             class="flex-1 px-3.5 py-2 bg-white border border-purple-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-purple-500 shadow-inner">
                         <button onclick="parseSocialPostToRadar()" class="px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white rounded-xl text-xs font-bold shrink-0 shadow-sm transition flex items-center justify-center space-x-1">
                             <i data-lucide="sparkles" class="w-3.5 h-3.5"></i><span>⚡ 智慧解析加入雷達池</span>
@@ -554,7 +554,6 @@
             <div class="flex items-center space-x-2">
                 <a href="https://www.instagram.com/livetws/" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-3 py-1.5 bg-pink-50 hover:bg-pink-100 text-pink-700 rounded-xl border border-pink-200 transition shadow-2xs font-semibold">
                     <svg class="w-3.5 h-3.5 fill-current text-pink-600" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    <span>Instagram</span>
                 </a>
                 <a href="https://www.threads.com/@livetws" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-3 py-1.5 bg-slate-50 hover:bg-slate-100 text-slate-800 rounded-xl border border-slate-200 transition shadow-2xs font-semibold">
                     <svg class="w-3.5 h-3.5 fill-current text-slate-900" viewBox="0 0 24 24"><path d="M12.186 24C5.467 24 0 18.533 0 11.814 0 5.094 5.467 0 12.186 0c6.643 0 11.968 5.176 12.014 11.758v.481h-3.418v-.481c-.043-4.73-3.856-8.543-8.596-8.543-4.757 0-8.627 3.87-8.627 8.627 0 4.758 3.87 8.627 8.627 8.627 2.664 0 5.105-1.22 6.697-3.342l2.678 2.115C19.645 22.016 16.094 24 12.186 24zm4.148-12.75c.198 2.378-1.455 4.394-3.864 4.394-2.205 0-3.816-1.782-3.816-4.225 0-2.457 1.636-4.238 3.844-4.238 1.83 0 3.256 1.258 3.65 2.997l-3.65.65c-.092-.816-.694-1.378-1.455-1.378-1.042 0-1.72.937-1.72 2.152 0 1.201.664 2.138 1.706 2.138 1.083 0 1.693-.978 1.693-2.316v-.174h3.612z"/></svg>
@@ -888,7 +887,7 @@
                         <div class="flex items-center justify-between text-xs text-amber-900">
                             <span class="font-semibold">票務清單 (可新增多種售票、換票、索票規則)：</span>
                             <button type="button" onclick="addTicketPlanRow()" class="px-2.5 py-1 bg-amber-600 hover:bg-amber-500 text-white rounded-lg font-bold flex items-center space-x-1 transition shadow-2xs">
-                                <i data-lucide="plus" class="w-3 h-3"></i><span>新增方式</span>
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i><span>新增方式</span>
                             </button>
                         </div>
                         <div id="ticket-plans-list" class="space-y-2"></div>
@@ -1156,7 +1155,7 @@
         let activeCarouselEvents = [];
 
         let events = [];
-        let radarEvents = []; // 第七點：AI 探索雷達獨立暫存池
+        let radarEvents = [];
         let bookmarks = [];
         let currentCategory = 'all';
         let currentRegion = 'all';
@@ -1745,7 +1744,7 @@
                             updateDailyVisitsDisplay();
                         }
 
-                        // 第七點：取得 AI 雷達探索清單
+                        // 第七點：取得探索雷達清單
                         if (data.radarEvents && Array.isArray(data.radarEvents)) {
                             radarEvents = data.radarEvents;
                             localStorage.setItem('tw_nye_radar_events_cache', JSON.stringify(radarEvents));
@@ -1943,7 +1942,6 @@
                     const sTime = range.startDate.getTime();
                     const eTime = range.endDate.getTime();
 
-                    // 5天內且活動尚未完全結束
                     const diffToStart = sTime - nowTime;
                     return (diffToStart <= fiveDaysMs && eTime >= nowTime);
                 })
@@ -1955,7 +1953,6 @@
                 })
                 .slice(0, 10);
 
-            // 備援機制：若 5 天內未有符合條件者，自動抓取最近公開場次
             if (activeCarouselEvents.length === 0) {
                 activeCarouselEvents = events
                     .filter(e => !isEffectivelyClosed(e) && e.status !== 'hidden')
@@ -2040,7 +2037,7 @@
             const now = new Date();
             const y = now.getFullYear();
             const m = String(now.getMonth() + 1).padStart(2, '0');
-            const d = String(now.getDate()).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
             const hh = String(now.getHours()).padStart(2, '0');
             const mm = String(now.getMinutes()).padStart(2, '0');
             document.getElementById('input-published-at').value = `${y}/${m}/${d} ${hh}:${mm}`;
@@ -2787,29 +2784,24 @@
         // 置頂最優先 ➔ 自然時間（近到遠）➔ 縣市地理順序（基隆至連江）➔ 同縣市內活動權重 (weight: 1 > 2 > 3...)
         function sortEventsByGoldenRule(eventList) {
             return eventList.sort((a, b) => {
-                // 1. 手動置頂最優先
                 const pinA = a.is_pinned ? 0 : 1;
                 const pinB = b.is_pinned ? 0 : 1;
                 if (pinA !== pinB) return pinA - pinB;
 
-                // 2. 開放狀態優先於尚未開放
                 const statusA = (a.status === 'open') ? 0 : 1;
                 const statusB = (b.status === 'open') ? 0 : 1;
                 if (statusA !== statusB) return statusA - statusB;
 
-                // 3. 自然時間排序（開始時間近的優先）
                 const startA = parseEventRange(a.time).startDate.getTime();
                 const startB = parseEventRange(b.time).startDate.getTime();
                 if (startA !== startB) return startA - startB;
 
-                // 4. 縣市自然順序 (CITY_ORDER: 基隆市 ➔ 臺北市 ➔ 新北市...)
                 const idxA = CITY_ORDER.indexOf(a.city);
                 const idxB = CITY_ORDER.indexOf(b.city);
                 const orderCityA = (idxA !== -1 ? idxA : 99);
                 const orderCityB = (idxB !== -1 ? idxB : 99);
                 if (orderCityA !== orderCityB) return orderCityA - orderCityB;
 
-                // 5. 同縣市內活動權重 (weight: 數值越小越前面，1 > 2 > 3... 未填寫排最後)
                 const hasWeightA = (a.weight !== undefined && a.weight !== null && a.weight !== '' && !isNaN(Number(a.weight)));
                 const hasWeightB = (b.weight !== undefined && b.weight !== null && b.weight !== '' && !isNaN(Number(b.weight)));
 
@@ -2822,7 +2814,6 @@
                     return 1;
                 }
 
-                // 6. 隨機雜湊備援
                 return getRandomOrderValue(a.id) - getRandomOrderValue(b.id);
             });
         }
@@ -3284,7 +3275,6 @@
             const content = document.getElementById('modal-content');
             const outerModal = document.getElementById('detail-modal');
 
-            // 雙層 instant 捲軸歸零
             if (content) content.scrollTop = 0;
             if (outerModal) outerModal.scrollTop = 0;
 
@@ -3485,7 +3475,6 @@
             outerModal.classList.remove('hidden');
             lucide.createIcons();
 
-            // 開啟後雙重確保捲軸置頂
             setTimeout(() => {
                 if (content) content.scrollTop = 0;
                 if (outerModal) outerModal.scrollTop = 0;
@@ -3676,7 +3665,7 @@
                 if (radarPanel) radarPanel.classList.add('hidden');
             } else if (tab === 'radar') {
                 btnRadar.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-purple-600 text-white shadow-xs transition flex items-center space-x-1.5";
-                titleEl.innerText = "🤖 AI 雷達探索清單 (全自動背景掃描 + 社群情報解析待審核池)";
+                titleEl.innerText = "🤖 探索雷達清單 (全自動背景掃描 + 社群情報解析待審核池)";
                 if (radarPanel) radarPanel.classList.remove('hidden');
             }
             renderAdminTable();
@@ -3793,7 +3782,7 @@
             await syncToGoogleSheet();
         }
 
-        // 第七點：後台表格渲染（支援正式庫與 AI 雷達探索專屬審核池）
+        // 第七點：後台表格渲染（支援正式庫與探索雷達專屬審核池）
         function renderAdminTable() {
             const tbody = document.getElementById('admin-table-body');
             const searchKeyword = (document.getElementById('admin-search-input')?.value || '').toLowerCase().trim();
@@ -3807,7 +3796,7 @@
             } else {
                 if (adminViewTab === 'radar') {
                     targetList = radarEvents;
-                    document.getElementById('admin-table-title').innerText = "🤖 AI 雷達探索清單 (手動審核轉入正式庫)";
+                    document.getElementById('admin-table-title').innerText = "🤖 探索雷達清單 (手動審核轉入正式庫)";
                 } else {
                     targetList = events.filter(e => {
                         const isArchived = isEffectivelyClosed(e);
@@ -3850,7 +3839,6 @@
                 return;
             }
 
-            // 判斷是否為雷達待審池呈現專屬操作
             if (adminViewTab === 'radar') {
                 tbody.innerHTML = filtered.map(e => {
                     const isDuplicateInMain = events.some(m => (m.name === e.name && m.city === e.city));
@@ -3947,7 +3935,7 @@
             lucide.createIcons();
         }
 
-        // 第七點：手動觸發雲端每3小時爬蟲掃描全臺活動
+        // 第七點：手動觸發純程式雙引擎掃描全臺活動（免 AI）
         async function triggerCloudCrawler() {
             const btn = document.getElementById('radar-crawl-btn');
             btn.innerHTML = `<i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i><span>正在全臺雷達掃描中...</span>`;
@@ -3992,7 +3980,7 @@
             }
         }
 
-        // 第七點：智慧解析社群 (FB/IG/Threads) 貼文並自動填入雷達池
+        // 第七點：純前端正則表達式解析社群 (FB/IG/Threads) 貼文並自動填入雷達池
         function parseSocialPostToRadar() {
             const input = document.getElementById('social-post-input');
             const text = input ? input.value.trim() : '';
@@ -4001,7 +3989,6 @@
                 return;
             }
 
-            // 智慧縣市推導
             let city = '臺北市';
             for (let c of CITY_ORDER) {
                 let alt = c.replace('臺', '台');
@@ -4011,7 +3998,6 @@
                 }
             }
 
-            // 地點推導
             let location = city + '市民廣場';
             if (text.includes('夢時代')) { city = '高雄市'; location = '高雄夢時代時代大道'; }
             else if (text.includes('義大')) { city = '高雄市'; location = '高雄義大世界大草區'; }
@@ -4019,17 +4005,17 @@
             else if (text.includes('水湳')) { city = '臺中市'; location = '臺中水湳中央公園'; }
             else if (text.includes('101') || text.includes('市政府廣場')) { city = '臺北市'; location = '臺北市市民廣場'; }
 
-            // 類別推導
             let category = '各縣市活動';
-            if (text.includes('跨年')) category = '跨年晚會';
-            else if (text.includes('升旗')) category = '元旦升旗';
-            else if (text.includes('燈會')) category = '燈會';
+            if (text.includes('音樂祭') || text.includes('音樂節') || text.includes('搖滾')) category = '音樂祭';
+            else if (text.includes('聖誕') || text.includes('耶誕')) category = '聖誕節';
+            else if (text.includes('萬聖')) category = '萬聖節';
+            else if (text.includes('跨年') || text.includes('倒數')) category = '跨年晚會';
+            else if (text.includes('升旗') || text.includes('元旦')) category = '元旦升旗';
+            else if (text.includes('燈會') || text.includes('光雕')) category = '燈會';
 
-            // 活動名稱推導 (擷取前 28 字或首行)
             let firstLine = text.split('\n')[0].replace(/[\#\【\】\[\]]/g, ' ').trim();
             let actName = firstLine.length > 30 ? firstLine.substring(0, 30) : (firstLine || `2027 ${city}${category}`);
 
-            // 防重複檢查
             const isDupMain = events.some(e => e.name === actName && e.city === city);
             const isDupRadar = radarEvents.some(e => e.name === actName && e.city === city);
             if (isDupMain) {
@@ -4079,7 +4065,7 @@
             updateStats();
             syncRadarToGoogleSheet();
             input.value = '';
-            alert(`🎉 已成功解析並將「${actName}」加入 AI 雷達探索池！您可以點擊「審核轉入」微調後正式發布。`);
+            alert(`🎉 已成功解析並將「${actName}」加入探索雷達池！您可以點擊「審核轉入」微調後正式發布。`);
         }
 
         function UtilitiesFormatNow() {
@@ -4092,7 +4078,6 @@
             return `${y}/${m}/${day} ${hh}:${mm}`;
         }
 
-        // 第七點：雷達活動一鍵轉入正式表單審核
         function convertRadarToMainModal(radarId) {
             const item = radarEvents.find(r => String(r.id) === String(radarId));
             if (!item) return;
@@ -4104,7 +4089,7 @@
             document.getElementById('input-name').value = item.name;
             document.getElementById('input-time').value = item.time;
             document.getElementById('input-location').value = item.location;
-            document.getElementById('input-status').value = 'open'; // 轉入時預設建議開放
+            document.getElementById('input-status').value = 'open';
             document.getElementById('input-admission').value = item.admission || '免費自由入場';
             document.getElementById('input-content').value = item.content || '';
             document.getElementById('input-lineup').value = item.lineup || '';
@@ -4115,11 +4100,9 @@
                 document.getElementById('image-preview-container').classList.remove('hidden');
             }
 
-            // 暫存此雷達 ID，於儲存時同步自動移出雷達池
             window.pendingConvertRadarId = radarId;
         }
 
-        // 第七點：忽略/刪除雷達池內活動
         async function ignoreRadarEvent(radarId) {
             if (confirm('確定要忽略並從雷達池中移除這筆探索活動嗎？')) {
                 radarEvents = radarEvents.filter(r => String(r.id) !== String(radarId));
@@ -4398,7 +4381,6 @@
                 events.unshift(eventData);
             }
 
-            // 若此活動來自雷達審核轉入，自動自雷達池清除
             if (window.pendingConvertRadarId) {
                 radarEvents = radarEvents.filter(r => String(r.id) !== String(window.pendingConvertRadarId));
                 window.pendingConvertRadarId = null;
